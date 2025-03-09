@@ -26,7 +26,9 @@ srung() {
         constraint_arg="--constraint=$gpu_type"
     fi
     
-    srun --mem=$mem --time=240:00:00 --gres=gpu:$num_gpus --pty $constraint_arg bash
+    cmd="srun --mem=$mem --time=240:00:00 --gres=gpu:$num_gpus --pty $constraint_arg bash"
+    echo "Running: $cmd"
+    $cmd
 }
 
 # <<<< Functions by sroydip1
