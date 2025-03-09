@@ -5,6 +5,7 @@ import os
 import sys
 import json
 import socket
+import getpass
 import subprocess
 
 
@@ -44,6 +45,18 @@ def setup_bitwarden():
         "https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip"
     )
     try:
+        ################
+        # setup env vars
+        ################
+        # ask for password from user
+        if not os.environ.get("BW_CLIENTID", None):
+            os.environ["BW_CLIENTID"] = input("Enter bitwarden client id: ")
+        if not os.environ.get("BW_CLIENTSECRET", None):
+            os.environ["BW_CLIENTSECRET"] = input("Enter bitwarden client secret: ")
+        if not os.environ.get("BW_PASSWORD", None):
+            # os.environ["BW_PASSWORD"] = input("Enter bitwarden password: ")
+            os.environ["BW_PASSWORD"] = getpass.getpass("Enter bitwarden password: ")
+
         ###################
         # install bitwarden
         ###################
