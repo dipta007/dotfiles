@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import json
+import socket
+import subprocess
+
+
+HOME_DIR = os.path.expanduser("~")
+HOSTNAME = socket.gethostname()
+
+
+def run_cmd(cmd):
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    output = result.stdout
+    error = result.stderr
+    if result.returncode != 0:
+        raise Exception(f"Error running command: {cmd}\n{error}")
+    return output
+
+
+def setup_git():
+    print("Setting up git")
+    run_cmd("git config --global user.name 'Shubhashis Roy Dipta'")
+    run_cmd("git config --global user.email iamdipta@gmail.com")
+
+
+def install_libs():
+    print("Installing libraries")
+    # install uv
+    run_cmd("curl -LsSf https://astral.sh/uv/install.sh | sh")
+
+
+def setup_bitwarden():
+    print("Setting up bitwarden")
+    url = (
+        "https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip"
+    )
+    try:
+        ###################
+        # install bitwarden
+        ###################
+        run_cmd(f"cd {HOME_DIR}")
+        run_cmd(f"wget {url}")
+        run_cmd("unzip bw-linux-1.22.1.zip")
+        run_cmd("chmod +x bw")
+        run_cmd(f"mv bw {HOME_DIR}/.local/bin")
+        run_cmd("rm bw-linux-1.22.1.zip")
+
+        #################
+        # bitwarden login
+        #################
+        run_cmd("bw login --apikey")
+        out = run_cmd("bw unlock --passwordenv BW_PASSWORD")
+        pattern = re.compile(r'BW_SESSION="([^"]+)"')
+        match = pattern.search(out)
+        assert match, "Error in unlocking bitwarden"
+        session_token = match.group(1)
+        run_cmd(f"bw sync --session {session_token}")
+        out = run_cmd(f"bw get item .bashrc --session {session_token}")
+        assert len(out) > 0, "Error in getting item from bitwarden"
+        obj = json.loads(out)
+
+        ##################
+        # bitwarden logout
+        ##################
+        run_cmd("bw lock")
+        run_cmd("bw logout")
+
+        return obj["notes"]
+    except Exception as e:
+        raise Exception(f"Error in setup_bitwarden: {e}")
+    finally:
+        # ? forcefully logout even if it errors out
+        try:
+            run_cmd("bw logout")
+        except:
+            pass
+
+
+def clear_env_vars():
+    print("Clearing environment variables")
+    env_vars = ["BW_CLIENTID", "BW_SESSION", "BW_PASSWORD", "BW_CLIENTSECRET"]
+    for var in env_vars:
+        os.environ.pop(var, None)
+
+
+def setup_tmux():
+    print("Setting up tmux")
+    try:
+        run_cmd(f"tmux source-file {HOME_DIR}/.tmux.conf")
+    except Exception as e:
+        print(f"Error in tmux: {e}")
+
+
+def add_source_bashrc(custom_bashrc):
+    if not os.path.exists(custom_bashrc):
+        print(f"Warning: {custom_bashrc} does not exist")
+        return
+
+    #### Source the custom bashrc in the main bashrc
+    already_added = False
+    with open(f"{HOME_DIR}/.bashrc", "r") as f:
+        for line in f:
+            if line.strip() == f". {custom_bashrc}":
+                already_added = True
+
+    if not already_added:
+        with open(f"{HOME_DIR}/.bashrc", "a") as f:
+            f.write(f"\n\n. {custom_bashrc}\n")
+
+
+def setup_bashrc(secret_tokens):
+    print("Setting up bashrc")
+    #############################
+    # Add secret tokens to bashrc
+    #############################
+    secret_bashrc = f"{HOME_DIR}/.bashrc.secret"
+    with open(secret_bashrc, "w") as f:
+        f.write(secret_tokens)
+
+    ###################
+    # Source all bashrc
+    ###################
+    add_source_bashrc(secret_bashrc)
+    add_source_bashrc(f"{HOME_DIR}/.bashrc.{HOSTNAME}")
+    add_source_bashrc(f"{HOME_DIR}/.bashrc.common")
+
+    #### Source the main bashrc
+    # run_cmd(f". {HOME_DIR}/.bashrc")
+    print("Please run the following command to source the bashrc")
+    print(f". {HOME_DIR}/.bashrc")
+
+
+def main():
+    try:
+        setup_git()
+        install_libs()
+        setup_tmux()
+        secret_tokens = setup_bitwarden()
+        setup_bashrc(secret_tokens)
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        clear_env_vars()
+
+
+if __name__ == "__main__":
+    main()
