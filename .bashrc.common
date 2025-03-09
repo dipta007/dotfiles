@@ -10,7 +10,7 @@ alias uvd="deactivate"
 
 # >>>> Functions by sroydip1
 yadm_pull_and_check() {
-    local bootstrap_file="$HOME/.config/yadm/bootstrap"
+    local bootstrap_file=".config/yadm/bootstrap"
     local output
     local changed=0
 
