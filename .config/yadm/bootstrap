@@ -114,7 +114,7 @@ def add_source_bashrc(custom_bashrc):
 
     if not already_added:
         with open(f"{HOME_DIR}/.bashrc", "a") as f:
-            f.write(f"\n\n. {custom_bashrc}\n")
+            f.write(f"\n. {custom_bashrc}\n")
 
 
 def setup_bashrc(secret_tokens):
