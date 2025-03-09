@@ -13,3 +13,20 @@ export HF_HOME="/umbc/ada/ferraro/users/sroydip1/.cache/huggingface"
 # export PATH=/usr/local/cuda-12/bin:$PATH
 # export CUDA_HOME=/usr/local/cuda-12
 # <<<< BASH by sroydip1
+
+
+# >>>> Functions by sroydip1
+srung() {
+    local gpu_type=$1
+    local num_gpus=${2:-1}
+    local mem=${3:-100000}
+    
+    local constraint_arg=""
+    if [ -n "$gpu_type" ]; then
+        constraint_arg="--constraint=$gpu_type"
+    fi
+    
+    srun --mem=$mem --time=240:00:00 --gres=gpu:$num_gpus --pty $constraint_arg bash
+}
+
+# <<<< Functions by sroydip1

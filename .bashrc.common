@@ -1,7 +1,41 @@
 # >>>> BASH by sroydip1
+
 export PATH=$PATH:$HOME/.local/bin
 
 alias uvc='uv venv .venv/$(basename $(pwd))-$(hostname) --python 3.12 --seed'
 alias uva='source .venv/$(basename $(pwd))-$(hostname)/bin/activate'
 alias uvd="deactivate"
 # <<<< BASH by sroydip1
+
+
+# >>>> Functions by sroydip1
+yadm_pull_and_check() {
+    local bootstrap_file="$HOME/.config/yadm/bootstrap"
+    local output
+    local changed=0
+
+    output=$(yadm pull 2>&1)
+    echo "yadm pull: $output"
+
+    if echo "$output" | grep -q "$bootstrap_file"; then
+        changed=1
+    else
+        git_status=$(yadm status --porcelain "$bootstrap_file" 2>/dev/null)
+        if [ -n "$git_status" ]; then
+            changed=1
+        fi
+    fi
+
+    if [ $changed -eq 1 ]; then
+        read -p "The bootstrap file has changed. Do you want to run 'yadm bootstrap'? [y/N] " answer
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            yadm bootstrap
+        fi
+    fi
+}
+
+# <<<< Functions by sroydip1
+
+
+# run yadm pull and check if the bootstrap file has changed
+yadm_pull_and_check
