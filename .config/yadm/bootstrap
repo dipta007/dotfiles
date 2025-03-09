@@ -2,6 +2,7 @@
 
 import re
 import os
+import sys
 import json
 import socket
 import subprocess
@@ -11,12 +12,36 @@ HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
 
 
+
+def run_command(command, shell=False):
+    if sys.version_info >= (3, 7):
+        # For Python 3.7 and later, use capture_output
+        result = subprocess.run(command, shell=shell, capture_output=True, text=True)
+        return result.stdout, result.stderr, result.returncode
+    else:
+        # For Python versions before 3.7, use PIPE
+        process = subprocess.Popen(
+            command,
+            shell=shell,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True  # equivalent to text=True in 3.7+
+        )
+        stdout, stderr = process.communicate()
+        return stdout, stderr, process.returncode
+
 def run_cmd(cmd):
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-    output = result.stdout
-    error = result.stderr
-    if result.returncode != 0:
-        raise Exception(f"Error running command: {cmd}\n{error}")
+    if sys.version_info >= (3, 7):
+        # For Python 3.7 and later, use capture_output
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        output = result.stdout
+        error = result.stderr
+        returncode = result.returncode
+    else:
+        process = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        output, error = process.communicate()
+        returncode = process.returncode
+    assert returncode == 0, f"Error running command: {cmd}\n{error}"
     return output
 
 
@@ -140,6 +165,7 @@ def main():
         setup_tmux()
         secret_tokens = setup_bitwarden()
         setup_bashrc(secret_tokens)
+        print("Bootstrap completed successfully")
     except Exception as e:
         print(f"Error: {e}")
     finally:
