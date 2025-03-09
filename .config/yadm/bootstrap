@@ -11,25 +11,6 @@ import subprocess
 HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
 
-
-
-def run_command(command, shell=False):
-    if sys.version_info >= (3, 7):
-        # For Python 3.7 and later, use capture_output
-        result = subprocess.run(command, shell=shell, capture_output=True, text=True)
-        return result.stdout, result.stderr, result.returncode
-    else:
-        # For Python versions before 3.7, use PIPE
-        process = subprocess.Popen(
-            command,
-            shell=shell,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            universal_newlines=True  # equivalent to text=True in 3.7+
-        )
-        stdout, stderr = process.communicate()
-        return stdout, stderr, process.returncode
-
 def run_cmd(cmd):
     if sys.version_info >= (3, 7):
         # For Python 3.7 and later, use capture_output
