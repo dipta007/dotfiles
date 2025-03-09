@@ -21,6 +21,7 @@ yadm_pull_and_check() {
         changed=1
     else
         git_status=$(yadm status --porcelain "$bootstrap_file" 2>/dev/null)
+        echo "git status: $git_status"
         if [ -n "$git_status" ]; then
             changed=1
         fi
