@@ -1,4 +1,7 @@
-Init YADM script - [private link](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)
+> [!IMPORTANT]
+> Only for ME 👨🏻‍💻
+> Init YADM script - [private gist](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)
+> See below for public version
 
 
 ## Public Version:
