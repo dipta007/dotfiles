@@ -1,0 +1,17 @@
+# >>>> BASH by sroydip1
+
+alias ada="cd /umbc/ada/ferraro/users/sroydip1"
+alias rs="cd /umbc/rs/ferraro/users/sroydip1"
+alias sqp="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t PENDING"
+alias sqr="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t RUNNING"
+alias squ="squeue -u sroydip1"
+alias sq="squeue"
+
+
+export TMPDIR=/umbc/ada/ferraro/users/sroydip1/chip-home/tmp
+export HF_HOME="/umbc/ada/ferraro/users/sroydip1/.cache/huggingface"
+# export UDOCKER_DIR="UPDATE THIS ACCORDING TO SERVER"
+# export LD_LIBRARY_PATH=/usr/ebuild/installs/software/CUDA/12.6.0/lib64:$LD_LIBRARY_PATH
+# export PATH=/usr/ebuild/installs/software/CUDA/12.6.0/bin:$PATH
+# export CUDA_HOME=/usr/ebuild/installs/software/CUDA/12.6.0
+# <<<< ENV Variables by sroydip1

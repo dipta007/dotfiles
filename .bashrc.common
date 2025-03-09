@@ -1,0 +1,7 @@
+# >>>> BASH by sroydip1
+export PATH=$PATH:$HOME/.local/bin
+
+alias uvc="uv venv .venv/$(hostname) --python 3.12 --seed"
+alias uva="source .venv/$(hostname)/bin/activate"
+alias uvd="deactivate"
+# <<<< BASH by sroydip1
