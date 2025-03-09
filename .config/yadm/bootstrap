@@ -12,6 +12,22 @@ import subprocess
 HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
 
+COLORS = {
+    "RED": "\033[31m",
+    "GREEN": "\033[32m",
+    "YELLOW": "\033[33m",
+    "BLUE": "\033[34m",
+    "MAGENTA": "\033[35m",
+    "CYAN": "\033[36m",
+    "RESET": "\033[0m",
+}
+
+def cprint(msg, color=None):
+    if color:
+        print(f"{COLORS[color]}{msg}{COLORS['RESET']}")
+    else:
+        print(msg)
+
 def run_cmd(cmd):
     if sys.version_info >= (3, 7):
         # For Python 3.7 and later, use capture_output
@@ -28,19 +44,19 @@ def run_cmd(cmd):
 
 
 def setup_git():
-    print("Setting up git")
+    cprint("Setting up git", "CYAN")
     run_cmd("git config --global user.name 'Shubhashis Roy Dipta'")
     run_cmd("git config --global user.email iamdipta@gmail.com")
 
 
 def install_libs():
-    print("Installing libraries")
+    cprint("Installing libraries", "CYAN")
     # install uv
     run_cmd("curl -LsSf https://astral.sh/uv/install.sh | sh")
 
 
 def setup_bitwarden():
-    print("Setting up bitwarden")
+    cprint("Setting up bitwarden", "CYAN")
     url = (
         "https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip"
     )
@@ -99,23 +115,23 @@ def setup_bitwarden():
 
 
 def clear_env_vars():
-    print("Clearing environment variables")
+    cprint("Clearing environment variables", "CYAN")
     env_vars = ["BW_CLIENTID", "BW_SESSION", "BW_PASSWORD", "BW_CLIENTSECRET"]
     for var in env_vars:
         os.environ.pop(var, None)
 
 
 def setup_tmux():
-    print("Setting up tmux")
+    cprint("Setting up tmux", "CYAN")
     try:
         run_cmd(f"tmux source-file {HOME_DIR}/.tmux.conf")
     except Exception as e:
-        print(f"Error in tmux: {e}")
+        cprint(f"Error in tmux: {e}", "RED")
 
 
 def add_source_bashrc(custom_bashrc):
     if not os.path.exists(custom_bashrc):
-        print(f"Warning: {custom_bashrc} does not exist")
+        cprint(f"Warning: {custom_bashrc} does not exist", "YELLOW")
         return
 
     #### Source the custom bashrc in the main bashrc
@@ -131,7 +147,7 @@ def add_source_bashrc(custom_bashrc):
 
 
 def setup_bashrc(secret_tokens):
-    print("Setting up bashrc")
+    cprint("Setting up bashrc", "CYAN")
     #############################
     # Add secret tokens to bashrc
     #############################
@@ -148,8 +164,8 @@ def setup_bashrc(secret_tokens):
 
     #### Source the main bashrc
     # run_cmd(f". {HOME_DIR}/.bashrc")
-    print("Please run the following command to source the bashrc")
-    print(f". {HOME_DIR}/.bashrc")
+    cprint("Please run the following command to source the bashrc", "YELLOW")
+    cprint(f". {HOME_DIR}/.bashrc", "MAGENTA")
 
 
 def main():
@@ -159,9 +175,9 @@ def main():
         setup_tmux()
         secret_tokens = setup_bitwarden()
         setup_bashrc(secret_tokens)
-        print("Bootstrap completed successfully")
+        cprint("Bootstrap completed successfully", "GREEN")
     except Exception as e:
-        print(f"Error: {e}")
+        cprint(f"Error: {e}", "RED")
     finally:
         clear_env_vars()
 
