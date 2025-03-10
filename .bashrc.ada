@@ -7,7 +7,7 @@ alias sq="squeue"
 
 
 export TMPDIR=/home/sroydip1/ferraro_ada/users/sroydip1/.cache/tmp
-export HF_HOME="/umbc/ada/ferraro/users/sroydip1/.cache/huggingface"
+export HF_HOME="/home/sroydip1/ferraro_ada/users/sroydip1/.cache/huggingface"
 # export UDOCKER_DIR="/p/work2/sroydip1/udocker"
 # export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH
 # export PATH=/usr/local/cuda-12/bin:$PATH
