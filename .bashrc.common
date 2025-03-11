@@ -5,6 +5,9 @@ export PATH=$PATH:$HOME/.local/bin
 alias uvc='uv venv .venv/$(basename $(pwd))-$(hostname) --python 3.12 --seed'
 alias uva='source .venv/$(basename $(pwd))-$(hostname)/bin/activate'
 alias uvd="deactivate"
+
+eval "$(uv generate-shell-completion bash)"
+eval "$(uvx --generate-shell-completion bash)"
 # <<<< BASH by sroydip1
 
 
@@ -28,7 +31,7 @@ yadm_pull_and_check() {
     fi
 
     if [ $changed -eq 1 ]; then
-        read -p "The bootstrap file has changed. Do you want to run 'yadm bootstrap'? [y/N] " answer
+        echo -n "The bootstrap file has changed. Do you want to run 'yadm bootstrap'? [y/N] " && read answer
         if [[ "$answer" =~ ^[Yy]$ ]]; then
             yadm bootstrap
         fi
