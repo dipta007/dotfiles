@@ -6,11 +6,13 @@ import sys
 import json
 import socket
 import getpass
+import platform
 import subprocess
 
 
 HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
+OS = platform.system()
 
 COLORS = {
     "RED": "\033[31m",
@@ -21,6 +23,8 @@ COLORS = {
     "CYAN": "\033[36m",
     "RESET": "\033[0m",
 }
+
+bash_file = ".bashrc" if OS == "Linux" else ".zshrc"
 
 def cprint(msg, color=None):
     if color:
@@ -57,9 +61,10 @@ def install_libs():
 
 def setup_bitwarden():
     cprint("Setting up bitwarden", "CYAN")
-    url = (
-        "https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip"
-    )
+    url = dict(
+        Linux="https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip",
+        Darwin="https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-macos-1.22.1.zip"
+    )[OS]
     try:
         ################
         # setup env vars
@@ -70,18 +75,17 @@ def setup_bitwarden():
         if not os.environ.get("BW_CLIENTSECRET", None):
             os.environ["BW_CLIENTSECRET"] = input("Enter bitwarden client secret: ")
         if not os.environ.get("BW_PASSWORD", None):
-            # os.environ["BW_PASSWORD"] = input("Enter bitwarden password: ")
             os.environ["BW_PASSWORD"] = getpass.getpass("Enter bitwarden password: ")
 
         ###################
         # install bitwarden
         ###################
         run_cmd(f"cd {HOME_DIR}")
-        run_cmd(f"wget {url}")
-        run_cmd("unzip bw-linux-1.22.1.zip")
+        run_cmd(f"wget {url} -O bw-1.22.1.zip")
+        run_cmd("unzip bw-1.22.1.zip")
         run_cmd("chmod +x bw")
         run_cmd(f"mv bw {HOME_DIR}/.local/bin")
-        run_cmd("rm bw-linux-1.22.1.zip")
+        run_cmd("rm bw-1.22.1.zip")
 
         #################
         # bitwarden login
@@ -129,20 +133,20 @@ def setup_tmux():
         cprint(f"Error in tmux: {e}", "RED")
 
 
-def add_source_bashrc(custom_bashrc):
+def add_to_bash_file(custom_bashrc):
     if not os.path.exists(custom_bashrc):
         cprint(f"Warning: {custom_bashrc} does not exist", "YELLOW")
         return
 
     #### Source the custom bashrc in the main bashrc
     already_added = False
-    with open(f"{HOME_DIR}/.bashrc", "r") as f:
+    with open(f"{HOME_DIR}/{bash_file}", "r") as f:
         for line in f:
             if line.strip() == f". {custom_bashrc}":
                 already_added = True
 
     if not already_added:
-        with open(f"{HOME_DIR}/.bashrc", "a") as f:
+        with open(f"{HOME_DIR}/{bash_file}", "a") as f:
             f.write(f"\n. {custom_bashrc}\n")
 
 
@@ -158,14 +162,13 @@ def setup_bashrc(secret_tokens):
     ###################
     # Source all bashrc
     ###################
-    add_source_bashrc(secret_bashrc)
-    add_source_bashrc(f"{HOME_DIR}/.bashrc.{HOSTNAME}")
-    add_source_bashrc(f"{HOME_DIR}/.bashrc.common")
+    add_to_bash_file(secret_bashrc)
+    add_to_bash_file(f"{HOME_DIR}/.bashrc.{HOSTNAME}")
+    add_to_bash_file(f"{HOME_DIR}/.bashrc.common")
 
     #### Source the main bashrc
-    # run_cmd(f". {HOME_DIR}/.bashrc")
     cprint("Please run the following command to source the bashrc", "YELLOW")
-    cprint(f". {HOME_DIR}/.bashrc", "MAGENTA")
+    cprint(f". {HOME_DIR}/{bash_file}", "MAGENTA")
 
 
 def main():
