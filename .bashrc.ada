@@ -31,10 +31,10 @@ srung() {
     $cmd
 }
 
-sattach() {
+satt() {
     local job_id=$1
     if [ -z "$job_id" ]; then
-        echo "Usage: sattach <job_id>"
+        echo "Usage: satt <job_id>"
         return
     fi
     cmd="srun --pty --overlap --jobid $job_id bash"
