@@ -31,10 +31,10 @@ srung() {
     $cmd
 }
 
-sconnect() {
+sattach() {
     local job_id=$1
     if [ -z "$job_id" ]; then
-        echo "Usage: sconnect <job_id>"
+        echo "Usage: sattach <job_id>"
         return
     fi
     cmd="srun --pty --overlap --jobid $job_id bash"
