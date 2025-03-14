@@ -1,5 +1,6 @@
-# >>>> BASH by sroydip1
+HOSTNAME="chip"
 
+# >>>> BASH by sroydip1
 alias ada="cd /umbc/ada/ferraro/users/sroydip1"
 alias rs="cd /umbc/rs/ferraro/users/sroydip1"
 alias sqp="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t PENDING"

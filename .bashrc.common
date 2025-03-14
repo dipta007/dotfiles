@@ -2,8 +2,8 @@
 
 export PATH=$PATH:$HOME/.local/bin
 
-alias uvc='uv venv .venv/$(basename $(pwd))-$(hostname) --python 3.12 --seed'
-alias uva='source .venv/$(basename $(pwd))-$(hostname)/bin/activate'
+alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
+alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
 alias uvd="deactivate"
 
 eval "$(uv generate-shell-completion bash)"

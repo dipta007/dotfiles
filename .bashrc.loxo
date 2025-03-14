@@ -1,3 +1,5 @@
+HOSTNAME="loxo"
+
 # >>>> ENV Variables by sroydip1
 alias work2="cd /p/work2/sroydip1"
 

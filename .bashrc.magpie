@@ -1,3 +1,5 @@
+HOSTNAME="magpie"
+
 # >>>> BASH by sroydip1
 alias work2="cd /p/work2/sroydip1"
 

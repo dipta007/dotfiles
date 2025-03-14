@@ -1,3 +1,5 @@
+HOSTNAME="ada"
+
 # >>>> BASH by sroydip1
 alias ada="cd /nfs/ada/ferraro/users/sroydip1"
 alias sqp="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t PENDING"
