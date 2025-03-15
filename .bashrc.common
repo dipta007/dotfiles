@@ -6,12 +6,6 @@ alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
 alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
 alias uvd="deactivate"
 
-alias ada="ssh sroydip1@ada.rs.umbc.edu"
-alias chip="ssh sroydip1@chip.rs.umbc.edu"
-alias loxo="ssh -p 35800 sroydip1@loxo.cs.umbc.edu"
-alias corax="ssh -p 35800 sroydip1@corax.cs.umbc.edu"
-alias magpie="ssh -p 35800 sroydip1@magpie.cs.umbc.edu"
-
 eval "$(uv generate-shell-completion bash)"
 eval "$(uvx --generate-shell-completion bash)"
 # <<<< BASH by sroydip1
