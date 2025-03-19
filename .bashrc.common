@@ -18,13 +18,13 @@ yadm_pull_and_check() {
     local changed=0
 
     output=$(yadm pull 2>&1)
-    echo "yadm pull: $output"
+    # echo "yadm pull: $output"
 
     if echo "$output" | grep -q "$bootstrap_file"; then
         changed=1
     else
         git_status=$(yadm status --porcelain "$bootstrap_file" 2>/dev/null)
-        echo "git status: $git_status"
+        # echo "git status: $git_status"
         if [ -n "$git_status" ]; then
             changed=1
         fi
