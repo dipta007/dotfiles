@@ -2,8 +2,8 @@ HOSTNAME="ada"
 
 # >>>> BASH by sroydip1
 alias ada="cd /nfs/ada/ferraro/users/sroydip1"
-alias sqp="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t PENDING"
-alias sqr="squeue --Format=JobID,Jobname,User,userid,account,State,PriorityLong,tres-alloc:50,nodelist,feature -t RUNNING"
+alias sqp="squeue --Format=JobID,name,UserName,account,State,PriorityLong,tres-alloc:50,nodelist,feature,TimeLimit,timeused -t PENDING"
+alias sqr="squeue --Format=JobID,name,UserName,account,State,PriorityLong,tres-alloc:50,nodelist,feature,TimeLimit,timeused -t RUNNING"
 alias squ="squeue -u sroydip1"
 alias wsqu="watch -n 4 squeue -u sroydip1"
 alias sq="squeue"
