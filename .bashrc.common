@@ -38,6 +38,26 @@ yadm_pull_and_check() {
     fi
 }
 
+# post message to discord
+dalert() {
+    local message="$1"
+    local hook_url="https://discord.com/api/webhooks/1354987140018213025/ahIcJVe2x9yrCFIvDOSAYDiVyxbr8ppT3ans9PsWqHoJIuLfy0UGnHewnyyimzYiEEN6"
+    
+    if [ -z "$message" ]; then
+        echo "Usage: dalert \"message\""
+        return 1
+    fi
+    
+    curl -s -H "Content-Type: application/json" -d "{\"content\":\"$message\"}" "$hook_url"
+    
+    if [ $? -eq 0 ]; then
+        echo "Message sent successfully"
+    else
+        echo "Failed to send message"
+        return 1
+    fi
+}
+
 # <<<< Functions by sroydip1
 
 
