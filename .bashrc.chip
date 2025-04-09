@@ -11,7 +11,7 @@ alias sq="squeue"
 alias wsq="watch -n 4 squeue"
 
 
-export TMPDIR=/umbc/ada/ferraro/users/sroydip1/chip-home/tmp
+export TMPDIR=/tmp
 export HF_HOME="/umbc/ada/ferraro/users/sroydip1/.cache/huggingface"
 # export UDOCKER_DIR="UPDATE THIS ACCORDING TO SERVER"
 # export LD_LIBRARY_PATH=/usr/ebuild/installs/software/CUDA/12.6.0/lib64:$LD_LIBRARY_PATH
