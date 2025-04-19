@@ -1,6 +1,5 @@
 -- shamelessly copied from https://github.com/trifiasco/dotfiles/
 
-
 -- absolute basic
 -- map leader is required by lazy.nvim
 vim.g.mapleader = ' '

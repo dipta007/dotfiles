@@ -15,13 +15,13 @@ local opts_noremap_silent = { noremap = true, silent = true }
 local opts_noremap = { noremap = true, silent = false }
 
 -- Things I can't live without
-nmap { '<D-s>', ':w!<CR>', opts_noremap }
+nimap { '<D-s>', ':w!<CR>', opts_noremap }
 nmap { ';', ':', opts_noremap }
 -- nmap{'<leader>q', ':bd!<CR>'}
 
 -- reload stuff that almost never works
-nmap { '<leader>r', ':Lazy reload ' }
-nmap { '<leader><leader>x', ': source %<CR>' }
+-- nmap { '<leader>r', ':Lazy reload ' }
+-- nmap { '<leader><leader>x', ': source %<CR>' }
 
 -- opens/close quickfix list
 -- nmap { '<leader>c', ':copen<cr>' }
@@ -55,27 +55,7 @@ nmap { '<C-b>', '<cmd> Neotree filesystem reveal left toggle<CR>', opts_noremap 
 --
 -- nmap {'<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts_noremap_silent}
 --
--- -- telekasten keymaps
--- nmap { '<leader>zf', [[<cmd>lua require('telekasten').find_notes()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zd', [[<cmd>lua require('telekasten').find_daily_notes()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zw', [[<cmd>lua require('telekasten').find_weekly_notes()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zg', [[<cmd>lua require('telekasten').search_notes()<CR>]], opts_noremap_silent }
---
--- nmap { '<leader>zT', [[<cmd>lua require('telekasten').goto_today()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zW', [[<cmd>lua require('telekasten').goto_thisweek()<CR>]], opts_noremap_silent }
---
--- nmap { '<leader>zn', [[<cmd>lua require('telekasten').new_note()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zN', [[<cmd>lua require('telekasten').new_template_note()<CR>]], opts_noremap_silent }
---
--- nmap { '<leader>zt', [[<cmd>lua require('telekasten').toggle_todo()<CR>]], opts_noremap_silent }
---
--- nmap { '<leader>zr', [[<cmd>lua require('telekasten').rename_note()<CR>]], opts_noremap_silent }
--- nmap { '<leader>za', [[<cmd>lua require('telekasten').show_tags()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zb', [[<cmd>lua require('telekasten').show_backlinks()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zF', [[<cmd>lua require('telekasten').find_friends()<CR>]], opts_noremap_silent }
--- nmap { '<leader>zz', [[<cmd>lua require('telekasten').follow_link()<CR>]], opts_noremap_silent }
---
--- nmap { '<leader>z', [[<cmd>lua require('telekasten').panel()<CR>]], opts_noremap_silent }
+
 
 -- -- Terminal related
 vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]], opts_noremap_silent)
@@ -89,8 +69,6 @@ vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang 
 nmap { '<localleader>tt', '<CMD>FTermToggle<CR>', opts_noremap_silent }
 nmap { '<localleader>tx', '<CMD>FTermExit<CR>', opts_noremap_silent }
 nmap { '<localleader>tc', '<CMD>FTermClose<CR>', opts_noremap_silent }
-
--- TODO: scratch terminal for ephimeral build commands. Possibilities are endless
 
 -- TODO: custom terminal to attach things like btop, lazygit etc.
 -- LSP related mappings
@@ -122,12 +100,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
