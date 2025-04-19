@@ -34,6 +34,7 @@ require('lazy').setup({ import = 'dipta007.plugins' }, {
   change_detection = {
     notify = true,
   },
+  checker = { enabled = true }
 })
 -- ================= END: PLUGINS ==================================================
 

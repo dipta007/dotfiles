@@ -42,19 +42,18 @@ nmap { '<C-n>', '<cmd> Neotree filesystem reveal float toggle<CR>', opts_noremap
 nmap { '<C-b>', '<cmd> Neotree filesystem reveal left toggle<CR>', opts_noremap }
 
 -- Telescope Keymaps
--- local builtin = require 'telescope.builtin'
--- nmap { '<leader>t', builtin.find_files, {} }
--- nmap { '<leader>f', builtin.live_grep, {} }
--- nmap { '<leader>b', builtin.buffers, {} }
--- nmap { '<leader>h', builtin.help_tags, {} }
+local builtin = require 'telescope.builtin'
+nmap { '<leader>f', builtin.find_files, {} }
+nmap { '<leader>g', builtin.live_grep, {} }
+nmap { '<leader>b', builtin.buffers, {} }
+nmap { '<leader>h', builtin.help_tags, {} }
 
 --> fugitive - git stuff
--- nmap { '<leader>gs', '<CMD> Git<CR>', opts_noremap_silent }
--- nmap { '<leader>gb', '<CMD> Git blame<CR>', opts_noremap_silent }
--- nmap { '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts_noremap_silent }
+nmap { '<leader>gs', '<CMD> Git<CR>', opts_noremap_silent }
+nmap { '<leader>gb', '<CMD> Git blame<CR>', opts_noremap_silent }
+nmap { '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts_noremap_silent }
 --
 -- nmap {'<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts_noremap_silent}
---
 
 
 -- -- Terminal related

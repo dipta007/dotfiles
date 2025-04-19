@@ -7,6 +7,7 @@ return {
     end,
   },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { "tpope/vim-fugitive" },
   {
     'numToStr/FTerm.nvim',
     config = function()
