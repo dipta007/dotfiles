@@ -10,6 +10,7 @@ return {
   { "tpope/vim-fugitive" },
   {
     'numToStr/FTerm.nvim',
+    enabled = not vim.g.vscode,
     config = function()
       require('FTerm').setup {
         border = 'double',

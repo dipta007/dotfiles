@@ -24,6 +24,7 @@ local config = function()
 end
 return {
   'zbirenbaum/copilot.lua',
+  enabled = not vim.g.vscode,
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = config,

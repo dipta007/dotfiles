@@ -1,5 +1,6 @@
 return {
  "LunarVim/bigfile.nvim",
+  enabled = not vim.g.vscode,
   event="BufReadPre",
   opts={
     filesize=2,

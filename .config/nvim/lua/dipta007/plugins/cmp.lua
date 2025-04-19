@@ -35,6 +35,7 @@ end
 return {
   -- Autocompletion
   'hrsh7th/nvim-cmp',
+  enabled = not vim.g.vscode,
   config = config,
   dependencies = {
     'hrsh7th/cmp-buffer',

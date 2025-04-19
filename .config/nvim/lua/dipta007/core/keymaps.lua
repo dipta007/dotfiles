@@ -38,41 +38,47 @@ nmap { '<C-j>', "<CMD>lua require('Navigator').down()<CR>", opts_noremap_silent 
 nmap { '<C-\\>', "<CMD>lua require('Navigator').previous()<CR>", opts_noremap_silent }
 
 -- -- Neotree Keymaps
-nmap { '<C-n>', '<cmd> Neotree filesystem reveal float toggle<CR>', opts_noremap }
-nmap { '<C-b>', '<cmd> Neotree filesystem reveal left toggle<CR>', opts_noremap }
+if not vim.g.vscode then
+  nmap { '<C-n>', '<cmd> Neotree filesystem reveal float toggle<CR>', opts_noremap }
+  nmap { '<C-b>', '<cmd> Neotree filesystem reveal left toggle<CR>', opts_noremap }
+end
 
 -- Telescope Keymaps
-local builtin = require 'telescope.builtin'
-nmap { '<leader>f', builtin.find_files, {} }
-nmap { '<leader>g', builtin.live_grep, {} }
-nmap { '<leader>b', builtin.buffers, {} }
-nmap { '<leader>h', builtin.help_tags, {} }
+if not vim.g.vscode then
+  local builtin = require 'telescope.builtin'
+  nmap { '<leader>f', builtin.find_files, {} }
+  nmap { '<leader>g', builtin.live_grep, {} }
+  nmap { '<leader>b', builtin.buffers, {} }
+  nmap { '<leader>h', builtin.help_tags, {} }
+end
 
 --> fugitive - git stuff
-nmap { '<leader>gs', '<CMD> Git<CR>', opts_noremap_silent }
-nmap { '<leader>gb', '<CMD> Git blame<CR>', opts_noremap_silent }
-nmap { '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts_noremap_silent }
---
--- nmap {'<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts_noremap_silent}
+if not vim.g.vscode then
+  nmap { '<leader>gs', '<CMD> Git<CR>', opts_noremap_silent }
+  nmap { '<leader>gb', '<CMD> Git blame<CR>', opts_noremap_silent }
+  nmap { '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts_noremap_silent }
+end
 
 
 -- -- Terminal related
-vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]], opts_noremap_silent)
--- Can directly map to keys, but better to expose the commands as a vim user command
--- Close Vs Exit: Close doesn't kill the process, Exit does
-vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
-vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = true })
-vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
-vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
+if not vim.g.vscode then
+  vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]], opts_noremap_silent)
+  -- Can directly map to keys, but better to expose the commands as a vim user command
+  -- Close Vs Exit: Close doesn't kill the process, Exit does
+  vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
+  vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = true })
+  vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
+  vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
+  
+  nmap { '<localleader>tt', '<CMD>FTermToggle<CR>', opts_noremap_silent }
+  nmap { '<localleader>tx', '<CMD>FTermExit<CR>', opts_noremap_silent }
+  nmap { '<localleader>tc', '<CMD>FTermClose<CR>', opts_noremap_silent }
 
-nmap { '<localleader>tt', '<CMD>FTermToggle<CR>', opts_noremap_silent }
-nmap { '<localleader>tx', '<CMD>FTermExit<CR>', opts_noremap_silent }
-nmap { '<localleader>tc', '<CMD>FTermClose<CR>', opts_noremap_silent }
-
--- TODO: custom terminal to attach things like btop, lazygit etc.
--- LSP related mappings
--- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
-nmap { '<leader>lf', '<CMD>Format<CR>', opts_noremap_silent }
+  -- TODO: custom terminal to attach things like btop, lazygit etc.
+  -- LSP related mappings
+  -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
+  nmap { '<leader>lf', '<CMD>Format<CR>', opts_noremap_silent }
+end
 
 -- Shamelessly copying from the primeagen
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
@@ -82,23 +88,12 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('x', '<leader>p', [["_dP]])
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
