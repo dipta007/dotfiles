@@ -15,7 +15,7 @@ local opts_noremap_silent = { noremap = true, silent = true }
 local opts_noremap = { noremap = true, silent = false }
 
 -- Things I can't live without
-nimap { '<D-s>', ':w!<CR>', opts_noremap }
+nimap { '<D-s>', '<CMD>w!<CR>', opts_noremap }
 nmap { ';', ':', opts_noremap }
 -- nmap{'<leader>q', ':bd!<CR>'}
 

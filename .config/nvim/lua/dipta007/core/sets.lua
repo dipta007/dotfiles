@@ -16,6 +16,10 @@ o.tabstop = 4
 o.softtabstop = 4
 o.expandtab = true
 
+-- appearance
+opt.termguicolors = true
+opt.background = "dark"
+
 --- don't want any backup or swap files
 -- o.backup = false
 -- o.wb = false
@@ -23,10 +27,10 @@ o.expandtab = true
 
 -- fold settings
 -- needed for ufo plugin to work
--- o.foldcolumn = '1'
--- o.foldlevel = 99
--- o.foldlevelstart = -1
--- o.foldenable = true
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = -1
+o.foldenable = true
 
 -- window local settings
 --- show numbers (relatively)
@@ -34,7 +38,7 @@ wo.number = true
 wo.relativenumber = true
 
 --- highlight 88th column
-wo.colorcolumn = '88'
+wo.colorcolumn = '120'
 
 --- always show signcolumn
 wo.signcolumn = 'yes'
