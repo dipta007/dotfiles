@@ -118,15 +118,6 @@ local servers = {
   },
 }
 
--- setup null-ls to handle linting and formatting
--- require("null-ls").setup({
--- 	sources = {
--- 		require("null-ls").builtins.formatting.stylua,
--- 		require("null-ls").builtins.formatting.isort,
--- 		require("null-ls").builtins.formatting.black,
--- 	},
--- })
-
 local config = function()
   -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
   local capabilities = vim.lsp.protocol.make_client_capabilities()
