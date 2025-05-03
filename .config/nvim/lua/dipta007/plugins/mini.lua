@@ -1,5 +1,6 @@
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
+  version = '*',
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -17,6 +18,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.surround').setup()
     require('mini.comment').setup { options = { ignore_blank_line = true } }
     require('mini.pairs').setup()
+    require('mini.animate').setup()
 
     require('mini.indentscope').setup {
       symbol = '│',
