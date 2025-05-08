@@ -18,7 +18,9 @@ return { -- Collection of various small independent plugins/modules
     require('mini.surround').setup()
     require('mini.comment').setup { options = { ignore_blank_line = true } }
     require('mini.pairs').setup()
-    require('mini.animate').setup()
+    if not vim.g.vscode then
+      require('mini.animate').setup()
+    end
 
     require('mini.indentscope').setup {
       symbol = '│',

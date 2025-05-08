@@ -174,23 +174,6 @@ local config = function()
         on_attach = on_attach,
         settings = servers[server_name],
         filetypes = (servers[server_name] or {}).filetypes,
-        on_init = function(client)
-          if server_name == 'pyright' then
-            -- why and what?
-            -- pyright doesn't work if you use `pyenv local` to specify auto-activate virtualenv on entering a directory
-            -- Although if you manually activate the virtual env -> pyright will respect that
-            -- See [ref](https://github.com/neovim/nvim-lspconfig/issues/717)
-            --
-            -- Solution:
-            -- Option #1: Add pyrightconfig.json with pythonPath, venvPath and venv
-            -- you can optionally use a [pyenv plugin](https://github.com/alefpereira/pyenv-pyright) to avoid manually managing this
-            -- Option #2: Hook up correct python path before LSP init
-            -- what we are doing right now
-            local python_path = get_python_path(client.config.root_dir)
-            print(python_path)
-            client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
-          end
-        end,
       }
     end,
   }
