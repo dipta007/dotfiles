@@ -63,3 +63,6 @@ dalert() {
 
 # run yadm pull and check if the bootstrap file has changed
 yadm_pull_and_check
+
+
+set -o vi
