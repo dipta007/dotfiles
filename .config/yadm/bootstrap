@@ -158,13 +158,11 @@ def setup_bashrc(secret_tokens):
     secret_bashrc = f"{HOME_DIR}/.bashrc.secret"
     with open(secret_bashrc, "w") as f:
         f.write(secret_tokens)
-
+s
     ###################
     # Source all bashrc
     ###################
-    add_to_bash_file(secret_bashrc)
     add_to_bash_file(f"{HOME_DIR}/.bashrc.{HOSTNAME}")
-    add_to_bash_file(f"{HOME_DIR}/.bashrc.common")
 
     #### Source the main bashrc
     cprint("Please run the following command to source the bashrc", "YELLOW")
