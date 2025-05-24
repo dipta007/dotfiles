@@ -64,5 +64,12 @@ dalert() {
 # run yadm pull and check if the bootstrap file has changed
 yadm_pull_and_check
 
+# >>>> ssh server alias
+alias ada="ssh sroydip1@ada.rs.umbc.edu"
+alias chip="ssh sroydip1@chip.rs.umbc.edu"
+alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
+alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
+alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
+alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
+# <<<< ssh server alias
 
-set -o vi
