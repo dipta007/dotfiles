@@ -25,12 +25,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
 
 
 # if local zshrc is here, source it
 if [[ -f "$HOME/.local_zshrc" ]]; then
-  echo "sourcing local"
   . $HOME/.local_zshrc
 fi
 
