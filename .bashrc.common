@@ -1,4 +1,4 @@
-# >>>> BASH by sroydip1
+# >>>> BASH by roydipta
 
 export PATH=$PATH:$HOME/.local/bin
 
@@ -8,10 +8,10 @@ alias uvd="deactivate"
 
 eval "$(uv generate-shell-completion bash)"
 eval "$(uvx --generate-shell-completion bash)"
-# <<<< BASH by sroydip1
+# <<<< BASH by roydipta
 
 
-# >>>> Functions by sroydip1
+# >>>> Functions by roydipta
 yadm_pull_and_check() {
     local bootstrap_file=".config/yadm/bootstrap"
     local output
@@ -58,18 +58,18 @@ dalert() {
     fi
 }
 
-# <<<< Functions by sroydip1
+# <<<< Functions by roydipta
 
-
-# run yadm pull and check if the bootstrap file has changed
-yadm_pull_and_check
-
-# >>>> ssh server alias
+# >>>> Alias by roydipta
 alias ada="ssh sroydip1@ada.rs.umbc.edu"
 alias chip="ssh sroydip1@chip.rs.umbc.edu"
 alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
 alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
 alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
 alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
-# <<<< ssh server alias
+# <<<< Alias by roydipta
+
+
+# run yadm pull and check if the bootstrap file has changed
+yadm_pull_and_check
 

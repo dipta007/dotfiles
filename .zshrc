@@ -1,5 +1,3 @@
-HOSTNAME="mac_personal"
-
 # antigen load and configuration
 # run this on root: curl -L git.io/antigen > antigen.zsh
 source ~/antigen.zsh
@@ -31,12 +29,13 @@ fi
 
 
 # if local zshrc is here, source it
-if [[ -f "~/.local_zshrc" ]]; then
-  . ~/.local_zshrc
+if [[ -f "$HOME/.local_zshrc" ]]; then
+  echo "sourcing local"
+  . $HOME/.local_zshrc
 fi
 
 
 # source the common ones
-. /Users/dipta007/.bashrc.secret
-. /Users/dipta007/.bashrc.common
+. $HOME/.bashrc.secret
+. $HOME/.bashrc.common
 
