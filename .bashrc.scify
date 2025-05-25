@@ -6,7 +6,7 @@ alias work2="cd /p/work2/sroydip1"
 export TMPDIR="/tmp"
 export HF_HOME="/p/work2/sroydip1/huggingface"
 export UDOCKER_DIR="/p/work2/sroydip1/udocker"
-export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH
-export PATH=/usr/local/cuda-12/bin:$PATH
-export CUDA_HOME=/usr/local/cuda-12
+export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-12.8/bin:$PATH
+export CUDA_HOME=/usr/local/cuda-12.8
 # <<<< ENV Variables by sroydip1
