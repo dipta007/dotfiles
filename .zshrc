@@ -11,14 +11,6 @@ source ~/antigen.zsh
 antigen init ~/.antigenrc
 
 
-# If NVIM is available then nvim is the editor, else vim
-if command -v nvim &> /dev/null; then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
-
-
 # the things we want to do in MAC
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
@@ -31,15 +23,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-
 # . "$HOME/.local/bin/env"
-
-
-# if local zshrc is here, source it
-if [[ -f "$HOME/.local_zshrc" ]]; then
-  . $HOME/.local_zshrc
-fi
-
 
 # source the common ones
 . $HOME/.bashrc.secret

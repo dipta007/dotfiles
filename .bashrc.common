@@ -61,6 +61,19 @@ dalert() {
 
 # <<<< Functions by roydipta
 
+# If NVIM is available then nvim is the editor, else vim
+if command -v nvim &> /dev/null; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
+
+# if local zshrc is here, source it
+if [[ -f "$HOME/.local_zshrc" ]]; then
+  . $HOME/.local_zshrc
+fi
+
+
 # >>>> Alias by roydipta
 alias ada="ssh sroydip1@ada.rs.umbc.edu"
 alias chip="ssh sroydip1@chip.rs.umbc.edu"
@@ -68,6 +81,9 @@ alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
 alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
 alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
 alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat'
+fi
 # <<<< Alias by roydipta
 
 
