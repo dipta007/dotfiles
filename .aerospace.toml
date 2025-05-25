@@ -1,6 +1,3 @@
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
-
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -51,6 +48,7 @@ automatically-unhide-macos-hidden-apps = false
 [key-mapping]
     preset = 'qwerty'
 
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -62,10 +60,10 @@ automatically-unhide-macos-hidden-apps = false
 [gaps]
     inner.horizontal = 4
     inner.vertical =   4
-    outer.left =       4
-    outer.bottom =     4
-    outer.top =        4
-    outer.right =      4
+    outer.left =       2
+    outer.bottom =     2
+    outer.top =        2
+    outer.right =      2
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -212,4 +210,39 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+
+
+[[on-window-detected]]
+    if.app-id = 'com.github.wez.wezterm'
+    run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Zotero'
+    run = 'move-node-to-workspace Z'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Warp'
+    run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Zotero'
+    run = 'move-node-to-workspace Z'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Slack'
+    run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Cursor'
+    run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Microsoft Edge'
+    run = 'move-node-to-workspace M'
+
 
