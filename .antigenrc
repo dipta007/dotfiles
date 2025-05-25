@@ -2,8 +2,7 @@
 antigen use oh-my-zsh
 
 # Set theme
-# THEME=robbyrussell 
-# antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
+# antigen theme robbyrussell
 antigen theme romkatv/powerlevel10k
 
 # Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
