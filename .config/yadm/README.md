@@ -1,19 +1,30 @@
 ## Some Manual Things to install
 0. brew (just if you dont have sudo access): 
-* first go to https://docs.brew.sh/Installation#untar-anywhere-unsupported
-* go to .local/
-* install using the untar alternative option, pasted here just if that is deprecated
+    * first go to https://docs.brew.sh/Installation#untar-anywhere-unsupported
+    * go to .local/
+    * install using the untar alternative option, pasted here just if that is deprecated
+
 ```
 eval "$(homebrew/bin/brew shellenv)"
 brew update --force --quiet
 chmod -R go-w "$(brew --prefix)/share/zsh"
 ```
+
 * add to .bashrc/.zshrc: 
+
 ```
 export PATH="$HOME/.local/homebrew/bin:$PATH"
 brew shellenv
 ```
-1. zsh (if not available): `brew install zsh`
+
+1. zsh (if not available): 
+
+```
+brew install zsh
+# add to the end of .bashrc -- as you dont have sudo to change shell
+exec zsh
+```
+
 2. antigen: `curl -L git.io/antigen > antigen.zsh`
 3. bat: `brew install bat`
 4. nvm: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`
