@@ -1,0 +1,33 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Shubhashis Roy Dipta
+	email = iamdipta@gmail.com
+
+[core]
+	excludesfile = $HOME/.gitignore_global
+	pager = delta
+
+[init]
+	defaultBranch = main
+	templateDir = $HOME/.git-template
+
+[push]
+	autoSetupRemote = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	dark = true
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictStyle = zdiff3
