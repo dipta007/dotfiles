@@ -4,12 +4,12 @@
 	email = iamdipta@gmail.com
 
 [core]
-	excludesfile = $HOME/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	pager = delta
 
 [init]
 	defaultBranch = main
-	templateDir = $HOME/.git-template
+	templateDir = ~/.git-template
 
 [push]
 	autoSetupRemote = true
