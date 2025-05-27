@@ -69,8 +69,8 @@ else
 fi
 
 # if local zshrc is here, source it
-if [[ -f "$HOME/.local_zshrc" ]]; then
-  . $HOME/.local_zshrc
+if [[ -f "$HOME/.bashrc.local" ]]; then
+  . $HOME/.bashrc.local
 fi
 
 
