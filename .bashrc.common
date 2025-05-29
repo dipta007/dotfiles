@@ -68,11 +68,6 @@ else
   export EDITOR='vim'
 fi
 
-# if local zshrc is here, source it
-if [[ -f "$HOME/.bashrc.local" ]]; then
-  . $HOME/.bashrc.local
-fi
-
 
 # >>>> Alias by roydipta
 alias ada="ssh sroydip1@ada.rs.umbc.edu"
@@ -92,4 +87,11 @@ alias lli="ls -lh --color=always | sort -k9 -f"
 
 # run yadm pull and check if the bootstrap file has changed
 yadm_pull_and_check
+
+# if local zshrc is here, source it
+# end of file to replace everything with .bashrc.local
+if [[ -f "$HOME/.bashrc.local" ]]; then
+  . $HOME/.bashrc.local
+fi
+
 
