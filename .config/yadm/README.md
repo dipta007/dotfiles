@@ -35,3 +35,9 @@ exec zsh
 brew tap FelixKratz/formulae
 brew install borders
 ```
+8. install aerospace
+```
+brew install --cask nikitabobko/tap/aerospaces
+defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+defaults write com.apple.dock expose-group-apps -bool true && killall dock
+```
