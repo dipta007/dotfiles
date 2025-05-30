@@ -70,7 +70,6 @@ fi
 
 
 # >>>> Alias by roydipta
-alias ada="ssh sroydip1@ada.rs.umbc.edu"
 alias chip="ssh sroydip1@chip.rs.umbc.edu"
 alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
 alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
