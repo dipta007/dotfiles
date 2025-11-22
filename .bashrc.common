@@ -68,6 +68,8 @@ else
   export EDITOR='vim'
 fi
 
+source <(fzf --zsh)
+
 
 # >>>> Alias by roydipta
 alias chip="ssh sroydip1@chip.rs.umbc.edu"
@@ -81,6 +83,7 @@ if command -v bat >/dev/null 2>&1; then
 fi
 
 alias lli="ls -lh --color=always | sort -k9 -f"
+alias fnv='nvim $(fzf --preview "bat --style=numbers --color=always {}" --layout reverse --border)'
 # <<<< Alias by roydipta
 
 
@@ -94,3 +97,12 @@ if [[ -f "$HOME/.bashrc.local" ]]; then
 fi
 
 
+alias ll='ls -lAFh'                         # Preferred 'ls' implementatioss
+alias less='less -FSRXc'                    # Preferred 'less' implementation
+alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
+alias c='clear'                             # c:            Clear terminal display
+alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
+alias show_options='shopt'                  # Show_options: display bash options settings
+alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
+alias fix_term='echo -e "\033c"'            # fix_term:     Reset the conosle.  Similar to the reset command
+alias cic='bind "set completion-ignore-case on"' # cic:          Make tab-completion case-insensitive
