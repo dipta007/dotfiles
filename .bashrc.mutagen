@@ -1,0 +1,252 @@
+# Default ignores for ML projects
+MSYNC_DEFAULT_IGNORES=(
+  # Version control
+  ".git/"
+  
+  # Python environments
+  ".venv/"
+  "venv/"
+  "env/"
+  ".conda/"
+  "conda_env/"
+  ".python-version"
+  
+  # Python cache
+  "__pycache__/"
+  ".mypy_cache/"
+  ".pytest_cache/"
+  ".ruff_cache/"
+  ".cache/"
+  "*.pyc"
+  "*.pyo"
+  
+  # Model checkpoints & weights
+  "*.pt"
+  "*.pth"
+  "*.ckpt"
+  "*.safetensors"
+  "*.bin"
+  "*.onnx"
+  "*.pb"
+  "*.tflite"
+  "*.mlmodel"
+  "*.h5"
+  "*.hdf5"
+  "checkpoints/"
+  "saved_models/"
+  "pretrained/"
+  
+  # Experiment tracking
+  "wandb/"
+  "mlruns/"
+  "tensorboard/"
+  "lightning_logs/"
+  "runs/"
+  "logs/"
+  
+  # Huggingface
+  ".huggingface/"
+  "hub/"
+  
+  # Data files (usually large)
+  "*.parquet"
+  "*.arrow"
+  "*.pkl"
+  "*.pickle"
+  "*.joblib"
+  "*.npy"
+  "*.npz"
+  "*.csv"
+  "*.tsv"
+  "*.json"
+  "*.jsonl"
+  
+  # Compressed files
+  "*.tar"
+  "*.tar.gz"
+  "*.tgz"
+  "*.zip"
+  "*.7z"
+  "*.gz"
+  
+  # Media (datasets)
+  "*.mp4"
+  "*.avi"
+  "*.mov"
+  "*.wav"
+  "*.mp3"
+  "*.png"
+  "*.jpg"
+  "*.jpeg"
+  
+  # Output directories
+  "outputs/"
+  "results/"
+  "output/"
+  
+  # Hydra
+  "multirun/"
+  
+  # Compiled/cache
+  "unsloth_compiled_cache/"
+  "torch_extensions/"
+  "*.so"
+  
+  # IDE
+  ".idea/"
+  ".vscode/"
+  "*.swp"
+  "*.swo"
+  
+  # Jupyter
+  ".ipynb_checkpoints/"
+  
+  # Build
+  "build/"
+  "dist/"
+  "*.egg-info/"
+  
+  # Node (if any JS tooling)
+  "node_modules/"
+  
+  # Misc
+  ".DS_Store"
+  "*.log"
+)
+
+# Create sync: msync <server> <remote_path> [extra_ignores...]
+msync() {
+  local server="$1"
+  local remote_path="$2"
+  shift 2
+  local extra_ignores=("$@")
+  
+  local name=$(basename "$remote_path")
+  local local_path="$HOME/sync/$name"
+
+  if [[ -z "$server" || -z "$remote_path" ]]; then
+    echo "Usage: msync <server> <remote_path> [extra_ignores...]"
+    echo "Example: msync user@host.edu /path/to/project"
+    echo "Example: msync user@host.edu /path/to/project 'data/' '*.log'"
+    return 1
+  fi
+
+  mkdir -p "$local_path"
+
+  local ignore_flags=()
+  for pattern in "${MSYNC_DEFAULT_IGNORES[@]}"; do
+    ignore_flags+=(--ignore="$pattern")
+  done
+  for pattern in "${extra_ignores[@]}"; do
+    ignore_flags+=(--ignore="$pattern")
+  done
+  echo "Ignoring patterns:"
+    for pattern in "${MSYNC_DEFAULT_IGNORES[@]}"; do
+      echo "  $pattern"
+    done
+
+  mutagen sync create \
+    "$local_path" \
+    "${server}:${remote_path}" \
+    --name="$name" \
+    --sync-mode=two-way-resolved \
+    "${ignore_flags[@]}"
+
+  echo "✓ Syncing: $local_path ↔ ${server}:${remote_path}"
+  echo "✓ Local dir: $local_path"
+  mutagen sync monitor "$name"
+}
+
+# Stop sync
+msync-stop() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-stop <name>"
+    echo ""
+    mutagen sync list
+    return 1
+  fi
+  mutagen sync terminate "$name"
+  echo "✓ Stopped: $name"
+}
+
+# Pause sync
+msync-pause() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-pause <name>"
+    return 1
+  fi
+  mutagen sync pause "$name"
+  echo "✓ Paused: $name"
+}
+
+# Resume sync
+msync-resume() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-resume <name>"
+    return 1
+  fi
+  mutagen sync resume "$name"
+  echo "✓ Resumed: $name"
+}
+
+# List all syncs
+msync-ls() {
+  mutagen sync list
+}
+
+# Monitor sync
+msync-mon() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-mon <name>"
+    return 1
+  fi
+  mutagen sync monitor "$name"
+}
+
+# Force flush
+msync-flush() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-flush <name>"
+    return 1
+  fi
+  mutagen sync flush "$name"
+  echo "✓ Flushed: $name"
+}
+
+# Open local sync directory
+msync-cd() {
+  local name="$1"
+  local local_path="$HOME/sync/$name"
+  if [[ -z "$name" ]]; then
+    cd "$HOME/sync" 2>/dev/null || echo "No sync directory"
+    return
+  fi
+  if [[ -d "$local_path" ]]; then
+    cd "$local_path"
+  else
+    echo "Directory not found: $local_path"
+    return 1
+  fi
+}
+
+# Reset sync (re-scan)
+msync-reset() {
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    echo "Usage: msync-reset <name>"
+    return 1
+  fi
+  mutagen sync reset "$name"
+  echo "✓ Reset: $name"
+}
+
+# Show what's being ignored
+msync-ignores() {
+  echo "Default ignore patterns:"
+  printf '  %s\n' "${MSYNC_DEFAULT_IGNORES[@]}"
+}
