@@ -1,111 +1,86 @@
-return {
-  'nvim-treesitter/nvim-treesitter-textobjects',
-  branch = 'main',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = { 'BufReadPost', 'BufNewFile' },
-  config = function()
-    require('nvim-treesitter-textobjects').setup {
+local config = function()
+  require('nvim-treesitter.configs').setup {
+    textobjects = {
       select = {
+        enable = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
         lookahead = true,
+        keymaps = {
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+          ['al'] = '@loop.outer',
+          ['il'] = '@loop.inner',
+          ['ab'] = '@block.outer',
+          ['ib'] = '@block.inner',
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>a'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>A'] = '@parameter.inner',
+        },
       },
       move = {
+        enable = true,
         set_jumps = true,
+        goto_next_start = {
+          -- ["]m"] = "@function.outer",
+          -- ["]]"] = "@class.outer",
+          [']f'] = '@function.outer',
+          [']c'] = '@class.outer',
+          [']a'] = '@parameter.outer',
+          [']i'] = '@conditional.outer',
+          [']l'] = '@loop.outer',
+          [']b'] = '@block.outer',
+          [']s'] = '@statement.outer',
+        },
+        goto_next_end = {
+          -- ["]M"] = "@function.outer",
+          -- ["]["] = "@class.outer",
+          [']F'] = '@function.outer',
+          [']C'] = '@class.outer',
+          [']A'] = '@parameter.outer',
+          [']I'] = '@conditional.outer',
+          [']L'] = '@loop.outer',
+          [']B'] = '@block.outer',
+          [']S'] = '@statement.outer',
+        },
+        goto_previous_start = {
+          -- ["[m"] = "@function.outer",
+          -- ["[["] = "@class.outer",
+          ['[f'] = '@function.outer',
+          ['[c'] = '@class.outer',
+          ['[a'] = '@parameter.outer',
+          ['[i'] = '@conditional.outer',
+          ['[l'] = '@loop.outer',
+          ['[b'] = '@block.outer',
+          ['[s'] = '@statement.outer',
+        },
+        goto_previous_end = {
+          -- ["[M"] = "@function.outer",
+          -- ["[]"] = "@class.outer",
+          ['[F'] = '@function.outer',
+          ['[C'] = '@class.outer',
+          ['[A'] = '@parameter.outer',
+          ['[I'] = '@conditional.outer',
+          ['[L'] = '@loop.outer',
+          ['[B'] = '@block.outer',
+          ['[S'] = '@statement.outer',
+        },
       },
-    }
+    },
+  }
+end
 
-    local select = require('nvim-treesitter-textobjects.select')
-    local move = require('nvim-treesitter-textobjects.move')
-    local swap = require('nvim-treesitter-textobjects.swap')
-
-    -- Select keymaps
-    local select_maps = {
-      ['af'] = '@function.outer',
-      ['if'] = '@function.inner',
-      ['ac'] = '@class.outer',
-      ['ic'] = '@class.inner',
-      ['al'] = '@loop.outer',
-      ['il'] = '@loop.inner',
-      ['ab'] = '@block.outer',
-      ['ib'] = '@block.inner',
-      ['aa'] = '@parameter.outer',
-      ['ia'] = '@parameter.inner',
-    }
-    for key, query in pairs(select_maps) do
-      vim.keymap.set({ 'x', 'o' }, key, function()
-        select.select_textobject(query, 'textobjects')
-      end)
-    end
-
-    -- Swap keymaps
-    vim.keymap.set('n', '<leader>a', function()
-      swap.swap_next('@parameter.inner')
-    end, { desc = 'Swap next parameter' })
-    vim.keymap.set('n', '<leader>A', function()
-      swap.swap_previous('@parameter.inner')
-    end, { desc = 'Swap previous parameter' })
-
-    -- Move keymaps (goto next start)
-    local goto_next_start = {
-      [']f'] = '@function.outer',
-      [']c'] = '@class.outer',
-      [']a'] = '@parameter.outer',
-      [']i'] = '@conditional.outer',
-      [']l'] = '@loop.outer',
-      [']b'] = '@block.outer',
-      [']s'] = '@statement.outer',
-    }
-    for key, query in pairs(goto_next_start) do
-      vim.keymap.set({ 'n', 'x', 'o' }, key, function()
-        move.goto_next_start(query, 'textobjects')
-      end)
-    end
-
-    -- Move keymaps (goto next end)
-    local goto_next_end = {
-      [']F'] = '@function.outer',
-      [']C'] = '@class.outer',
-      [']A'] = '@parameter.outer',
-      [']I'] = '@conditional.outer',
-      [']L'] = '@loop.outer',
-      [']B'] = '@block.outer',
-      [']S'] = '@statement.outer',
-    }
-    for key, query in pairs(goto_next_end) do
-      vim.keymap.set({ 'n', 'x', 'o' }, key, function()
-        move.goto_next_end(query, 'textobjects')
-      end)
-    end
-
-    -- Move keymaps (goto previous start)
-    local goto_prev_start = {
-      ['[f'] = '@function.outer',
-      ['[c'] = '@class.outer',
-      ['[a'] = '@parameter.outer',
-      ['[i'] = '@conditional.outer',
-      ['[l'] = '@loop.outer',
-      ['[b'] = '@block.outer',
-      ['[s'] = '@statement.outer',
-    }
-    for key, query in pairs(goto_prev_start) do
-      vim.keymap.set({ 'n', 'x', 'o' }, key, function()
-        move.goto_previous_start(query, 'textobjects')
-      end)
-    end
-
-    -- Move keymaps (goto previous end)
-    local goto_prev_end = {
-      ['[F'] = '@function.outer',
-      ['[C'] = '@class.outer',
-      ['[A'] = '@parameter.outer',
-      ['[I'] = '@conditional.outer',
-      ['[L'] = '@loop.outer',
-      ['[B'] = '@block.outer',
-      ['[S'] = '@statement.outer',
-    }
-    for key, query in pairs(goto_prev_end) do
-      vim.keymap.set({ 'n', 'x', 'o' }, key, function()
-        move.goto_previous_end(query, 'textobjects')
-      end)
-    end
-  end,
+return {
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  lazy = true,
+  config = config,
 }
