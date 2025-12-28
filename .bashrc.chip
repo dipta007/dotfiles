@@ -48,3 +48,5 @@ satt() {
 }
 
 # <<<< Functions by sroydip1
+
+export PATH="$HOME/.local/nvim-stable/bin:$PATH"
