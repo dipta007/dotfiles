@@ -12,8 +12,8 @@ return {
             return -- jumped or applied
           end
   
-          -- if you are using Neovim's native inline completions
-          if vim.lsp.inline_completion.get() then
+          -- if you are using Neovim's native inline completions (Neovim 0.11+)
+          if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then
             return
           end
   
