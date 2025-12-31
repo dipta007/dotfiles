@@ -9,8 +9,8 @@ local config = function()
         accept = '<C-y>',
         accept_word = '<C-w>',
         accept_line = '<C-l>',
-        next = '<]]>',
-        prev = '<[[>',
+        next = ']]',
+        prev = '[[',
         dismiss = '<C-e>',
       },
     },
@@ -24,7 +24,7 @@ local config = function()
 end
 return {
   'zbirenbaum/copilot.lua',
-  enabled = not vim.g.vscode,
+  enabled = true, -- Disabled in favor of official Copilot LSP for sidekick NES
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = config,

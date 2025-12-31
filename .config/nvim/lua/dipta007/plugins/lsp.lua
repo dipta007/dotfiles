@@ -4,6 +4,7 @@
 local servers = {
   -- clangd = {},
   -- gopls = {},
+  copilot = {},
   pyright = {
     single_file_support = true,
     settings = {
