@@ -143,6 +143,9 @@ msync() {
     "${server}:${remote_path}" \
     --name="$name" \
     --sync-mode=two-way-resolved \
+    --stage-mode=internal \
+    --max-staging-file-size=500MB \
+    --no-ignore-vcs \
     "${ignore_flags[@]}"
 
   echo "✓ Syncing: $local_path ↔ ${server}:${remote_path}"
