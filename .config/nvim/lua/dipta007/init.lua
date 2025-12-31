@@ -26,8 +26,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
 
--- First load the core files
-
 -- ================= START: PLUGINS ==================================================
 require('lazy').setup({ import = 'dipta007.plugins' }, {
   change_detection = {

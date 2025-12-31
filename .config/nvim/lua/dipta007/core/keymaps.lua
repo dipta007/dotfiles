@@ -41,15 +41,6 @@ if not vim.g.vscode then
 	nmap({ "<C-b>", "<cmd> Neotree filesystem reveal left toggle<CR>", opts_noremap })
 end
 
--- Telescope Keymaps
-if not vim.g.vscode then
-	local builtin = require("telescope.builtin")
-	nmap({ "<leader>f", builtin.find_files, {} })
-	nmap({ "<leader>g", builtin.live_grep, {} })
-	nmap({ "<leader>b", builtin.buffers, {} })
-	nmap({ "<leader>h", builtin.help_tags, {} })
-end
-
 --> fugitive - git stuff
 if not vim.g.vscode then
 	nmap({ "<leader>gs", "<CMD> Git<CR>", opts_noremap_silent })
