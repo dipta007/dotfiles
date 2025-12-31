@@ -1,8 +1,3 @@
---[[
-   this file will contain keybindings
-   api to set keybindings is - vim.api.nvim_set_keymap
-]]
-
 -- Note: two ways to setup keymap
 -- vim.keymap.set - default opts = {noremap = true}
 -- vim.api.nvim_set_keymap - no default opts
@@ -19,13 +14,6 @@ imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
 nmap({ ";", ":", opts_noremap })
 -- nmap{'<leader>q', ':bd!<CR>'}
-
--- opens/close quickfix list
--- nmap { '<leader>c', ':copen<cr>' }
--- nmap { '<leader>x', ':cclose<cr>' }
-
--- toggle highlight last search
--- nmap { '<leader>n', ':set hlsearch!<cr>' }
 
 --> Navigator - vim-tmux-navigator
 nmap({ "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent })
@@ -82,11 +70,11 @@ if not vim.g.vscode then
 	nmap({ "<localleader>tt", "<CMD>FTermToggle<CR>", opts_noremap_silent })
 	nmap({ "<localleader>tx", "<CMD>FTermExit<CR>", opts_noremap_silent })
 	nmap({ "<localleader>tc", "<CMD>FTermClose<CR>", opts_noremap_silent })
-
-	-- LSP related mappings
-	-- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
-	nmap({ "<leader>lf", "<CMD>Format<CR>", opts_noremap_silent })
 end
+
+-- LSP related mappings
+-- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
+nmap({ "<leader>lf", "<CMD>Format<CR>", opts_noremap_silent })
 
 -- Shamelessly copying from the primeagen
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

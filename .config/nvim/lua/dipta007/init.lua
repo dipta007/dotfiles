@@ -5,10 +5,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- @TODO:CHECK
-vim.g.loaded_python3_provider = 0
-
--- Turns off netrw
+-- Turns off netrw (default file explorer) in favor of nvim-tree or other plugins
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
@@ -28,6 +25,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
+
+-- First load the core files
 
 -- ================= START: PLUGINS ==================================================
 require('lazy').setup({ import = 'dipta007.plugins' }, {

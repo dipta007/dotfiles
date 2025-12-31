@@ -8,9 +8,9 @@ local config = function()
       keymap = {
         accept = '<C-y>',
         accept_word = '<C-w>',
-        accept_line = '<C-l>',
-        next = '<C-j>',
-        prev = '<C-k>',
+        accept_line = false,
+        next = '<C-[[>',
+        prev = '<C-]]>',
         dismiss = '<C-e>',
       },
     },
