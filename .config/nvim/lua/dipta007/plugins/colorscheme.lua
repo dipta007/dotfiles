@@ -8,6 +8,17 @@ return { -- You can easily change to a different colorscheme.
   name = 'catppuccin',
   priority = 1000, -- Make sure to load this before all the other start plugins.
   config = function()
+    require("catppuccin").setup {
+      flavour = "mocha", -- latte, frappe, macchiato, mocha
+      transparent_background = true,
+      term_colors = true,
+      auto_integrations = true,
+      float = {
+        border = "rounded",
+        transparent = true,
+        solid = true,
+      }
+    }
     vim.cmd.colorscheme 'catppuccin-mocha'
   end,
 }

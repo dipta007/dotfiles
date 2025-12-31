@@ -34,6 +34,19 @@ nmap({ "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts_noremap_silent
 nmap({ "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts_noremap_silent })
 nmap({ "<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", opts_noremap_silent })
 
+-- window management
+nmap({ "<leader>sv", "<C-w>v", opts_noremap }) -- split window vertically
+nmap({ "<leader>sh", "<C-w>s", opts_noremap }) -- split window horizontally
+nmap({ "<leader>se", "<C-w>=", opts_noremap }) -- make split windows equal width & height
+nmap({ "<leader>sx", "<cmd>close<CR>", opts_noremap }) -- close current split window
+
+-- tab management
+-- nmap({ "<leader>to", "<cmd>tabnew<CR>", opts_noremap }) -- open new tab
+-- nmap({ "<leader>tx", "<cmd>tabclose<CR>", opts_noremap }) -- close current tab
+-- nmap({ "<leader>tn", "<cmd>tabn<CR>", opts_noremap }) -- go to next tab
+-- nmap({ "<leader>tp", "<cmd>tabp<CR>", opts_noremap }) -- go to previous tab
+-- nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
+
 -- -- Neotree Keymaps
 if not vim.g.vscode then
 	nmap({ "<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap })

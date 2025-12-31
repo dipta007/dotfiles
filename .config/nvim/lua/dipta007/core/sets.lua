@@ -11,19 +11,24 @@ o.ignorecase = true
 o.smartcase = true
 
 --- tab related
-o.shiftwidth = 4
-o.tabstop = 4
-o.softtabstop = 4
+o.shiftwidth = 2
+o.tabstop = 2
+o.softtabstop = 2
 o.expandtab = true
+o.autoindent = true
 
 -- appearance
 opt.termguicolors = true
 opt.background = "dark"
+opt.signcolumn = "yes"
+
+-- backspace
+opt.backspace = "indent,eol,start"
 
 --- don't want any backup or swap files
 -- o.backup = false
 -- o.wb = false
--- o.swapfile = false
+o.swapfile = false
 
 -- fold settings
 -- needed for ufo plugin to work
