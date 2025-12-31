@@ -1,16 +1,5 @@
 # Default ignores for ML projects
 MSYNC_DEFAULT_IGNORES=(
-  # Version control
-  ".git/"
-  
-  # Python environments
-  ".venv/"
-  "venv/"
-  "env/"
-  ".conda/"
-  "conda_env/"
-  ".python-version"
-  
   # Python cache
   "__pycache__/"
   ".mypy_cache/"
@@ -41,33 +30,31 @@ MSYNC_DEFAULT_IGNORES=(
   "mlruns/"
   "tensorboard/"
   "lightning_logs/"
-  "runs/"
-  "logs/"
   
   # Huggingface
   ".huggingface/"
   "hub/"
   
-  # Data files (usually large)
-  "*.parquet"
-  "*.arrow"
-  "*.pkl"
-  "*.pickle"
-  "*.joblib"
-  "*.npy"
-  "*.npz"
-  "*.csv"
-  "*.tsv"
-  "*.json"
-  "*.jsonl"
+  # # Data files (usually large)
+  # "*.parquet"
+  # "*.arrow"
+  # "*.pkl"
+  # "*.pickle"
+  # "*.joblib"
+  # "*.npy"
+  # "*.npz"
+  # "*.csv"
+  # "*.tsv"
+  # "*.json"
+  # "*.jsonl"
   
   # Compressed files
-  "*.tar"
-  "*.tar.gz"
-  "*.tgz"
-  "*.zip"
-  "*.7z"
-  "*.gz"
+  # "*.tar"
+  # "*.tar.gz"
+  # "*.tgz"
+  # "*.zip"
+  # "*.7z"
+  # "*.gz"
   
   # Media (datasets)
   "*.mp4"
@@ -150,6 +137,7 @@ msync() {
     "${server}:${remote_path}" \
     --name="$name" \
     --sync-mode=two-way-resolved \
+    --ignore-vcs false \
     "${ignore_flags[@]}"
 
   echo "✓ Syncing: $local_path ↔ ${server}:${remote_path}"
