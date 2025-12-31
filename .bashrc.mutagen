@@ -1,5 +1,11 @@
 # Default ignores for ML projects
 MSYNC_DEFAULT_IGNORES=(
+  ".venv"
+  "venv/"
+  "env/"
+  ".env/"
+  ".conda/"
+
   # Python cache
   "__pycache__/"
   ".mypy_cache/"
@@ -137,7 +143,6 @@ msync() {
     "${server}:${remote_path}" \
     --name="$name" \
     --sync-mode=two-way-resolved \
-    --ignore-vcs false \
     "${ignore_flags[@]}"
 
   echo "✓ Syncing: $local_path ↔ ${server}:${remote_path}"

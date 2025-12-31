@@ -45,3 +45,4 @@ export PATH=$PATH:/Users/dipta007/my-world/platform-tools
 
 # Added by Antigravity
 export PATH="/Users/dipta007/.antigravity/antigravity/bin:$PATH"
+source ~/.bashrc.mutagen
