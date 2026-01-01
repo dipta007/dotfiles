@@ -19,7 +19,7 @@ return {
       enabled = true
     },
 		dashboard = { enabled = true },
-		explorer = { enabled = false },
+		explorer = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		notifier = {
@@ -46,6 +46,7 @@ return {
 		-- Top Pickers & Explorer
 		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>e", function() Snacks.explorer({ path = vim.fn.expand("%:p:h") }) end, desc = "Toggle Explorer" },
 
     -- git
 		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },

@@ -41,10 +41,10 @@ nmap({ "[b", "<cmd>bprevious<CR>", opts_noremap })
 nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap })  -- Toggle last buffer
 
 -- -- Neotree Keymaps
-if not vim.g.vscode then
-	nmap({ "<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap })
-	nmap({ "<C-b>", "<cmd> Neotree filesystem reveal left toggle<CR>", opts_noremap })
-end
+-- if not vim.g.vscode then
+-- 	nmap({ "<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap })
+-- 	nmap({ "<C-b>", "<cmd> Neotree filesystem reveal left toggle<CR>", opts_noremap })
+-- end
 
 -- -- Terminal related
 if not vim.g.vscode then

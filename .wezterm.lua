@@ -28,10 +28,12 @@ config.colors = {
 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 }
 
--- and finally, return the configuration to wezterm
 config.keys = {
   {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
 }
 
+config.enable_kitty_graphics = true
+
+-- and finally, return the configuration to wezterm
 return config
 

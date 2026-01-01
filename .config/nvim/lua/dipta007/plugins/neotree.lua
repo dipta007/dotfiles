@@ -1,6 +1,6 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  enabled = not vim.g.vscode,
+  enabled = false,
   branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
