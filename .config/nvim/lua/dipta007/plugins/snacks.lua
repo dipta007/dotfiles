@@ -30,6 +30,12 @@ return {
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
+		zen = {
+			enabled = true,
+			toggles = {
+				dim = false,
+			},
+		},
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 		styles = {
