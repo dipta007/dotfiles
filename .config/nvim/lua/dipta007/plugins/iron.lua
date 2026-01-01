@@ -2,6 +2,7 @@ return {
 	"Vigemus/iron.nvim",
 	enabled = not vim.g.vscode,
 	cmd = { "IronRepl", "IronRestart", "IronFocus", "IronHide" },
+  event = "VeryLazy",
 	keys = {
 		{
 			"<leader>rs",

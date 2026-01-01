@@ -5,20 +5,20 @@ local servers = {
 	-- clangd = {},
 	-- gopls = {},
 	copilot = {},
-	pyright = {
-		single_file_support = true,
-		settings = {
-			pyright = {
-				disableOrganizeImports = true,
-			},
-			python = {
-				analysis = {
-					-- using ruff for linting
-					ignore = { "*" },
-				},
-			},
-		},
-	},
+	-- pyright = {
+	-- 	single_file_support = true,
+	-- 	settings = {
+	-- 		pyright = {
+	-- 			disableOrganizeImports = true,
+	-- 		},
+	-- 		python = {
+	-- 			analysis = {
+	-- 				-- using ruff for linting
+	-- 				ignore = { "*" },
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 	ruff = {
 		cmd = { "ruff", "server" },
 		filetypes = { "python" },
@@ -112,14 +112,6 @@ local config = function()
 			nmap("[d", vim.diagnostic.goto_prev)
 			nmap("]d", vim.diagnostic.goto_next)
 
-			nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-			nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-			nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-			nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-			nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-			nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-			nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
 			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 			nmap("<leader>k", vim.lsp.buf.signature_help, "Signature Documentation")
 
@@ -132,8 +124,17 @@ local config = function()
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 				vim.lsp.buf.format()
 			end, { desc = "Format current buffer with LSP" })
+
+
 		end,
 	})
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.py", "*.js", "*.ts" },
+    callback = function()
+      vim.lsp.buf.format({ async = false })
+    end,
+  })
 
 	-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 	local capabilities = vim.lsp.protocol.make_client_capabilities()

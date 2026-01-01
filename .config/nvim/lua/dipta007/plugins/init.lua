@@ -5,8 +5,7 @@ return {
       require('Navigator').setup()
     end,
   },
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-  { "tpope/vim-fugitive" },
+  -- { "tpope/vim-fugitive" },
   {
     'numToStr/FTerm.nvim',
     enabled = not vim.g.vscode,

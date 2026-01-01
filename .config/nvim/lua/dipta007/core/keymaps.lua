@@ -23,10 +23,10 @@ nmap({ "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts_noremap_silent 
 nmap({ "<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", opts_noremap_silent })
 
 -- window management
-nmap({ "<leader>sv", "<C-w>v", opts_noremap }) -- split window vertically
-nmap({ "<leader>sh", "<C-w>s", opts_noremap }) -- split window horizontally
-nmap({ "<leader>se", "<C-w>=", opts_noremap }) -- make split windows equal width & height
-nmap({ "<leader>sx", "<cmd>close<CR>", opts_noremap }) -- close current split window
+nmap({ "<leader>wv", "<C-w>v", opts_noremap }) -- split window vertically
+nmap({ "<leader>wh", "<C-w>s", opts_noremap }) -- split window horizontally
+nmap({ "<leader>we", "<C-w>=", opts_noremap }) -- make split windows equal width & height
+nmap({ "<leader>wx", "<cmd>close<CR>", opts_noremap }) -- close current split window
 
 -- tab management
 -- nmap({ "<leader>to", "<cmd>tabnew<CR>", opts_noremap }) -- open new tab
@@ -35,17 +35,15 @@ nmap({ "<leader>sx", "<cmd>close<CR>", opts_noremap }) -- close current split wi
 -- nmap({ "<leader>tp", "<cmd>tabp<CR>", opts_noremap }) -- go to previous tab
 -- nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
 
+-- buffer management
+nmap({ "]b", "<cmd>bnext<CR>", opts_noremap })
+nmap({ "[b", "<cmd>bprevious<CR>", opts_noremap })
+nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap })  -- Toggle last buffer
+
 -- -- Neotree Keymaps
 if not vim.g.vscode then
 	nmap({ "<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap })
 	nmap({ "<C-b>", "<cmd> Neotree filesystem reveal left toggle<CR>", opts_noremap })
-end
-
---> fugitive - git stuff
-if not vim.g.vscode then
-	nmap({ "<leader>gs", "<CMD> Git<CR>", opts_noremap_silent })
-	nmap({ "<leader>gb", "<CMD> Git blame<CR>", opts_noremap_silent })
-	nmap({ "<leader>gv", "<CMD> Gvdiffsplit<CR>", opts_noremap_silent })
 end
 
 -- -- Terminal related

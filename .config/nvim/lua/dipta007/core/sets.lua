@@ -34,7 +34,7 @@ o.swapfile = false
 -- needed for ufo plugin to work
 o.foldcolumn = '1'
 o.foldlevel = 99
-o.foldlevelstart = -1
+o.foldlevelstart = 99
 o.foldenable = true
 
 -- window local settings
@@ -44,9 +44,6 @@ wo.relativenumber = true
 
 --- highlight 88th column
 wo.colorcolumn = '120'
-
---- always show signcolumn
-wo.signcolumn = 'yes'
 wo.linebreak = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
@@ -71,13 +68,6 @@ opt.breakindent = true
 
 -- Save undo history
 opt.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-opt.ignorecase = true
-opt.smartcase = true
-
--- Keep signcolumn on by default
-opt.signcolumn = 'yes'
 
 -- Decrease update time
 opt.updatetime = 250
