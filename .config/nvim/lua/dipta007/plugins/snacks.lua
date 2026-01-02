@@ -19,14 +19,25 @@ return {
       enabled = true
     },
 		dashboard = { enabled = true },
-		explorer = { enabled = true },
+		explorer = {
+      enabled = true,
+      replace_netrw = true,
+    },
 		indent = { enabled = true },
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 7000,
 		},
-		picker = { enabled = true },
+		picker = {
+      sources = {
+        explorer = {
+          hidden = true,
+          ignored = true,
+        }
+      },
+      enabled = true
+    },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
