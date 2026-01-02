@@ -1,6 +1,6 @@
 return {
 	"nvim-pack/nvim-spectre",
-	enabled = not vim.g.vscode,
+	enabled = true,
 	build = false,
 	cmd = "Spectre",
 	opts = { open_cmd = "noswapfile vnew" },

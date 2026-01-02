@@ -1,24 +1,7 @@
--- [[ Configure LSP ]]
--- Enable the following language servers
--- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 local servers = {
 	-- clangd = {},
 	-- gopls = {},
-	copilot = {},
-	-- pyright = {
-	-- 	single_file_support = true,
-	-- 	settings = {
-	-- 		pyright = {
-	-- 			disableOrganizeImports = true,
-	-- 		},
-	-- 		python = {
-	-- 			analysis = {
-	-- 				-- using ruff for linting
-	-- 				ignore = { "*" },
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
+	-- copilot = {},
 	ruff = {
 		cmd = { "ruff", "server" },
 		filetypes = { "python" },
@@ -124,42 +107,38 @@ local config = function()
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 				vim.lsp.buf.format()
 			end, { desc = "Format current buffer with LSP" })
-
-
 		end,
 	})
 
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.py", "*.js", "*.ts" },
-    callback = function()
-      vim.lsp.buf.format({ async = false })
-    end,
-  })
-
-	-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	capabilities.textDocument.foldingRange = {
-		dynamicRegistration = false,
-		lineFoldingOnly = true,
-	}
-
-	-- Configure default capabilities for all LSP servers using the new vim.lsp.config API
-	vim.lsp.config("*", {
-		capabilities = capabilities,
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		pattern = { "*.py", "*.js", "*.ts" },
+		callback = function()
+			vim.lsp.buf.format({ async = false })
+		end,
 	})
 
-	-- Configure each server
-	for server_name, server_config in pairs(servers) do
-		vim.lsp.config(server_name, server_config)
-	end
+	local capabilities = {
+		textDocument = {
+			foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			},
+		},
+	}
 
-	-- Ensure the servers above are installed via mason
+	capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+	-- Ensure the servers are installed via mason
 	local mason_lspconfig = require("mason-lspconfig")
 	mason_lspconfig.setup({
 		ensure_installed = vim.tbl_keys(servers),
 	})
+
+	-- Configure each server using the new Neovim 0.11+ API
+	for server_name, server_config in pairs(servers) do
+		server_config.capabilities = require("blink.cmp").get_lsp_capabilities(server_config.capabilities)
+		vim.lsp.config(server_name, server_config)
+	end
 
 	-- Enable all configured servers
 	vim.lsp.enable(vim.tbl_keys(servers))
@@ -169,11 +148,12 @@ return {
 	-- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	config = config,
-	enabled = not vim.g.vscode,
+	enabled = true,
 	dependencies = {
 		-- Automatically install LSPs to stdpath for neovim
 		{ "williamboman/mason.nvim", config = true },
 		{ "williamboman/mason-lspconfig.nvim", version = "*" },
+		"saghen/blink.nvim",
 		-- JSON schemas for jsonls
 		"b0o/schemastore.nvim",
 	},

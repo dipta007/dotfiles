@@ -12,8 +12,11 @@ local opts_noremap = { noremap = true, silent = false }
 -- Things I can't live without
 imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
-nmap({ ";", ":", opts_noremap })
 -- nmap{'<leader>q', ':bd!<CR>'}
+
+--> disable <C-y> for completion
+nmap({ "<C-y>", "<Nop>", opts_noremap_silent })
+imap({ "<C-y>", "<Nop>", opts_noremap_silent })
 
 --> Navigator - vim-tmux-navigator
 nmap({ "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent })
@@ -36,15 +39,10 @@ nmap({ "<leader>wx", "<cmd>close<CR>", opts_noremap }) -- close current split wi
 -- nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
 
 -- buffer management
-nmap({ "]b", "<cmd>bnext<CR>", opts_noremap })
-nmap({ "[b", "<cmd>bprevious<CR>", opts_noremap })
+nmap({ "b[", "<cmd>bnext<CR>", opts_noremap })
+nmap({ "b]", "<cmd>bprevious<CR>", opts_noremap })
 nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap })  -- Toggle last buffer
-
--- -- Neotree Keymaps
--- if not vim.g.vscode then
--- 	nmap({ "<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap })
--- 	nmap({ "<C-b>", "<cmd> Neotree filesystem reveal left toggle<CR>", opts_noremap })
--- end
+nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap })      -- New buffer
 
 -- -- Terminal related
 if not vim.g.vscode then

@@ -1,54 +1,44 @@
 return {
 	"folke/sidekick.nvim",
+  event = "LspAttach",
 	opts = {
-		-- add any options here
+    nes = {
+      enabled = true,
+      debounce = 100,
+    }
 	},
 	keys = {
-		{
-			"<tab>",
-			function()
-				-- if there is a next edit, jump to it, otherwise apply it if any
-				if require("sidekick").nes_jump_or_apply() then
-					return -- jumped or applied
-				end
-
-				-- if you are using Neovim's native inline completions (Neovim 0.11+)
-				if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then
-					return
-				end
-
-				-- any other things (like snippets) you want to do on <tab> go here.
-
-				-- fall back to normal tab
-				return "<tab>"
-			end,
-			mode = { "i", "n" },
-			expr = true,
-			desc = "Goto/Apply Next Edit Suggestion",
-		},
-		{
-			"<c-.>",
-			function()
-				require("sidekick.cli").toggle()
-			end,
-			desc = "Sidekick Toggle",
-			mode = { "n", "t", "i", "x" },
-		},
+    -- Next Edit Suggestion Keybindings
+    {
+      "<C-y>",
+      function()
+        if require("sidekick").nes_jump_or_apply() then
+          return
+        end
+        return "<C-y>"
+      end,
+      mode = "n",  -- Normal mode only for NES
+      expr = true,
+      desc = "Goto/Apply Next Edit Suggestion",
+    },
+    {
+      "<C-e>",
+      function()
+        if not require("sidekick").clear() then
+          return "<Esc>"
+        end
+      end,
+      mode = { "i", "n" },
+      expr = true,
+      desc = "Clear Sidekick or normal Esc",
+    },
+    -- Sidekick CLI Keybindings
 		{
 			"<leader>aa",
 			function()
 				require("sidekick.cli").toggle()
 			end,
 			desc = "Sidekick Toggle CLI",
-		},
-		{
-			"<leader>as",
-			function()
-				require("sidekick.cli").select()
-			end,
-			-- Or to select only installed tools:
-			-- require("sidekick.cli").select({ filter = { installed = true } })
-			desc = "Select CLI",
 		},
 		{
 			"<leader>ad",

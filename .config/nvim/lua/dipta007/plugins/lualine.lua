@@ -1,7 +1,7 @@
 -- Replace entire file with:
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = not vim.g.vscode,
+  enabled = true,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   event = 'VeryLazy',
   config = function()

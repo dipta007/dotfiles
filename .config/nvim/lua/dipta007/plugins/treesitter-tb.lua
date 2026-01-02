@@ -5,15 +5,25 @@ local config = function()
         enable = true,
         -- Automatically jump forward to textobj, similar to targets.vim
         lookahead = true,
+
         keymaps = {
+          ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+          ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+          ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+          ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+
           ['af'] = '@function.outer',
           ['if'] = '@function.inner',
+
           ['ac'] = '@class.outer',
           ['ic'] = '@class.inner',
+
           ['al'] = '@loop.outer',
           ['il'] = '@loop.inner',
+
           ['ab'] = '@block.outer',
           ['ib'] = '@block.inner',
+
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
         },
@@ -31,8 +41,6 @@ local config = function()
         enable = true,
         set_jumps = true,
         goto_next_start = {
-          -- ["]m"] = "@function.outer",
-          -- ["]]"] = "@class.outer",
           [']f'] = '@function.outer',
           [']c'] = '@class.outer',
           [']a'] = '@parameter.outer',
@@ -42,8 +50,6 @@ local config = function()
           [']s'] = '@statement.outer',
         },
         goto_next_end = {
-          -- ["]M"] = "@function.outer",
-          -- ["]["] = "@class.outer",
           [']F'] = '@function.outer',
           [']C'] = '@class.outer',
           [']A'] = '@parameter.outer',
@@ -53,8 +59,6 @@ local config = function()
           [']S'] = '@statement.outer',
         },
         goto_previous_start = {
-          -- ["[m"] = "@function.outer",
-          -- ["[["] = "@class.outer",
           ['[f'] = '@function.outer',
           ['[c'] = '@class.outer',
           ['[a'] = '@parameter.outer',
@@ -64,8 +68,6 @@ local config = function()
           ['[s'] = '@statement.outer',
         },
         goto_previous_end = {
-          -- ["[M"] = "@function.outer",
-          -- ["[]"] = "@class.outer",
           ['[F'] = '@function.outer',
           ['[C'] = '@class.outer',
           ['[A'] = '@parameter.outer',
@@ -81,6 +83,6 @@ end
 
 return {
   'nvim-treesitter/nvim-treesitter-textobjects',
-  event = 'VeryLazy',
+  lazy = true,
   config = config,
 }
