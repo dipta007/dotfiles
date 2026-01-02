@@ -137,6 +137,9 @@ msync() {
     for pattern in "${MSYNC_DEFAULT_IGNORES[@]}"; do
       echo "  $pattern"
     done
+    for pattern in "${extra_ignores[@]}"; do
+      echo "  $pattern"
+    done
 
   mutagen sync create \
     "$local_path" \
