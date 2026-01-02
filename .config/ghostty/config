@@ -1,0 +1,44 @@
+# Font configuration
+font-family = MesloLGS Nerd Font Mono
+font-size = 16
+
+# Window configuration
+window-decoration = true
+background-opacity = 0.8
+background-blur-radius = 20
+unfocused-split-opacity = 0.8
+
+# macOS specific
+macos-titlebar-style = hidden
+window-theme = ghostty
+
+# Coolnight colorscheme
+foreground = #CBE0F0
+background = #011423
+cursor-color = #47FF9C
+cursor-text = #011423
+selection-background = #033259
+selection-foreground = #CBE0F0
+
+# ANSI colors (normal)
+palette = 0=#214969
+palette = 1=#E52E2E
+palette = 2=#44FFB1
+palette = 3=#FFE073
+palette = 4=#0FC5ED
+palette = 5=#a277ff
+palette = 6=#24EAF7
+palette = 7=#24EAF7
+
+# ANSI colors (bright)
+palette = 8=#214969
+palette = 9=#E52E2E
+palette = 10=#44FFB1
+palette = 11=#FFE073
+palette = 12=#A277FF
+palette = 13=#a277ff
+palette = 14=#24EAF7
+palette = 15=#24EAF7
+
+# Key binding (Shift+Enter sends escape + return)
+keybind = shift+enter=text:\x1b\r
