@@ -5,7 +5,6 @@ return {
       require('Navigator').setup()
     end,
   },
-  -- { "tpope/vim-fugitive" },
   {
     'numToStr/FTerm.nvim',
     enabled = true,

@@ -77,10 +77,10 @@ return {
 		-- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
     
 		-- gh
-		-- { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
-		-- { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
-		-- { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
-		-- { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+		{ "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+		{ "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+		{ "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
 
 		-- search (active)
 		{ "<leader>sh", function() Snacks.picker.help() end, desc = "[S]earch [H]elp" },
@@ -98,7 +98,7 @@ return {
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
 		{ "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
 		{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-		{ "gi", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+		{ "gi", desc = "Goto Implementation", function() Snacks.picker.lsp_implementations() end },
 		{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
 		{ "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
 		{ "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
@@ -147,7 +147,7 @@ return {
 				Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 				Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 				Snacks.toggle.diagnostics():map("<leader>ud")
-				Snacks.toggle.line_number():map("<leader>ul")
+        Snacks.toggle.line_number():map("<leader>ul") 
 				Snacks.toggle
 					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
 					:map("<leader>uc")

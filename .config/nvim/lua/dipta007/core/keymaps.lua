@@ -12,11 +12,10 @@ local opts_noremap = { noremap = true, silent = false }
 -- Things I can't live without
 imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
--- nmap{'<leader>q', ':bd!<CR>'}
+nmap({ "<leader>w", "<CMD>w!<CR>", opts_noremap })
 
 --> disable <C-y> for completion
-nmap({ "<C-y>", "<Nop>", opts_noremap_silent })
-imap({ "<C-y>", "<Nop>", opts_noremap_silent })
+nimap({ "<C-y>", "<Nop>", opts_noremap_silent })
 
 --> Navigator - vim-tmux-navigator
 nmap({ "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent })
@@ -32,32 +31,30 @@ nmap({ "<leader>we", "<C-w>=", opts_noremap }) -- make split windows equal width
 nmap({ "<leader>wx", "<cmd>close<CR>", opts_noremap }) -- close current split window
 
 -- tab management
--- nmap({ "<leader>to", "<cmd>tabnew<CR>", opts_noremap }) -- open new tab
--- nmap({ "<leader>tx", "<cmd>tabclose<CR>", opts_noremap }) -- close current tab
--- nmap({ "<leader>tn", "<cmd>tabn<CR>", opts_noremap }) -- go to next tab
--- nmap({ "<leader>tp", "<cmd>tabp<CR>", opts_noremap }) -- go to previous tab
--- nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
+nmap({ "<leader>to", "<cmd>tabnew<CR>", opts_noremap }) -- open new tab
+nmap({ "<leader>tx", "<cmd>tabclose<CR>", opts_noremap }) -- close current tab
+nmap({ "<leader>tn", "<cmd>tabn<CR>", opts_noremap }) -- go to next tab
+nmap({ "<leader>tp", "<cmd>tabp<CR>", opts_noremap }) -- go to previous tab
+nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
 
 -- buffer management
-nmap({ "b[", "<cmd>bnext<CR>", opts_noremap })
-nmap({ "b]", "<cmd>bprevious<CR>", opts_noremap })
-nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap })  -- Toggle last buffer
-nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap })      -- New buffer
+nmap({ "]b", "<cmd>bnext<CR>", opts_noremap })
+nmap({ "[b", "<cmd>bprevious<CR>", opts_noremap })
+nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap }) -- Toggle last buffer
+nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap }) -- New buffer
 
--- -- Terminal related
-if not vim.g.vscode then
-	vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts_noremap_silent)
-	-- Can directly map to keys, but better to expose the commands as a vim user command
-	-- Close Vs Exit: Close doesn't kill the process, Exit does
-	vim.api.nvim_create_user_command("FTermOpen", require("FTerm").open, { bang = true })
-	vim.api.nvim_create_user_command("FTermClose", require("FTerm").close, { bang = true })
-	vim.api.nvim_create_user_command("FTermExit", require("FTerm").exit, { bang = true })
-	vim.api.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { bang = true })
+vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts_noremap_silent)
+-- Can directly map to keys, but better to expose the commands as a vim user command
+-- Close Vs Exit: Close doesn't kill the process, Exit does
+vim.api.nvim_create_user_command("FTermOpen", require("FTerm").open, { bang = true })
+vim.api.nvim_create_user_command("FTermClose", require("FTerm").close, { bang = true })
+vim.api.nvim_create_user_command("FTermExit", require("FTerm").exit, { bang = true })
+vim.api.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { bang = true })
 
-	nmap({ "<localleader>tt", "<CMD>FTermToggle<CR>", opts_noremap_silent })
-	nmap({ "<localleader>tx", "<CMD>FTermExit<CR>", opts_noremap_silent })
-	nmap({ "<localleader>tc", "<CMD>FTermClose<CR>", opts_noremap_silent })
-end
+nmap({ "<localleader>to", "<CMD>:terminal<CR>", opts_noremap_silent })
+nmap({ "<localleader>tt", "<CMD>FTermToggle<CR>", opts_noremap_silent })
+nmap({ "<localleader>tx", "<CMD>FTermExit<CR>", opts_noremap_silent })
+nmap({ "<localleader>tc", "<CMD>FTermClose<CR>", opts_noremap_silent })
 
 -- LSP related mappings
 -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()

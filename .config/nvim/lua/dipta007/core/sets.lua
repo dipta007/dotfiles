@@ -1,11 +1,12 @@
 -- settings
 local o = vim.o
-local bo = vim.bo
 local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
 -- general settings
+opt.clipboard = "unnamedplus"
+
 --- useful for searching
 o.ignorecase = true
 o.smartcase = true
@@ -20,19 +21,18 @@ o.autoindent = true
 -- appearance
 opt.termguicolors = true
 opt.background = "dark"
-opt.signcolumn = "yes"
 
 -- backspace
 opt.backspace = "indent,eol,start"
 
 --- don't want any backup or swap files
--- o.backup = false
--- o.wb = false
+o.backup = false
+o.wb = false
 o.swapfile = false
 
 -- fold settings
 -- needed for ufo plugin to work
-o.foldcolumn = '1'
+o.foldcolumn = "1"
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
@@ -42,26 +42,23 @@ o.foldenable = true
 wo.number = true
 wo.relativenumber = true
 
---- highlight 88th column
-wo.colorcolumn = '120'
+--- highlight 120th column
+wo.colorcolumn = "120"
+
+--- show sign column always
+wo.signcolumn = "yes"
+
+--- enable line wrapping
 wo.linebreak = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 g.have_nerd_font = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-opt.mouse = 'a'
+opt.mouse = "a"
 
 -- Don't show the mode, since it's already in the status line
 opt.showmode = false
-
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-  opt.clipboard = 'unnamedplus'
-end)
 
 -- Enable break indent
 opt.breakindent = true
@@ -83,10 +80,10 @@ opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
-opt.inccommand = 'split'
+opt.inccommand = "split"
 
 -- Show which line your cursor is on
 opt.cursorline = true
