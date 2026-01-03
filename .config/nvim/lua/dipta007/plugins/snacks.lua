@@ -27,7 +27,7 @@ return {
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
-			timeout = 7000,
+			timeout = 4000,
 		},
 		picker = {
       sources = {
@@ -74,7 +74,7 @@ return {
 		{ "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
 		{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
 		{ "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
-		-- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+		{ "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
     
 		-- gh
 		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
