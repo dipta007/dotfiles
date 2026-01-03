@@ -1,4 +1,5 @@
 # Font configuration
+theme = Catppuccin Frappe
 font-family = MesloLGS Nerd Font Mono
 font-size = 16
 
