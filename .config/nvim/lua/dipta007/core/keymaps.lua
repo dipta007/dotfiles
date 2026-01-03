@@ -14,9 +14,6 @@ imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
 nmap({ "<leader>w", "<CMD>w!<CR>", opts_noremap })
 
---> disable <C-y> for completion
-nimap({ "<C-y>", "<Nop>", opts_noremap_silent })
-
 --> Navigator - vim-tmux-navigator
 nmap({ "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent })
 nmap({ "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts_noremap_silent })

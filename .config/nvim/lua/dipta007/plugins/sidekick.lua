@@ -12,12 +12,14 @@ return {
     {
       "<C-y>",
       function()
+        -- first check for Sidekick NES suggestion
         if require("sidekick").nes_jump_or_apply() then
           return
         end
+        -- finally, fallback to normal behavior
         return "<C-y>"
       end,
-      mode = "n",  -- Normal mode only for NES
+      mode = { "i", "n" },
       expr = true,
       desc = "Goto/Apply Next Edit Suggestion",
     },
