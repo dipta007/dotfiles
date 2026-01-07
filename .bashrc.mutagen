@@ -114,7 +114,9 @@ msync() {
   shift 2
   local extra_ignores=("$@")
   
-  local name=$(basename "$remote_path")
+  local remote_name=$(basename "$remote_path")
+  local server_basename="${server#*@}"; server_basename="${server_basename%%.*}"  # Get first segment of hostname
+  local name="${server_basename}-${remote_name}"
   local local_path="$HOME/sync/$name"
 
   if [[ -z "$server" || -z "$remote_path" ]]; then
