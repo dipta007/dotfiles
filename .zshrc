@@ -48,3 +48,4 @@ export PATH="/Users/dipta007/.antigravity/antigravity/bin:$PATH"
 source ~/.bashrc.mutagen
 
 eval "$(zoxide init zsh)"
+

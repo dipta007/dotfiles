@@ -13,7 +13,7 @@ return {
 			preset = "default",
 			-- ["<C-space>"] = { }, -- if you want to disable it, set to false or {}
 			["<Cr>"] = { "accept", "fallback" },
-      ["<C-y>"] = {  },
+			["<C-y>"] = {},
 		},
 
 		appearance = {

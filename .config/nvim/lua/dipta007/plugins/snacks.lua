@@ -32,9 +32,19 @@ return {
 		picker = {
       sources = {
         explorer = {
+          -- comment out for floating explorer
+          -- layout = {
+          --   preset = "select",
+          --   layout = {
+          --     width = 0.9,
+          --     height = 0.9,
+          --     border = "rounded",
+          --   },
+          -- },
+          -- auto_close = true,
           hidden = true,
           ignored = true,
-        }
+        },
       },
       enabled = true
     },
