@@ -117,6 +117,7 @@ msync() {
   local remote_name=$(basename "$remote_path")
   local server_basename="${server#*@}"; server_basename="${server_basename%%.*}"  # Get first segment of hostname
   local name="${server_basename}-${remote_name}"
+  name="${name//[_ ]/-}"
   local local_path="$HOME/sync/$name"
 
   if [[ -z "$server" || -z "$remote_path" ]]; then
@@ -143,6 +144,23 @@ msync() {
       echo "  $pattern"
     done
 
+  # Build rsync exclude flags
+  local rsync_excludes=()
+  for pattern in "${MSYNC_DEFAULT_IGNORES[@]}"; do
+    rsync_excludes+=(--exclude="$pattern")
+  done
+  for pattern in "${extra_ignores[@]}"; do
+    rsync_excludes+=(--exclude="$pattern")
+  done
+
+  # Initial sync with rsync (much faster for first time)
+  echo "→ Running initial rsync from remote..."
+  rsync -avz --progress \
+    "${rsync_excludes[@]}" \
+    "${server}:${remote_path}/" \
+    "$local_path/"
+
+  echo "→ Creating mutagen sync session..."
   mutagen sync create \
     "$local_path" \
     "${server}:${remote_path}" \
