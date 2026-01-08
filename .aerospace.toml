@@ -212,6 +212,14 @@ automatically-unhide-macos-hidden-apps = false
     shift-down = ['volume set 0', 'mode main']
 
 
+[[on-window-detected]]
+  if.app-id = 'com.apple.finder'
+  check-further-callbacks = true
+  run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.TickTick.task.mac'
+    run = 'move-node-to-workspace X'
 
 [[on-window-detected]]
     if.app-id = 'com.github.wez.wezterm'
@@ -246,7 +254,21 @@ automatically-unhide-macos-hidden-apps = false
     run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
+    if.app-name-regex-substring = 'Claude'
+    run = 'move-node-to-workspace Y'
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Notes'
+    run = 'move-node-to-workspace Y'
+
+[[on-window-detected]]
     if.app-name-regex-substring = 'Microsoft Edge'
     run = 'move-node-to-workspace M'
 
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Comet'
+    run = 'move-node-to-workspace M'
 
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Obsidian'
+    run = 'move-node-to-workspace O'
