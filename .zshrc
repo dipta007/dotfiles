@@ -7,8 +7,11 @@ fi
 
 # antigen load and configuration
 # run this on root: curl -L git.io/antigen > antigen.zsh
-source ~/antigen.zsh
-antigen init ~/.antigenrc
+if [[ -z "$ANTIGEN_LOADED" ]]; then
+  source ~/antigen.zsh
+  antigen init ~/.antigenrc
+  export ANTIGEN_LOADED=1
+fi
 
 
 # the things we want to do in MAC
@@ -48,4 +51,6 @@ export PATH="/Users/dipta007/.antigravity/antigravity/bin:$PATH"
 source ~/.bashrc.mutagen
 
 eval "$(zoxide init zsh)"
+
+alias cd='z'
 
