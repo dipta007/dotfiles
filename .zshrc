@@ -7,10 +7,11 @@ fi
 
 # antigen load and configuration
 # run this on root: curl -L git.io/antigen > antigen.zsh
-if [[ -z "$ANTIGEN_LOADED" ]]; then
+# Use PID to allow new shells (tmux) to load, but prevent re-source hangs
+if [[ "$ANTIGEN_LOADED" != "$$" ]]; then
   source ~/antigen.zsh
   antigen init ~/.antigenrc
-  export ANTIGEN_LOADED=1
+  export ANTIGEN_LOADED="$$"
 fi
 
 
@@ -53,4 +54,3 @@ source ~/.bashrc.mutagen
 eval "$(zoxide init zsh)"
 
 alias cd='z'
-

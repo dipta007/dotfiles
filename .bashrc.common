@@ -7,8 +7,14 @@ alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
 alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
 alias uvd="deactivate"
 
-eval "$(uv generate-shell-completion bash)"
-eval "$(uvx --generate-shell-completion bash)"
+# Load bash completions (zsh completions are loaded in .zshrc after compinit)
+if [[ -n "$BASH_VERSION" ]]; then
+  eval "$(uv generate-shell-completion bash)"
+  eval "$(uvx --generate-shell-completion bash)"
+elif [[ -n "$ZSH_VERSION" ]]; then
+  eval "$(uv generate-shell-completion zsh)"
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
 # <<<< BASH by roydipta
 
 
