@@ -29,6 +29,9 @@ return {
 			enabled = true,
 			timeout = 4000,
 		},
+    img = {
+      enabled = true
+    },
 		picker = {
       sources = {
         explorer = {
