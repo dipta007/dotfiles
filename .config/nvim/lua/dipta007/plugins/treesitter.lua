@@ -1,5 +1,5 @@
 local config = function()
-	require("nvim-treesitter.configs").setup({
+	require("nvim-treesitter").setup({
 		highlight = {
 			enable = true,
 			additional_vim_regex_highlighting = false,
@@ -55,6 +55,7 @@ end
 
 return {
 	"nvim-treesitter/nvim-treesitter",
+  lazy = false,
 	build = ":TSUpdate",
 	config = config,
 	event = { "BufReadPre", "BufNewFile" },
