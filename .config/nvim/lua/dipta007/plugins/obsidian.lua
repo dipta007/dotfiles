@@ -19,6 +19,10 @@ return {
 				name = "personal",
 				path = "/Users/dipta007/Library/Mobile Documents/iCloud~md~obsidian/Documents/DeepBrain/",
 			},
+			{
+				name = "personal",
+				path = "/Users/sroy/Library/Mobile Documents/iCloud~md~obsidian/Documents/DeepBrain",
+			},
 		},
 		templates = {
 			folder = "Templates",
