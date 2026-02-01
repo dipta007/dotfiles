@@ -46,17 +46,6 @@ nmap({ "<leader><tab>", "<cmd>b#<CR>", opts_noremap }) -- Toggle last buffer
 nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap }) -- New buffer
 
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts_noremap_silent)
--- Can directly map to keys, but better to expose the commands as a vim user command
--- Close Vs Exit: Close doesn't kill the process, Exit does
-vim.api.nvim_create_user_command("FTermOpen", require("FTerm").open, { bang = true })
-vim.api.nvim_create_user_command("FTermClose", require("FTerm").close, { bang = true })
-vim.api.nvim_create_user_command("FTermExit", require("FTerm").exit, { bang = true })
-vim.api.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { bang = true })
-
-nmap({ "<localleader>to", "<CMD>:terminal<CR>", opts_noremap_silent })
-nmap({ "<localleader>tt", "<CMD>FTermToggle<CR>", opts_noremap_silent })
-nmap({ "<localleader>tx", "<CMD>FTermExit<CR>", opts_noremap_silent })
-nmap({ "<localleader>tc", "<CMD>FTermClose<CR>", opts_noremap_silent })
 
 -- LSP related mappings
 -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()

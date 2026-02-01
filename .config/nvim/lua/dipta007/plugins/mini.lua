@@ -23,6 +23,7 @@ return { -- Collection of various small independent plugins/modules
       options = { try_as_border = true },
       -- draw = { animation = require('mini.indentscope').gen_animation.none() },
     }
+    require('mini.bufremove').setup()
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,

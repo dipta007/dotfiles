@@ -7,7 +7,7 @@ return {
   },
   {
     'numToStr/FTerm.nvim',
-    enabled = true,
+    enabled = false,
     config = function()
       require('FTerm').setup {
         border = 'double',
