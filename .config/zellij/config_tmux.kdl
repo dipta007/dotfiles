@@ -80,8 +80,8 @@ keybinds clear-defaults=true {
 
         // manipulate tabs
         bind "c" { NewTab; SwitchToMode "Locked"; }
-        bind "K" { CloseTab; SwitchToMode "Locked"; }
-        bind "R" { SwitchToMode "RenameTab"; }
+        bind "x" { CloseTab; SwitchToMode "Locked"; }
+        bind "," { SwitchToMode "RenameTab"; }
 
         // switch modes
         bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
@@ -98,8 +98,6 @@ keybinds clear-defaults=true {
         bind "r" { SwitchToMode "RenamePane"; }
 
         // switch between tabs
-        bind "h" { GoToPreviousTab; SwitchToMode "Locked"; }
-        bind "l" { GoToNextTab; SwitchToMode "Locked"; }
         bind "1" { GoToTab 1; SwitchToMode "Locked"; }
         bind "2" { GoToTab 2; SwitchToMode "Locked"; }
         bind "3" { GoToTab 3; SwitchToMode "Locked"; }
@@ -111,17 +109,17 @@ keybinds clear-defaults=true {
         bind "9" { GoToTab 9; SwitchToMode "Locked"; }
 
         // switch between panes
-        bind "Left" { MoveFocus "Left"; }
-        bind "Right" { MoveFocus "Right"; }
-        bind "Down" { MoveFocus "Down"; }
-        bind "Up" { MoveFocus "Up"; }
+        bind "h" { MoveFocus "Left"; }
+        bind "l" { MoveFocus "Right"; }
+        bind "j" { MoveFocus "Down"; }
+        bind "k" { MoveFocus "Up"; }
         bind "Tab" { FocusNextPane; }
 
         // move panes
-        bind "H" { MovePane "Left"; }
-        bind "J" { MovePane "Down"; }
-        bind "K" { MovePane "Up"; }
-        bind "L" { MovePane "Right"; }
+        bind "Ctrl h" { MovePane "Left"; }
+        bind "Ctrl j" { MovePane "Down"; }
+        bind "Ctrl k" { MovePane "Up"; }
+        bind "Ctrl l" { MovePane "Right"; }
 
         // manipulate panes
         bind "W" { CloseFocus; SwitchToMode "Locked"; }
@@ -132,10 +130,10 @@ keybinds clear-defaults=true {
         bind "Q" { Quit; }
 
         // resizing
-        bind "Ctrl h" { Resize "Increase Left"; }
-        bind "Ctrl j" { Resize "Increase Down"; }
-        bind "Ctrl k" { Resize "Increase Up"; }
-        bind "Ctrl l" { Resize "Increase Right"; }
+        bind "H" { Resize "Increase Left"; }
+        bind "J" { Resize "Increase Down"; }
+        bind "K" { Resize "Increase Up"; }
+        bind "L" { Resize "Increase Right"; }
     }
 
     shared {
