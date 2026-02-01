@@ -115,10 +115,42 @@ keybinds clear-defaults=true {
     }
 
     locked {
-        bind "Ctrl h" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "left"; }; }
-        bind "Ctrl j" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "down"; }; }
-        bind "Ctrl k" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "up"; }; }
-        bind "Ctrl l" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "right"; }; }
+        // bind "Ctrl h" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "left"; }; }
+        // bind "Ctrl j" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "down"; }; }
+        // bind "Ctrl k" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "up"; }; }
+        // bind "Ctrl l" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "right"; }; }
+        bind "Ctrl h" {
+            MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "left";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            }
+        }
+        bind "Ctrl j" {
+            MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "down";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            }
+        }
+        bind "Ctrl k" {
+            MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "up";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            }
+        }
+        bind "Ctrl l" {
+            MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "right";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            }
+        }
     }
 
     shared {
