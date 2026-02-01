@@ -1,0 +1,162 @@
+// The name of the layout to load on startup (must be in the layouts folder). See layouts
+// Default: "default"
+//
+default_layout "compact"
+
+// Choose the mode that zellij uses when starting up.
+// Default: normal
+//
+default_mode "locked"
+
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+//
+default_shell "fish"
+
+// Choose the theme that is specified in the themes section.
+// Default: default
+//
+theme "nightfox"
+
+// Toggle enabling the mouse mode. On certain configurations, or terminals this
+// could potentially interfere with copying text.
+// Default: true
+//
+mouse_mode true
+
+// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+keybinds clear-defaults=true {
+
+    scroll {
+        bind "Esc" "Ctrl s" { SwitchToMode "Locked"; }
+        bind "e" { EditScrollback; SwitchToMode "Locked"; }
+        bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Locked"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "g" { ScrollToTop; }
+        bind "G" { ScrollToBottom; }
+    }
+
+    search {
+        bind "Ctrl s" { SwitchToMode "Locked"; }
+        bind "Esc" "Ctrl c" { ScrollToBottom; SwitchToMode "Locked"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "n" { Search "down"; }
+        bind "p" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+    }
+
+    entersearch {
+        bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
+        bind "Enter" { SwitchToMode "Search"; }
+    }
+
+    renametab {
+        bind "Ctrl c" { SwitchToMode "Locked"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Tmux"; }
+    }
+
+    renamepane {
+        bind "Ctrl c" { SwitchToMode "Locked"; }
+        bind "Esc" { UndoRenamePane; SwitchToMode "Tmux"; }
+    }
+
+    tmux {
+        bind "[" { SwitchToMode "Scroll"; }
+        bind "Ctrl a" { Write 1; SwitchToMode "Locked"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
+
+        // manipulate tabs
+        bind "c" { NewTab; SwitchToMode "Locked"; }
+        bind "K" { CloseTab; SwitchToMode "Locked"; }
+        bind "R" { SwitchToMode "RenameTab"; }
+
+        // switch modes
+        bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
+
+        // miscellaneous
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
+        bind "m" { ToggleMouseMode; SwitchToMode "Locked"; }
+        bind "y" { Run "yazi"; SwitchToMode "Locked"; }
+
+        // create new pane
+        bind "Space" { NewPane; SwitchToMode "Locked"; }
+        bind "-" "_" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "|" "\\" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "r" { SwitchToMode "RenamePane"; }
+
+        // switch between tabs
+        bind "h" { GoToPreviousTab; SwitchToMode "Locked"; }
+        bind "l" { GoToNextTab; SwitchToMode "Locked"; }
+        bind "1" { GoToTab 1; SwitchToMode "Locked"; }
+        bind "2" { GoToTab 2; SwitchToMode "Locked"; }
+        bind "3" { GoToTab 3; SwitchToMode "Locked"; }
+        bind "4" { GoToTab 4; SwitchToMode "Locked"; }
+        bind "5" { GoToTab 5; SwitchToMode "Locked"; }
+        bind "6" { GoToTab 6; SwitchToMode "Locked"; }
+        bind "7" { GoToTab 7; SwitchToMode "Locked"; }
+        bind "8" { GoToTab 8; SwitchToMode "Locked"; }
+        bind "9" { GoToTab 9; SwitchToMode "Locked"; }
+
+        // switch between panes
+        bind "Left" { MoveFocus "Left"; }
+        bind "Right" { MoveFocus "Right"; }
+        bind "Down" { MoveFocus "Down"; }
+        bind "Up" { MoveFocus "Up"; }
+        bind "Tab" { FocusNextPane; }
+
+        // move panes
+        bind "H" { MovePane "Left"; }
+        bind "J" { MovePane "Down"; }
+        bind "K" { MovePane "Up"; }
+        bind "L" { MovePane "Right"; }
+
+        // manipulate panes
+        bind "W" { CloseFocus; SwitchToMode "Locked"; }
+
+        // exit etc
+        bind "Enter" "Esc" { SwitchToMode "Locked"; }
+        bind "d" { Detach; SwitchToMode "Locked"; }
+        bind "Q" { Quit; }
+
+        // resizing
+        bind "Ctrl h" { Resize "Increase Left"; }
+        bind "Ctrl j" { Resize "Increase Down"; }
+        bind "Ctrl k" { Resize "Increase Up"; }
+        bind "Ctrl l" { Resize "Increase Right"; }
+    }
+
+    shared {
+        bind "Alt n" { NewPane; }
+        bind "Alt h" { MoveFocus "Left"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt l" { MoveFocus "Right"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        // need to figure out how to "send-key" when neovim is in the pane
+        //bind "Ctrl h" { MoveFocus "Left"; }
+        //bind "Ctrl j" { MoveFocus "Down"; }
+        //bind "Ctrl l" { MoveFocus "Right"; }
+        //bind "Ctrl k" { MoveFocus "Up"; }
+        bind "Alt [" { PreviousSwapLayout; }
+        bind "Alt ]" { NextSwapLayout; }
+        bind "Alt =" "Alt +" { Resize "Increase"; }
+        bind "Alt -" "Alt _" { Resize "Decrease"; }
+    }
+
+    shared_except "tmux" {
+        bind "Ctrl a" { SwitchToMode "Tmux"; }
+    }
+
+}
