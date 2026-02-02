@@ -50,15 +50,6 @@ keybinds clear-defaults=true {
         bind "[" { SwitchToMode "Scroll"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
 
-        // session management
-        bind "o" {
-          LaunchOrFocusPlugin "session-manager" {
-            floating true
-            move_to_focused_tab true
-          }
-          SwitchToMode "Locked"
-        }
-
         // modes
         bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
 
@@ -112,13 +103,42 @@ keybinds clear-defaults=true {
         bind "d" { Detach; SwitchToMode "Locked"; }
         bind "Q" { Quit; }
 
+        // session
+        bind "c" {
+            LaunchOrFocusPlugin "configuration" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "Locked"
+        }
+        bind "p" {
+            LaunchOrFocusPlugin "plugin-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "Locked"
+        }
+        bind "s" {
+            LaunchOrFocusPlugin "zellij:share" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "Locked"
+        }
+        bind "o" {
+          LaunchOrFocusPlugin "session-manager" {
+            floating true
+            move_to_focused_tab true
+          }
+          SwitchToMode "Locked"
+        }
     }
 
     locked {
-        // bind "Ctrl h" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "left"; }; }
-        // bind "Ctrl j" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "down"; }; }
-        // bind "Ctrl k" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "up"; }; }
-        // bind "Ctrl l" { MessagePlugin "vim-zellij-navigator" { name "move_focus"; payload "right"; }; }
+        bind "Ctrl y" { MoveFocus "Left"; }
+        bind "Ctrl u" { MoveFocus "Down"; }
+        bind "Ctrl i" { MoveFocus "Up"; }
+        bind "Ctrl o" { MoveFocus "Right"; }
         bind "Ctrl h" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
                 name "move_focus";
