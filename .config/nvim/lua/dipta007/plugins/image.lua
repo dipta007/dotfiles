@@ -8,8 +8,8 @@ return {
 				markdown = { enabled = true },
 				neorg = { enabled = false },
 			},
-			max_width = 400,
-			max_height = 400,
+			max_width = 1200,
+			max_height = 1200,
 			window_overlap_clear_enabled = true,
 		})
 	end,
