@@ -5,7 +5,18 @@ return {
     nes = {
       enabled = true,
       debounce = 100,
-    }
+    },
+    cli = {
+      mux = {
+        backend = "tmux",
+        enabled = true,
+        create = "split",
+        split = {
+          vertical = true, -- vertical or horizontal split
+          size = 0.3, -- size of the split (0-1 for percentage)
+        },
+      },
+    },
 	},
 	keys = {
     -- Next Edit Suggestion Keybindings
