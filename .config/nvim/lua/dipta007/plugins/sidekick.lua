@@ -9,7 +9,7 @@ return {
     cli = {
       mux = {
         backend = "tmux",
-        enabled = true,
+        enabled = false,
         create = "split",
         split = {
           vertical = true, -- vertical or horizontal split
@@ -30,7 +30,7 @@ return {
         -- finally, fallback to normal behavior
         return "<C-y>"
       end,
-      mode = { "i", "n" },
+      mode = { "n" },
       expr = true,
       desc = "Goto/Apply Next Edit Suggestion",
     },
