@@ -5,6 +5,11 @@
 
 ## Installation
 
+1. install nvim
+2. install yadm
+3. clone the repo using yadm
+4. install the dependencies
+
 ```bash
 brew install shelldon
 brew install starship
@@ -24,6 +29,8 @@ bat --completion=zsh > ~/.local/share/zsh/completions/_bat
 brew install zoxide
 
 brew install yazi ffmpeg-full sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick-full font-symbols-only-nerd-font
+
+brew install fzf
 ```
 
 ## Public Version:
