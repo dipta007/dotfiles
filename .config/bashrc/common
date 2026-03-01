@@ -96,8 +96,8 @@ yadm_pull_and_check
 
 # if local zshrc is here, source it
 # end of file to replace everything with .bashrc.local
-if [[ -f "$HOME/.bashrc.local" ]]; then
-  . $HOME/.bashrc.local
+if [[ -f "$HOME/.config/bashrc/local" ]]; then
+  . $HOME/.config/bashrc/local
 fi
 
 
@@ -113,4 +113,4 @@ alias cic='bind "set completion-ignore-case on"' # cic:          Make tab-comple
 
 export PATH="$HOME/.local/nvim-stable/bin:$PATH"
 
-. $HOME/.bashrc.mutagen
+. $HOME/.config/bashrc/mutagen

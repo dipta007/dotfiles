@@ -30,8 +30,9 @@ fi
 # . "$HOME/.local/bin/env"
 
 # source the common ones
-. $HOME/.bashrc.secret
-. $HOME/.bashrc.common
+. $HOME/.config/bashrc/secret
+. $HOME/.config/bashrc/common
+. $HOME/.config/bashrc/mutagen
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -48,8 +49,6 @@ export PATH=$PATH:/Users/dipta007/my-world/platform-tools
 # source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Added by Antigravity
-export PATH="/Users/dipta007/.antigravity/antigravity/bin:$PATH"
-source ~/.bashrc.mutagen
 
 eval "$(zoxide init zsh)"
 
