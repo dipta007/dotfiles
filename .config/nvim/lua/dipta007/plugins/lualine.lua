@@ -17,11 +17,11 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff" },
 				lualine_c = {
-					"filename",
+					{ "filename", path = 1 },
 					{
 						"diagnostics",
 						sources = { "nvim_diagnostic" },
-						symbols = { error = " ", warn = " ", info = " ", hint = " " },
+						symbols = { error = "✘ ", warn = "▲ ", info = "ℹ ", hint = "➤ " },
 					},
 				},
 				lualine_x = {
@@ -38,7 +38,7 @@ return {
 								table.insert(buf_client_names, client.name)
 							end
 
-							return " " .. table.concat(buf_client_names, ", ")
+							return "⚙ " .. table.concat(buf_client_names, ", ")
 						end,
 						color = { gui = "bold" },
 					},
