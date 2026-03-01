@@ -34,7 +34,7 @@ o.swapfile = false
 
 -- fold settings
 -- needed for ufo plugin to work
-o.foldcolumn = "1"
+o.foldcolumn = "0"
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
