@@ -5,7 +5,9 @@ local g = vim.g
 local opt = vim.opt
 
 -- general settings
-opt.clipboard = "unnamedplus"
+if vim.g.is_local then
+  opt.clipboard = "unnamedplus"
+end
 
 --- useful for searching
 o.ignorecase = true

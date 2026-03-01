@@ -1,6 +1,6 @@
 return {
 	"3rd/image.nvim",
-  enabled = vim.fn.has("macunix") == 1,
+  enabled = vim.g.is_local,
 	ft = "markdown",
 	config = function()
 		require("image").setup({

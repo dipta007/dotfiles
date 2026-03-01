@@ -5,7 +5,7 @@ return {
 	---@type snacks.Config
 	opts = {
 		animate = {
-			enabled = vim.fn.has("nvim-0.10") >= 1,
+			enabled = vim.g.is_local,
 			easing = "in_out_sine",
 			duration = {
 				step = 20,
@@ -14,7 +14,7 @@ return {
 		},
 		bigfile = {
       notify = true,
-      size = 10 * 1024 * 1024, -- 10 MB
+      size = 1 * 1024 * 1024, -- 1 MB
       line_length = 5000, -- 5k characters
       enabled = true
     },
@@ -23,7 +23,7 @@ return {
       enabled = true,
       replace_netrw = true,
     },
-		indent = { enabled = true },
+		indent = { enabled = vim.g.is_local },
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
@@ -52,16 +52,16 @@ return {
       enabled = true
     },
 		quickfile = { enabled = true },
-		scope = { enabled = true },
-		scroll = { enabled = true },
+		scope = { enabled = vim.g.is_local },
+		scroll = { enabled = vim.g.is_local },
 		zen = {
 			enabled = true,
 			toggles = {
 				dim = false,
 			},
 		},
-		statuscolumn = { enabled = true },
-		words = { enabled = true },
+		statuscolumn = { enabled = vim.g.is_local },
+		words = { enabled = vim.g.is_local },
 		styles = {
 			notification = {
 				wo = { wrap = true } -- Wrap notifications

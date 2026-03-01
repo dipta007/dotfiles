@@ -14,7 +14,6 @@ imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
 nmap({ "<leader>w", "<CMD>w!<CR>", opts_noremap })
 
-
 -- window management
 nmap({ "<leader>wv", "<C-w>v", opts_noremap }) -- split window vertically
 nmap({ "<leader>wh", "<C-w>s", opts_noremap }) -- split window horizontally
@@ -27,11 +26,6 @@ nmap({ "<leader>td", "<cmd>tabclose<CR>", opts_noremap }) -- close current tab
 nmap({ "<leader>tn", "<cmd>tabn<CR>", opts_noremap }) -- go to next tab
 nmap({ "<leader>tp", "<cmd>tabp<CR>", opts_noremap }) -- go to previous tab
 nmap({ "<leader>tf", "<cmd>tabnew %<CR>", opts_noremap }) -- move current buffer to new tab
-for i = 1, 9 do
-  vim.keymap.set('n', '<leader>' .. i, function()
-    require("bufferline").go_to(i, true)
-  end, { silent = true })
-end
 
 -- buffer management
 nmap({ "]b", "<cmd>bnext<CR>", opts_noremap })

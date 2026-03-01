@@ -28,12 +28,16 @@ vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
 
 
+-- true on macOS, false on servers
+vim.g.is_local = vim.fn.has("macunix") == 1
+
 -- ================= START: PLUGINS ==================================================
 require('lazy').setup({ import = 'dipta007.plugins' }, {
   change_detection = {
-    notify = true,
+    enabled = vim.g.is_local,
+    notify = vim.g.is_local,
   },
-  checker = { enabled = true },
+  checker = { enabled = vim.g.is_local },
   performance = {
     rtp = {
       disabled_plugins = {

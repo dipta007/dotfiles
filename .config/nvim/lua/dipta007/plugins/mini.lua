@@ -18,11 +18,10 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
     require('mini.pairs').setup()
-    require('mini.indentscope').setup {
-      symbol = '│',
-      options = { try_as_border = true },
-      -- draw = { animation = require('mini.indentscope').gen_animation.none() },
-    }
+    -- require('mini.indentscope').setup {
+    --   symbol = '│',
+    --   options = { try_as_border = true },
+    -- }
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,
