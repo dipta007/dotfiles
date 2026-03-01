@@ -1,8 +1,8 @@
 ---
 name: fordipta
-description: Generate or update FORDIPTA.md for the current project. Use when a project is set up, a major feature is complete, or the user asks to document the project.
-disable-model-invocation: true
-argument-hint: [optional: specific section to update]
+description: Generate or update FORDIPTA.md for the current project. Use proactively when a project is set up, a major feature is complete, or the user asks to document the project.
+tools: Read, Glob, Grep, Bash, Write, Edit
+model: opus
 ---
 
 Generate or update `FORDIPTA.md` in the project root.
@@ -16,8 +16,7 @@ A detailed, engaging document that explains the entire project in plain language
 1. **Check if FORDIPTA.md exists**: If it does, read it first — this is your starting point.
 2. **Read the entire codebase**: Explore the full project structure, all key files, configs, and recent git history. The code is the source of truth — always prioritize what's actually in the code over what's in the existing FORDIPTA.md.
 3. **Compare and update**: If FORDIPTA.md already exists, diff your understanding of the code against the existing doc. Update anything that's outdated, add anything that's missing, remove anything that no longer reflects the code. If no FORDIPTA.md exists, create it from scratch.
-4. **If $ARGUMENTS is provided**: Only update that specific section, but still read the code to ensure accuracy.
-5. **Add FORDIPTA.md to .gitignore**: Check if `FORDIPTA.md` is in the project's `.gitignore`. If not, add it. This is a personal learning doc, not for the repo.
+4. **Add FORDIPTA.md to .gitignore**: Check if `FORDIPTA.md` is in the project's `.gitignore`. If not, add it. This is a personal learning doc, not for the repo.
 
 ## Required sections
 
