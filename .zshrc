@@ -1,4 +1,4 @@
-zmodload zsh/zprof
+# zmodload zsh/zprof
 # --- 1. Env vars and PATH (instant, no forks) ---
 export EDITOR='nvim'
 
@@ -24,7 +24,8 @@ fpath=(~/.local/share/zsh/completions $fpath)
 # compinit once per day, skip rebuild check otherwise
 autoload -Uz compinit
 ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
-if [[ -n "$ZSH_COMPDUMP"(#qN.mh+24) ]]; then
+setopt LOCAL_OPTIONS EXTENDED_GLOB
+if [[ -n ${ZSH_COMPDUMP}(#qN.mh+24) ]]; then
   compinit -d "$ZSH_COMPDUMP"
 else
   compinit -C -d "$ZSH_COMPDUMP"
@@ -35,7 +36,7 @@ fi
 # --- 6. FZF ---
 source <(fzf --zsh)  # modern fzf integration (replaces sourcing ~/.fzf.zsh)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache exclude .venv'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # --- 7. Vi mode keybinding ---

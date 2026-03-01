@@ -32,7 +32,7 @@
   "schemastore.nvim": { "branch": "main", "commit": "2c2f2d3fb568bbff1a5e1344e87a979b7edf50a8" },
   "sidekick.nvim": { "branch": "main", "commit": "c2bdf8cfcd87a6be5f8b84322c1b5052e78e302e" },
   "smart-paste.nvim": { "branch": "main", "commit": "328f90f7f4535f58d5bd987edb48588836efdecc" },
-  "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
+  "snacks.nvim": { "branch": "main", "commit": "9912042fc8bca2209105526ac7534e9a0c2071b2" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "vimtex": { "branch": "master", "commit": "fcd1533862cc3153c203399964065bc835f6919a" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
