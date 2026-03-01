@@ -1,6 +1,7 @@
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   version = '*',
+  event = "VeryLazy",
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -16,14 +17,12 @@ return { -- Collection of various small independent plugins/modules
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
-    require('mini.comment').setup { options = { ignore_blank_line = true } }
     require('mini.pairs').setup()
     require('mini.indentscope').setup {
       symbol = '│',
       options = { try_as_border = true },
       -- draw = { animation = require('mini.indentscope').gen_animation.none() },
     }
-    require('mini.bufremove').setup()
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,

@@ -1,4 +1,5 @@
--- shamelessly copied from https://github.com/trifiasco/dotfiles/
+-- Enable bytecode caching for faster module loading
+vim.loader.enable()
 
 -- absolute basic
 -- map leader is required by lazy.nvim
@@ -26,12 +27,27 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
 
+
 -- ================= START: PLUGINS ==================================================
 require('lazy').setup({ import = 'dipta007.plugins' }, {
   change_detection = {
     notify = true,
   },
-  checker = { enabled = true }
+  checker = { enabled = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })
 -- ================= END: PLUGINS ==================================================
 

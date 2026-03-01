@@ -1,5 +1,6 @@
 return {
 	"lervag/vimtex",
+	ft = { "tex", "latex", "bib" },
 	init = function()
 		-- VimTeX configuration goes here, e.g.
 		-- vim.g.vimtex_view_method = "zathura"

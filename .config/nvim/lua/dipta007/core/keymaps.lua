@@ -14,12 +14,6 @@ imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
 nmap({ "<leader>w", "<CMD>w!<CR>", opts_noremap })
 
---> Navigator - vim-tmux-navigator
-nmap({ "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent })
-nmap({ "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts_noremap_silent })
-nmap({ "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts_noremap_silent })
-nmap({ "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts_noremap_silent })
-nmap({ "<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", opts_noremap_silent })
 
 -- window management
 nmap({ "<leader>wv", "<C-w>v", opts_noremap }) -- split window vertically

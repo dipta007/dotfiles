@@ -1,6 +1,7 @@
 return {
 	"3rd/image.nvim",
   enabled = vim.fn.has("macunix") == 1,
+	ft = "markdown",
 	config = function()
 		require("image").setup({
 			backend = "kitty", -- WezTerm supports kitty protocol

@@ -1,5 +1,6 @@
 return {
   'richwomanbtc/overleaf.nvim',
+  cmd = { "OverleafSync", "OverleafOpen", "OverleafClose" },
   config = function()
     require('overleaf').setup({
       cookie = 's%3AEYQ19d4XK8tfbdZb8FYeLjEFjWwRRGUi.4Dx3fS2uoZPVsCi0irVKjR4Pem8zaywDjobLswNDZ5E',
