@@ -21,7 +21,7 @@ return {
 		dashboard = { enabled = true },
 		explorer = {
       enabled = true,
-      replace_netrw = true,
+      replace_netrw = false, -- netrw already disabled in init.lua
     },
 		indent = { enabled = vim.g.is_local },
 		input = { enabled = true },

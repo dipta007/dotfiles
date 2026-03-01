@@ -49,3 +49,6 @@ alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
 alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
 alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
 alias uvd="deactivate"
+
+# Neovim nuke - delete all plugins, mason servers, caches, and state
+alias nvim-nuke='rm -rf ~/.local/share/nvim/lazy ~/.local/share/nvim/mason ~/.cache/nvim ~/.local/state/nvim && echo "Nuked nvim. Next launch will reinstall everything."'

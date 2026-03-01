@@ -45,6 +45,7 @@ require('lazy').setup({ import = 'dipta007.plugins' }, {
         "matchit",
         "matchparen",
         "netrwPlugin",
+        "rplugin",
         "tarPlugin",
         "tohtml",
         "tutor",

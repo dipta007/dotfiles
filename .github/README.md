@@ -13,6 +13,7 @@
 ```bash
 brew install shelldon
 brew install starship
+brew install mise
 
 brew install fd
 fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd

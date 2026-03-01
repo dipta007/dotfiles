@@ -1,5 +1,5 @@
 return {
   'nemanjamalesija/smart-paste.nvim',
-  event = 'VeryLazy',
+  keys = { "p", "P" },
   config = true,
 }

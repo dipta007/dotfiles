@@ -44,8 +44,7 @@ local function get_python_path(workspace)
 end
 
 local config = function()
-	-- Mason: install LSP servers
-	require("mason").setup()
+	-- Mason: mason-lspconfig needs mason loaded first (handled by dependency + config=true)
 	require("mason-lspconfig").setup({
 		ensure_installed = { "pyright", "ruff", "lua_ls", "jsonls", "bashls", "taplo", "marksman" },
 		-- mason-lspconfig 2.x: automatic_enable is on by default,
@@ -78,14 +77,15 @@ local config = function()
 			pyright = {
 				disableOrganizeImports = true,
 			},
-			python = {
-				analysis = {
-					-- using ruff for linting
-					ignore = { "*" },
-				},
+		},
+		python = {
+			analysis = {
+				-- using ruff for linting
+				ignore = { "*" },
 			},
 		},
 		on_init = function(client)
+			-- client.config.settings.python = client.config.settings.python or {}
 			client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
 		end,
 	})
@@ -141,9 +141,10 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
 	config = config,
 	dependencies = {
-		{ "williamboman/mason.nvim" },
+		{ "williamboman/mason.nvim", cmd = "Mason", config = true },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{ "saghen/blink.cmp" },
 		{ "b0o/schemastore.nvim" },
