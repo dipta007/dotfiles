@@ -1,3 +1,11 @@
+## Python / uv
+
+1. Always use `uv` for Python. Never pip, poetry, or conda.
+2. Run scripts with `uv run script.py`, not `python script.py`.
+3. Add dependencies with `uv add <pkg>`, not `uv pip install`. Only use `uv pip install` if the user explicitly asks for it.
+4. After implementing a feature, run it to verify it works before reporting completion.
+5. After verifying a feature works, ask the user: "Should I add this as a pytest test so you can run it later?"
+
 ## MUST FOLLOW RULES FOR ALL PROJECTS
 
 For every project, write a detailed FORDIPTA.md file that explains the whole project in plain language. 
