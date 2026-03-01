@@ -1,5 +1,6 @@
 return {
 	"obsidian-nvim/obsidian.nvim",
+  enabled = vim.g.is_local,
 	version = "*", -- use latest release, remove to use latest commit
 	ft = "markdown",
 	config = function(_, opts)
