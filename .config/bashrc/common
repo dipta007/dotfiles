@@ -1,7 +1,5 @@
 # >>>> BASH by roydipta
-bindkey -v
 set -o vi
-bindkey -M viins 'kj' vi-cmd-mode
 
 export PATH=$PATH:$HOME/.local/bin
 
