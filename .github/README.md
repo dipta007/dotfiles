@@ -3,6 +3,16 @@
 > Init YADM script - [private gist](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)  
 > See below for public version  
 
+## Installation
+
+```bash
+# uv cache generate
+mkdir -p ~/.local/share/zsh/completions
+uv generate-shell-completion zsh > ~/.local/share/zsh/completions/_uv
+uvx --generate-shell-completion zsh > ~/.local/share/zsh/completions/_uvx
+
+
+```
 
 ## Public Version:
 ```

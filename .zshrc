@@ -1,55 +1,59 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+zmodload zsh/zprof
+# --- 1. Env vars and PATH (instant, no forks) ---
+export EDITOR='nvim'
+
+typeset -U path  # auto-deduplicate PATH entries
+path=(
+  "$HOME/.local/bin"
+  $path
+)
+
+# --- 2. mise — replaces nvm, pyenv, conda (~5ms) ---
+eval "$(mise activate zsh)"
+
+# --- 3. Sheldon — plugin manager (~10ms) ---
+eval "$(sheldon source)"
+
+# --- 4. Starship prompt (~20ms) ---
+eval "$(starship init zsh)"
+
+# --- 5. Completions (cached, ~5ms) ---
+# uv/uvx completions pre-cached in fpath 
+fpath=(~/.local/share/zsh/completions $fpath)
+
+# compinit once per day, skip rebuild check otherwise
+autoload -Uz compinit
+ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -n "$ZSH_COMPDUMP"(#qN.mh+24) ]]; then
+  compinit -d "$ZSH_COMPDUMP"
+else
+  compinit -C -d "$ZSH_COMPDUMP"
 fi
+# Compile dump in background for next startup
+{ [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]] && zcompile "$ZSH_COMPDUMP" } &!
 
-# antigen load and configuration
-# run this on root: curl -L git.io/antigen > antigen.zsh
-# Use PID to allow new shells (tmux) to load, but prevent re-source hangs
-if [[ "$ANTIGEN_LOADED" != "$$" ]]; then
-  source ~/antigen.zsh
-  antigen init ~/.antigenrc
-  export ANTIGEN_LOADED="$$"
-fi
+# --- 6. Source aliases and functions ---
+# source "$HOME/.zsh_aliases"
+# [[ -f "$HOME/.zsh_local_aliases" ]] && source "$HOME/.zsh_local_aliases"
+# source "$HOME/.zsh_funcs"
 
+# --- 7. FZF ---
+source <(fzf --zsh)  # modern fzf integration (replaces sourcing ~/.fzf.zsh)
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# the things we want to do in MAC
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-  if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-    ##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
+# --- 8. Vi mode keybinding ---
+# bindkey -v
+# bindkey -M viins 'kj' vi-cmd-mode
 
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-    ##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
-  fi
-fi
-
-# . "$HOME/.local/bin/env"
-
-# source the common ones
-. $HOME/.config/bashrc/secret
-. $HOME/.config/bashrc/common
-. $HOME/.config/bashrc/mutagen
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH=$HOME/.toolbox/bin:$PATH
-
-
-export PATH=$PATH:/Users/dipta007/my-world/platform-tools
-# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Added by Antigravity
-
+# --- 9. zoxide for smarter cd (replaces autojump, z.lua, etc.) ---
 eval "$(zoxide init zsh)"
 
 alias cd='z'
+
+
+# --- 10. Source secrets and common configs ---
+. $HOME/.config/bashrc/secret
+. $HOME/.config/bashrc/common
+. $HOME/.config/bashrc/mutagen

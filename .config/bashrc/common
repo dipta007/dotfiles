@@ -1,5 +1,7 @@
 # >>>> BASH by roydipta
+bindkey -v
 set -o vi
+bindkey -M viins 'kj' vi-cmd-mode
 
 export PATH=$PATH:$HOME/.local/bin
 
@@ -11,11 +13,7 @@ alias uvd="deactivate"
 if [[ -n "$BASH_VERSION" ]]; then
   eval "$(uv generate-shell-completion bash)"
   eval "$(uvx --generate-shell-completion bash)"
-elif [[ -n "$ZSH_VERSION" ]]; then
-  eval "$(uv generate-shell-completion zsh)"
-  eval "$(uvx --generate-shell-completion zsh)"
 fi
-# <<<< BASH by roydipta
 
 
 # >>>> Functions by roydipta
@@ -44,27 +42,6 @@ yadm_pull_and_check() {
         fi
     fi
 }
-
-# post message to discord
-dalert() {
-    local message="$1"
-    local hook_url="https://discord.com/api/webhooks/1354987140018213025/ahIcJVe2x9yrCFIvDOSAYDiVyxbr8ppT3ans9PsWqHoJIuLfy0UGnHewnyyimzYiEEN6"
-    
-    if [ -z "$message" ]; then
-        echo "Usage: dalert \"message\""
-        return 1
-    fi
-    
-    curl -s -H "Content-Type: application/json" -d "{\"content\":\"$message\"}" "$hook_url"
-    
-    if [ $? -eq 0 ]; then
-        echo "Message sent successfully"
-    else
-        echo "Failed to send message"
-        return 1
-    fi
-}
-
 # <<<< Functions by roydipta
 
 # If NVIM is available then nvim is the editor, else vim
@@ -75,42 +52,16 @@ else
 fi
 
 
-# >>>> Alias by roydipta
-alias chip="ssh sroydip1@chip.rs.umbc.edu"
-alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
-alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
-alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
-alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
-# use bat if available, else use cat
-if command -v bat >/dev/null 2>&1; then
-    alias cat='bat'
-fi
-
-alias lli="ls -lh --color=always | sort -k9 -f"
-alias fnv='nvim $(fzf --preview "bat --style=numbers --color=always {}" --layout reverse --border)'
-# <<<< Alias by roydipta
-
-
 # run yadm pull and check if the bootstrap file has changed
-yadm_pull_and_check
+# yadm_pull_and_check
+# disable yadm pull and check for now since it is too slow and I don't want to run yadm bootstrap every time I log in
+
 
 # if local zshrc is here, source it
-# end of file to replace everything with .bashrc.local
 if [[ -f "$HOME/.config/bashrc/local" ]]; then
   . $HOME/.config/bashrc/local
 fi
 
 
-alias ll='ls -lAFh'                         # Preferred 'ls' implementatioss
-alias less='less -FSRXc'                    # Preferred 'less' implementation
-alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
-alias c='clear'                             # c:            Clear terminal display
-alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
-alias show_options='shopt'                  # Show_options: display bash options settings
-alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-alias fix_term='echo -e "\033c"'            # fix_term:     Reset the conosle.  Similar to the reset command
-alias cic='bind "set completion-ignore-case on"' # cic:          Make tab-completion case-insensitive
-
+. $HOME/.config/bashrc/alias
 export PATH="$HOME/.local/nvim-stable/bin:$PATH"
-
-. $HOME/.config/bashrc/mutagen

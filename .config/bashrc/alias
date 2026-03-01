@@ -1,0 +1,42 @@
+# use bat if available, else use cat
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat'
+fi
+
+# use rg if available, else use grep
+if command -v rg >/dev/null 2>&1; then
+    alias grep='rg'
+fi
+
+# use fd if available, else use find
+if command -v fd >/dev/null 2>&1; then
+    alias find='fd'
+fi
+
+# Git worktree
+alias gwl="git worktree list"
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
+
+# General aliases
+alias ll='ls -lAFh'                         # Preferred 'ls' implementatioss
+alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
+alias c='clear'                             # c:            Clear terminal display
+alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
+alias gl='git pull'
+alias gp='git push'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias lli="ls -lh --color=always | sort -k9 -f"
+alias fnv='nvim $(fzf --preview "bat --style=numbers --color=always {}" --layout reverse --border)'
+
+
+# SSH Aliases
+alias chip="ssh sroydip1@chip.rs.umbc.edu"
+alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
+alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
+alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
+alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
+
+
