@@ -41,9 +41,30 @@ nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap }) -- New buffer
 
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts_noremap_silent)
 
--- LSP related mappings
--- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
-nmap({ "<leader>lf", "<CMD>Format<CR>", opts_noremap_silent })
+-- LSP keymaps (global LspAttach autocmd — no plugin dependency)
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("lsp-attach-keymaps", { clear = true }),
+	callback = function(ev)
+		local bufnr = ev.buf
+		local map = function(keys, func, desc)
+			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+		end
+
+		map("<leader>rn", vim.lsp.buf.rename, "Rename")
+		map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+		map("<leader>ld", vim.diagnostic.open_float, "Line Diagnostic")
+		map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+		map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+		map("K", vim.lsp.buf.hover, "Hover Documentation")
+		map("<leader>k", vim.lsp.buf.signature_help, "Signature Documentation")
+		map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
+		map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
+		map("<leader>wl", function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end, "Workspace List Folders")
+
+	end,
+})
 
 -- Shamelessly copying from the primeagen
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
