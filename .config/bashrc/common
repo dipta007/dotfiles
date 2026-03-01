@@ -3,11 +3,13 @@ set -o vi
 
 export PATH=$PATH:$HOME/.local/bin
 
-alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
-alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
-alias uvd="deactivate"
+# check if nvim-stable is available and add it to the path
+if [ -d "$HOME/.local/nvim-stable/bin" ]; then
+  export PATH="$PATH:$HOME/.local/nvim-stable/bin"
+fi
 
 # Load bash completions (zsh completions are loaded in .zshrc after compinit)
+# TODO: delete after full revamp to zsh
 if [[ -n "$BASH_VERSION" ]]; then
   eval "$(uv generate-shell-completion bash)"
   eval "$(uvx --generate-shell-completion bash)"
@@ -49,17 +51,10 @@ else
   export EDITOR='vim'
 fi
 
+. $HOME/.config/bashrc/alias
 
 # run yadm pull and check if the bootstrap file has changed
 # yadm_pull_and_check
 # disable yadm pull and check for now since it is too slow and I don't want to run yadm bootstrap every time I log in
 
 
-# if local zshrc is here, source it
-if [[ -f "$HOME/.config/bashrc/local" ]]; then
-  . $HOME/.config/bashrc/local
-fi
-
-
-. $HOME/.config/bashrc/alias
-export PATH="$HOME/.local/nvim-stable/bin:$PATH"

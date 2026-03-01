@@ -1,20 +1,29 @@
 > [!IMPORTANT]
 > Only for ME 👨🏻‍💻  
 > Init YADM script - [private gist](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)  
-> See below for public version  
+> See below for public version
 
 ## Installation
 
 ```bash
-# uv cache generate
-mkdir -p ~/.local/share/zsh/completions
+brew install shelldon
+brew install starship
+
+brew install fd
+fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd
+
+brew install uv
 uv generate-shell-completion zsh > ~/.local/share/zsh/completions/_uv
 uvx --generate-shell-completion zsh > ~/.local/share/zsh/completions/_uvx
 
+brew install ripgrep
 
+brew install bat
+bat --completion=zsh > ~/.local/share/zsh/completions/_bat
 ```
 
 ## Public Version:
+
 ```
 ###########
 # Install yadm

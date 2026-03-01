@@ -46,6 +46,5 @@ satt() {
     echo "Running: $cmd"
     $cmd
 }
-
 # <<<< Functions by sroydip1
 

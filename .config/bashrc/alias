@@ -40,3 +40,7 @@ alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
 alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
 
 
+# Python virtual environment aliases
+alias uvc='uv venv .venv/$(basename $(pwd))-$HOSTNAME --python 3.12 --seed'
+alias uva='source .venv/$(basename $(pwd))-$HOSTNAME/bin/activate'
+alias uvd="deactivate"
