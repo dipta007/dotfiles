@@ -12,6 +12,8 @@ import subprocess
 
 HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
+if "chip" in HOSTNAME:
+    HOSTNAME = "chip"
 OS = platform.system()
 
 COLORS = {
