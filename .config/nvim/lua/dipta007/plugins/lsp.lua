@@ -1,5 +1,96 @@
-local servers = {
-	ruff = {
+-- [[ LSP Configuration — Neovim 0.11+ native API ]]
+
+-- Buffer-local keymaps when LSP attaches
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("lsp-attach-keymaps", { clear = true }),
+	callback = function(event)
+		local bufnr = event.buf
+		local map = function(keys, func, desc)
+			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+		end
+
+		map("<leader>rn", vim.lsp.buf.rename, "Rename")
+		map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+
+		map("<leader>ld", vim.diagnostic.open_float, "Line Diagnostic")
+		map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Prev diagnostic")
+		map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next diagnostic")
+
+		-- Navigation keymaps (gd, gr, gi, etc.) handled by snacks.lua pickers
+
+		map("K", vim.lsp.buf.hover, "Hover Documentation")
+		map("<leader>k", vim.lsp.buf.signature_help, "Signature Help")
+	end,
+})
+
+-- Helper: detect python venv path
+local function get_python_path(workspace)
+	-- Case 1: activated virtual env
+	if vim.env.VIRTUAL_ENV then
+		return vim.fs.joinpath(vim.env.VIRTUAL_ENV, "bin", "python")
+	end
+
+	-- Case 2: .venv in project root
+	if workspace then
+		local root = vim.fs.root(workspace, ".git") or workspace
+		local venv = vim.fs.joinpath(root, ".venv")
+		if vim.uv.fs_stat(venv) then
+			return vim.fs.joinpath(venv, "bin", "python")
+		end
+	end
+
+	-- Case 3: system fallback
+	return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+end
+
+local config = function()
+	-- Mason: install LSP servers
+	require("mason").setup()
+	require("mason-lspconfig").setup({
+		ensure_installed = { "pyright", "ruff", "lua_ls", "jsonls", "bashls", "taplo", "marksman" },
+		-- mason-lspconfig 2.x: automatic_enable is on by default,
+		-- but we exclude rust_analyzer since rustaceanvim handles it
+		automatic_enable = {
+			exclude = { "rust_analyzer" },
+		},
+	})
+
+	-- Shared capabilities: blink.cmp + folding range for nvim-ufo
+	vim.lsp.config("*", {
+		capabilities = vim.tbl_deep_extend(
+			"force",
+			require("blink.cmp").get_lsp_capabilities({}, true),
+			{
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+				},
+			}
+		),
+	})
+
+	-- Server configs
+	vim.lsp.config("pyright", {
+		single_file_support = true,
+		settings = {
+			pyright = {
+				disableOrganizeImports = true,
+			},
+			python = {
+				analysis = {
+					-- using ruff for linting
+					ignore = { "*" },
+				},
+			},
+		},
+		on_init = function(client)
+			client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
+		end,
+	})
+
+	vim.lsp.config("ruff", {
 		cmd = { "ruff", "server" },
 		filetypes = { "python" },
 		settings = {
@@ -9,14 +100,17 @@ local servers = {
 				},
 			},
 		},
-	},
-	lua_ls = {
+	})
+
+	-- rust_analyzer is NOT configured here — rustaceanvim manages it entirely
+
+	vim.lsp.config("lua_ls", {
 		settings = {
 			Lua = {
 				workspace = { checkThirdParty = false },
 				telemetry = { enable = false },
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "Snacks" },
 				},
 				defaultConfig = {
 					indent_style = "space",
@@ -24,10 +118,9 @@ local servers = {
 				},
 			},
 		},
-	},
+	})
 
-	-- JSON (for config files)
-	jsonls = {
+	vim.lsp.config("jsonls", {
 		settings = {
 			json = {
 				schemas = (function()
@@ -40,74 +133,19 @@ local servers = {
 				validate = { enable = true },
 			},
 		},
-	},
+	})
 
-	-- YAML (for config files, k8s, CI/CD)
-	-- yamlls = {
-	-- 	settings = {
-	-- 		yaml = {
-	-- 			schemas = {
-	-- 				kubernetes = "*.yaml",
-	-- 				["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-	-- 				["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-	-- 				["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
-
-	-- Bash/Shell scripts
-	bashls = {},
-
-	-- Docker
-	dockerls = {},
-	docker_compose_language_service = {},
-
-	-- TOML (for pyproject.toml)
-	taplo = {},
-
-	-- Markdown
-	marksman = {},
-}
+	-- Enable servers
+	vim.lsp.enable({ "pyright", "ruff", "lua_ls", "jsonls", "bashls", "taplo", "marksman" })
+end
 
 return {
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		config = true,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"saghen/blink.nvim",
-			"b0o/schemastore.nvim",
-		},
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = vim.tbl_keys(servers),
-			})
-
-			-- Add blink.cmp capabilities + folding range to each server
-			local capabilities = {
-				textDocument = {
-					foldingRange = {
-						dynamicRegistration = false,
-						lineFoldingOnly = true,
-					},
-				},
-			}
-
-			for server_name, server_config in pairs(servers) do
-				server_config.capabilities = require("blink.cmp").get_lsp_capabilities(
-					vim.tbl_deep_extend("force", capabilities, server_config.capabilities or {})
-				)
-				vim.lsp.config(server_name, server_config)
-			end
-
-			vim.lsp.enable(vim.tbl_keys(servers))
-		end,
+	"neovim/nvim-lspconfig",
+	config = config,
+	dependencies = {
+		{ "williamboman/mason.nvim" },
+		{ "williamboman/mason-lspconfig.nvim" },
+		{ "saghen/blink.cmp" },
+		{ "b0o/schemastore.nvim" },
 	},
 }
