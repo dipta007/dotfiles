@@ -6,23 +6,15 @@
 4. After implementing a feature, run it to verify it works before reporting completion.
 5. After verifying a feature works, ask the user: "Should I add this as a pytest test so you can run it later?"
 
-## MUST FOLLOW RULES FOR ALL PROJECTS
+## Memory
 
-For every project, write a detailed FORDIPTA.md file that explains the whole project in plain language. 
+After any substantial change (new feature, bug fix, architectural decision, new dependency, config change, or lesson learned), update the project-level memory files. Keep MEMORY.md concise and link to topic-specific files for details.
 
-Explain the technical architecture, the structure of the codebase and how the various parts are connected, the technologies used, why we made these technical decisions, and lessons I can learn from it (this should include the bugs we ran into and how we fixed them, potential pitfalls and how to avoid them in the future, new technologies used, how good engineers think and work, best practices, etc). 
+## Workflow Rules
 
-It should be very engaging to read; don't make it sound like boring technical documentation/textbook. Where appropriate, use analogies and anecdotes to make it more understandable and memorable.
-
-## Important Guidelines
-1. If local CLAUDE.md file doesn't exist, create it using \init command.
-
-2. If there is conflict between local CLAUDE.md and global CLAUDE.md, local CLAUDE.md always takes precedence.
-
-3. Before writing any code, describe your approach and wait for approval. Always ask clarifying questions before writing any code if requirements are ambiguous.
-
-4. If a task requires changes to more than 3 files, stop and break it into smaller tasks first.
-
-5. After writing code, list what could break and suggest tests to cover it.
-
-6. Every time I correct you, add a new rule to the local CLAUDE.md file so it never happens again.
+1. **Local CLAUDE.md**: If the project has no local `CLAUDE.md`, create one with project-specific conventions. Local CLAUDE.md always overrides this global file on conflicts.
+2. **Clarify first**: If anything about the task is confusing or unclear, use the AskUserQuestion tool to clarify before making any decisions or writing any code.
+3. **Plan before coding**: Describe the approach and wait for explicit user approval before writing any code.
+3. **Small scope**: If a task touches more than 3 files, stop. Break it into smaller subtasks and confirm the plan with the user.
+4. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
+5. **Learn from corrections**: When the user corrects a mistake, add a rule to the project's local CLAUDE.md so the same mistake never happens again.
