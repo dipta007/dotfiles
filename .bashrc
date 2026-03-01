@@ -5,7 +5,7 @@ case $- in
 esac
 
 # Path to your oh-my-bash installation.
-export OSH='/Users/dipta007/.oh-my-bash'
+export OSH='/home/sroydip1/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -166,3 +166,5 @@ set -o vi
 if [ -f $HOME/.config/bashrc/local ]; then
     . $HOME/.config/bashrc/local
 fi
+
+. /home/sroydip1/.config/bashrc/loxo
