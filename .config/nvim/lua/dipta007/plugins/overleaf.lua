@@ -1,5 +1,6 @@
 return {
   'richwomanbtc/overleaf.nvim',
+  enabled = vim.g.is_local,
   cmd = { "OverleafSync", "OverleafOpen", "OverleafClose" },
   config = function()
     require('overleaf').setup({

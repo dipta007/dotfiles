@@ -1,5 +1,6 @@
 return {
 	"lervag/vimtex",
+  enabled = vim.g.is_local,
 	ft = { "tex", "latex", "bib" },
 	init = function()
 		-- VimTeX configuration goes here, e.g.
