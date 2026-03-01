@@ -39,15 +39,24 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache exclude .venv'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# --- 7. zoxide for smarter cd (replaces autojump, z.lua, etc.) ---
+# --- 7. Prefix-based history search (up/down arrows) ---
+# zvm_after_init hook runs after zsh-vi-mode so bindings don't get overwritten
+function zvm_after_init() {
+  bindkey '^[[A' history-beginning-search-backward
+  bindkey '^[[B' history-beginning-search-forward
+  bindkey '^[OA' history-beginning-search-backward
+  bindkey '^[OB' history-beginning-search-forward
+}
+
+# --- 8. zoxide for smarter cd (replaces autojump, z.lua, etc.) ---
 eval "$(zoxide init zsh)"
 
-# --- 8. Source secrets and common configs ---
+# --- 9. Source secrets and common configs ---
 . $HOME/.config/bashrc/secret
 . $HOME/.config/bashrc/common
 . $HOME/.config/bashrc/mutagen
 
-# --- 9. Local overrides (not committed to git) ---
+# --- 10. Local overrides (not committed to git) ---
 if [[ -f "$HOME/.config/bashrc/local" ]]; then
   . $HOME/.config/bashrc/local
 fi
