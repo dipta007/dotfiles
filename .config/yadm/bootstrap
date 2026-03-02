@@ -14,6 +14,8 @@ HOME_DIR = os.path.expanduser("~")
 HOSTNAME = socket.gethostname()
 if "chip" in HOSTNAME:
     HOSTNAME = "chip"
+
+print(f"Running bootstrap for {HOSTNAME} on {socket.gethostname()}")
 OS = platform.system()
 
 COLORS = {
@@ -166,9 +168,9 @@ def setup_bashrc(secret_tokens):
     #############################
     # Add secret tokens to bashrc
     #############################
-    secret_bashrc = f"{HOME_DIR}/.config/bashrc/secret"
-    with open(secret_bashrc, "w") as f:
-        f.write(secret_tokens)
+    # secret_bashrc = f"{HOME_DIR}/.config/bashrc/secret"
+    # with open(secret_bashrc, "w") as f:
+    #     f.write(secret_tokens)
 
     ###################
     # Source all bashrc
@@ -185,7 +187,8 @@ def main():
         setup_git()
         install_libs()
         setup_tmux()
-        secret_tokens = setup_bitwarden()
+        # secret_tokens = setup_bitwarden()
+        secret_tokens = ""
         setup_bashrc(secret_tokens)
         cprint("Bootstrap completed successfully", "GREEN")
     except Exception as e:
