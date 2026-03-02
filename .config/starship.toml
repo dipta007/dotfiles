@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-scan_timeout = 100
+scan_timeout = 30
 continuation_prompt = "[.](bright-black) "
 
 [character]
@@ -21,8 +21,14 @@ diverged = "<>"
 renamed = "r"
 deleted = "x"
 
-# --- KEPT: aws, azure, gcloud, kubernetes, docker, python, nodejs ---
+# --- KEPT: python, nodejs ---
+[python]
+symbol = "py "
 
+[nodejs]
+symbol = "nodejs "
+
+# --- DISABLED: not in use ---
 [aws]
 disabled = true
 symbol = "aws "
@@ -42,14 +48,6 @@ symbol = "gcp "
 [kubernetes]
 disabled = true
 symbol = "kubernetes "
-
-[nodejs]
-symbol = "nodejs "
-
-[python]
-symbol = "py "
-
-# --- DISABLED: not in use ---
 
 [battery]
 disabled = true
