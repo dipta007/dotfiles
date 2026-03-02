@@ -72,7 +72,11 @@ brew install tmux
 
 brew install font-meslo-lg-nerd-font
 
-brew install yazi ffmpeg-full sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick-full font-symbols-only-nerd-font
+brew install aichat
+
+brew install jq
+
+brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick font-symbols-only-nerd-font
 
 ########################################
 # only install locally
@@ -103,20 +107,26 @@ brew tap FelixKratz/formulae
 brew install borders
 ```
 
-4. Install [Homerow](https://www.homerow.app/)
+    - Install [Homerow](https://www.homerow.app/)
 
-## Public Version:
+## Brewfile
 
 ```
-###########
-# Install yadm
-###########
-mkdir -p ~/.local/bin && curl -fLo ~/.local/bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm && chmod a+x ~/.local/bin/yadm && export PATH=$PATH:$HOME/.local/bin
+brew bundle dump --file=~/.config/brew/mac.Brewfile --no-vscode --force
+brew bundle --file=~/.config/brew/mac.Brewfile
+```
 
-##########
-# SETUP BW
-##########
-export BW_CLIENTID={BITWARDEN_CLIENT_ID}
-export BW_CLIENTSECRET={BITWARDEN_CLIENT_SECRET}
-export BW_PASSWORD={BITWARDEN_PASSWORD}
+7. borders for aerospace:
+
+```
+brew tap FelixKratz/formulae
+brew install borders
+```
+
+8. install aerospace
+
+```
+brew install --cask nikitabobko/tap/aerospaces
+defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+defaults write com.apple.dock expose-group-apps -bool true && killall dock
 ```
