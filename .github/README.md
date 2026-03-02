@@ -40,6 +40,9 @@ git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
 mkdir -p ~/.linuxbrew/bin
 ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin
 
+echo 'eval "$(~/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+source ~/.bashrc
+
 brew install zsh
 ```
 
