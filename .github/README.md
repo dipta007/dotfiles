@@ -5,6 +5,18 @@
 
 ## Installation
 
+0. Install Homebrew (only needed if you don't have it already):
+
+```
+# Set the install location to your home
+mkdir -p ~/.linuxbrew
+git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
+mkdir -p ~/.linuxbrew/bin
+ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin
+
+brew install zsh
+```
+
 1. Install yadm: [only for me](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)
 
 ```
@@ -36,6 +48,8 @@ uvx --generate-shell-completion zsh > ~/.local/share/zsh/completions/_uvx
 
 uv tool install ipython
 
+brew install sheldon starship mise uv fd ripgrep bat zoxide fzf neovim lazygit git-delta tmux font-meslo-lg-nerd-font
+
 brew install fd
 fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd
 
@@ -46,28 +60,26 @@ bat --completion=zsh > ~/.local/share/zsh/completions/_bat
 
 brew install zoxide
 
-brew install yazi ffmpeg-full sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick-full font-symbols-only-nerd-font
-
 brew install fzf
-
-brew install neovim git rsync wget yadm
-brew install lazygit
-brew install git-delta
-
-brew install --cask claude-code
-
-brew install tmux
-
 
 brew install neovim
 :MasonInstall stylua shfmt prettier
 
+brew install lazygit
+brew install git-delta
+
+brew install tmux
+
 brew install font-meslo-lg-nerd-font
+
+brew install yazi ffmpeg-full sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick-full font-symbols-only-nerd-font
 
 ########################################
 # only install locally
 ########################################
+
 brew install mutagen-io/mutagen/mutagen
+brew install --cask claude-code
 
 brew install --cask ghostty
 brew install --cask claude
