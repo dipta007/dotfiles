@@ -24,18 +24,23 @@ deleted = "x"
 # --- KEPT: aws, azure, gcloud, kubernetes, docker, python, nodejs ---
 
 [aws]
+disabled = true
 symbol = "aws "
 
 [azure]
+disabled = true
 symbol = "az "
 
 [docker_context]
+disabled = true
 symbol = "docker "
 
 [gcloud]
+disabled = true
 symbol = "gcp "
 
 [kubernetes]
+disabled = true
 symbol = "kubernetes "
 
 [nodejs]

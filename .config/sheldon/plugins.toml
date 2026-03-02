@@ -10,10 +10,6 @@ github = "romkatv/zsh-defer"
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
 
-[plugins.alias-tips]
-github = 'djui/alias-tips'
-apply = ["defer"]
-
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 dir = "src"

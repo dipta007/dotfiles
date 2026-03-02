@@ -38,6 +38,14 @@ fi
 if [[ "$OSTYPE" == darwin* ]]; then
   eval "$(starship init zsh)"
 else
+  # Auto-generate platform config: disable expensive modules on non-Mac (NFS, etc.)
+  _starship_local=~/.cache/starship-local.toml
+  if [[ ! -f "$_starship_local" ]] || [[ ~/.config/starship.toml -nt "$_starship_local" ]]; then
+    sed -e '/^\[git_status\]$/a disabled = true' ~/.config/starship.toml > "$_starship_local"
+  fi
+  export STARSHIP_CONFIG="$_starship_local"
+  unset _starship_local
+
   _starship_cache=~/.cache/starship-init.zsh
   if [[ ! -f "$_starship_cache" ]] || [[ ~/.config/starship.toml -nt "$_starship_cache" ]]; then
     starship init zsh > "$_starship_cache"
