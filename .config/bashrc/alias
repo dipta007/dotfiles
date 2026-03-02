@@ -52,3 +52,7 @@ alias uvd="deactivate"
 
 # Neovim nuke - delete all plugins, mason servers, caches, and state
 alias nvim-nuke='rm -rf ~/.local/share/nvim/lazy ~/.local/share/nvim/mason ~/.cache/nvim ~/.local/state/nvim && echo "Nuked nvim. Next launch will reinstall everything."'
+
+# Homebrew
+alias brewdump='brew bundle dump --file=~/.config/brew/mac.Brewfile --no-vscode --force'
+alias brewinstall='brew bundle --file=~/.config/brew/mac.Brewfile'
