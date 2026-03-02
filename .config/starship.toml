@@ -1,5 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+scan_timeout = 100
 continuation_prompt = "[.](bright-black) "
 
 [character]
@@ -20,13 +21,33 @@ diverged = "<>"
 renamed = "r"
 deleted = "x"
 
+# --- KEPT: aws, azure, gcloud, kubernetes, docker, python, nodejs ---
+
 [aws]
 symbol = "aws "
 
 [azure]
 symbol = "az "
 
+[docker_context]
+symbol = "docker "
+
+[gcloud]
+symbol = "gcp "
+
+[kubernetes]
+symbol = "kubernetes "
+
+[nodejs]
+symbol = "nodejs "
+
+[python]
+symbol = "py "
+
+# --- DISABLED: not in use ---
+
 [battery]
+disabled = true
 full_symbol = "full "
 charging_symbol = "charging "
 discharging_symbol = "discharging "
@@ -34,99 +55,120 @@ unknown_symbol = "unknown "
 empty_symbol = "empty "
 
 [buf]
+disabled = true
 symbol = "buf "
 
 [bun]
+disabled = true
 symbol = "bun "
 
 [c]
+disabled = true
 symbol = "C "
 
 [cpp]
+disabled = true
 symbol = "C++ "
 
 [cobol]
+disabled = true
 symbol = "cobol "
 
 [conda]
+disabled = true
 symbol = "conda "
 
 [container]
+disabled = true
 symbol = "container "
 
 [crystal]
+disabled = true
 symbol = "cr "
 
 [cmake]
+disabled = true
 symbol = "cmake "
 
 [daml]
+disabled = true
 symbol = "daml "
 
 [dart]
+disabled = true
 symbol = "dart "
 
 [deno]
+disabled = true
 symbol = "deno "
 
 [dotnet]
+disabled = true
 format = "via [$symbol($version )(target $tfm )]($style)"
 symbol = ".NET "
 
 [directory]
 read_only = " ro"
 
-[docker_context]
-symbol = "docker "
-
 [elixir]
+disabled = true
 symbol = "exs "
 
 [elm]
+disabled = true
 symbol = "elm "
 
 [erlang]
+disabled = true
 symbol = "erl "
 
 [fennel]
+disabled = true
 symbol = "fnl "
 
 [fortran]
+disabled = true
 symbol = "fortran "
 
 [fossil_branch]
+disabled = true
 symbol = "fossil "
 truncation_symbol = "..."
 
-[gcloud]
-symbol = "gcp "
+[gleam]
+disabled = true
+symbol = "gleam "
 
 [git_branch]
 symbol = "git "
 truncation_symbol = "..."
 
-[gleam]
-symbol = "gleam "
-
 [golang]
+disabled = true
 symbol = "go "
 
 [gradle]
+disabled = true
 symbol = "gradle "
 
 [guix_shell]
+disabled = true
 symbol = "guix "
 
 [haskell]
+disabled = true
 symbol = "haskell "
 
 [haxe]
+disabled = true
 symbol = "hx "
 
 [helm]
+disabled = true
 symbol = "helm "
 
 [hg_branch]
+disabled = true
 symbol = "hg "
 truncation_symbol = "..."
 
@@ -134,58 +176,67 @@ truncation_symbol = "..."
 ssh_symbol = "ssh "
 
 [java]
+disabled = true
 symbol = "java "
 
 [jobs]
 symbol = "*"
 
 [julia]
+disabled = true
 symbol = "jl "
 
 [kotlin]
+disabled = true
 symbol = "kt "
 
-[kubernetes]
-symbol = "kubernetes "
-
 [lua]
+disabled = true
 symbol = "lua "
 
-[nodejs]
-symbol = "nodejs "
-
 [memory_usage]
+disabled = true
 symbol = "memory "
 
 [meson]
+disabled = true
 symbol = "meson "
 truncation_symbol = "..."
 
 [mojo]
+disabled = true
 symbol = "mojo "
 
 [nats]
+disabled = true
 symbol = "nats "
 
 [netns]
+disabled = true
 symbol = "netns "
 
 [nim]
+disabled = true
 symbol = "nim "
 
 [nix_shell]
+disabled = true
 symbol = "nix "
 
 [ocaml]
+disabled = true
 symbol = "ml "
 
 [odin]
+disabled = true
 symbol = "odin "
 
 [opa]
+disabled = true
 symbol = "opa "
 
 [openstack]
+disabled = true
 symbol = "openstack "
 
 [os.symbols]
@@ -249,58 +300,71 @@ Windows = "win "
 Zorin = "zorn "
 
 [package]
+disabled = true
 symbol = "pkg "
 
 [perl]
+disabled = true
 symbol = "pl "
 
 [php]
+disabled = true
 symbol = "php "
 
 [pijul_channel]
+disabled = true
 symbol = "pijul "
 truncation_symbol = "..."
 
 [pixi]
+disabled = true
 symbol = "pixi "
 
 [pulumi]
+disabled = true
 symbol = "pulumi "
 
 [purescript]
+disabled = true
 symbol = "purs "
 
-[python]
-symbol = "py "
-
 [quarto]
+disabled = true
 symbol = "quarto "
 
 [raku]
+disabled = true
 symbol = "raku "
 
 [red]
+disabled = true
 symbol = "red "
 
 [rlang]
+disabled = true
 symbol = "r "
 
 [ruby]
+disabled = true
 symbol = "rb "
 
 [rust]
+disabled = true
 symbol = "rs "
 
 [scala]
+disabled = true
 symbol = "scala "
 
 [shlvl]
 symbol = "shlvl "
 
 [spack]
+disabled = true
 symbol = "spack "
 
 [solidity]
+disabled = true
 symbol = "solidity "
 
 [status]
@@ -314,24 +378,29 @@ signal_symbol = "sig"
 symbol = "sudo "
 
 [swift]
+disabled = true
 symbol = "swift "
 
 [typst]
+disabled = true
 symbol = "typst "
 
 [vagrant]
+disabled = true
 symbol = "vagrant "
 
 [terraform]
+disabled = true
 symbol = "terraform "
 
 [xmake]
+disabled = true
 symbol = "xmake "
 
 [zig]
+disabled = true
 symbol = "zig "
 
 ########################################
 # Changes by me
 ########################################
-

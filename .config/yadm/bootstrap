@@ -27,12 +27,15 @@ COLORS = {
 }
 
 bash_file = ".bashrc" if OS == "Linux" else ".zshrc"
+bash_file = ".zshrc"
+
 
 def cprint(msg, color=None):
     if color:
         print(f"{COLORS[color]}{msg}{COLORS['RESET']}")
     else:
         print(msg)
+
 
 def run_cmd(cmd):
     if sys.version_info >= (3, 7):
@@ -42,7 +45,13 @@ def run_cmd(cmd):
         error = result.stderr
         returncode = result.returncode
     else:
-        process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        process = subprocess.Popen(
+            cmd,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True,
+        )
         output, error = process.communicate()
         returncode = process.returncode
     assert returncode == 0, f"Error running command: {cmd}\n{error}"
@@ -65,7 +74,7 @@ def setup_bitwarden():
     cprint("Setting up bitwarden", "CYAN")
     url = dict(
         Linux="https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-linux-1.22.1.zip",
-        Darwin="https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-macos-1.22.1.zip"
+        Darwin="https://github.com/bitwarden/cli/releases/download/v1.22.1/bw-macos-1.22.1.zip",
     )[OS]
     try:
         ################
