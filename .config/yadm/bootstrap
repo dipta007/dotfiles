@@ -60,18 +60,6 @@ def run_cmd(cmd):
     return output
 
 
-def setup_git():
-    cprint("Setting up git", "CYAN")
-    run_cmd("git config --global user.name 'Shubhashis Roy Dipta'")
-    run_cmd("git config --global user.email iamdipta@gmail.com")
-
-
-def install_libs():
-    cprint("Installing libraries", "CYAN")
-    # install uv
-    run_cmd("curl -LsSf https://astral.sh/uv/install.sh | sh")
-
-
 def setup_bitwarden():
     cprint("Setting up bitwarden", "CYAN")
     url = dict(
@@ -138,14 +126,6 @@ def clear_env_vars():
         os.environ.pop(var, None)
 
 
-def setup_tmux():
-    cprint("Setting up tmux", "CYAN")
-    try:
-        run_cmd(f"tmux source-file {HOME_DIR}/.tmux.conf")
-    except Exception as e:
-        cprint(f"Error in tmux: {e}", "RED")
-
-
 def add_to_bash_file(custom_bashrc):
     if not os.path.exists(custom_bashrc):
         cprint(f"Warning: {custom_bashrc} does not exist", "YELLOW")
@@ -184,12 +164,9 @@ def setup_bashrc(secret_tokens):
 
 def main():
     try:
-        setup_git()
-        install_libs()
-        setup_tmux()
+        cprint("There is nothing in the bootstrap script right now", "YELLOW")
         # secret_tokens = setup_bitwarden()
-        secret_tokens = ""
-        setup_bashrc(secret_tokens)
+        # setup_bashrc(secret_tokens)
         cprint("Bootstrap completed successfully", "GREEN")
     except Exception as e:
         cprint(f"Error: {e}", "RED")
