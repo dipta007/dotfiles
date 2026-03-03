@@ -115,9 +115,7 @@ if [[ -f "$HOME/.config/bashrc/local" ]]; then
 fi
 
 # --- 11. Worktrunk (wt) ---
-if (( $+commands[wt] )); then
-  _CACHED_EVAL_CMD="command wt config shell init zsh" _cached_eval ~/.cache/wt-init.zsh wt
-fi
+_CACHED_EVAL_CMD="command wt config shell init zsh" _cached_eval ~/.cache/wt-init.zsh wt
 
 # --- Recache: regenerate all cached init scripts ---
 zsh-recache() {
