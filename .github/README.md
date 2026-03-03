@@ -129,25 +129,25 @@ Inside neovim, install formatters:
 | Tool                                        | What it does                   |
 | ------------------------------------------- | ------------------------------ |
 | [bat](https://github.com/sharkdp/bat)       | `cat` with syntax highlighting |
-| [tmux](https://github.com/tmux/tmux)        | Terminal multiplexer           |
 | [yazi](https://github.com/sxyazi/yazi)      | Terminal file manager          |
 | [jq](https://jqlang.github.io/jq/)          | JSON processor                 |
 | [aichat](https://github.com/sigoden/aichat) | AI chat in terminal            |
 
 ```bash
-brew install bat tmux jq aichat
+brew install bat jq aichat
 
 # Zsh completions for bat
 bat --completion=zsh > ~/.local/share/zsh/completions/_bat
+brew install --cask claude-code    # Claude Code CLI
+brew install codex                 # OpenAI Codex CLI
 
-# yazi + its optional dependencies
-brew install yazi ffmpeg sevenzip poppler resvg imagemagick
 ```
 
 ### 8. Fonts
 
 ```bash
 brew install font-meslo-lg-nerd-font font-symbols-only-nerd-font
+brew install --cask font-jetbrains-mono
 ```
 
 ---
@@ -159,10 +159,11 @@ These are only needed on a local macOS machine (not remote servers).
 ### 9. Terminal Emulator & Apps
 
 ```bash
+# yazi + its optional dependencies
+brew install yazi ffmpeg sevenzip poppler resvg imagemagick
+
 brew install --cask ghostty       # GPU-accelerated terminal
 brew install --cask claude         # Claude desktop app
-brew install --cask claude-code    # Claude Code CLI
-brew install codex                 # OpenAI Codex CLI
 ```
 
 ### 10. GitHub CLI

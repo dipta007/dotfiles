@@ -1,21 +1,36 @@
 # Font configuration
 theme = Catppuccin Frappe
-font-family = MesloLGS Nerd Font Mono
-font-size = 16
+font-family = JetBrains Mono
+# font-family = MesloLGS Nerd Font Mono
+font-size = 15
+
+# Keep font size stable across new windows/tabs
+window-inherit-font-size = false
 
 # Window configuration
 window-decoration = true
-background-opacity = 0.8
-background-blur-radius = 20
-unfocused-split-opacity = 0.8
+# background-opacity = 0.8
+# background-blur-radius = 20
+# unfocused-split-opacity = 0.8
 
 # macOS specific
 macos-titlebar-style = hidden
 window-theme = ghostty
 
+# Focus mode
+# background-opacity = 1.0
+# background-blur-radius = 0
+# unfocused-split-opacity = 1.0
+
+# Cool
+background-opacity = 0.92
+background-blur-radius = 12
+unfocused-split-opacity = 0.9
+
 # Coolnight colorscheme
 foreground = #CBE0F0
-background = #011423
+background = #03182a
+# background = #011423
 cursor-color = #47FF9C
 cursor-text = #011423
 selection-background = #033259
