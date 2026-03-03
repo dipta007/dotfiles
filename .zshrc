@@ -19,40 +19,56 @@ path=(
   $path
 )
 
+# --- Helper: cached eval (binary mtime invalidation) ---
+# Usage: _cached_eval <cache_file> <command> [extra_deps...]
+# Regenerates cache when binary or any extra dep file is newer than cache.
+_cached_eval() {
+  local cache="$1" cmd="$2"
+  shift 2
+  local bin_path="${commands[$cmd]}"
+  local needs_regen=0
+
+  if [[ ! -f "$cache" ]]; then
+    needs_regen=1
+  elif [[ -n "$bin_path" && "$bin_path" -nt "$cache" ]]; then
+    needs_regen=1
+  else
+    for dep in "$@"; do
+      if [[ -f "$dep" && "$dep" -nt "$cache" ]]; then
+        needs_regen=1
+        break
+      fi
+    done
+  fi
+
+  if (( needs_regen )); then
+    # Caller sets _CACHED_EVAL_CMD to the full command to run
+    eval "$_CACHED_EVAL_CMD" > "$cache"
+  fi
+  source "$cache"
+}
+
 # --- 2. mise — replaces nvm, pyenv, conda ---
 if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(mise activate zsh)"
+  _CACHED_EVAL_CMD="mise activate zsh" _cached_eval ~/.cache/mise-init.zsh mise
 else
   path=("$HOME/.local/share/mise/shims" $path)
 fi
 
-# --- 3. Sheldon — plugin manager (cached on non-Mac) ---
-if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(sheldon source)"
-else
-  [[ ! -f ~/.cache/sheldon-source.zsh ]] && sheldon source > ~/.cache/sheldon-source.zsh
-  source ~/.cache/sheldon-source.zsh
-fi
+# --- 3. Sheldon — plugin manager ---
+_CACHED_EVAL_CMD="sheldon source" _cached_eval ~/.cache/sheldon-source.zsh sheldon ~/.config/sheldon/plugins.toml
 
-# --- 4. Starship prompt (cached on non-Mac) ---
-if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(starship init zsh)"
-else
-  # Auto-generate platform config: disable expensive modules on non-Mac (NFS, etc.)
+# --- 4. Starship prompt ---
+if [[ "$OSTYPE" != darwin* ]]; then
+  # Non-Mac: disable expensive modules (NFS, etc.)
   _starship_local=~/.cache/starship-local.toml
   if [[ ! -f "$_starship_local" ]] || [[ ~/.config/starship.toml -nt "$_starship_local" ]]; then
     sed -e '/^\[git_status\]$/a disabled = true' ~/.config/starship.toml > "$_starship_local"
   fi
   export STARSHIP_CONFIG="$_starship_local"
   unset _starship_local
-
-  _starship_cache=~/.cache/starship-init.zsh
-  if [[ ! -f "$_starship_cache" ]] || [[ ~/.config/starship.toml -nt "$_starship_cache" ]]; then
-    starship init zsh > "$_starship_cache"
-  fi
-  source "$_starship_cache"
-  unset _starship_cache
 fi
+_CACHED_EVAL_CMD="starship init zsh" _cached_eval ~/.cache/starship-init.zsh starship ~/.config/starship.toml
 
 # --- 5. Completions (cached, ~5ms) ---
 # uv/uvx/fd completions pre-cached in fpath
@@ -70,13 +86,8 @@ fi
 # Compile dump in background for next startup
 { [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]] && zcompile "$ZSH_COMPDUMP" } &!
 
-# --- 6. FZF (cached on non-Mac) ---
-if [[ "$OSTYPE" == darwin* ]]; then
-  source <(fzf --zsh)
-else
-  [[ ! -f ~/.cache/fzf-init.zsh ]] && fzf --zsh > ~/.cache/fzf-init.zsh
-  source ~/.cache/fzf-init.zsh
-fi
+# --- 6. FZF ---
+_CACHED_EVAL_CMD="fzf --zsh" _cached_eval ~/.cache/fzf-init.zsh fzf
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache exclude .venv'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -90,13 +101,8 @@ function zvm_after_init() {
   bindkey '^[OB' history-beginning-search-forward
 }
 
-# --- 8. zoxide for smarter cd (cached on non-Mac) ---
-if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(zoxide init zsh)"
-else
-  [[ ! -f ~/.cache/zoxide-init.zsh ]] && zoxide init zsh > ~/.cache/zoxide-init.zsh
-  source ~/.cache/zoxide-init.zsh
-fi
+# --- 8. zoxide for smarter cd ---
+_CACHED_EVAL_CMD="zoxide init zsh" _cached_eval ~/.cache/zoxide-init.zsh zoxide
 
 # --- 9. Source secrets and common configs ---
 . $HOME/.config/bashrc/secret
@@ -107,3 +113,18 @@ fi
 if [[ -f "$HOME/.config/bashrc/local" ]]; then
   . $HOME/.config/bashrc/local
 fi
+
+# --- 11. Worktrunk (wt) ---
+if (( $+commands[wt] )); then
+  _CACHED_EVAL_CMD="command wt config shell init zsh" _cached_eval ~/.cache/wt-init.zsh wt
+fi
+
+# --- Recache: regenerate all cached init scripts ---
+zsh-recache() {
+  echo "Clearing cached init scripts..."
+  rm -f ~/.cache/{mise-init,sheldon-source,starship-init,fzf-init,zoxide-init,wt-init}.zsh
+  echo "Reloading shell..."
+  exec zsh -l
+}
+
+unfunction _cached_eval 2>/dev/null
