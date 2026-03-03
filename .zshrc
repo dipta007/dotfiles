@@ -7,7 +7,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt APPEND_HISTORY        # append instead of overwrite
-setopt SHARE_HISTORY         # share history across sessions
+# setopt SHARE_HISTORY         # share history across sessions
 setopt HIST_IGNORE_DUPS      # skip consecutive duplicates
 setopt HIST_IGNORE_ALL_DUPS  # remove older duplicate entries
 setopt HIST_IGNORE_SPACE     # skip commands starting with space
