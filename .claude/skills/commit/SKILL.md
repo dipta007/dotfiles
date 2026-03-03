@@ -12,6 +12,7 @@ Create a commit message for currently staged changes, get user approval, then co
 - `git diff --cached` (read staged changes)
 - `git diff --cached --name-only` (list staged file names)
 - `git commit -m "..."` (commit after approval)
+- `git push` (push after approval)
 
 **You may NOT run any of these:**
 - `git add`, `git rm`, `git mv`
@@ -46,3 +47,8 @@ Present the commit message to the user and ask:
 ### Step 5: Commit
 Only after explicit user approval, run `git commit` with the approved message.
 If the user suggests edits, revise and ask again.
+
+### Step 6: Ask to push
+After the commit succeeds, ask the user:
+> "Push to remote?"
+If yes, run `git push`. If the branch has no upstream, use `git push -u origin <branch-name>`.
