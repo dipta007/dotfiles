@@ -92,15 +92,16 @@ uv tool install ipython
 
 ### 5. Search & Navigation
 
-| Tool                                             | What it does                         |
-| ------------------------------------------------ | ------------------------------------ |
-| [fd](https://github.com/sharkdp/fd)              | Fast `find` alternative              |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative              |
-| [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything          |
-| [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits |
+| Tool                                             | What it does                           |
+| ------------------------------------------------ | -------------------------------------- |
+| [fd](https://github.com/sharkdp/fd)              | Fast `find` alternative                |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative                |
+| [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything            |
+| [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits   |
+| [wt](https://github.com/max-sixty/worktrunk)     | Git worktree manager with fuzzy search |
 
 ```bash
-brew install fd ripgrep fzf zoxide
+brew install fd ripgrep fzf zoxide worktrunk
 
 # Zsh completions
 fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd
