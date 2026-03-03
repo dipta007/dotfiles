@@ -86,6 +86,7 @@ fi
 # Compile dump in background for next startup
 { [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]] && zcompile "$ZSH_COMPDUMP" } &!
 
+# --- 6. FZF ---
 _CACHED_EVAL_CMD="fzf --zsh" _cached_eval ~/.cache/fzf-init.zsh fzf
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache exclude .venv'
