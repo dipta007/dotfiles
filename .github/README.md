@@ -181,6 +181,7 @@ brew install gh && gh auth login
 | [borders](https://github.com/FelixKratz/JankyBorders) | Colored window borders        |
 | [Homerow](https://www.homerow.app/)                   | Keyboard-driven UI navigation |
 | [kindavim](https://kindavim.app/)                     | Vim keybindings system-wide   |
+| [pipiri](https://lowtechguys.com/pipiri/)             | PIP view anything on macOS    |
 
 ```bash
 brew install --cask kindavim
@@ -196,7 +197,9 @@ defaults write com.apple.spaces spans-displays -bool true && killall SystemUISer
 defaults write com.apple.dock expose-group-apps -bool true && killall Dock
 ```
 
-Install [Homerow](https://www.homerow.app/) manually.
+Install [Homerow](https://www.homerow.app/) manually and set up a hotkey (cmd + shift + space and cmd + shift + j) to trigger it.
+
+Install [pipiri](https://lowtechguys.com/pipiri/) manually and set up a hotkey (cmd + y) to trigger it.
 
 ### 12. Other macOS Tools
 
