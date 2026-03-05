@@ -124,8 +124,8 @@ zsh-recache() {
   echo "Reloading shell..."
   exec zsh -l
 }
+unfunction _cached_eval 2>/dev/null
 
 # Case-insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-unfunction _cached_eval 2>/dev/null
