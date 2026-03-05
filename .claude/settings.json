@@ -14,5 +14,6 @@
     "hugging-face-evaluation@huggingface-skills": true,
     "hugging-face-model-trainer@huggingface-skills": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high"
 }
