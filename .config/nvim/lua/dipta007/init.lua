@@ -3,8 +3,8 @@ vim.loader.enable()
 
 -- absolute basic
 -- map leader is required by lazy.nvim
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Turns off netrw (default file explorer) in favor of nvim-tree or other plugins
 vim.g.loaded_netrw = 1
@@ -13,47 +13,46 @@ vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 
 -- ================= START: PLUGIN MANAGER SETUP =====================================
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  }
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
-
 
 -- true on macOS, false on servers
 vim.g.is_local = vim.fn.has("macunix") == 1
 
 -- ================= START: PLUGINS ==================================================
-require('lazy').setup({ import = 'dipta007.plugins' }, {
-  change_detection = {
-    enabled = vim.g.is_local,
-    notify = vim.g.is_local,
-  },
-  checker = { enabled = vim.g.is_local },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "rplugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
-  },
+require("lazy").setup({ import = "dipta007.plugins" }, {
+	change_detection = {
+		enabled = vim.g.is_local,
+		notify = vim.g.is_local,
+	},
+	checker = { enabled = vim.g.is_local },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"rplugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })
 -- ================= END: PLUGINS ==================================================
 
-require 'dipta007.core'
+require("dipta007.core")

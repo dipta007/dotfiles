@@ -6,8 +6,11 @@ local opt = vim.opt
 
 -- general settings
 if vim.g.is_local then
-  opt.clipboard = "unnamedplus"
+	opt.clipboard = "unnamedplus"
 end
+
+--- winborder for floating windows
+o.winborder = "rounded"
 
 --- useful for searching
 o.ignorecase = true
