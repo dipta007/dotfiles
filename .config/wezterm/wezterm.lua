@@ -29,11 +29,10 @@ config.colors = {
 }
 
 config.keys = {
-  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
 }
 
 config.enable_kitty_graphics = true
 
 -- and finally, return the configuration to wezterm
 return config
-

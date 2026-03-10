@@ -2,6 +2,7 @@
 theme = Catppuccin Frappe
 font-family = JetBrains Mono
 # font-family = MesloLGS Nerd Font Mono
+font-family = Kohinoor Bangla
 font-size = 15
 
 # Keep font size stable across new windows/tabs
