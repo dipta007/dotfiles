@@ -19,6 +19,176 @@
     "pr-review-toolkit@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
   "voiceEnabled": true,
-  "effortLevel": "high"
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=SessionStart $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=PreToolUse $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=PostToolUse $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=PostToolUseFailure $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=Stop $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=SessionEnd $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.local/share/clorch/hooks/notify_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=PermissionRequest $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=UserPromptSubmit $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=SubagentStart $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=SubagentStop $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=PreCompact $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=TeammateIdle $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CLORCH_EVENT=TaskCompleted $HOME/.local/share/clorch/hooks/event_handler.sh",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
 }
