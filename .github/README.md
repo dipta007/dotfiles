@@ -164,8 +164,9 @@ These are only needed on a local macOS machine (not remote servers).
 uv tool install git+https://github.com/androsovm/clorch.git
 brew install yazi ffmpeg sevenzip poppler resvg imagemagick
 
-brew install --cask ghostty       # GPU-accelerated terminal
-brew install --cask claude         # Claude desktop app
+brew install --cask ghostty         # GPU-accelerated terminal
+brew install --cask claude          # Claude desktop app
+brew install cronboard              # cron scheduler with a terminal UI
 ```
 
 ### 10. GitHub CLI
