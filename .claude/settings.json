@@ -4,6 +4,9 @@
     "pr": ""
   },
   "includeCoAuthoredBy": false,
+  "permissions": {
+    "defaultMode": "default"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -182,17 +185,17 @@
     "lua-lsp@claude-plugins-official": false,
     "pyright-lsp@claude-plugins-official": false,
     "superpowers@claude-plugins-official": true,
-    "document-skills@anthropic-agent-skills": true,
+    "document-skills@anthropic-agent-skills": false,
     "huggingface-skills@claude-plugins-official": true,
-    "hugging-face-cli@huggingface-skills": true,
-    "hugging-face-datasets@huggingface-skills": true,
+    "hugging-face-cli@huggingface-skills": false,
+    "hugging-face-datasets@huggingface-skills": false,
     "hugging-face-evaluation@huggingface-skills": false,
     "hugging-face-model-trainer@huggingface-skills": false,
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "skim@skim": true
+    "skim@skim": false
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -204,5 +207,6 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "autoDreamEnabled": true
 }

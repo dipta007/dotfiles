@@ -1,6 +1,7 @@
 return {
 	"3rd/image.nvim",
-  enabled = vim.g.is_local,
+	-- enabled = vim.g.is_local,
+	enabled = false,
 	ft = "markdown",
 	config = function()
 		require("image").setup({

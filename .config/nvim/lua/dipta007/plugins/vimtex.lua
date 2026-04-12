@@ -3,12 +3,11 @@ return {
   enabled = vim.g.is_local,
 	ft = { "tex", "latex", "bib" },
 	init = function()
-		-- VimTeX configuration goes here, e.g.
-		-- vim.g.vimtex_view_method = "zathura"
-
+		vim.g.vimtex_view_method = "skim"
 		-- xelatex with latexmk for better font support
 		vim.g.vimtex_compiler_latexmk = {
 			executable = "latexmk",
+			out_dir = "build",
 			options = {
 				"-pdf",
 				-- "-pdflatex=xelatex",
