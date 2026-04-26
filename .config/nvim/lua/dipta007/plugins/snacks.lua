@@ -29,8 +29,8 @@ return {
 			enabled = true,
 			timeout = 4000,
 		},
-    img = {
-      enabled = true
+    image = {
+      enabled = vim.g.is_local,
     },
 		picker = {
       sources = {
@@ -171,6 +171,26 @@ return {
 				Snacks.toggle.inlay_hints():map("<leader>uh")
 				Snacks.toggle.indent():map("<leader>ug")
 				Snacks.toggle.dim():map("<leader>uD")
+
+				-- Workaround for snacks.nvim #2634: image-file buffers don't re-render
+				-- when re-entering after switching to another buffer. Skip the first
+				-- BufEnter (snacks's own BufReadCmd attach is in flight); on later
+				-- BufEnters re-attach to force a fresh placement.
+				vim.api.nvim_create_autocmd("BufEnter", {
+					group = vim.api.nvim_create_augroup("snacks-image-rerender", { clear = true }),
+					pattern = {
+						"*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp",
+						"*.tiff", "*.heic", "*.avif", "*.pdf",
+						"*.mp4", "*.mov", "*.avi", "*.mkv", "*.webm",
+					},
+					callback = function(args)
+						if not vim.b[args.buf].snacks_image_initial_done then
+							vim.b[args.buf].snacks_image_initial_done = true
+							return
+						end
+						pcall(function() Snacks.image.buf.attach(args.buf) end)
+					end,
+				})
 			end,
 		})
 	end,
