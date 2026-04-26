@@ -207,6 +207,8 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "autoDreamEnabled": true,
   "voiceEnabled": true,
-  "autoDreamEnabled": true
+  "editorMode": "vim",
+  "preferredNotifChannel": "ghostty"
 }
