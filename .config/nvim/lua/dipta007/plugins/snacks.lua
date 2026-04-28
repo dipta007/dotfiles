@@ -13,44 +13,44 @@ return {
 			},
 		},
 		bigfile = {
-      notify = true,
-      size = 1 * 1024 * 1024, -- 1 MB
-      line_length = 5000, -- 5k characters
-      enabled = true
-    },
+			notify = true,
+			size = 1 * 1024 * 1024, -- 1 MB
+			line_length = 5000, -- 5k characters
+			enabled = true,
+		},
 		dashboard = { enabled = true },
 		explorer = {
-      enabled = true,
-      replace_netrw = false, -- netrw already disabled in init.lua
-    },
+			enabled = true,
+			replace_netrw = false, -- netrw already disabled in init.lua
+		},
 		indent = { enabled = vim.g.is_local },
 		input = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 4000,
 		},
-    image = {
-      enabled = vim.g.is_local,
-    },
+		image = {
+			enabled = true, -- vim.g.is_local,
+		},
 		picker = {
-      sources = {
-        explorer = {
-          -- comment out for floating explorer
-          -- layout = {
-          --   preset = "select",
-          --   layout = {
-          --     width = 0.9,
-          --     height = 0.9,
-          --     border = "rounded",
-          --   },
-          -- },
-          -- auto_close = true,
-          hidden = true,
-          ignored = true,
-        },
-      },
-      enabled = true
-    },
+			sources = {
+				explorer = {
+					-- comment out for floating explorer
+					-- layout = {
+					--   preset = "select",
+					--   layout = {
+					--     width = 0.9,
+					--     height = 0.9,
+					--     border = "rounded",
+					--   },
+					-- },
+					-- auto_close = true,
+					hidden = true,
+					ignored = true,
+				},
+			},
+			enabled = true,
+		},
 		quickfile = { enabled = true },
 		scope = { enabled = vim.g.is_local },
 		scroll = { enabled = vim.g.is_local },
@@ -64,70 +64,329 @@ return {
 		words = { enabled = vim.g.is_local },
 		styles = {
 			notification = {
-				wo = { wrap = true } -- Wrap notifications
+				wo = { wrap = true }, -- Wrap notifications
 			},
 		},
 	},
 	keys = {
-    -- Todo Comments
-		{ "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
-		{ "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+		-- Todo Comments
+		{
+			"<leader>st",
+			function()
+				Snacks.picker.todo_comments()
+			end,
+			desc = "Todo Comments",
+		},
+		{
+			"<leader>sT",
+			function()
+				Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+			end,
+			desc = "Todo/Fix/Fixme",
+		},
 
 		-- Top Pickers & Explorer
-		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>e", function() Snacks.explorer({ path = vim.fn.expand("%:p:h") }) end, desc = "Toggle Explorer" },
+		{
+			"<leader><space>",
+			function()
+				Snacks.picker.smart()
+			end,
+			desc = "Smart Find Files",
+		},
+		{
+			"<leader>:",
+			function()
+				Snacks.picker.command_history()
+			end,
+			desc = "Command History",
+		},
+		{
+			"<leader>e",
+			function()
+				Snacks.explorer({ path = vim.fn.expand("%:p:h") })
+			end,
+			desc = "Toggle Explorer",
+		},
 
-    -- git
-		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-    { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame" },
-		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-		{ "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
-		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-		{ "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
-		{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
-		{ "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+		-- git
+		{
+			"<leader>gb",
+			function()
+				Snacks.picker.git_branches()
+			end,
+			desc = "Git Branches",
+		},
+		{
+			"<leader>gB",
+			function()
+				Snacks.git.blame_line()
+			end,
+			desc = "Git Blame",
+		},
+		{
+			"<leader>gl",
+			function()
+				Snacks.picker.git_log()
+			end,
+			desc = "Git Log",
+		},
+		{
+			"<leader>gL",
+			function()
+				Snacks.picker.git_log_line()
+			end,
+			desc = "Git Log Line",
+		},
+		{
+			"<leader>gs",
+			function()
+				Snacks.picker.git_status()
+			end,
+			desc = "Git Status",
+		},
+		{
+			"<leader>gS",
+			function()
+				Snacks.picker.git_stash()
+			end,
+			desc = "Git Stash",
+		},
+		{
+			"<leader>gd",
+			function()
+				Snacks.picker.git_diff()
+			end,
+			desc = "Git Diff (Hunks)",
+		},
+		{
+			"<leader>gf",
+			function()
+				Snacks.picker.git_log_file()
+			end,
+			desc = "Git Log File",
+		},
 		-- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-    
+
 		-- gh
-		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
-		{ "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
-		{ "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
-		{ "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+		{
+			"<leader>gi",
+			function()
+				Snacks.picker.gh_issue()
+			end,
+			desc = "GitHub Issues (open)",
+		},
+		{
+			"<leader>gI",
+			function()
+				Snacks.picker.gh_issue({ state = "all" })
+			end,
+			desc = "GitHub Issues (all)",
+		},
+		{
+			"<leader>gp",
+			function()
+				Snacks.picker.gh_pr()
+			end,
+			desc = "GitHub Pull Requests (open)",
+		},
+		{
+			"<leader>gP",
+			function()
+				Snacks.picker.gh_pr({ state = "all" })
+			end,
+			desc = "GitHub Pull Requests (all)",
+		},
 
 		-- search (active)
-		{ "<leader>sh", function() Snacks.picker.help() end, desc = "[S]earch [H]elp" },
-		{ "<leader>sk", function() Snacks.picker.keymaps() end, desc = "[S]earch [K]eymaps" },
-		{ "<leader>sf", function() Snacks.picker.files() end, desc = "[S]earch [F]iles" },
-		{ "<leader>sg", function() Snacks.picker.grep() end, desc = "[S]earch by [G]rep" },
-		{ "<leader>sb", function() Snacks.picker.buffers() end, desc = "[S]earch [B]uffers" },
-		{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "[S]earch [D]iagnostics" },
-		{ "<leader>sr", function() Snacks.picker.resume() end, desc = "[S]earch [R]esume" },
-		{ "<leader>sp", function() Snacks.picker.projects() end, desc = "Projects" },
-		{ "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+		{
+			"<leader>sh",
+			function()
+				Snacks.picker.help()
+			end,
+			desc = "[S]earch [H]elp",
+		},
+		{
+			"<leader>sk",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "[S]earch [K]eymaps",
+		},
+		{
+			"<leader>sf",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "[S]earch [F]iles",
+		},
+		{
+			"<leader>sg",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "[S]earch by [G]rep",
+		},
+		{
+			"<leader>sb",
+			function()
+				Snacks.picker.buffers()
+			end,
+			desc = "[S]earch [B]uffers",
+		},
+		{
+			"<leader>sd",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "[S]earch [D]iagnostics",
+		},
+		{
+			"<leader>sr",
+			function()
+				Snacks.picker.resume()
+			end,
+			desc = "[S]earch [R]esume",
+		},
+		{
+			"<leader>sp",
+			function()
+				Snacks.picker.projects()
+			end,
+			desc = "Projects",
+		},
+		{
+			"<leader>sc",
+			function()
+				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+			end,
+			desc = "Find Config File",
+		},
+		{
+			"<leader>/",
+			function()
+				Snacks.picker.lines()
+			end,
+			desc = "Buffer Lines",
+		},
 
 		-- LSP
-		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-		{ "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-		{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-		{ "gi", desc = "Goto Implementation", function() Snacks.picker.lsp_implementations() end },
-		{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-		{ "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
-		{ "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
-		{ "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+		{
+			"gd",
+			function()
+				Snacks.picker.lsp_definitions()
+			end,
+			desc = "Goto Definition",
+		},
+		{
+			"gD",
+			function()
+				Snacks.picker.lsp_declarations()
+			end,
+			desc = "Goto Declaration",
+		},
+		{
+			"gr",
+			function()
+				Snacks.picker.lsp_references()
+			end,
+			nowait = true,
+			desc = "References",
+		},
+		{
+			"gi",
+			desc = "Goto Implementation",
+			function()
+				Snacks.picker.lsp_implementations()
+			end,
+		},
+		{
+			"gy",
+			function()
+				Snacks.picker.lsp_type_definitions()
+			end,
+			desc = "Goto T[y]pe Definition",
+		},
+		{
+			"gai",
+			function()
+				Snacks.picker.lsp_incoming_calls()
+			end,
+			desc = "C[a]lls Incoming",
+		},
+		{
+			"gao",
+			function()
+				Snacks.picker.lsp_outgoing_calls()
+			end,
+			desc = "C[a]lls Outgoing",
+		},
+		{
+			"<leader>ss",
+			function()
+				Snacks.picker.lsp_symbols()
+			end,
+			desc = "LSP Symbols",
+		},
+		{
+			"<leader>sS",
+			function()
+				Snacks.picker.lsp_workspace_symbols()
+			end,
+			desc = "LSP Workspace Symbols",
+		},
 
-    -- Buffer
-    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-		{ "<leader>br", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+		-- Buffer
+		{
+			"<leader>bd",
+			function()
+				Snacks.bufdelete()
+			end,
+			desc = "Delete Buffer",
+		},
+		{
+			"<leader>br",
+			function()
+				Snacks.rename.rename_file()
+			end,
+			desc = "Rename File",
+		},
 
 		-- Other
-		{ "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-		{ "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-		{ "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-		{ "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-		{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+		{
+			"<leader>z",
+			function()
+				Snacks.zen()
+			end,
+			desc = "Toggle Zen Mode",
+		},
+		{
+			"<leader>.",
+			function()
+				Snacks.scratch()
+			end,
+			desc = "Toggle Scratch Buffer",
+		},
+		{
+			"<leader>S",
+			function()
+				Snacks.scratch.select()
+			end,
+			desc = "Select Scratch Buffer",
+		},
+		{
+			"<leader>n",
+			function()
+				Snacks.notifier.show_history()
+			end,
+			desc = "Notification History",
+		},
+		{
+			"<leader>gg",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Lazygit",
+		},
 		-- { "<leader>j",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
 		-- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
 		-- { "<c-_>\",      function() Snacks.terminal() end, desc = \"which_key_ignore\" },
@@ -160,7 +419,7 @@ return {
 				Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 				Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 				Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul") 
+				Snacks.toggle.line_number():map("<leader>ul")
 				Snacks.toggle
 					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
 					:map("<leader>uc")
@@ -179,16 +438,30 @@ return {
 				vim.api.nvim_create_autocmd("BufEnter", {
 					group = vim.api.nvim_create_augroup("snacks-image-rerender", { clear = true }),
 					pattern = {
-						"*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp",
-						"*.tiff", "*.heic", "*.avif", "*.pdf",
-						"*.mp4", "*.mov", "*.avi", "*.mkv", "*.webm",
+						"*.png",
+						"*.jpg",
+						"*.jpeg",
+						"*.gif",
+						"*.webp",
+						"*.bmp",
+						"*.tiff",
+						"*.heic",
+						"*.avif",
+						"*.pdf",
+						"*.mp4",
+						"*.mov",
+						"*.avi",
+						"*.mkv",
+						"*.webm",
 					},
 					callback = function(args)
 						if not vim.b[args.buf].snacks_image_initial_done then
 							vim.b[args.buf].snacks_image_initial_done = true
 							return
 						end
-						pcall(function() Snacks.image.buf.attach(args.buf) end)
+						pcall(function()
+							Snacks.image.buf.attach(args.buf)
+						end)
 					end,
 				})
 			end,
