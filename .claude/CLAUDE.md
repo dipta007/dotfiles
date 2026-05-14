@@ -85,3 +85,5 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 4. **Small scope**: If a task touches more than 3 files, stop. Break it into smaller subtasks and confirm the plan with the user.
 5. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
 6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again.
+
+**MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
