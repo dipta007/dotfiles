@@ -185,12 +185,7 @@
     "lua-lsp@claude-plugins-official": false,
     "pyright-lsp@claude-plugins-official": false,
     "superpowers@claude-plugins-official": true,
-    "document-skills@anthropic-agent-skills": false,
     "huggingface-skills@claude-plugins-official": true,
-    "hugging-face-cli@huggingface-skills": false,
-    "hugging-face-datasets@huggingface-skills": false,
-    "hugging-face-evaluation@huggingface-skills": false,
-    "hugging-face-model-trainer@huggingface-skills": false,
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -208,7 +203,6 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "autoDreamEnabled": true,
-  "voiceEnabled": true,
   "editorMode": "vim",
-  "preferredNotifChannel": "ghostty"
+  "voiceEnabled": true
 }

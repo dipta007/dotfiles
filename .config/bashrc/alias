@@ -54,3 +54,12 @@ alias brewinstall='brew bundle --file=~/.config/brew/mac.Brewfile'
 
 # yadm
 alias yadm='yadm --yadm-archive ~/.config/yadm/archive'
+
+# jean-claude profile: work
+alias claude-work='CLAUDE_CONFIG_DIR="/Users/sroy/.claude-work" claude'
+alias cw='claude-work'
+
+# jean-claude profile: home
+alias claude-home='CLAUDE_CONFIG_DIR="/Users/sroy/.claude-home" claude'
+alias ch='claude-home'
+
