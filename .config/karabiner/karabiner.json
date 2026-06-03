@@ -159,6 +159,7 @@
                     },
                     {
                         "description": "Left Control + hjkl to arrow keys (chains with Caps Lock hold)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

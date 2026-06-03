@@ -10,7 +10,6 @@ local opts_noremap_silent = { noremap = true, silent = true }
 local opts_noremap = { noremap = true, silent = false }
 
 -- Things I can't live without
-imap({ "kj", "<ESC>" })
 nimap({ "<D-s>", "<CMD>w!<CR>", opts_noremap })
 nmap({ "<leader>w", "<CMD>w!<CR>", opts_noremap })
 
