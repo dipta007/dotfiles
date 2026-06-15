@@ -65,6 +65,31 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Comments
+
+**Concise, human-coder-like, non-native-English voice. Simple but complete.**
+
+Write comments the way a busy engineer writes them at 11pm — short, direct, slightly clipped. Skip articles ("the", "a") when the meaning is clear. Skip filler ("In order to", "Note that"). Don't write essays.
+
+But: complete. The "why" must be there if it's non-obvious. Future-you must be able to understand the constraint without re-deriving it.
+
+**Do:**
+- One line if one line is enough.
+- Lead with the fact: `Pool size 48 (NOT =num_workers): cheap CPU procs, batch >> workers...`
+- Keep load-bearing context: incident references, version-specific gotchas, deadlock stories, magic numbers' origins. Future readers can't recover these from the code.
+- Use sentence fragments where they read naturally: `# Empty → verl derives prompt+response.` is fine.
+
+**Don't:**
+- Don't restate what the code obviously does. `# increment counter` next to `i += 1` is noise.
+- Don't write multi-paragraph block comments unless the user asks. Two short lines beat one paragraph.
+- Don't pad with "Note:", "Important:", "Please". Just say it.
+- Don't write polished marketing prose. This is a comment, not docs.
+- Don't use em-dashes or polished transitions ("Furthermore", "Additionally", "However") to chain claims. Plain `.` or `;` is enough.
+
+**Test:** Read the comment back. Does it sound like a tired engineer typed it, or like an essay? If essay, cut it.
+
+When in doubt: shorter, plainer, complete. If it loses meaning, add it back. If it doesn't, leave it short.
+
 ## Python / uv
 
 1. Always use `uv` for Python. Never pip, poetry, or conda.

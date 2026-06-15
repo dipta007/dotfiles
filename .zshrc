@@ -26,11 +26,18 @@ _cached_eval() {
   local cache="$1" cmd="$2"
   shift 2
   local bin_path="${commands[$cmd]}"
+
+  # Binary not on PATH yet — skip rather than write a 0-byte cache
+  if [[ -z "$bin_path" ]]; then
+    return 1
+  fi
+
   local needs_regen=0
 
-  if [[ ! -f "$cache" ]]; then
+  # -s: missing OR zero-byte cache counts as stale
+  if [[ ! -s "$cache" ]]; then
     needs_regen=1
-  elif [[ -n "$bin_path" && "$bin_path" -nt "$cache" ]]; then
+  elif [[ "$bin_path" -nt "$cache" ]]; then
     needs_regen=1
   else
     for dep in "$@"; do
@@ -129,3 +136,7 @@ unfunction _cached_eval 2>/dev/null
 # Case-insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+
+export PATH=$HOME/.toolbox/bin:$PATH
+export PATH=$HOME/bin:$PATH
+source $HOME/.zshrc.kube

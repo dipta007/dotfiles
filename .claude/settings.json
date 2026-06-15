@@ -1,4 +1,8 @@
 {
+  "awsCredentialExport": "\"/Users/roydipta/.toolbox/bin/claude\" default-credential-export",
+  "env": {
+    "AWS_REGION": "us-west-2"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
@@ -7,7 +11,11 @@
   "permissions": {
     "defaultMode": "default"
   },
-  "model": "opus[1m]",
+  "model": "global.anthropic.claude-opus-4-8[1m]",
+  "availableModels": [
+    "opus",
+    "sonnet"
+  ],
   "hooks": {
     "SessionStart": [
       {
@@ -191,7 +199,9 @@
     "commit-commands@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "skim@skim": false
+    "skim@skim": false,
+    "AmazonBuilderCoreAIAgents-pipeline-assistant@aim": true,
+    "AmazonBuilderCoreAIAgents-core@aim": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -199,14 +209,21 @@
         "source": "github",
         "repo": "dipta007/skim"
       }
+    },
+    "aim": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/roydipta/.aim/cc-plugins"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "tui": "fullscreen",
   "autoDreamEnabled": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
   "editorMode": "vim",
   "voiceEnabled": true,
-  "preferredNotifChannel": "ghostty",
-  "skipAutoPermissionPrompt": true
+  "preferredNotifChannel": "ghostty"
 }
