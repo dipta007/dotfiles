@@ -38,6 +38,11 @@ npx skills@latest remove <skill> -g    # skills installed via Vercel skills CLI
 | `literature-research` (phd-skills) | Related work / survey / find implementations | "Find related work on online hint generation for RL agents." |
 | `/gaps <topic>` (phd-skills) | Gap analysis w/ web confirmation | `/gaps teacher-guided exploration in agentic GRPO` |
 
+### Critical thinking / stress-testing
+| Skill | Use it for | Example |
+|---|---|---|
+| `socratic` (custom, dotfiles) | Adversarial interrogation of an idea — assumptions, evidence, devil's advocate, confounds, novelty vs real literature (uses arxiv + semantic-scholar MCPs). Anti-sycophantic. | "Socratic: poke holes in my hypothesis that nudging helps weak models more than strong ones." |
+
 ### Experiment output analysis & insight
 | Skill / agent | Use it for | Example |
 |---|---|---|
