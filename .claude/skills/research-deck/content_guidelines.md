@@ -163,6 +163,7 @@ problem, main result, conclusions. Pre-build appendix slides for the 3–5 likel
 □ Body text 20pt (18pt floor) — grep the deck source for fontSize < 18 on body text; cut text, don't shrink font; ≤~40 words/slide; no accent line under any title
 □ Appendix slides labeled, pre-built for the 3–5 likeliest questions
 □ Every slide has speaker notes = a full spoken script (casual FAANG/top-lab voice), NOT slide-text read aloud
+□ Notes use SIMPLE English for a non-native speaker — keep technical jargon, drop fancy words/idioms; short sentences
 □ Deck runs 1–2 min under the limit when practiced aloud
 ```
 

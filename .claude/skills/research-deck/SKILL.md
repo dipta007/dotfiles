@@ -119,14 +119,23 @@ presenter actually SAYS, start to finish. This is a default deliverable, not opt
 
 Voice = how a researcher talks at a FAANG / top-AI-lab talk. Casual, first-person, conversational —
 NOT formal, NOT a summary of the slide, NOT read-aloud bullets.
-- Write it to be SPOKEN: contractions ("we're", "it's"), short sentences, natural connectives
-  ("so", "here's the thing", "the fun part is", "okay, results").
+- **SIMPLE ENGLISH for a non-native speaker.** Technical jargon is fine and expected (GRPO, advantage,
+  gradient, off-policy, rollout, baseline, ablation, importance-sampling…). But NON-technical words must
+  be simple, everyday ones a non-native speaker would comfortably say. Short sentences, one idea each.
+  No idioms, no rare/fancy vocabulary, no clever phrasing.
+  - Avoid words like: reframes, oversell, baked into, red flag, slamming, buys it, poke at, gigantic,
+    tricks, plateau (as a verb). Use plain equivalents: changes, over-claim, inside, warning sign, push,
+    gives it, ask about, very large, methods, level off.
+  - Keep contractions light — a non-native speaker often reads full forms cleanly ("we are", "it is",
+    "does not"). Contractions are OK but don't lean on them.
+- Write it to be SPOKEN: short sentences, natural connectives ("so", "now the important part",
+  "okay, results", "here is the problem").
 - **Do NOT restate the slide text.** The slide shows the exhibit; the notes tell the story around it —
   the intuition, the "why we did this", the honest caveat, the transition to the next slide.
-- Add signposting + transitions ("before the results, one caveat…", "let me get to the questions").
-- Be honest in voice — flag limitations like a real talk ("I'm not going to oversell this…").
-- ~40–110 words per slide (title/section can be shorter). It should read like a person talking, so if
-  read verbatim it still sounds natural, not like reciting text.
+- Add signposting + transitions ("before the results, one thing…", "let me go to the questions").
+- Be honest in voice — state limitations plainly ("I do not want to over-claim…").
+- ~40–110 words per slide (title/section can be shorter). It should read like a person talking, in
+  simple words, so a non-native speaker can say it verbatim and still sound natural.
 
 How to attach:
 - **pptx** → `slide.addNotes("…")` on every slide (verify: unzip → 12 `ppt/notesSlides/notesSlideN.xml`).

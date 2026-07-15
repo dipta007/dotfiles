@@ -272,24 +272,25 @@ actionTitle(slide, "dirty_rows stays 0 across all steps — no hint token ever r
 ## 13. Speaker notes (every slide — a spoken script)
 
 Attach a full spoken script to each slide (see SKILL Step 4 for voice). pptx uses `addNotes`;
-write it the way you'd actually SAY it, not as a recap of the slide.
+write it the way you'd actually SAY it, in SIMPLE English, not as a recap of the slide.
 
 ```javascript
 // after building slide `s`:
 s.addNotes(
-"Okay, results. This is the headline plot — baseline in blue, our nudge variants in orange and green. " +
-"The story is speed: nudge crosses 0.6 around step 160, baseline takes til ~225. I'm not going to " +
-"oversell it — they all plateau close by the end. So the clean claim is sample efficiency, not a giant " +
-"final-accuracy win. I'll come back to whether that headline is strong enough.");
+"Okay, results. This is the main plot — baseline in blue, our nudge variants in orange and green. The " +
+"main point is speed: nudge reaches 0.6 around step 160, baseline needs about 225. I do not want to " +
+"over-claim — by the end all three lines get close. So the honest claim is sample efficiency, not a big " +
+"final-accuracy win. I will come back to whether that is a strong enough main result.");
 ```
 
 Slidev: put the script in an HTML comment as the LAST block of the slide (renders in presenter mode):
 ```md
 <!--
-Okay, results. This is the headline plot — baseline in blue... (same spoken-script voice)
+Okay, results. This is the main plot — baseline in blue... (same simple spoken-script voice)
 -->
 ```
-Tone check: contractions, first person, one transition in/out, a caveat if honest, no slide-text echo.
+Tone check: simple words a non-native speaker would use (jargon OK), first person, one transition
+in/out, a plain caveat if honest, no slide-text echo, no fancy words/idioms.
 
 ---
 
@@ -308,5 +309,6 @@ Tone check: contractions, first person, one transition in/out, a caveat if hones
 □ Conclusions last main slide; contact/code/arXiv; stays up during Q&A
 □ Body ≥20pt; ≤~40 words/slide; no accent line under any title
 □ Every slide has speaker notes = a spoken script (FAANG/top-lab voice), not slide-text read aloud
+□ Notes in SIMPLE non-native-friendly English (technical jargon OK, no fancy words/idioms)
 □ Ran the pptx skill's visual QA (subagent) + fixed at least one cycle
 ```
