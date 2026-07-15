@@ -1,2 +1,7 @@
 #!/bin/bash
 yadm decrypt
+
+# research-deck skill: install pptx plugin + system deps after a pull.
+# Check-first & idempotent (~2s no-op when already set up). Never fails the pull.
+RD="$HOME/.claude/skills/research-deck/install.sh"
+[ -f "$RD" ] && bash "$RD" || true
