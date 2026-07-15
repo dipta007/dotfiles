@@ -5,37 +5,48 @@ The `pptx` skill embeds **images** (PNG/JPG via file path/URL/base64) and **nati
 So: native charts for simple bars/lines built from numbers; **pre-rendered PNGs** for anything with
 math, or when the real experimental figure already exists.
 
+**Core principle — RECREATE FOR THE STORY.** Whatever the user gives (a finished figure, a CSV, a table,
+numbers in the prompt, a wandb run) is a **DATA SOURCE**, not a final asset. The slide's action title
+decides the exhibit; you plot it from the numbers, white/minimal, focal point annotated. Re-plot even a
+polished figure unless it's already white, already the right exhibit for THIS point, and readable.
+
 Decision rule:
-- Simple comparison from a few numbers, no math labels → `slide.addChart(pres.charts.BAR, …)` (see slide_patterns.md).
-- Real result already plotted (training curve, benchmark, ablation heatmap) → **embed the actual PNG**.
-- Anything with equations, Greek, sub/superscripts in labels → render with matplotlib `text.usetex` → PNG.
+- Pick the exhibit from the point: gap → dumbbell; convergence/trend → line; single comparison → annotated bar; ablation grid → table; math → pre-rendered image.
+- Build it from the numbers with matplotlib (see §2), white bg, ≥16pt labels.
+- Only embed a user-supplied figure UNCHANGED if it's already white + already the right exhibit + readable.
+- Equations / Greek / sub-superscript labels → `text.usetex` → PNG (§3–4).
 
 ---
 
-## 1. Use the REAL figure — scan first
+## 0. Get the numbers first (data-source ladder)
 
-Before building a results slide, look for the actual figure instead of inventing one:
+Ask where the results are (SKILL Step 0c), then get the numbers — never invent them:
 
-```bash
-ls -la figures/ results/ plots/ outputs/ assets/ 2>/dev/null
-find . -maxdepth 3 -iname '*.png' -o -iname '*.pdf' 2>/dev/null | grep -iE 'fig|plot|curve|result|ablat|bench' | head
-```
+1. **Numbers in the prompt / a table** → use directly.
+2. **CSV / json / parquet** in the repo → read it (`pandas`).
+3. **Existing figure (PNG/SVG/PDF)** → if it has a data source (HTML with inline data, a plotting
+   script, a CSV), use that. A bare PNG is pixels — recover the numbers from its source, or from wandb.
+4. **wandb** → use the **`wandb-primary` skill** to pull run history. This repo: entity `collab-srd`,
+   project `amazon26`; match runs by name (= `EXPERIMENT_NAME`, e.g. `Q3_4bI_terminal_..._v141`);
+   common metric keys `val-aux/appworld/success/mean@4` (mean success@4) and `.../best@4/mean`.
+   **If it needs an API key and none is set, ASK the user for it.** (Template: a small pull script that
+   caches `run.history(keys=[...])` to JSON, then §2 plots it.)
 
-Embed it (pptx skill, `contain` keeps aspect ratio):
+Never fabricate a curve or a number. If none of the above yields data, ask the user.
+
+## 1. Recreate the figure white, at presentation quality
+
+A given figure is a starting point, not the output. Rebuild it (see §2) so it: (i) is white-background,
+(ii) is the exhibit the point needs, (iii) has ≥16pt labels, (iv) annotates the focal number directly.
+
+Only if a figure is ALREADY white + right-exhibit + readable, embed it unchanged (`contain` keeps ratio):
 
 ```javascript
-slide.addImage({ path: "figures/main_result.png", x: 0.5, y: 1.15, w: 5.4, h: 3.8, sizing: { type: "contain", w: 5.4, h: 3.8 } });
+slide.addImage({ path: "figs_light/main_result.png", x: 0.5, y: 1.15, w: 5.4, h: 3.8, sizing: { type: "contain", w: 5.4, h: 3.8 } });
 ```
 
-If the figure is a `.pdf` (vector), rasterize at presentation DPI first:
-
-```bash
-pdftoppm -png -r 200 figures/curve.pdf figures/curve   # -> figures/curve-1.png
-```
-
-**Rebuild, don't screenshot.** Paper figures use print-size fonts that vanish on a projector. If you
-have the plotting script, re-render with bigger fonts (below). If you only have the paper PNG and it's
-too small, say so and offer to rebuild from the underlying numbers.
+Vector `.pdf` source → rasterize at presentation DPI: `pdftoppm -png -r 200 curve.pdf curve`.
+**Never screenshot a paper figure** — print-size fonts vanish on a projector; rebuild from the numbers.
 
 ---
 

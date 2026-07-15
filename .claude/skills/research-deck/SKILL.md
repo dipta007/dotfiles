@@ -24,23 +24,40 @@ For editable-.pptx output, also read the pptx skill's `pptxgenjs.md` (create) or
 
 ---
 
-## Step 0 — Ask two things up front (do NOT skip)
+## Step 0 — Defaults + one question
 
-Before planning slides, ask the user (unless they already told you):
+**(a) Aesthetic mode — DEFAULT TO WHITE MINIMAL. Do NOT ask.**
+The user's standing preference is a **white minimal academic background — never dark/black**
+(eye-friendly, professional). Apply the communication-first design rules in Step 2 by default;
+these OVERRIDE the pptx skill's design-forward defaults.
+- Only use **visual/dark** mode if the user EXPLICITLY asks for it this once. Even then, keep the
+  white background unless they specifically want dark.
+- **Dark source figures** (wandb-style charts on a black background) must be **RE-RENDERED on white**
+  before embedding — a dark chart on a white slide reads as an ugly floating rectangle. See figures.md.
 
-**(a) Aesthetic mode** — this skill never assumes; ask every deck:
-> "Two looks: **minimal** (white bg, one sans font, ≤3 colors, no icons — the clean conference/paper standard) or **visual** (same narrative rigor, but architecture diagrams, colored callouts, tasteful accents for engagement). Which for this deck?"
-
-- **minimal** → apply the communication-first design rules below. These OVERRIDE the pptx skill's design-forward defaults.
-- **visual** → keep ALL narrative rules (action titles, one-exhibit, ghost-deck test) but allow the pptx skill's richer visual palette, diagrams, and accents. Never let visuals add words or bury the finding.
-
-**(b) Output track:**
+**(b) Output track — ask this:**
 > "Editable **.pptx** (co-authors can edit, matches a lab/venue template) or **HTML/PDF** you present yourself?"
 
 - **.pptx** → drive the `pptx` skill (create-from-scratch via pptxgenjs, or edit-from-template).
 - **HTML/PDF, math/code-heavy talk** → you MAY instead scaffold a **Slidev** or **Marp** deck (native LaTeX via KaTeX/MathJax, code line-stepping). Still apply this skill's narrative structure. Only do this if the user is fine without an editable .pptx.
 
-Also collect: talk length (sets slide budget), venue/template if any, and where the figures live.
+**(c) Data/results — ASK where the results are.** Do NOT invent numbers.
+> "Where are the results? Point me at figures / a CSV / a table / numbers in the prompt / wandb (which runs), or paste them."
+
+Accept ANY source: existing PNGs, CSV, a results table, numbers in the prompt, or wandb.
+For wandb, use the **`wandb-primary` skill** to fetch run histories (this repo: entity `collab-srd`,
+project `amazon26`, run name = `EXPERIMENT_NAME`). **If it needs an API key and none is set, ASK the user.**
+
+**FIGURES ARE RECREATED FOR THE STORY — this is a rule, not an option.**
+Whatever the user gives (even a finished figure) is treated as a **DATA SOURCE**, not a final asset.
+The narrative dictates the exhibit: the right chart type, the focal number annotated, white/minimal,
+≥16pt labels. So you almost always **re-plot from the underlying numbers** rather than embed as-is —
+because (i) the story may need a different chart than they have, (ii) dark figures must go white,
+(iii) paper/screenshot figures have print-size fonts. Only embed a given figure unchanged if it is
+ALREADY white, already the right exhibit for the point, and readable. When given only a dark PNG with
+no recoverable numbers, pull the numbers from wandb (or ask), then rebuild. See figures.md.
+
+Also collect: talk length (sets slide budget) and venue/template if any.
 
 ---
 
@@ -59,11 +76,13 @@ story on their own. If they don't, fix the outline before building. See content_
 
 ---
 
-## Step 2 — Design rules for MINIMAL mode
+## Step 2 — Design rules (WHITE MINIMAL — the default)
 
-(Skip if the user chose visual mode; then follow the pptx skill's design guidance instead, keeping narrative rules.)
+(These apply unless the user explicitly asked for visual/dark. Keep narrative rules either way.)
 
-- **Background** white for content slides; dark navy for title + conclusions only (sandwich).
+- **Background** WHITE for ALL slides, including title + conclusions. Do NOT use dark navy/black
+  backgrounds anywhere (standing user preference). For title/conclusions, differentiate with a
+  colored accent bar or a light-tinted band — never a dark fill.
 - **Font**: one sans-serif throughout (Arial/Calibri/Helvetica, or the venue template's).
 - **Color**: ≤3 — primary `1F4E79` (navy, titles), accent `2E75B6` (highlights), + one emphasis/alert. Color DIRECTS attention (highlight the key result), never decorates.
 - **Type sizes**: action title 24–28pt bold; body ≥20pt; chart labels 16–18pt; citations 12–14pt muted.
@@ -74,12 +93,21 @@ Full palette + FONTS/MARGIN constants are in slide_patterns.md §Global Defaults
 
 ---
 
-## Step 3 — Get figures onto the slides
+## Step 3 — Build the figure the STORY needs (recreate, don't just embed)
 
-Read **[figures.md](figures.md)**. Key points:
-- The pptx skill embeds images (PNG/JPG) and native charts (BAR/LINE/SCATTER/…), but has **NO native LaTeX**. Equations and math-labeled plots must be **pre-rendered to images**.
-- For true-LaTeX plot text (axis labels, annotations), render matplotlib with `rcParams["text.usetex"]=True` → save PNG → embed.
-- **Before building any results slide, scan `figures/ results/ plots/ outputs/` for the real figure and embed it** — don't invent a chart when the actual result exists. Rebuild paper figures at presentation resolution (≥16pt labels), don't screenshot the PDF.
+Read **[figures.md](figures.md)**. The exhibit is chosen by the slide's action title, then plotted
+from the underlying numbers. Key points:
+- **Recreate for the story.** For each results slide, decide the exhibit the point needs (dumbbell for
+  a before/after gap, line chart for convergence, annotated bar for a single comparison, table for an
+  ablation grid), then plot it white/minimal with the focal number annotated. Re-plot from numbers even
+  if the user handed you a finished figure — unless it's already white, already the right exhibit, and readable.
+- **Get the numbers** from whatever the user pointed at (Step 0c): CSV / table / prompt / existing figure /
+  **wandb** (via the `wandb-primary` skill — ask for an API key if none is set). NEVER invent numbers; if
+  you have only a dark PNG and can't recover the data, pull it from wandb or ask.
+- The pptx skill embeds images (PNG/JPG) and native charts (BAR/LINE/SCATTER/…), but has **NO native LaTeX**.
+  Equations and math-labeled plots must be **pre-rendered to images**.
+- For true-LaTeX plot text, render matplotlib with `rcParams["text.usetex"]=True` → save PNG → embed.
+- Rebuild paper figures at presentation resolution (≥16pt labels), don't screenshot the PDF.
 
 ---
 

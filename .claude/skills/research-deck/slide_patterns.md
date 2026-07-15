@@ -1,8 +1,8 @@
 # Slide Patterns — ML/AI decks (PptxGenJS)
 
 Concrete PptxGenJS patterns per ML slide type. Use with the pptx skill's `pptxgenjs.md` for the full API.
-All coords assume `LAYOUT_16x9` (10" × 5.625"). These are MINIMAL-mode patterns; in visual mode keep the
-structure but you may add diagrams/accents per the pptx skill's design guidance.
+All coords assume `LAYOUT_16x9` (10" × 5.625"). WHITE MINIMAL is the default — EVERY slide (incl. title
+and conclusions) has a WHITE background; differentiate with accent bars / light-tinted bands, NEVER a dark fill.
 
 ---
 
@@ -10,12 +10,13 @@ structure but you may add diagrams/accents per the pptx skill's design guidance.
 
 ```javascript
 const COLORS = {
-  bg:        "FFFFFF",   // white content background
-  primary:   "1F4E79",   // dark navy — titles, title/conclusion bg
-  accent:    "2E75B6",   // mid-blue — headers, focal series
+  bg:        "FFFFFF",   // white — EVERY slide, no exceptions (incl. title/conclusions)
+  primary:   "1F4E79",   // dark navy — title/header TEXT color (never a background fill)
+  accent:    "2E75B6",   // mid-blue — accent bars, focal series
   body:      "2D2D2D",   // near-black — body text
   muted:     "777777",   // gray — citations, captions
   rule:      "CCCCCC",   // light gray — dividers
+  band:      "EEF3F9",   // very light blue — tint band for title/conclusion/divider (replaces dark fills)
   highlight: "FFF2CC",   // pale yellow — callouts (sparingly)
   good:      "2E7D32",   // green — wins / our method
   bad:       "C62828",   // red — failures / alerts
@@ -39,19 +40,22 @@ function cite(slide, text) {
 
 ---
 
-## 1. Title slide (dark)
+## 1. Title slide (WHITE — accent bar, not a dark fill)
 
 ```javascript
-slide.background = { color: COLORS.primary };
+slide.background = { color: COLORS.bg };
+// left accent bar for visual interest (replaces the old dark background)
+slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.18, h: 5.625, fill: { color: COLORS.accent } });
 slide.addText("Insight-Guided RL: teacher hints rescue the hard groups\nGRPO can't learn from", {
-  x: 0.7, y: 1.4, w: 8.6, h: 1.8, fontSize: 32, fontFace: FONTS.face, color: "FFFFFF", bold: true, align: "left", valign: "top" });
+  x: 0.7, y: 1.4, w: 8.6, h: 1.8, fontSize: 32, fontFace: FONTS.face, color: COLORS.primary, bold: true, align: "left", valign: "top" });
+slide.addShape(pres.shapes.RECTANGLE, { x: 0.72, y: 3.15, w: 2.4, h: 0.04, fill: { color: COLORS.accent } });
 slide.addText("NeurIPS 2026  ·  Efficient RL for LLM Agents workshop", {
-  x: 0.7, y: 3.2, w: 8.6, h: 0.4, fontSize: 16, fontFace: FONTS.face, color: "A0BBDD" });
+  x: 0.7, y: 3.3, w: 8.6, h: 0.4, fontSize: 16, fontFace: FONTS.face, color: COLORS.accent });
 slide.addText("Your Name¹  ·  Coauthor²\n¹ Your Lab   ² Affiliation", {
-  x: 0.7, y: 3.7, w: 8.6, h: 0.6, fontSize: 15, fontFace: FONTS.face, color: "CADCFC" });
+  x: 0.7, y: 3.75, w: 8.6, h: 0.6, fontSize: 15, fontFace: FONTS.face, color: COLORS.body });
 // arXiv / code
 slide.addText("arxiv.org/abs/XXXX.XXXXX   ·   github.com/you/repo", {
-  x: 0.7, y: 4.7, w: 8.6, h: 0.4, fontSize: 13, fontFace: FONTS.face, color: "7BAFD4" });
+  x: 0.7, y: 4.75, w: 8.6, h: 0.4, fontSize: 13, fontFace: FONTS.face, color: COLORS.muted });
 ```
 
 ---
@@ -196,34 +200,37 @@ slide.addText([
 
 ---
 
-## 9. Conclusions (dark, mirrors title; stays up during Q&A)
+## 9. Conclusions (WHITE with a light tint band; stays up during Q&A)
 
 ```javascript
-slide.background = { color: COLORS.primary };
-slide.addText("Conclusions", { x: MARGIN, y: 0.25, w: 9.0, h: 0.45, fontSize: 20, fontFace: FONTS.face, color: "A0BBDD" });
-slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 0.7, w: 9.0, h: 0.04, fill: { color: COLORS.accent } });
+slide.background = { color: COLORS.bg };
+// light tint band across the top (replaces the old dark fill) — differentiates without going dark
+slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 1.0, fill: { color: COLORS.band } });
+slide.addText("Conclusions", { x: MARGIN, y: 0.28, w: 9.0, h: 0.5, fontSize: 22, fontFace: FONTS.face, color: COLORS.primary, bold: true });
+slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 0.98, w: 9.0, h: 0.04, fill: { color: COLORS.accent } });
 slide.addText([
-  { text: "1. All-fail groups are the bottleneck: ", options: { bold: true, breakLine: false } },
-  { text: "GRPO gets no gradient exactly where we need it most.", options: { breakLine: true } },
-  { text: "2. Online teacher hints create signal there: ", options: { bold: true, breakLine: false } },
-  { text: "hard-group solve 0.31 → 0.58, no change to the RL objective.", options: { breakLine: true } },
-  { text: "3. The strip is load-bearing: ", options: { bold: true, breakLine: false } },
-  { text: "we train p(solution | task); the hint never enters the gradient.", options: { breakLine: true } },
-], { x: MARGIN, y: 0.85, w: 9.0, h: 3.5, fontSize: FONTS.body + 1, fontFace: FONTS.face, color: "FFFFFF", paraSpaceAfter: 20 });
+  { text: "1. All-fail groups are the bottleneck: ", options: { bold: true, color: COLORS.primary, breakLine: false } },
+  { text: "GRPO gets no gradient exactly where we need it most.", options: { color: COLORS.body, breakLine: true } },
+  { text: "2. Online teacher hints create signal there: ", options: { bold: true, color: COLORS.primary, breakLine: false } },
+  { text: "hard-group solve 0.31 → 0.58, no change to the RL objective.", options: { color: COLORS.body, breakLine: true } },
+  { text: "3. The strip is load-bearing: ", options: { bold: true, color: COLORS.primary, breakLine: false } },
+  { text: "we train p(solution | task); the hint never enters the gradient.", options: { color: COLORS.body, breakLine: true } },
+], { x: MARGIN, y: 1.3, w: 9.0, h: 3.4, fontSize: FONTS.body + 1, fontFace: FONTS.face, paraSpaceAfter: 20 });
 slide.addText("you@lab.edu   ·   github.com/you/repo   ·   arxiv.org/abs/XXXX.XXXXX", {
-  x: MARGIN, y: 4.8, w: 8.0, h: 0.4, fontSize: 14, fontFace: FONTS.face, color: "A0BBDD" });
+  x: MARGIN, y: 4.9, w: 8.0, h: 0.4, fontSize: 14, fontFace: FONTS.face, color: COLORS.muted });
 // optional QR: slide.addImage({ path: "figures/qr.png", x: 8.6, y: 4.5, w: 0.9, h: 0.9 });
 ```
 
 ---
 
-## 10. Section divider (decks > 15 slides)
+## 10. Section divider (decks > 15 slides) — WHITE with tint band
 
 ```javascript
-slide.background = { color: "1A3A5C" };
-slide.addText("Part 2", { x: MARGIN, y: 1.8, w: 9.0, h: 0.4, fontSize: 16, fontFace: FONTS.face, color: "7BAFD4" });
-slide.addText("Results", { x: MARGIN, y: 2.2, w: 9.0, h: 1.0, fontSize: 36, fontFace: FONTS.face, color: "FFFFFF", bold: true });
-slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 3.3, w: 2.5, h: 0.06, fill: { color: COLORS.accent } });
+slide.background = { color: COLORS.bg };
+slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 2.0, w: 10, h: 1.6, fill: { color: COLORS.band } });
+slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 2.0, w: 0.18, h: 1.6, fill: { color: COLORS.accent } });
+slide.addText("Part 2", { x: MARGIN, y: 2.25, w: 9.0, h: 0.4, fontSize: 16, fontFace: FONTS.face, color: COLORS.accent });
+slide.addText("Results", { x: MARGIN, y: 2.65, w: 9.0, h: 0.9, fontSize: 36, fontFace: FONTS.face, color: COLORS.primary, bold: true });
 ```
 
 ---

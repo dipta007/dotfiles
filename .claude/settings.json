@@ -1,7 +1,9 @@
 {
   "awsCredentialExport": "\"/Users/roydipta/.toolbox/bin/claude\" default-credential-export",
   "env": {
-    "AWS_REGION": "us-west-2"
+    "AWS_REGION": "us-west-2",
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1",
+    "ANTHROPIC_SMALL_FAST_MODEL": "global.anthropic.claude-sonnet-4-6"
   },
   "attribution": {
     "commit": "",
@@ -12,10 +14,38 @@
     "defaultMode": "default"
   },
   "model": "global.anthropic.claude-opus-4-8[1m]",
-  "availableModels": [
-    "opus",
-    "sonnet"
+  "fallbackModel": [
+    "global.anthropic.claude-opus-4-6-v1[1m]"
   ],
+  "availableModels": [
+    "claude-opus-4-6[1m]",
+    "claude-opus-4-6",
+    "claude-opus-4-7[1m]",
+    "claude-opus-4-7",
+    "claude-opus-4-8[1m]",
+    "claude-opus-4-8",
+    "claude-sonnet-4-6",
+    "claude-sonnet-4-6[1m]",
+    "claude-sonnet-5",
+    "claude-fable-5",
+    "claude-fable-5[1m]",
+    "claude-haiku-4-5"
+  ],
+  "enforceAvailableModels": true,
+  "modelOverrides": {
+    "claude-opus-4-6[1m]": "global.anthropic.claude-opus-4-6-v1[1m]",
+    "claude-opus-4-6": "global.anthropic.claude-opus-4-6-v1",
+    "claude-opus-4-7[1m]": "global.anthropic.claude-opus-4-7[1m]",
+    "claude-opus-4-7": "global.anthropic.claude-opus-4-7",
+    "claude-opus-4-8[1m]": "global.anthropic.claude-opus-4-8[1m]",
+    "claude-opus-4-8": "global.anthropic.claude-opus-4-8",
+    "claude-sonnet-4-6": "global.anthropic.claude-sonnet-4-6",
+    "claude-sonnet-4-6[1m]": "global.anthropic.claude-sonnet-4-6[1m]",
+    "claude-sonnet-5": "global.anthropic.claude-sonnet-5",
+    "claude-fable-5": "global.anthropic.claude-fable-5",
+    "claude-fable-5[1m]": "global.anthropic.claude-fable-5[1m]",
+    "claude-haiku-4-5": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -201,7 +231,11 @@
     "pr-review-toolkit@claude-plugins-official": true,
     "skim@skim": false,
     "AmazonBuilderCoreAIAgents-pipeline-assistant@aim": true,
-    "AmazonBuilderCoreAIAgents-core@aim": true
+    "AmazonBuilderCoreAIAgents-core@aim": true,
+    "playwright@claude-plugins-official": true,
+    "document-skills@anthropic-agent-skills": true,
+    "phd-skills@phd-skills": true,
+    "ideation@ai-research-skills": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -215,15 +249,33 @@
         "source": "directory",
         "path": "/Users/roydipta/.aim/cc-plugins"
       }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "phd-skills": {
+      "source": {
+        "source": "github",
+        "repo": "fcakyon/phd-skills"
+      }
+    },
+    "ai-research-skills": {
+      "source": {
+        "source": "github",
+        "repo": "orchestra-research/AI-research-SKILLs"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "tui": "fullscreen",
   "autoDreamEnabled": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "editorMode": "vim",
-  "voiceEnabled": true,
-  "preferredNotifChannel": "ghostty"
+  "preferredNotifChannel": "ghostty",
+  "voiceEnabled": true
 }
