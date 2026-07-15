@@ -86,6 +86,40 @@ npx skills@latest remove <skill> -g    # skills installed via Vercel skills CLI
 
 ---
 
+# Scientific writing — papers + collaboration docs (installed 2026-07-15)
+
+**Group inventory**
+- `phd-skills` (plugin, installed earlier) — PAPER-track engine: `/factcheck` (BibTeX vs DBLP), `/xray` (5-agent audit), `/fortify`, paper-writing/verification skills, auto-`pdflatex` + citation-guard hooks, venue templates (NeurIPS/ICML/ICLR/ACL/CVPR)
+- `document-skills` docx (plugin, installed earlier) — DOCS engine: real Word tracked-changes + threaded comments, all headless/CLI
+- `zotero-mcp` (MCP, `54yyyu/zotero-mcp`) — two-way BibTeX + Better-BibTeX key lookup. **Needs the Zotero desktop app running.**
+- `pandoc` (MCP, `vivekVells/mcp-pandoc`) — markdown ⇄ docx/pdf/… with house-style Word reference doc
+- `overleaf` (AgentSkill, `aloth/olcli`) — pull/push/sync/**remote-compile** Overleaf projects from the terminal
+
+### Papers (LaTeX)
+| Trigger phrase | What happens | Example |
+|---|---|---|
+| "check my citations / BibTeX" | phd-skills `/factcheck` verifies author/venue/year/numbers vs DBLP | `/phd-skills:factcheck` |
+| "audit my paper" | phd-skills `/xray` — 5 parallel agents (numbers/terms/code/cites/eval) | `/phd-skills:xray` |
+| "add this paper to my refs" | zotero-mcp imports BibTeX / looks up by citation key | "Add the DeepSeekMath BibTeX to refs.bib" |
+| "pull / compile my Overleaf project" | overleaf skill syncs + compiles PDF remotely | "Pull my Overleaf project and compile it" |
+
+### Docs (collaboration)
+| Trigger phrase | What happens | Example |
+|---|---|---|
+| "make a Word doc with tracked changes / comments" | document-skills docx (w:ins/w:del + comment.py) | "Turn this into a .docx with my edits as tracked changes" |
+| "convert this markdown to Word/PDF" | pandoc MCP, optional reference doc for house style | "Convert notes.md to a styled .docx" |
+
+**Reminder:** raw LLM BibTeX is ~51% fully-correct — always run `/factcheck` before submitting. Avoid (refuted/unmaintained): claude-scientific-writer for LaTeX, Yeok-c/latex-mcp-server, overleaf-forge, ClaudePrism (GUI), texlab (editor LSP).
+
+**Reinstall on new machine**
+- phd-skills + document-skills → dotfiles (restored by `yadm clone`).
+- zotero-mcp + pandoc + overleaf → `post_pull` auto-runs `~/.claude/scripts/sci-writing-tools/install.sh` (idempotent); or manually:
+  ```bash
+  bash ~/.claude/scripts/sci-writing-tools/install.sh
+  ```
+
+---
+
 # Presentations / Slide decks (installed 2026-07-14)
 
 **Group inventory**
