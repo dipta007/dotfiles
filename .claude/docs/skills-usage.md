@@ -86,6 +86,27 @@ npx skills@latest remove <skill> -g    # skills installed via Vercel skills CLI
 
 ---
 
+# Writing craft — prose quality & storytelling (installed 2026-07-15)
+
+**Group inventory**
+- `writing-craft` (skill, `~/.claude/skills/writing-craft/`, self-contained) — improves the WORDS themselves: clarity, story, value-to-reader, sharpness. Built from Zinsser (*On Writing Well*), Schimel OCAR, McEnerney (value), Lanham (paramedic method), Gopen & Swan (given-new). SKILL.md + clarity/narrative/audit guides.
+
+This is the CRAFT layer (how it reads), distinct from formatting (docx/latex), citations (phd-skills), and slides (research-deck).
+
+### Improve the writing
+| Trigger phrase | What happens | Example |
+|---|---|---|
+| "make this clearer / tighten this / cut the clutter" | Quick edit: improved version + 1-line why per change (Zinsser + paramedic method) | "Tighten this abstract" |
+| "review my writing / is this well written" | Full audit: value→story→claim/evidence→clarity, issue report (Original/Recommended/Why + severity), density score, top-3 fixes | "Review my intro" |
+| "help me write the intro/abstract" | Coach mode: finds the value + OCAR story FIRST, before prose | "Help me write the intro" |
+| "does this say why the reader cares" | McEnerney value + so-what test | "Does my abstract sell the contribution?" |
+
+**What makes it different:** it fixes STRUCTURE before words (most bad writing is value/story, not word choice), and it runs a **claim↔evidence map** (every abstract/intro claim must map to a result; flags unbacked claims + number mismatches) — a check no off-the-shelf writing skill does. Hands off number/citation verification to phd-skills `/xray` `/factcheck`.
+
+**Reinstall:** dotfiles (`~/.claude/skills/writing-craft/`), restored by `yadm clone`. Pure markdown, no deps.
+
+---
+
 # Scientific writing — papers + collaboration docs (installed 2026-07-15)
 
 **Group inventory**
