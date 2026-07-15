@@ -1,6 +1,6 @@
 ---
 name: writing-craft
-description: "Use this skill whenever the user wants to improve the WRITING itself — prose quality, clarity, storytelling, cutting clutter, making dense technical text readable — for ML/AI research writing: paper drafts, abstracts, intros, related work, rebuttals, blog posts, README, grant text, or any passage they want to read better. Triggers: 'make this clearer', 'tighten this', 'edit my writing', 'is this well written', 'help me write the intro/abstract', 'cut the clutter', 'this reads badly', 'improve the prose', 'rewrite this paragraph', 'review my writing'. This governs the CRAFT of the words (clarity, story, value-to-reader, sharpness) — NOT file formatting (docx/latex), citations (phd-skills), or slides (research-deck). Grounded in Zinsser (On Writing Well), Schimel (Writing Science / OCAR), McEnerney (communicating value), Lanham (paramedic method), Williams, Gopen & Swan (given-new flow)."
+description: "Use this skill whenever the user wants to improve the WRITING itself — prose quality, clarity, storytelling, cutting clutter, making dense technical text readable — for ML/AI research writing: paper drafts, abstracts, intros, related work, rebuttals, blog posts, README, grant text, or any passage they want to read better. Triggers: 'make this clearer', 'tighten this', 'edit my writing', 'is this well written', 'help me write the intro/abstract', 'cut the clutter', 'this reads badly', 'improve the prose', 'rewrite this paragraph', 'review my writing', 'draft my paper', 'write the paper/section from my results/code', 'write from scratch', 'draft the related work from these papers', 'turn my notes into a draft'. This governs the CRAFT of the words (clarity, story, value-to-reader, sharpness) — NOT file formatting (docx/latex), citations (phd-skills), or slides (research-deck). Grounded in Zinsser (On Writing Well), Schimel (Writing Science / OCAR), McEnerney (communicating value), Lanham (paramedic method), Williams, Gopen & Swan (given-new flow)."
 license: MIT
 ---
 
@@ -14,14 +14,18 @@ WORDS — not formatting, citations, or slides. It coaches and edits toward four
 3. **Clarity & cut clutter (Zinsser + Lanham)** — every word earns its place; simple, direct, warm.
 4. **Reviewer-facing sharpness** — claim-first sentences, the so-what test, claims backed by evidence.
 
-**Read the three guides before editing:** [clarity.md](clarity.md) (word/sentence craft),
-[narrative.md](narrative.md) (structure + value + sharpness), [audit.md](audit.md) (how to report/fix).
+**Guides:** [narrative.md](narrative.md) (structure + value + sharpness), [clarity.md](clarity.md)
+(word/sentence craft), [audit.md](audit.md) (how to review/report/fix), [draft.md](draft.md) (write a
+grounded first draft from results/code/papers). Read the ones your mode (Step 0) needs.
 
 ---
 
 ## Step 0 — Pick the mode (ask if unclear)
 
-- **Coach / plan** — user is starting or stuck. Help find the story and value FIRST (narrative.md), before any prose. Don't polish words that shouldn't exist.
+- **Draft from sources** — blank page; user has results / code / related papers and wants a first draft.
+  **Read [draft.md](draft.md).** Draft ONLY from grounded inputs; never invent numbers or citations; flag
+  every unsupported spot with `[TODO]`. This is the safe way to "write my paper from scratch."
+- **Coach / plan** — user is starting or stuck but not ready to draft. Help find the story and value FIRST (narrative.md), before any prose. Don't polish words that shouldn't exist.
 - **Revise** — user has a draft, wants it better. Run the audit (audit.md), produce an issue report, apply fixes on request.
 - **Quick edit** — user pastes a paragraph, wants it tightened now. Give the improved version + a 1-line why per change. Skip the full report.
 
