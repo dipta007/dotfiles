@@ -92,5 +92,22 @@ Why:         <one line + the principle, e.g. "clutter — Zinsser" / "value — 
 
 ## Related tools (hand off, don't duplicate)
 - **phd-skills** `/factcheck` `/xray` — citations vs DBLP, number/code audits. Writing-craft does PROSE; it flags claim↔evidence but phd-skills verifies the numbers.
-- **research-deck** — turning the written story into a talk.
+- **research-deck** — for SLIDES, use research-deck, NOT this skill. See the boundary below.
 - **slop-cop** (if installed) — a mechanical CLI prose linter; complementary to this skill's craft coaching.
+
+## Slides are NOT prose — the boundary with research-deck
+
+If the target is a slide deck, use **research-deck**, not this skill. Slides have no sentences or paragraphs,
+so this skill's word/sentence rules (clarity.md) would make slides worse — walls of text instead of the
+telegraphic fragments good slides use. What DOES carry over is only the structure layer, and research-deck
+already has its own versions:
+- value-to-reader → research-deck's "audience needs the why" + reader-level question
+- OCAR story → research-deck's Problem→Gap→Method→Results→Takeaway spine
+- so-what test → research-deck's **action titles** (title states the takeaway, not a topic)
+- ghost-outline → research-deck's **ghost-deck test**
+
+The ONLY slide elements that are sentence-like — and where this skill's clarity rules genuinely help — are the
+**action titles** and the **speaker-note scripts**. research-deck already governs both. So: don't run this
+skill's paragraph rules (given→new flow, topic sentences, one-idea-per-sentence, full-sentence polish) on slide
+bullets. Improve the deck's PROSE artifacts (a blog version, the paper the talk is based on) with this skill;
+build and word-tune the deck itself with research-deck.

@@ -196,6 +196,14 @@ Build via the pptx skill (or Slidev/Marp if that track was chosen). Then run the
 - **End on conclusions**, which stays up during Q&A. Never end on "Thank You" or blank.
 - **Every slide ships a full spoken script** in the speaker notes — casual FAANG/top-lab voice, not slide-text read aloud (Step 4).
 
+## Related: writing-craft (prose), not for slide bullets
+
+The `writing-craft` skill governs PROSE (sentences/paragraphs). Do NOT apply its paragraph rules
+(given→new flow, one-idea-per-sentence, full-sentence polish) to slide bullets — slides use telegraphic
+fragments on purpose. This skill already carries the slide-appropriate versions (action titles = so-what,
+ghost-deck test, ≤40 words). Use writing-craft only on the PROSE artifacts behind a talk (the paper, a blog
+post) — and on the two sentence-like slide elements this skill owns: action titles and speaker-note scripts.
+
 ## Dependencies (same as pptx skill)
 
 - `pip install "markitdown[pptx]"` — text extraction / content QA
