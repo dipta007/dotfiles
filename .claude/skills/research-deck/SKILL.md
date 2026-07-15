@@ -117,25 +117,57 @@ from the underlying numbers. Key points:
 **Every slide gets speaker notes, and they are a full word-for-word speaking script** — what the
 presenter actually SAYS, start to finish. This is a default deliverable, not optional.
 
-Voice = how a researcher talks at a FAANG / top-AI-lab talk. Casual, first-person, conversational —
-NOT formal, NOT a summary of the slide, NOT read-aloud bullets.
+### The one goal: it must sound like a HUMAN TALKING, not text read aloud
+
+The test for every note: if you close your eyes and hear it, does it sound like a person explaining
+their work to a colleague? Or does it sound like someone reading an essay? It must be the first.
+The difference is not "casual words". It is the RHYTHM and MOVES of real speech:
+
+- **Talk TO the audience, not at the slide.** "You can see the blue line just stops here." "Notice how
+  the two curves split early." Point at things like a person standing at a screen.
+- **Think out loud.** Real speakers show the reasoning as it unfolds: "So the natural question is…",
+  "and at first I thought it was a bug, but…", "the reason this matters is…". Let them follow your logic.
+- **React to your own results like a person.** "This one surprised me." "Honestly, this is my favorite
+  plot." "This part is a little embarrassing but it is the interesting bit." Emotion + honesty = human.
+- **Vary the rhythm.** Mix short punchy lines with one longer one. A three-word sentence hits: "It broke.
+  Same method. Opposite result." Do not make every sentence the same medium length — that is the tell of
+  generated text.
+- **Keep each sentence SHORT — at most TWO joined ideas.** A listener can hold "A, and B." They lose
+  "A, and B, but C, which D." If you're joining three or more clauses with commas / and / but / so /
+  which, split it into separate sentences. When in doubt, use a period. This matters more in speech than
+  in writing, because the audience can't re-read. One breath ≈ one sentence.
+- **Use real spoken glue,** not written connectors. Yes: "so", "okay", "now", "here is the thing",
+  "the point is", "look", "right", "anyway", "which is nice because…". No: "furthermore", "moreover",
+  "additionally", "thus", "hence", "as such", "in conclusion".
+- **Contractions and light filler are GOOD here** (this is speech): "we're", "it's", "that's",
+  "kind of", "basically", "it turns out". A little imperfection reads as human. (This softens the earlier
+  "keep contractions light" rule — for the SPOKEN script, contractions help.)
+- **Callbacks.** Refer to earlier slides the way a speaker does: "remember that 0.84 baseline?",
+  "this is the strip step I mentioned".
+- **NEVER restate the slide text.** The slide shows the exhibit; you say the story around it — the
+  intuition, why you did it, the honest caveat, and the hand-off to the next slide.
+
+### Hard constraints (still apply)
+
 - **SIMPLE ENGLISH for a non-native speaker.** Technical jargon is fine and expected (GRPO, advantage,
-  gradient, off-policy, rollout, baseline, ablation, importance-sampling…). But NON-technical words must
-  be simple, everyday ones a non-native speaker would comfortably say. Short sentences, one idea each.
-  No idioms, no rare/fancy vocabulary, no clever phrasing.
-  - Avoid words like: reframes, oversell, baked into, red flag, slamming, buys it, poke at, gigantic,
-    tricks, plateau (as a verb). Use plain equivalents: changes, over-claim, inside, warning sign, push,
-    gives it, ask about, very large, methods, level off.
-  - Keep contractions light — a non-native speaker often reads full forms cleanly ("we are", "it is",
-    "does not"). Contractions are OK but don't lean on them.
-- Write it to be SPOKEN: short sentences, natural connectives ("so", "now the important part",
-  "okay, results", "here is the problem").
-- **Do NOT restate the slide text.** The slide shows the exhibit; the notes tell the story around it —
-  the intuition, the "why we did this", the honest caveat, the transition to the next slide.
-- Add signposting + transitions ("before the results, one thing…", "let me go to the questions").
-- Be honest in voice — state limitations plainly ("I do not want to over-claim…").
-- ~40–110 words per slide (title/section can be shorter). It should read like a person talking, in
-  simple words, so a non-native speaker can say it verbatim and still sound natural.
+  gradient, off-policy, rollout, baseline, ablation, importance-sampling…). Non-technical words stay
+  simple and everyday. No rare/fancy vocabulary, no idioms a non-native speaker wouldn't use.
+  Avoid: reframes, oversell, baked into, slamming, buys it, poke at, gigantic. Plain forms instead.
+- **NO em-dashes.** A listener can't hear a dash. Break it into speech: a period, a comma, or a word.
+  - category then example → **"like"**, not a comma pair: "a weak model like Qwen2.5-7B", NOT "a weak
+    model, Qwen2.5-7B," (that sounds like a list). Same for "a method like DAPO".
+  - a written aside ("— just as important —") → its own sentence: "And just as important, …".
+  (Slide TEXT may keep em-dashes; this rule is only for the spoken notes.)
+- **Honest in voice** — state limits plainly: "I don't want to over-claim here."
+- **~50–120 words per slide** (title/section shorter). Read it out loud in your head before moving on.
+
+### Before / after (same content)
+
+- ❌ text-read-aloud: "The results demonstrate that nudging achieves approximately 2x faster convergence,
+  reaching 0.6 success at step 160 versus 225 for the baseline; however, final performance is comparable."
+- ✅ human talking: "Okay, results. Look at where the lines cross 0.6. Nudge gets there around 160, the
+  baseline needs like 225. So early on we're almost twice as fast. Now, I don't want to oversell it,
+  because by the end they all kind of meet up. So the honest story here is speed, not a higher final score."
 
 How to attach:
 - **pptx** → `slide.addNotes("…")` on every slide (verify: unzip → 12 `ppt/notesSlides/notesSlideN.xml`).

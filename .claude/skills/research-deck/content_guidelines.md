@@ -162,8 +162,10 @@ problem, main result, conclusions. Pre-build appendix slides for the 3–5 likel
 □ Conclusions is the last main slide; stays up during Q&A; contact/code/arXiv present
 □ Body text 20pt (18pt floor) — grep the deck source for fontSize < 18 on body text; cut text, don't shrink font; ≤~40 words/slide; no accent line under any title
 □ Appendix slides labeled, pre-built for the 3–5 likeliest questions
-□ Every slide has speaker notes = a full spoken script (casual FAANG/top-lab voice), NOT slide-text read aloud
-□ Notes use SIMPLE English for a non-native speaker — keep technical jargon, drop fancy words/idioms; short sentences
+□ Every slide has speaker notes = a full spoken script that SOUNDS LIKE A HUMAN TALKING (talks to the audience, thinks out loud, reacts to results, varied rhythm), NOT text read aloud, NOT slide-text restated
+□ Notes use SIMPLE English for a non-native speaker — keep technical jargon, drop fancy words/idioms; contractions + light filler OK (it's speech)
+□ NO em-dashes in notes (listener can't hear them) — use period/comma/connector; category→example uses "like", not a comma pair; no written connectors (furthermore/moreover/thus)
+□ Each note sentence joins AT MOST 2 ideas — 3+ clauses (A, and B, but C…) must split into separate sentences (ear can't track long chains)
 □ Deck runs 1–2 min under the limit when practiced aloud
 ```
 
