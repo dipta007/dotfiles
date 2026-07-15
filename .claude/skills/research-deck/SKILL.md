@@ -112,7 +112,29 @@ from the underlying numbers. Key points:
 
 ---
 
-## Step 4 — Build and QA
+## Step 4 — Speaker notes (ALWAYS — a full spoken script, not bullets)
+
+**Every slide gets speaker notes, and they are a full word-for-word speaking script** — what the
+presenter actually SAYS, start to finish. This is a default deliverable, not optional.
+
+Voice = how a researcher talks at a FAANG / top-AI-lab talk. Casual, first-person, conversational —
+NOT formal, NOT a summary of the slide, NOT read-aloud bullets.
+- Write it to be SPOKEN: contractions ("we're", "it's"), short sentences, natural connectives
+  ("so", "here's the thing", "the fun part is", "okay, results").
+- **Do NOT restate the slide text.** The slide shows the exhibit; the notes tell the story around it —
+  the intuition, the "why we did this", the honest caveat, the transition to the next slide.
+- Add signposting + transitions ("before the results, one caveat…", "let me get to the questions").
+- Be honest in voice — flag limitations like a real talk ("I'm not going to oversell this…").
+- ~40–110 words per slide (title/section can be shorter). It should read like a person talking, so if
+  read verbatim it still sounds natural, not like reciting text.
+
+How to attach:
+- **pptx** → `slide.addNotes("…")` on every slide (verify: unzip → 12 `ppt/notesSlides/notesSlideN.xml`).
+- **Slidev** → an HTML comment `<!-- … -->` as the LAST block of each slide (shows in presenter mode).
+
+---
+
+## Step 5 — Build and QA
 
 Build via the pptx skill (or Slidev/Marp if that track was chosen). Then run the pptx skill's QA loop IN FULL:
 - Content QA: `python -m markitdown output.pptx` — check content, order, no leftover placeholder text.
@@ -131,6 +153,7 @@ Build via the pptx skill (or Slidev/Marp if that track was chosen). Then run the
 - **Slides carry evidence; you carry the argument.** Body text orients, it doesn't transfer information.
 - **Show the real numbers.** Use actual results/figures from the repo, cite baselines, report CIs/seeds/variance where relevant. ML audiences distrust vibes.
 - **End on conclusions**, which stays up during Q&A. Never end on "Thank You" or blank.
+- **Every slide ships a full spoken script** in the speaker notes — casual FAANG/top-lab voice, not slide-text read aloud (Step 4).
 
 ## Dependencies (same as pptx skill)
 

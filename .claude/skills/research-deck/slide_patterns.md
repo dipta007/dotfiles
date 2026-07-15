@@ -269,6 +269,30 @@ actionTitle(slide, "dirty_rows stays 0 across all steps — no hint token ever r
 
 ---
 
+## 13. Speaker notes (every slide — a spoken script)
+
+Attach a full spoken script to each slide (see SKILL Step 4 for voice). pptx uses `addNotes`;
+write it the way you'd actually SAY it, not as a recap of the slide.
+
+```javascript
+// after building slide `s`:
+s.addNotes(
+"Okay, results. This is the headline plot — baseline in blue, our nudge variants in orange and green. " +
+"The story is speed: nudge crosses 0.6 around step 160, baseline takes til ~225. I'm not going to " +
+"oversell it — they all plateau close by the end. So the clean claim is sample efficiency, not a giant " +
+"final-accuracy win. I'll come back to whether that headline is strong enough.");
+```
+
+Slidev: put the script in an HTML comment as the LAST block of the slide (renders in presenter mode):
+```md
+<!--
+Okay, results. This is the headline plot — baseline in blue... (same spoken-script voice)
+-->
+```
+Tone check: contractions, first person, one transition in/out, a caveat if honest, no slide-text echo.
+
+---
+
 ## Pre-delivery checklist
 
 ```
@@ -283,5 +307,6 @@ actionTitle(slide, "dirty_rows stays 0 across all steps — no hint token ever r
 □ Every borrowed figure/dataset cited on-slide; References slide present
 □ Conclusions last main slide; contact/code/arXiv; stays up during Q&A
 □ Body ≥20pt; ≤~40 words/slide; no accent line under any title
+□ Every slide has speaker notes = a spoken script (FAANG/top-lab voice), not slide-text read aloud
 □ Ran the pptx skill's visual QA (subagent) + fixed at least one cycle
 ```
