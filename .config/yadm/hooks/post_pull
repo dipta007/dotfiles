@@ -5,3 +5,8 @@ yadm decrypt
 # Check-first & idempotent (~2s no-op when already set up). Never fails the pull.
 RD="$HOME/.claude/skills/research-deck/install.sh"
 [ -f "$RD" ] && bash "$RD" || true
+
+# scientific-writing tooling: zotero-mcp + mcp-pandoc + olcli (MCP servers aren't
+# yadm-tracked files, so re-register them here). Idempotent, never fails the pull.
+SW="$HOME/.claude/scripts/sci-writing-tools/install.sh"
+[ -f "$SW" ] && bash "$SW" || true
