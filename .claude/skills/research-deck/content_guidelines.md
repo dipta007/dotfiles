@@ -160,7 +160,7 @@ problem, main result, conclusions. Pre-build appendix slides for the 3–5 likel
 □ Every borrowed figure/dataset/claim has an in-slide citation; References slide present
 □ Acronyms defined on first use; color not the only signal
 □ Conclusions is the last main slide; stays up during Q&A; contact/code/arXiv present
-□ Body text ≥20pt; ≤~40 words/slide; no accent line under any title
+□ Body text 20pt (18pt floor) — grep the deck source for fontSize < 18 on body text; cut text, don't shrink font; ≤~40 words/slide; no accent line under any title
 □ Appendix slides labeled, pre-built for the 3–5 likeliest questions
 □ Deck runs 1–2 min under the limit when practiced aloud
 ```

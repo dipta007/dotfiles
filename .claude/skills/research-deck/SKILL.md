@@ -86,7 +86,7 @@ story on their own. If they don't, fix the outline before building. See content_
   colored accent bar or a light-tinted band — never a dark fill.
 - **Font**: one sans-serif throughout (Arial/Calibri/Helvetica, or the venue template's).
 - **Color**: ≤3 — primary `1F4E79` (navy, titles), accent `2E75B6` (highlights), + one emphasis/alert. Color DIRECTS attention (highlight the key result), never decorates.
-- **Type sizes**: action title 24–28pt bold; body ≥20pt; chart labels 16–18pt; citations 12–14pt muted.
+- **Type sizes (HARD)**: action title 24–28pt bold; **body 20pt, absolute floor 18pt — never shrink body to fit, cut text instead**; chart labels 16–18pt; citations 12–14pt muted. Body <18pt = failed slide.
 - **Layout**: left-align body; center only titles/axis labels; results slide = figure LEFT, interpretation RIGHT; ≥0.5" margins; leave white space.
 - **Avoid**: decorative icons, stock art, themed gradients, full-bleed images on content slides, >~40 words body text, and NEVER an accent line under a title (hallmark of AI slides — use whitespace).
 

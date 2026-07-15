@@ -25,6 +25,13 @@ const FONTS = { face: "Arial", title: 26, sectionHeader: 22, body: 20, label: 16
 const MARGIN = 0.5;
 ```
 
+**HARD RULE — body text is 20pt, floor 18pt. NON-NEGOTIABLE.**
+Use `FONTS.body` (20) for ALL body/bullet text; never type a smaller literal to make text fit.
+Interpretation columns, takeaways, table cells — all ≥18pt. If content doesn't fit at 20pt, the fix
+is **less text, not smaller font** (cut words, split the slide, move detail to appendix). A slide with
+17pt bullets is a FAILED slide even if it looks full. Only captions/citations (`FONTS.cite` 13) and
+chart-internal labels (`FONTS.label` 16) may go below 18. Titles ≥24. This is the #1 drift to avoid.
+
 Two reusable helpers (define once, call per slide):
 
 ```javascript
@@ -131,7 +138,7 @@ slide.addText([
   { text: "prompt = task + hint; sample K new rollouts → now some succeed → non-zero advantage.", options: { breakLine: true } },
   { text: "Strip: ", options: { bold: true, breakLine: false } },
   { text: "physically remove the hint span from the sequence used for the policy-gradient loss.", options: { breakLine: true } },
-], { x: MARGIN, y: 1.1, w: 9.0, h: 3.4, fontSize: FONTS.body - 1, fontFace: FONTS.face, color: COLORS.body, bullet: true, paraSpaceAfter: 10 });
+], { x: MARGIN, y: 1.1, w: 9.0, h: 3.4, fontSize: FONTS.body, fontFace: FONTS.face, color: COLORS.body, bullet: true, paraSpaceAfter: 10 });
 cite(slide, "Full strip + log-prob alignment: Appendix B");
 ```
 
@@ -154,7 +161,7 @@ slide.addText([
   { text: "+27 pts on all-fail groups (the ones GRPO can't touch)", options: { breakLine: true } },
   { text: "Overall val success +4.1 pts; no regression on easy tasks", options: { breakLine: true } },
   { text: "Mean over 3 seeds; shaded = ±1 std", options: { breakLine: true } },
-], { x: 6.2, y: 1.55, w: 3.3, h: 2.6, fontSize: FONTS.body - 2, fontFace: FONTS.face, color: COLORS.body, bullet: true, paraSpaceAfter: 12 });
+], { x: 6.2, y: 1.55, w: 3.3, h: 2.6, fontSize: FONTS.body, fontFace: FONTS.face, color: COLORS.body, bullet: true, paraSpaceAfter: 12 });
 cite(slide, "AppWorld test-normal + test-challenge; Qwen3-4B-Instruct");
 ```
 
