@@ -30,55 +30,90 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "f" }, { "key_code": "g" }],
+                                    "simultaneous": [
+                                        { "key_code": "f" },
+                                        { "key_code": "g" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
-                                "to": [{ "key_code": "open_bracket", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "h" }, { "key_code": "j" }],
+                                    "simultaneous": [
+                                        { "key_code": "h" },
+                                        { "key_code": "j" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
-                                "to": [{ "key_code": "close_bracket", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "v" }, { "key_code": "b" }],
+                                    "simultaneous": [
+                                        { "key_code": "v" },
+                                        { "key_code": "b" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
-                                "to": [{ "key_code": "9", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "n" }, { "key_code": "m" }],
+                                    "simultaneous": [
+                                        { "key_code": "n" },
+                                        { "key_code": "m" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
-                                "to": [{ "key_code": "0", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "r" }, { "key_code": "t" }],
+                                    "simultaneous": [
+                                        { "key_code": "r" },
+                                        { "key_code": "t" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
@@ -90,7 +125,10 @@
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "y" }, { "key_code": "u" }],
+                                    "simultaneous": [
+                                        { "key_code": "y" },
+                                        { "key_code": "u" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
@@ -102,7 +140,10 @@
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "u" }, { "key_code": "i" }],
+                                    "simultaneous": [
+                                        { "key_code": "u" },
+                                        { "key_code": "i" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
@@ -114,19 +155,30 @@
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "m" }, { "key_code": "comma" }],
+                                    "simultaneous": [
+                                        { "key_code": "m" },
+                                        { "key_code": "comma" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
                                     }
                                 },
                                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
-                                "to": [{ "key_code": "equal_sign", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "simultaneous": [{ "key_code": "left_shift" }, { "key_code": "right_shift" }],
+                                    "simultaneous": [
+                                        { "key_code": "left_shift" },
+                                        { "key_code": "right_shift" }
+                                    ],
                                     "simultaneous_options": {
                                         "key_down_order": "insensitive",
                                         "key_up_order": "insensitive"
