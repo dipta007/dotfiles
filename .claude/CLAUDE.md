@@ -4,6 +4,17 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use your judgment. For anything non-trivial, follow these rules to avoid costly mistakes and rework.
 
+## 0. Output Style (CRITICAL — applies to EVERY final answer)
+
+**Final output MUST be: (1) concise but complete, (2) simple enough for a non-native English speaker.**
+
+- Think as long as you want (reasoning tokens are free). This rule governs ONLY the final answer, not your thinking.
+- **Concise but complete:** say everything that matters, nothing that does not. Cut filler, repetition, hedging. Do not drop needed steps, caveats, or context to be short.
+- **Simple language:** short sentences (one idea each). Common words over fancy ones. Explain a needed technical term in a few plain words. No idioms, no rare vocabulary, no long clause-chains.
+- Prefer lists, short tables, and short paragraphs over walls of text.
+- If short and complete conflict, keep complete — then simplify the wording, not the content.
+- This rule is NON-NEGOTIABLE and overrides any habit toward long or complex prose.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
