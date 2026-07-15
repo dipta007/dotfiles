@@ -5,6 +5,7 @@ import os
 import sys
 import json
 import socket
+import shutil
 import getpass
 import platform
 import subprocess
@@ -119,6 +120,36 @@ def setup_bitwarden():
             pass
 
 
+def setup_claude_mcp():
+    # Claude Code research MCP servers (literature data layer for lit-review/ideation
+    # skills). Registered at user scope -> lands in ~/.claude.json (NOT tracked: PII +
+    # volatile state). Bootstrap re-creates them here so it stays reproducible.
+    cprint("Setting up Claude Code MCP servers", "CYAN")
+
+    # Prereqs. Missing -> warn + skip (don't fail whole bootstrap).
+    for tool in ("claude", "uvx"):
+        if not shutil.which(tool):
+            cprint(f"Warning: '{tool}' not on PATH, skipping Claude MCP setup", "YELLOW")
+            return
+
+    servers = {
+        "semantic-scholar": "uvx semantic-scholar-mcp",
+        "arxiv": "uvx arxiv-mcp-server",
+    }
+    for name, cmd in servers.items():
+        # idempotent: already-registered exits nonzero -> just warn
+        res = subprocess.run(
+            f"claude mcp add --scope user {name} -- {cmd}",
+            shell=True, capture_output=True, text=True,
+        )
+        if res.returncode == 0:
+            cprint(f"  added MCP server: {name}", "GREEN")
+        else:
+            msg = (res.stderr or res.stdout).strip().splitlines()
+            msg = msg[-1] if msg else "unknown error"
+            cprint(f"  Warning: could not add '{name}' (may already exist): {msg}", "YELLOW")
+
+
 def clear_env_vars():
     cprint("Clearing environment variables", "CYAN")
     env_vars = ["BW_CLIENTID", "BW_SESSION", "BW_PASSWORD", "BW_CLIENTSECRET"]
@@ -164,9 +195,9 @@ def setup_bashrc(secret_tokens):
 
 def main():
     try:
-        cprint("There is nothing in the bootstrap script right now", "YELLOW")
         # secret_tokens = setup_bitwarden()
         # setup_bashrc(secret_tokens)
+        setup_claude_mcp()
         cprint("Bootstrap completed successfully", "GREEN")
     except Exception as e:
         cprint(f"Error: {e}", "RED")

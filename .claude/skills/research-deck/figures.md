@@ -26,11 +26,11 @@ Ask where the results are (SKILL Step 0c), then get the numbers — never invent
 2. **CSV / json / parquet** in the repo → read it (`pandas`).
 3. **Existing figure (PNG/SVG/PDF)** → if it has a data source (HTML with inline data, a plotting
    script, a CSV), use that. A bare PNG is pixels — recover the numbers from its source, or from wandb.
-4. **wandb** → use the **`wandb-primary` skill** to pull run history. This repo: entity `collab-srd`,
-   project `amazon26`; match runs by name (= `EXPERIMENT_NAME`, e.g. `Q3_4bI_terminal_..._v141`);
-   common metric keys `val-aux/appworld/success/mean@4` (mean success@4) and `.../best@4/mean`.
-   **If it needs an API key and none is set, ASK the user for it.** (Template: a small pull script that
-   caches `run.history(keys=[...])` to JSON, then §2 plots it.)
+4. **wandb** → use the **`wandb-primary` skill** to pull run history. Ask the user (or read a local
+   wandb config) for the **entity, project, run names, and metric keys** — don't hardcode them.
+   Match runs by name; confirm the exact metric key against the user's numbers before plotting a whole deck.
+   **If it needs an API key and none is set, ASK the user for it.** (Pattern: a small pull script that
+   caches `run.history(keys=[...])` to JSON, then §2 plots it white.)
 
 Never fabricate a curve or a number. If none of the above yields data, ask the user.
 

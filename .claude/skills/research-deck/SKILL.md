@@ -45,8 +45,9 @@ these OVERRIDE the pptx skill's design-forward defaults.
 > "Where are the results? Point me at figures / a CSV / a table / numbers in the prompt / wandb (which runs), or paste them."
 
 Accept ANY source: existing PNGs, CSV, a results table, numbers in the prompt, or wandb.
-For wandb, use the **`wandb-primary` skill** to fetch run histories (this repo: entity `collab-srd`,
-project `amazon26`, run name = `EXPERIMENT_NAME`). **If it needs an API key and none is set, ASK the user.**
+For wandb, use the **`wandb-primary` skill** to fetch run histories — ask the user for the
+entity/project and which runs/metrics (or read them from a local wandb config). **If it needs an
+API key and none is set, ASK the user.**
 
 **FIGURES ARE RECREATED FOR THE STORY — this is a rule, not an option.**
 Whatever the user gives (even a finished figure) is treated as a **DATA SOURCE**, not a final asset.
