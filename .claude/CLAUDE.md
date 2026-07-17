@@ -15,6 +15,14 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 - If short and complete conflict, keep complete — then simplify the wording, not the content.
 - This rule is NON-NEGOTIABLE and overrides any habit toward long or complex prose.
 
+**Applies to written docs too, not just chat answers.** Any generated content or tech doc
+(README, design doc, plan, notes, code comments) MUST be:
+- **Simple** enough for a non-native English speaker.
+- **Concise** enough that a busy researcher WANTS to read it.
+- **Complete** enough that they miss nothing they need.
+- EXCEPTION: research papers. For papers use the `writing-craft` skill or a paper-writing skill,
+  NOT this rule.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
