@@ -11,179 +11,9 @@
     "defaultMode": "default"
   },
   "model": "opus[1m]",
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=SessionStart $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=PreToolUse $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=PostToolUse $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=PostToolUseFailure $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=Stop $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=SessionEnd $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/share/clorch/hooks/notify_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=PermissionRequest $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=UserPromptSubmit $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "SubagentStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=SubagentStart $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "SubagentStop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=SubagentStop $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=PreCompact $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "TeammateIdle": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=TeammateIdle $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "TaskCompleted": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CLORCH_EVENT=TaskCompleted $HOME/.local/share/clorch/hooks/event_handler.sh",
-            "async": true
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
-    "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name'); dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); style=$(echo \"$input\" | jq -r '.output_style.name // \"default\"'); remaining=$(echo \"$input\" | jq -r '.context_window.remaining_percentage // empty'); context_info=''; if [ -n \"$remaining\" ]; then context_info=$(printf \" | Context: %.0f%%\" \"$remaining\"); fi; printf \"%s | %s | Style: %s%s\" \"$model\" \"$(basename \"$dir\")\" \"$style\" \"$context_info\""
+    "command": "\"$HOME/.claude/hooks/statusline.sh\""
   },
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": false,
@@ -199,9 +29,7 @@
     "document-skills@anthropic-agent-skills": true,
     "phd-skills@phd-skills": true,
     "ideation@ai-research-skills": true,
-    "frontend-design@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true
+    "codex@openai-codex": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -227,6 +55,12 @@
         "source": "github",
         "repo": "orchestra-research/AI-research-SKILLs"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
@@ -237,5 +71,38 @@
   "theme": "dark",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/notify.sh\" done"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/notify.sh\" input"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/session_context.sh\""
+          }
+        ]
+      }
+    ]
+  }
 }
