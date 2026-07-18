@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code status line (1 line). Reads session JSON on stdin.
-# 🕐 clock · 🤖 model · effort · 📁 dir @ branch · 🧠 context% · 📊 5h · 📆 7d
+# 🕐 clock · 🤖 model · effort 💭 · 📁 dir @ branch · 🧠 context% n/total · 📊 5h · 📆 7d
 # Muted 256-color palette for dark terminals, no special font. Portable via $HOME.
 
 input="$(cat)"
@@ -10,7 +10,11 @@ dir="$(printf '%s' "$input" | jq -r '.workspace.current_dir // empty')"
 [ -z "$dir" ] && dir="$PWD"
 proj="$(basename "$dir")"
 remain="$(printf '%s' "$input" | jq -r '.context_window.remaining_percentage // empty')"
+cw_size="$(printf '%s' "$input" | jq -r '.context_window.context_window_size // empty')"
+cw_in="$(printf '%s' "$input" | jq -r '.context_window.total_input_tokens // 0')"
+cw_out="$(printf '%s' "$input" | jq -r '.context_window.total_output_tokens // 0')"
 effort="$(printf '%s' "$input" | jq -r '.effort.level // empty')"
+thinking="$(printf '%s' "$input" | jq -r 'if .thinking.enabled == null then "" else .thinking.enabled end')"
 rl5="$(printf '%s' "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')"
 rl7="$(printf '%s' "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')"
 
@@ -59,6 +63,18 @@ if [ -n "$remain" ]; then
     i=$((i+1))
   done
   ctx_part="🧠 ${bar}${C_RESET} ${cc}${pct}%${C_RESET}"
+  # append remaining/total tokens as numbers (e.g. 786k/1M) when we know the size
+  if [ -n "$cw_size" ] && [ "$cw_size" -gt 0 ] 2>/dev/null; then
+    used=$(( cw_in ))
+    rem_tok=$(( cw_size - used )); [ "$rem_tok" -lt 0 ] && rem_tok=0
+    hnum() { # humanize: <1000 as-is, <1M as k, else M
+      local n="$1"
+      if   [ "$n" -ge 1000000 ]; then awk "BEGIN{printf \"%.1fM\", $n/1000000}"
+      elif [ "$n" -ge 1000 ];    then awk "BEGIN{printf \"%dk\", $n/1000}"
+      else printf '%d' "$n"; fi
+    }
+    ctx_part="${ctx_part} ${C_GRAY}$(hnum "$rem_tok")/$(hnum "$cw_size") left${C_RESET}"
+  fi
 fi
 
 # reasoning effort, color by intensity (absent if model doesn't support it)
@@ -71,6 +87,12 @@ if [ -n "$effort" ]; then
     *)      ec="$C_MODEL" ;;   # xhigh/max -> model accent
   esac
   effort_part="${ec}${effort}${C_RESET}"
+  # thinking indicator beside effort: [T] on, [NT] off
+  if [ "$thinking" = "true" ]; then
+    effort_part="${effort_part} ${C_GRAY}[T]${C_RESET}"
+  elif [ "$thinking" = "false" ]; then
+    effort_part="${effort_part} ${C_GRAY}[NT]${C_RESET}"
+  fi
 fi
 
 # rate limit helper: emoji + label + colored used%
