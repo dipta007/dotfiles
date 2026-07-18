@@ -1,12 +1,15 @@
 # Font configuration
-theme = Catppuccin Frappe
+theme = TokyoNight Night
 font-family = JetBrains Mono
 # font-family = MesloLGS Nerd Font Mono
 font-family = Kohinoor Bangla
-font-size = 15
+font-size = 16
 
 # Keep font size stable across new windows/tabs
 window-inherit-font-size = false
+
+# More line spacing = easier to read, less eye strain
+adjust-cell-height = 15%
 
 # Window configuration
 window-decoration = true
@@ -18,44 +21,29 @@ window-decoration = true
 macos-titlebar-style = hidden
 window-theme = ghostty
 
+# Quality-of-life
+# select text -> straight to clipboard
+copy-on-select = clipboard
+# hide pointer while typing, less distraction
+mouse-hide-while-typing = true
+# ask before closing a pane/window (avoid accidental loss)
+confirm-close-surface = true
+
 # Focus mode
 # background-opacity = 1.0
 # background-blur-radius = 0
 # unfocused-split-opacity = 1.0
 
-# Cool
-background-opacity = 0.92
-background-blur-radius = 12
+# Solid background = less eye strain. No transparency/blur when reading code all day.
+background-opacity = 1.0
 unfocused-split-opacity = 0.9
 
-# Coolnight colorscheme
-foreground = #CBE0F0
-background = #03182a
-# background = #011423
-cursor-color = #47FF9C
-cursor-text = #011423
-selection-background = #033259
-selection-foreground = #CBE0F0
+# Never let any text/bg color pair fall below a readable contrast floor
+minimum-contrast = 1.05
 
-# ANSI colors (normal)
-palette = 0=#214969
-palette = 1=#E52E2E
-palette = 2=#44FFB1
-palette = 3=#FFE073
-palette = 4=#0FC5ED
-palette = 5=#a277ff
-palette = 6=#24EAF7
-palette = 7=#24EAF7
-
-# ANSI colors (bright)
-palette = 8=#214969
-palette = 9=#E52E2E
-palette = 10=#44FFB1
-palette = 11=#FFE073
-palette = 12=#A277FF
-palette = 13=#a277ff
-palette = 14=#24EAF7
-palette = 15=#24EAF7
+# Colors now come from `theme = TokyoNight Night` above (matches nvim).
+# Old Coolnight neon palette removed 2026-07-17 (high contrast + neon = eye fatigue).
+# Full original saved in config.backup-2026-07-17 if you want it back.
 
 # Key binding (Shift+Enter sends escape + return)
 keybind = shift+enter=text:\x1b\r
