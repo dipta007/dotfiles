@@ -29,7 +29,9 @@
     "document-skills@anthropic-agent-skills": true,
     "phd-skills@phd-skills": true,
     "ideation@ai-research-skills": true,
-    "codex@openai-codex": true
+    "frontend-design@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -54,12 +56,6 @@
       "source": {
         "source": "github",
         "repo": "orchestra-research/AI-research-SKILLs"
-      }
-    },
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
       }
     }
   },
