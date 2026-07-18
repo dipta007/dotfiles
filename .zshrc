@@ -96,7 +96,7 @@ fi
 # --- 6. FZF ---
 _CACHED_EVAL_CMD="fzf --zsh" _cached_eval ~/.cache/fzf-init.zsh fzf
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache exclude .venv'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache --exclude .venv'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # --- 7. Prefix-based history search (up/down arrows) ---
@@ -106,10 +106,30 @@ function zvm_after_init() {
   bindkey '^[[B' history-beginning-search-forward
   bindkey '^[OA' history-beginning-search-backward
   bindkey '^[OB' history-beginning-search-forward
+  # atuin Ctrl-R: bind here so zsh-vi-mode doesn't clobber it
+  if (( $+widgets[atuin-search-viins] )); then
+    bindkey -M viins '^r' atuin-search-viins
+    bindkey -M vicmd '^r' atuin-search-vicmd
+    bindkey '^r' atuin-search-viins
+    # atuin binds '?' to experimental AI at empty prompt; restore normal '?'
+    bindkey -M viins '?' self-insert
+    bindkey -M main  '?' self-insert
+  fi
+  # fzf cd-widget on Ctrl-F ('Find dir'). Alt-C is taken by aerospace (system-level).
+  if (( $+widgets[fzf-cd-widget] )); then
+    bindkey -M viins '^f' fzf-cd-widget
+    bindkey -M vicmd '^f' fzf-cd-widget
+    bindkey '^f' fzf-cd-widget
+  fi
 }
 
 # --- 8. zoxide for smarter cd ---
 _CACHED_EVAL_CMD="zoxide init zsh" _cached_eval ~/.cache/zoxide-init.zsh zoxide
+
+# --- 8b. atuin — sqlite shell history + Ctrl-R (sync across machines) ---
+# --disable-up-arrow: keep our own up/down history-search (see zvm_after_init).
+# ^r binding is re-applied in zvm_after_init since zsh-vi-mode clobbers keymaps.
+_CACHED_EVAL_CMD="atuin init zsh --disable-up-arrow" _cached_eval ~/.cache/atuin-init.zsh atuin
 
 # --- 9. Source secrets and common configs ---
 . $HOME/.config/bashrc/secret
@@ -140,3 +160,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH=$HOME/bin:$PATH
 source $HOME/.zshrc.kube
+
+# Added by Aki Desktop — CLI access
+export PATH="$HOME/.aki/bin:$PATH"

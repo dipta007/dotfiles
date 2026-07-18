@@ -98,14 +98,29 @@ uv tool install ipython
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative                |
 | [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything            |
 | [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits   |
+| [atuin](https://github.com/atuinsh/atuin)        | `Ctrl-R` history in SQLite, syncs across machines |
 | [wt](https://github.com/max-sixty/worktrunk)     | Git worktree manager with fuzzy search |
 
 ```bash
-brew install fd ripgrep fzf zoxide worktrunk
+brew install fd ripgrep fzf zoxide atuin worktrunk
 
 # Zsh completions
 fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd
+
+# atuin: import existing shell history (one-time, per machine)
+atuin import zsh
+
+# atuin: OPTIONAL encrypted history sync across machines (Mac + lab servers).
+# Run `register` once on your first machine, then `login` on each other machine
+# using the same key (atuin key on the first machine gives the recovery key).
+atuin register -u <username> -e <email>   # first machine only
+# atuin login -u <username>                # each additional machine
+atuin sync
 ```
+
+> `.zshrc` inits atuin with `--disable-up-arrow` (keeps our own up/down prefix-search).
+> `Ctrl-R` is bound inside `zvm_after_init` so zsh-vi-mode doesn't clobber it, and
+> atuin's experimental `?` AI binding is reset to normal there too.
 
 ### 6. Editor & Git
 

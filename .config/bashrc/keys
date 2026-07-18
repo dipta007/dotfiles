@@ -1,0 +1,93 @@
+# Keyboard cheat sheet. Run `keys` to show shortcuts for THIS setup.
+# Grounded in: .zshrc (fzf/atuin), .tmux.conf (prefix C-a), aerospace (alt), git.
+# Usage:  keys            show all
+#         keys fzf        shell / fzf / history
+#         keys nav        navigation + tool aliases
+#         keys tmux       tmux (prefix = Ctrl-a)
+#         keys wm         aerospace window manager (mod = alt)
+#         keys git        git + delta
+
+# row printers (shared, defined once)
+# _keys_row <key> <desc> [mnemonic]  — mnemonic shown dim magenta, no strict align
+_keys_sec() { printf '\n\033[1;36m▏ %s\033[0m\n' "$1"; }
+_keys_row() {
+  if [[ -n "$3" ]]; then
+    printf '  \033[1;33m%-16s\033[0m %s  \033[0;35m» %s\033[0m\n' "$1" "$2" "$3"
+  else
+    printf '  \033[1;33m%-16s\033[0m %s\n' "$1" "$2"
+  fi
+}
+_keys_note(){ printf '    \033[0;90m%s\033[0m\n' "$1"; }
+
+keys() {
+  local want="${1:-all}"
+
+  if [[ "$want" == all || "$want" == fzf ]]; then
+    _keys_sec "FZF · HISTORY  (zsh)"
+    _keys_row "Ctrl-T"     "pick file(s) → insert path on line" "T = a Thing (file)"
+    _keys_row "Ctrl-F"     "cd into a directory (fuzzy)"        "F = Find a folder"
+    _keys_row "Ctrl-R"     "search history (atuin)"             "R = Recall / Reverse"
+    _keys_row "**<Tab>"    "fuzzy complete → cd/ssh/kill/git"   "★★ = fuzzy anything"
+    _keys_row "↑ / ↓"      "prefix history search"
+    _keys_row "fnv"        "fuzzy-find file → open in nvim"     "f-nv = fzf + nvim"
+    _keys_note "Alt-C is taken by aerospace → use Ctrl-F for cd."
+  fi
+
+  if [[ "$want" == all || "$want" == nav ]]; then
+    _keys_sec "NAVIGATION · TOOLS"
+    _keys_row "z <dir>"    "jump to frequent dir (zoxide)"      "z = zap to dir"
+    _keys_row "zi"         "interactive jump (fzf)"             "i = interactive"
+    _keys_row "yazi"       "terminal file manager"
+    _keys_row "ll / lli"   "list files / list sorted"
+    _keys_row "c"          "clear screen"                        "c = clear"
+    _keys_row "cat / grep" "→ bat / ripgrep (aliased)"
+    _keys_row "find"       "→ fd (aliased)"
+    _keys_row "uvc/uva/uvd" "venv create/activate/deactivate"    "c reate · a ctivate · d eactivate"
+  fi
+
+  if [[ "$want" == all || "$want" == tmux ]]; then
+    _keys_sec "TMUX  (prefix = Ctrl-a)"
+    _keys_row "C-a |"      "split pane right"                    "| = vertical bar = side-by-side"
+    _keys_row "C-a -"      "split pane down"                     "- = horizontal line = stacked"
+    _keys_row "C-a c"      "new window"                          "c = create"
+    _keys_row "C-a h/j/k/l" "focus pane"                         "vim arrows"
+    _keys_row "C-a H/J/K/L" "resize pane (hold to repeat)"       "SHIFT = bigger action = resize"
+    _keys_row "C-a o"      "switch session (fzf popup)"          "o = open session picker"
+    _keys_row "C-a O"      "switch pane (fzf)"                   "O = big O = pane picker"
+    _keys_row "C-a r"      "reload tmux config"                  "r = reload"
+    _keys_row "C-a ["      "copy mode → v select, y copy"        "[ = enter a box to copy"
+    _keys_row "F12"        "suspend tmux keys (pass-through)"
+  fi
+
+  if [[ "$want" == all || "$want" == wm ]]; then
+    _keys_sec "AEROSPACE  (mod = alt)"
+    _keys_row "alt-h/j/k/l" "focus window"                       "vim arrows"
+    _keys_row "alt-⇧-h/j/k/l" "move window"                      "SHIFT = grab & move"
+    _keys_row "alt-1..9"   "go to workspace number"
+    _keys_row "alt-<letter>" "go to workspace letter"            "letter = app (see below)"
+    _keys_row "alt-⇧-<n/ltr>" "send window to workspace"         "SHIFT = send it there"
+    _keys_row "alt-f"      "fullscreen"                          "f = fullscreen"
+    _keys_row "alt- - / ="  "resize smaller / bigger"            "- shrinks, = grows"
+    _keys_row "alt- / "    "tiles layout"                        "/ = split into tiles"
+    _keys_row "alt- , "    "accordion layout"
+    _keys_row "alt-tab"    "last workspace (back-and-forth)"     "tab = flip back"
+    _keys_row "alt-⇧-tab"  "move workspace to next monitor"
+    _keys_row "alt-⇧-;"    "service mode ↓"
+    _keys_note "service: esc=reload  r=reset tree  f=float toggle  ⌫=close others"
+    _keys_note "workspaces: T=term  C=chat  M=browser  O=obsidian  Z=zotero  W=cursor  Y=claude  X=ticktick"
+  fi
+
+  if [[ "$want" == all || "$want" == git ]]; then
+    _keys_sec "GIT · DELTA"
+    _keys_row "gs / gl / gp" "status / pull / push"              "s tatus · pu L l · p ush"
+    _keys_row "ga / gc"    "add / commit"                        "a dd · c ommit"
+    _keys_row "git dag"    "pretty graph log"                    "DAG = directed acyclic graph"
+    _keys_row "gwl/gwa/gwr" "worktree list / add / remove"       "gw = git worktree · l/a/r"
+    _keys_row "lazygit"    "git TUI"
+    _keys_row "n / N"      "next / prev hunk (in delta diff)"    "n = next, N = back"
+  fi
+
+  if [[ "$want" == all ]]; then
+    printf '\n\033[0;90m  filter: keys [fzf|nav|tmux|wm|git]\033[0m\n'
+  fi
+}

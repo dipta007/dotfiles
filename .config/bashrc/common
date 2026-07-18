@@ -52,6 +52,7 @@ else
 fi
 
 . $HOME/.config/bashrc/alias
+. $HOME/.config/bashrc/keys
 
 # run yadm pull and check if the bootstrap file has changed
 # yadm_pull_and_check
