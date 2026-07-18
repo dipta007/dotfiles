@@ -160,6 +160,3 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH=$HOME/bin:$PATH
 source $HOME/.zshrc.kube
-
-# Added by Aki Desktop — CLI access
-export PATH="$HOME/.aki/bin:$PATH"
