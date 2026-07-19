@@ -187,6 +187,10 @@ brew install cronboard              # cron scheduler with a terminal UI
 # (~/.claude/hooks/notify.sh). Click a banner -> jumps to the tmux pane that
 # fired it. Without it the hook falls back to a plain (non-clickable) banner.
 brew install terminal-notifier
+
+# TomoBar: menu-bar Pomodoro timer (maintained, signed fork of TomatoBar).
+# Third-party tap, not core. Or install "TomoBar" from the Mac App Store.
+brew install --cask ArtemYurov/tomobar/tomobar
 ```
 
 ### 10. GitHub CLI
