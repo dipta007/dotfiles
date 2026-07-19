@@ -23,6 +23,29 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 - EXCEPTION: research papers. For papers use the `writing-craft` skill or a paper-writing skill,
   NOT this rule.
 
+**NO em-dash, ever (applies to ALL output).** Never use the em-dash character in any
+generation: chat replies, papers, docs, README, slides, comments, commit messages, code,
+anything. This has no exception.
+- Do not just swap the em-dash for an en-dash or a spaced hyphen as a workaround. Rewrite the
+  sentence so no dash is needed.
+- Use a period, comma, colon, parentheses, or two short sentences instead. Pick the one that
+  fits the meaning.
+- Applies to visible text AND thinking output.
+- The character to never emit is U+2014 (the long dash). Also avoid using U+2013 or a
+  spaced hyphen as a stand-in for it.
+- NOTE: the "Bad" lines below intentionally contain a real em-dash so the example is clear.
+  This block is the ONLY place an em-dash is allowed. Do not copy the pattern; do not strip
+  the em-dash from these examples either.
+- Aside or interruption:
+  - Bad: "The fix works — but only on macOS."
+  - Good: "The fix works, but only on macOS." Or: "The fix works. It is macOS only."
+- List set off mid-sentence:
+  - Bad: "Three tools — fd, rg, fzf — cover search."
+  - Good: "Three tools cover search: fd, rg, and fzf."
+- Two clauses joined for emphasis:
+  - Bad: "One rule matters most — verify."
+  - Good: "One rule matters most: verify."
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**

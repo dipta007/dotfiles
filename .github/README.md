@@ -182,6 +182,11 @@ brew install yazi ffmpeg sevenzip poppler resvg imagemagick
 brew install --cask ghostty         # GPU-accelerated terminal
 brew install --cask claude          # Claude desktop app
 brew install cronboard              # cron scheduler with a terminal UI
+
+# terminal-notifier: powers Claude Code's click-to-focus notifications
+# (~/.claude/hooks/notify.sh). Click a banner -> jumps to the tmux pane that
+# fired it. Without it the hook falls back to a plain (non-clickable) banner.
+brew install terminal-notifier
 ```
 
 ### 10. GitHub CLI
