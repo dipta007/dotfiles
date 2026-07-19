@@ -101,5 +101,6 @@
   "theme": "custom:tokyonight-night",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "cleanupPeriodDays": 365
 }
