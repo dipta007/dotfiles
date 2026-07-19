@@ -1,0 +1,39 @@
+{
+  "name": "TokyoNight Night",
+  "base": "dark",
+  "overrides": {
+    "claude": "#bb9af7",
+    "text": "#c0caf5",
+    "inverseText": "#1a1b26",
+    "inactive": "#565f89",
+    "subtle": "#414868",
+    "suggestion": "#7dcfff",
+    "permission": "#7aa2f7",
+    "remember": "#bb9af7",
+
+    "success": "#9ece6a",
+    "error": "#f7768e",
+    "warning": "#e0af68",
+    "merged": "#bb9af7",
+
+    "promptBorder": "#414868",
+    "planMode": "#7dcfff",
+    "autoAccept": "#9ece6a",
+    "bashBorder": "#e0af68",
+    "ide": "#7aa2f7",
+    "fastMode": "#bb9af7",
+
+    "diffAdded": "#24352a",
+    "diffRemoved": "#3a2730",
+    "diffAddedDimmed": "#1e2620",
+    "diffRemovedDimmed": "#2a2126",
+    "diffAddedWord": "#2f4a37",
+    "diffRemovedWord": "#5a2d3a",
+
+    "userMessageBackground": "#1f2335",
+    "userMessageBackgroundHover": "#283457",
+    "bashMessageBackgroundColor": "#20222f",
+    "memoryBackgroundColor": "#211f30",
+    "selectionBg": "#283457"
+  }
+}
