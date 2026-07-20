@@ -1,6 +1,6 @@
 ---
 name: quiz-paper
-description: Turn reading an arxiv paper into a Predict-then-Reveal game where curiosity, not points, is the reward. Claude reads the paper silently, then asks you to predict answers before revealing them, one question at a time, with rising difficulty. Use when the user wants to ENJOY reading a paper, be quizzed on it, learn it actively, or "make reading this fun" instead of getting a summary dumped at them. Triggers on "quiz me on this paper", "make me read this", "test me on arXiv 1234.5678", "gamify this paper", "help me actually learn this paper". Do NOT use for a passive summary (use skim:story/skim:deep) or a full critical review (use read-paper).
+description: Turn reading an arxiv paper into a Predict-then-Reveal game where curiosity, not points, is the reward. Claude reads the paper silently, then asks you to predict answers before revealing them, one question at a time, with rising difficulty. Use when the user wants to ENJOY reading a paper, be quizzed on it, learn it actively, or "make reading this fun" instead of getting a summary dumped at them. Triggers on "quiz me on this paper", "make me read this", "test me on arXiv 1234.5678", "gamify this paper", "help me actually learn this paper". Do NOT use for a passive summary (use skim:story/skim:deep) or an adversarial critique (use socratic).
 argument-hint: <arxiv-id-or-url>
 ---
 
@@ -89,5 +89,5 @@ worth a second look later. No totals, no XP, no "you reached level 3".
 
 ## Scope
 One paper per invocation, run in the chat. No files written, no persistence, no scoring.
-For a passive summary use `skim:story` / `skim:deep`. For a full adversarial review use
-`read-paper`.
+For a passive summary use `skim:story` / `skim:deep`. For an adversarial critique of the
+paper's claims use `socratic`.
