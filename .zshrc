@@ -56,11 +56,9 @@ _cached_eval() {
 }
 
 # --- 2. mise — replaces nvm, pyenv, conda ---
-if [[ "$OSTYPE" == darwin* ]]; then
-  _CACHED_EVAL_CMD="mise activate zsh" _cached_eval ~/.cache/mise-init.zsh mise
-else
-  path=("$HOME/.local/share/mise/shims" $path)
-fi
+# shims (not activate): no per-prompt hook-env (~30ms/prompt saved). Only global
+# node/npm, no per-project versions or [env], so activate buys us nothing.
+path=("$HOME/.local/share/mise/shims" $path)
 
 # --- 3. Sheldon — plugin manager ---
 _CACHED_EVAL_CMD="sheldon source" _cached_eval ~/.cache/sheldon-source.zsh sheldon ~/.config/sheldon/plugins.toml
