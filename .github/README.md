@@ -159,6 +159,27 @@ brew install codex                 # OpenAI Codex CLI
 
 ```
 
+### 7b. tmux plugin dependencies
+
+tmux plugins install themselves via TPM (`prefix + I`), but these binaries they
+depend on are NOT installed by TPM — do these manually per machine.
+
+| Tool | Used by | What it does |
+| ---- | ------- | ------------ |
+| [sesh](https://github.com/joshmedeski/sesh)          | `prefix + o` | fuzzy jump to any project/session (uses zoxide) |
+| [tmux-fingers](https://github.com/Morantron/tmux-fingers) | `prefix + f` | hint-label copy of paths/urls/hashes on screen |
+| python3 | [extrakto](https://github.com/laktak/extrakto) (`prefix + Tab`) | fzf grab of pane text into the command line |
+
+```bash
+brew install sesh              # needs zoxide + fzf (already installed above)
+brew install tmux-fingers      # or let its prefix+I wizard pick "brew"
+brew install python            # for extrakto (fzf already present)
+```
+
+> First tmux launch: run `prefix + I` to install the TPM plugins, then the binaries
+> above make sesh/fingers/extrakto work. lazygit popup (`prefix + g`) needs `lazygit`
+> (installed in section 6).
+
 ### 8. Fonts
 
 ```bash
