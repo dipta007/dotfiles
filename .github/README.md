@@ -81,6 +81,11 @@ brew install sheldon starship
 ```bash
 brew install mise uv
 
+# Install runtimes declared in ~/.config/mise/config.toml (node/npm) + gen shims.
+# We use shims mode (no per-prompt activate hook), so this step is what creates
+# the node/npm binaries on a fresh machine.
+mise install
+
 # Zsh completions for uv
 mkdir -p ~/.local/share/zsh/completions
 uv generate-shell-completion zsh > ~/.local/share/zsh/completions/_uv
