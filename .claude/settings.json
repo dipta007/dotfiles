@@ -77,7 +77,7 @@
     "commit-commands@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "skim@skim": false,
+    "skim@skim": true,
     "playwright@claude-plugins-official": true,
     "document-skills@anthropic-agent-skills": true,
     "phd-skills@phd-skills": true,
@@ -120,5 +120,7 @@
   "theme": "custom:tokyonight-night",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true
 }
