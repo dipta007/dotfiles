@@ -63,3 +63,20 @@ alias cw='claude-work'
 alias claude-home='CLAUDE_CONFIG_DIR="/Users/sroy/.claude-home" claude'
 alias ch='claude-home'
 
+# make a dir and cd into it
+mkcd() { mkdir -p "$1" && cd "$1"; }
+
+# extract any archive by type
+extract() {
+  case "$1" in
+    *.tar.gz|*.tgz)   tar xzf "$1" ;;
+    *.tar.bz2|*.tbz2) tar xjf "$1" ;;
+    *.tar.xz)         tar xJf "$1" ;;
+    *.tar)            tar xf  "$1" ;;
+    *.zip)            unzip   "$1" ;;
+    *.gz)             gunzip  "$1" ;;
+    *.7z)             7z x    "$1" ;;
+    *)                echo "extract: unknown type: $1" ;;
+  esac
+}
+

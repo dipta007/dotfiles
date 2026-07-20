@@ -10,7 +10,7 @@
   diffFilter = delta --color-only
 
 [merge]
-  conflictStyle = diff3
+  conflictStyle = zdiff3
 
 [init]
 	defaultBranch = main
@@ -25,9 +25,6 @@
 	process = git-lfs filter-process
 	required = true
 	
-[interactive]
-	diffFilter = delta --color-only
-
 [delta]
 	navigate = true
 	dark = true
@@ -36,5 +33,20 @@
 
 [color]
 	ui = auto
+[rerere]
+	enabled = true
+[rebase]
+	autoStash = true
+	autosquash = true
+[fetch]
+	prune = true
+[diff]
+	algorithm = histogram
+[help]
+	autocorrect = 10
 [alias]
 	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+	s = status -sb
+	unstage = restore --staged
+	amend = commit --amend --no-edit
+	undo = reset --soft HEAD~1

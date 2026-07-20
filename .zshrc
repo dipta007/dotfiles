@@ -156,6 +156,14 @@ unfunction _cached_eval 2>/dev/null
 # Case-insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+# fzf-tab: fuzzy <Tab> menus. Disable zsh's own menu; reuse FZF_DEFAULT_OPTS.
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':completion:*:descriptions' format '[%d]'
+# dir preview when completing cd / z
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -1 $realpath'
+
 
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH=$HOME/bin:$PATH

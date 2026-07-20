@@ -6,6 +6,12 @@ defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
 
+# fzf-tab: fuzzy menu for every <Tab>. Must load after compinit, before
+# autosuggestions/syntax-highlighting -> keep it first in the defer queue.
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["defer"]
+
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
