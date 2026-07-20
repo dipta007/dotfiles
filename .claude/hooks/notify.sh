@@ -41,12 +41,22 @@ if command -v terminal-notifier >/dev/null 2>&1; then
   if [ -n "$pane" ]; then
     click="$click; tmux switch-client -t '$pane' 2>/dev/null; tmux select-window -t '$pane' 2>/dev/null; tmux select-pane -t '$pane' 2>/dev/null"
   fi
-  # Detached: terminal-notifier stays alive waiting for the click, but the hook
-  # must NOT block the turn — background it and disown so we return instantly.
+  group="claude-${pane:-$project}"
+  # -execute makes terminal-notifier stay alive waiting for a click, so each
+  # notification leaks a process that never exits. Two guards stop the pile-up:
+  # 1) kill this group's prior notifier. a new -group already replaces the
+  #    visible banner, so the old process is dead weight (max 1 per pane).
+  pkill -f "terminal-notifier.*-group $group" 2>/dev/null
+  # Detached + disowned so the hook returns instantly (must NOT block the turn).
   terminal-notifier \
     -title "$title" -subtitle "$subtitle" -message "$body" \
-    -execute "$click" -group "claude-${pane:-$project}" -sender com.mitchellh.ghostty \
+    -execute "$click" -group "$group" -sender com.mitchellh.ghostty \
     >/dev/null 2>&1 &
+  tn_pid=$!
+  disown 2>/dev/null
+  # 2) watchdog: reap this notifier after 5 min if still waiting for a click.
+  #    click-to-focus works for 5 min; after that a stale notif isn't worth a leak.
+  ( sleep 300; kill "$tn_pid" 2>/dev/null ) >/dev/null 2>&1 &
   disown 2>/dev/null
   exit 0
 fi
