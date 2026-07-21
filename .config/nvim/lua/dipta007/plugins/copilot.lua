@@ -28,7 +28,7 @@ return {
 	requires = {
 		"copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
 	},
-	enabled = true,
+	enabled = false,
 	cmd = "Copilot",
 	event = "InsertEnter",
 	config = config,
