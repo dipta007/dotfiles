@@ -57,3 +57,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+-- Jump to last edit position when reopening a file.
+-- Skip commit msgs (want top) and buffers where the mark is past EOF.
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "Restore last cursor position",
+	group = vim.api.nvim_create_augroup("last-edit-pos", { clear = true }),
+	callback = function(args)
+		if vim.bo[args.buf].filetype == "gitcommit" then
+			return
+		end
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		local line = mark[1]
+		if line > 0 and line <= vim.api.nvim_buf_line_count(args.buf) then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
+-- Rebalance splits when the terminal window is resized.
+vim.api.nvim_create_autocmd("VimResized", {
+	desc = "Equalize splits on resize",
+	group = vim.api.nvim_create_augroup("resize-splits", { clear = true }),
+	command = "tabdo wincmd =",
+})

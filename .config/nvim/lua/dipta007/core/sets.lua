@@ -81,6 +81,21 @@ opt.timeoutlen = 300
 opt.splitright = true
 opt.splitbelow = true
 
+-- keep visible text still when opening/closing a split
+opt.splitkeep = "screen"
+
+-- scroll wrapped lines one screen-row at a time (smoother than whole-line jumps)
+opt.smoothscroll = true
+
+-- cap completion popup (blink) height so it doesn't fill the screen
+opt.pumheight = 10
+
+-- browser-like back/forward for the jumplist (<C-o>/<C-i>)
+opt.jumpoptions = "stack"
+
+-- let cursor go past line end in visual-block only (column edits, CSV)
+opt.virtualedit = "block"
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
