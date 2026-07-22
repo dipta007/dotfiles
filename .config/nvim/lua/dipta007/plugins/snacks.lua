@@ -1,3 +1,68 @@
+-- Ctrl-hjkl pane focus inside the snacks explorer.
+-- The explorer runs in a FLOATING window. Navigator.nvim decides "jump to the
+-- tmux/wezterm pane" by running `wincmd <dir>` and checking if the window
+-- changed; from a float that is unreliable (both h and l land on the editor),
+-- so it never escapes to a mux pane and just bounces explorer <-> editor.
+-- Decide by screen geometry instead: if a real split sits in <dir>, focus it;
+-- otherwise hand off to the multiplexer directly.
+local function detect_mux()
+	for _, name in ipairs({ "tmux", "wezterm" }) do
+		local ok, mux = pcall(function()
+			return require("Navigator.mux." .. name):new()
+		end)
+		if ok then
+			return mux
+		end
+	end
+end
+
+-- Nearest real (non-floating) window in direction dir, or nil if none.
+local function real_win_in_dir(dir)
+	local cur = vim.api.nvim_get_current_win()
+	local p = vim.fn.win_screenpos(cur)
+	local top, left = p[1], p[2]
+	local bottom = top + vim.api.nvim_win_get_height(cur) - 1
+	local right = left + vim.api.nvim_win_get_width(cur) - 1
+	local best, best_dist
+	for _, w in ipairs(vim.api.nvim_list_wins()) do
+		if w ~= cur and vim.api.nvim_win_get_config(w).relative == "" then
+			local wp = vim.fn.win_screenpos(w)
+			local wtop, wleft = wp[1], wp[2]
+			local wbottom = wtop + vim.api.nvim_win_get_height(w) - 1
+			local wright = wleft + vim.api.nvim_win_get_width(w) - 1
+			local dist
+			-- horizontal moves need vertical overlap; vertical moves need horizontal overlap
+			if dir == "h" and wright < left and wtop <= bottom and wbottom >= top then
+				dist = left - wright
+			elseif dir == "l" and wleft > right and wtop <= bottom and wbottom >= top then
+				dist = wleft - right
+			elseif dir == "k" and wbottom < top and wleft <= right and wright >= left then
+				dist = top - wbottom
+			elseif dir == "j" and wtop > bottom and wleft <= right and wright >= left then
+				dist = wtop - bottom
+			end
+			if dist and (not best_dist or dist < best_dist) then
+				best, best_dist = w, dist
+			end
+		end
+	end
+	return best
+end
+
+local function nav(dir)
+	return function()
+		local target = real_win_in_dir(dir)
+		if target then
+			vim.api.nvim_set_current_win(target)
+		else
+			local mux = detect_mux()
+			if mux then
+				mux:navigate(dir)
+			end
+		end
+	end
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -47,6 +112,16 @@ return {
           -- auto_close = true,
           hidden = true,
           ignored = true,
+          win = {
+            list = {
+              keys = {
+                ["<c-h>"] = { nav("h"), mode = { "n", "i" } },
+                ["<c-j>"] = { nav("j"), mode = { "n", "i" } },
+                ["<c-k>"] = { nav("k"), mode = { "n", "i" } },
+                ["<c-l>"] = { nav("l"), mode = { "n", "i" } },
+              },
+            },
+          },
         },
       },
       enabled = true
