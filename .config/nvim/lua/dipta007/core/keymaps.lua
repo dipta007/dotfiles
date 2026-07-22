@@ -35,6 +35,11 @@ nmap({ "<leader>bn", "<cmd>enew<CR>", opts_noremap }) -- New buffer
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts_noremap_silent)
 
 
+-- Move by screen row on wrapped lines, but keep real-line jumps when a count
+-- is given (e.g. 5j) so the jumplist still works.
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- Shamelessly copying from the primeagen
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

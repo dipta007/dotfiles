@@ -84,9 +84,6 @@ opt.splitbelow = true
 -- keep visible text still when opening/closing a split
 opt.splitkeep = "screen"
 
--- scroll wrapped lines one screen-row at a time (smoother than whole-line jumps)
-opt.smoothscroll = true
-
 -- cap completion popup (blink) height so it doesn't fill the screen
 opt.pumheight = 10
 
