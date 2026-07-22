@@ -48,6 +48,10 @@
           {
             "type": "command",
             "command": "\"$HOME/.claude/hooks/agent_marker.sh\" start"
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/scripts/sync-skills-to-codex.sh\""
           }
         ]
       }
