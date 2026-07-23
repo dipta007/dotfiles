@@ -132,6 +132,26 @@ But: complete. The "why" must be there if it's non-obvious. Future-you must be a
 
 When in doubt: shorter, plainer, complete. If it loses meaning, add it back. If it doesn't, leave it short.
 
+## Visualization (CRITICAL — any chart, plot, figure, image, UI, HTML artifact)
+
+**Before making ANY visualization, think about how the human eye and brain read it.** Design for perception first, decoration last.
+
+- **Invoke the `dataviz` skill first** for any chart, graph, plot, dashboard, figure, or data viz. It encodes these principles. Do this BEFORE writing the first line of chart/UI code or picking colors.
+- **Ground design in perception research.** Follow the ideas from the core visualization books, which are all about how humans perceive:
+  - Colin Ware, *Information Visualization: Perception for Design* (how the eye/brain process visuals).
+  - Edward Tufte, *The Visual Display of Quantitative Information* (maximize data-ink, cut chartjunk).
+  - William Cleveland (position on a common scale is read most accurately; color/area least).
+  - Cole Nussbaumer Knaflic, *Storytelling with Data* (one clear message per view, guide the eye).
+- **Apply the key rules every time:**
+  - Pick the chart type that matches the question, not the flashiest one.
+  - Rank encodings by accuracy: position > length > angle > area > color/shade. Use the strongest one the data allows.
+  - One main message per figure. Remove anything that does not help read it (extra gridlines, 3D, heavy borders, noise).
+  - Order and group data to make the pattern obvious (sort bars, align baselines).
+  - Use color with meaning, not for looks. Keep it colorblind-safe and readable in light and dark.
+  - Label directly when you can. Keep legends short. Add units and a clear title.
+  - Do not distort: bar charts start at zero; keep aspect ratios honest.
+- If a viz book or the `dataviz` skill conflicts with these lines, the skill wins (it is kept current).
+
 ## Python / uv
 
 1. Always use `uv` for Python. Never pip, poetry, or conda.
@@ -152,5 +172,6 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 4. **Small scope**: If a task touches more than 3 files, stop. Break it into smaller subtasks and confirm the plan with the user.
 5. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
 6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again.
+7. **Never commit without explicit permission (CRITICAL)**: Do NOT run `git commit` unless the user explicitly tells you to commit in that request. Same for `git push`, `git merge`, and opening PRs. Staging changes or writing code is fine; creating the commit is not. If you think a commit is warranted, stop and ask first. A prior "yes" does not carry over to later changes; ask again each time.
 
 **MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
