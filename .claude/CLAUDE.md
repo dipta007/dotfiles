@@ -46,6 +46,12 @@ anything. This has no exception.
   - Bad: "One rule matters most — verify."
   - Good: "One rule matters most: verify."
 
+**Flag must-read info with a pinned block.** Long answers make users skim and miss
+crucial things (a risk, a blocker, a needed action, a data-loss warning). When your output
+has something the user MUST NOT miss, put it in its own block: start the line with
+`📌📌📌📌` and end it with `📌📌📌📌`.
+- Use it only for truly critical points, not for every reply. Overuse kills the signal.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
