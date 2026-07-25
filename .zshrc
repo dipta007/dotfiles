@@ -68,7 +68,8 @@ if [[ "$OSTYPE" != darwin* ]]; then
   # Non-Mac: disable expensive modules (NFS, etc.)
   _starship_local=~/.cache/starship-local.toml
   if [[ ! -f "$_starship_local" ]] || [[ ~/.config/starship.toml -nt "$_starship_local" ]]; then
-    sed -e '/^\[git_status\]$/a disabled = true' ~/.config/starship.toml > "$_starship_local"
+    # ensure exactly one disabled=true under [git_status]; source may already have it -> dup-key crash
+    awk '/^\[git_status\]$/{print;print "disabled = true";g=1;next} g&&/^disabled[[:space:]]*=/{next} /^\[/{g=0} {print}' ~/.config/starship.toml > "$_starship_local"
   fi
   export STARSHIP_CONFIG="$_starship_local"
   unset _starship_local
@@ -165,4 +166,4 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -1 $realpath'
 
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH=$HOME/bin:$PATH
-source $HOME/.zshrc.kube
+[[ -f $HOME/.zshrc.kube ]] && source $HOME/.zshrc.kube

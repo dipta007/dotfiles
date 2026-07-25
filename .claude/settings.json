@@ -124,7 +124,8 @@
   "theme": "custom:tokyonight-night",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "voiceEnabled": true,
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true,
+  "inputNeededNotifEnabled": true
 }
