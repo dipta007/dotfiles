@@ -40,11 +40,15 @@ satt() {
     local job_id=$1
     if [ -z "$job_id" ]; then
         echo "Usage: satt <job_id>"
+        squeue -u "$USER" -o "%.10i %.16j %.4t %.10M %.10R"
         return
     fi
-    cmd="srun --pty --overlap --jobid $job_id bash"
-    echo "Running: $cmd"
-    $cmd
+    # -l for login shell (zsh config, brew PATH). rdev jobs have a tmux server
+    # already running: attach with `tmux a -t dev` once inside.
+    # Call srun directly, NOT via $cmd: zsh has SH_WORD_SPLIT off, so an
+    # unquoted "$cmd" is one word and fails with "command not found".
+    echo "Running: srun --pty --overlap --jobid $job_id bash -l"
+    srun --pty --overlap --jobid "$job_id" bash -l
 }
 # <<<< Functions by sroydip1
 
