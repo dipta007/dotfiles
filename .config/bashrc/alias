@@ -32,12 +32,14 @@ alias lli="ls -lh --color=always | sort -k9 -f"
 alias fnv='nvim $(fzf --preview "bat --style=numbers --color=always {}" --layout reverse --border)'
 
 
-# SSH Aliases
-alias chip="ssh sroydip1@chip.rs.umbc.edu"
-alias magpie="ssh -p 35800 -l sroydip1 magpie.cs.umbc.edu"
-alias corax="ssh -p 35800 -l sroydip1 corax.cs.umbc.edu"
-alias loxo="ssh -p 35800 -l sroydip1 loxo.cs.umbc.edu"
-alias scify="ssh -p 35800 -l sroydip1 scify.cs.umbc.edu"
+# SSH Aliases. Port/user/key/jump all live in ~/.ssh/config now, don't repeat them
+# here. Old aliases hardcoded -p 35800, which overrode the config and broke scify
+# when it moved behind magpie (needs port 22 + ProxyJump).
+alias chip="ssh chip.rs.umbc.edu"
+alias magpie="ssh magpie.cs.umbc.edu"
+alias corax="ssh corax.cs.umbc.edu"
+alias loxo="ssh loxo.cs.umbc.edu"
+alias scify="ssh scify"
 
 
 # Python virtual environment aliases
