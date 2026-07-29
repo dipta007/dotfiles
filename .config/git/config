@@ -30,6 +30,8 @@
 	dark = true
 	side-by-side = true
 	line-numbers = true
+	wrap-max-lines = unlimited
+	max-line-length = 0
 
 [color]
 	ui = auto
