@@ -36,7 +36,12 @@ confirm-close-surface = true
 
 # Solid background = less eye strain. No transparency/blur when reading code all day.
 background-opacity = 1.0
-unfocused-split-opacity = 0.9
+# Match tmux dim level (window-style in .tmux.conf: inactive fg #5a6183 bg #101014)
+unfocused-split-opacity = 0.45
+unfocused-split-fill = #101014
+
+# tmux active-border blue. Ghostty has one divider color, no active/inactive variant.
+split-divider-color = #00afff
 
 # Never let any text/bg color pair fall below a readable contrast floor
 minimum-contrast = 1.05
@@ -47,3 +52,20 @@ minimum-contrast = 1.05
 
 # Key binding (Shift+Enter sends escape + return)
 keybind = shift+enter=text:\x1b\r
+
+# Global drop-down terminal. Needs Accessibility perm on first use.
+keybind = global:alt+space=toggle_quick_terminal
+
+# Split focus. alt+hjkl = aerospace windows, ctrl+hjkl = tmux/nvim, so cmd here.
+# NOTE: no trailing comments on keybind lines, ghostty parses them into the action.
+keybind = super+h=goto_split:left
+keybind = super+j=goto_split:down
+keybind = super+k=goto_split:up
+keybind = super+l=goto_split:right
+
+# moved off cmd+k, taken by split-up above
+keybind = super+shift+k=clear_screen
+
+# Zoom split, like tmux prefix+z. cmd+z steals undo (still on cmd+shift+t).
+keybind = super+z=toggle_split_zoom
+keybind = super+shift+enter=toggle_split_zoom
