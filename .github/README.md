@@ -101,13 +101,14 @@ uv tool install ipython
 | ------------------------------------------------ | -------------------------------------- |
 | [fd](https://github.com/sharkdp/fd)              | Fast `find` alternative                |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative                |
+| [eza](https://github.com/eza-community/eza)      | Modern `ls` with git cols + icons (`ll` alias) |
 | [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything            |
 | [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits   |
 | [atuin](https://github.com/atuinsh/atuin)        | `Ctrl-R` history in SQLite, syncs across machines |
 | [wt](https://github.com/max-sixty/worktrunk)     | Git worktree manager with fuzzy search |
 
 ```bash
-brew install fd ripgrep fzf zoxide atuin worktrunk
+brew install fd ripgrep eza fzf zoxide atuin worktrunk
 
 # Zsh completions
 fd --gen-completions zsh > ~/.local/share/zsh/completions/_fd

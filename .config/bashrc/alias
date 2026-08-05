@@ -3,23 +3,18 @@ if command -v bat >/dev/null 2>&1; then
     alias cat='bat'
 fi
 
-# use rg if available, else use grep
-if command -v rg >/dev/null 2>&1; then
-    alias grep='rg'
-fi
-
-# use fd if available, else use find
-if command -v fd >/dev/null 2>&1; then
-    alias find='fd'
-fi
-
 # Git worktree
 alias gwl="git worktree list"
 alias gwa="git worktree add"
 alias gwr="git worktree remove"
 
 # General aliases
-alias ll='ls -lAFh'                         # Preferred 'ls' implementatioss
+# eza if available (git cols + icons), else plain ls
+if command -v eza >/dev/null 2>&1; then
+    alias ll='eza -lah --git --icons --group-directories-first'
+else
+    alias ll='ls -lAFh'
+fi
 alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
 alias c='clear'                             # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
