@@ -7,6 +7,21 @@ local opt = vim.opt
 -- general settings
 if vim.g.is_local then
 	opt.clipboard = "unnamedplus"
+else
+	-- SSH: no remote clipboard tool + it'd be the server's clipboard anyway.
+	-- Route yank through OSC 52 so text lands in the LOCAL clipboard via terminal.
+	opt.clipboard = "unnamedplus"
+	local osc52 = require("vim.ui.clipboard.osc52")
+	-- paste reads nvim's own reg, NOT the terminal: OSC 52 read-back is blocked by
+	-- most terminals (hangs/prompts). use Cmd+V in insert mode to paste from local.
+	local function paste()
+		return vim.split(vim.fn.getreg('"'), "\n")
+	end
+	vim.g.clipboard = {
+		name = "OSC 52",
+		copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+		paste = { ["+"] = paste, ["*"] = paste },
+	}
 end
 
 --- winborder for floating windows
