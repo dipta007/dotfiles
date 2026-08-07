@@ -10,6 +10,8 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 
 - Think as long as you want (reasoning tokens are free). This rule governs ONLY the final answer, not your thinking.
 - **Concise but complete:** say everything that matters, nothing that does not. Cut filler, repetition, hedging. Do not drop needed steps, caveats, or context to be short.
+- **Keep exact tokens exact:** being concise never means altering code, error strings, IDs, file paths, commands, numbers, or units. Quote those byte-for-byte. And never drop a negation (`not`/`no`/`never`/`only`/`except`) to save words; dropping it flips the meaning, far worse than the length saved.
+- **No invented abbreviations:** write the full word (`config` not `cfg`, `implementation` not `impl`, `request`/`response` not `req`/`res`, `function` not `fn`). Short forms save ~zero tokens (the tokenizer splits them the same) and cost the reader clarity. Standard, well-known acronyms (DB, API, HTTP) are fine.
 - **Simple language:** short sentences (one idea each). Common words over fancy ones. Explain a needed technical term in a few plain words. No idioms, no rare vocabulary, no long clause-chains.
 - Prefer lists, short tables, and short paragraphs over walls of text.
 - If short and complete conflict, keep complete — then simplify the wording, not the content.
@@ -157,6 +159,17 @@ But: complete. The "why" must be there if it's non-obvious. Future-you must be a
 **Test:** Read the comment back. Does it sound like a tired engineer typed it, or like an essay? If essay, cut it.
 
 When in doubt: shorter, plainer, complete. If it loses meaning, add it back. If it doesn't, leave it short.
+
+## 6. Commit Messages
+
+**Conventional Commits. Why over what. No fluff.**
+
+- Subject: `type(scope): imperative summary`. Scope optional. Types: `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style`, `revert`.
+- Imperative mood ("add", "fix", "remove"), not "added"/"adds". No trailing period. Aim ≤50 chars, hard cap 72.
+- Body only when the subject is not self-explanatory. Add it for a non-obvious *why*, a breaking change, a migration, or linked issues. Wrap at 72. Reference issues at the end (`Closes #42`).
+- Never write "this commit does X", "I", "we", "now" (the diff already says what). No AI attribution ("Generated with Claude Code") unless a project rule requires an attribution trailer.
+- Always give a body for: breaking changes, security fixes, data migrations, reverts. Future debuggers need the context.
+- A local/project CLAUDE.md commit rule overrides this.
 
 ## Visualization (CRITICAL — any chart, plot, figure, image, UI, HTML artifact)
 
