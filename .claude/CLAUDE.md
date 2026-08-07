@@ -25,6 +25,11 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 - EXCEPTION: research papers. For papers use the `writing-craft` skill or a paper-writing skill,
   NOT this rule.
 
+**No hard-wrapping prose. Let lines wrap naturally.** In markdown and any prose output (chat, docs, README, notes, plans, commit bodies), do NOT insert manual line breaks to hit a fixed column width (like 80 chars). Write each paragraph as ONE line and let the editor or viewer soft-wrap it by width.
+- Break the line ONLY when the meaning needs it: a new paragraph, a new list item, a heading, or a code block. Width is the renderer's job, not yours.
+- Do not break mid-sentence just because a line got "too wide". Same for long list items: one item is one line, however long.
+- EXCEPTION: code and code-block contents keep their own line-length rules. This is about prose, not code.
+
 **NO em-dash, ever (applies to ALL output).** Never use the em-dash character in any
 generation: chat replies, papers, docs, README, slides, comments, commit messages, code,
 anything. This has no exception.
