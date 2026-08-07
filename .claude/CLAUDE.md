@@ -75,6 +75,24 @@ Before implementing:
 
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
+**The ladder (climb it BEFORE writing code).** Understand the problem first (read the task, trace the real flow end to end), then stop at the first rung that holds:
+
+1. Does this need to exist at all? Speculative need = skip it, say so in one line. (YAGNI)
+2. Already in this codebase? Reuse the helper/util/type/pattern. Re-implementing what lives a few files over is the most common slop. Look before you write.
+3. Stdlib does it? Use it.
+4. Native platform feature covers it? (`<input type="date">` over a picker lib, CSS over JS, DB constraint over app code.) Use it.
+5. Already-installed dependency solves it? Use it. Never add a new dep for what a few lines can do.
+6. Can it be one line? One line.
+7. Only then: minimum code that works.
+
+The ladder shortens the solution, never the reading. A small diff in the wrong place is not lazy, it is a second bug.
+
+**Bug fix = root cause, not symptom.** A report names a symptom. Before editing, grep every caller of the function you will touch. One guard in the shared function is a smaller diff than a guard in each caller, and patching only the path the ticket names leaves sibling callers still broken.
+
+**Mark the corner you cut.** When you deliberately take a simplification with a known ceiling (global lock, O(n²) scan, naive heuristic), leave ONE short comment naming the ceiling and the upgrade path. Example: `# global lock now; per-account locks if throughput matters`. Do this only for a real cut, not for ordinary code.
+
+**When NOT to be lazy (never simplify these away):** input validation at trust boundaries, error handling that prevents data loss, security, accessibility basics, and anything the user explicitly asked for. Simplicity trims speculative code, never these. If the user wants the full version, build it, no re-arguing.
+
 ## 3. Surgical Changes
 
 **Touch only what you must. Clean up only your own mess.**
@@ -133,6 +151,8 @@ But: complete. The "why" must be there if it's non-obvious. Future-you must be a
 - Don't pad with "Note:", "Important:", "Please". Just say it.
 - Don't write polished marketing prose. This is a comment, not docs.
 - Don't use em-dashes or polished transitions ("Furthermore", "Additionally", "However") to chain claims. Plain `.` or `;` is enough.
+- Don't comment on what you removed. `# removed old X` has no referent, the code is gone. A deletion needs no note left behind.
+- Don't narrate every change with a comment. Comment only where it matters (the non-obvious "why", a cut corner, a gotcha). Most edits need no comment at all.
 
 **Test:** Read the comment back. Does it sound like a tired engineer typed it, or like an essay? If essay, cut it.
 
