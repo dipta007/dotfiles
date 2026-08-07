@@ -28,6 +28,7 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 **No hard-wrapping prose. Let lines wrap naturally.** In markdown and any prose output (chat, docs, README, notes, plans, commit bodies), do NOT insert manual line breaks to hit a fixed column width (like 80 chars). Write each paragraph as ONE line and let the editor or viewer soft-wrap it by width.
 - Break the line ONLY when the meaning needs it: a new paragraph, a new list item, a heading, or a code block. Width is the renderer's job, not yours.
 - Do not break mid-sentence just because a line got "too wide". Same for long list items: one item is one line, however long.
+- HTML / artifacts: the browser wraps prose by width on its own. Do NOT fake width-wrapping with `<br>` tags or `white-space: pre` / `pre-wrap` on prose. Let normal flow wrap it. (Real code blocks and `<pre>` for code are fine.)
 - EXCEPTION: code and code-block contents keep their own line-length rules. This is about prose, not code.
 
 **NO em-dash, ever (applies to ALL output).** Never use the em-dash character in any
