@@ -139,6 +139,8 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+**Verify factual claims in a fresh context (anti-hallucination).** Before you assert a fact, citation, or number that the user will rely on (a paper says X, a function has signature Y, an API returns Z, a metric equals N), check it against the source, not your memory. For a batch of claims (a draft, a related-work section, a results table), verify each one in a context that did not write it: a claim is `supported`, `contradicted`, or `unverifiable`. For a citation, check the source actually *says* the attributed thing, not merely that the source exists. If you cannot verify, say `unverifiable`, never upgrade a guess to a fact.
+
 ## 5. Comments
 
 **Concise, human-coder-like, non-native-English voice. Simple but complete.**
@@ -216,7 +218,7 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 3. **Plan before coding**: Describe the approach and wait for explicit user approval before writing any code.
 4. **Small scope**: If a task touches more than 3 files, stop. Break it into smaller subtasks and confirm the plan with the user.
 5. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
-6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again.
+6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again. Record it as one greppable line: `[LEARN:<category>] <wrong> → <right>` (example: `[LEARN:git] yadm add stages whole file → stage a surgical blob`).
 7. **Never commit without explicit permission (CRITICAL)**: Do NOT run `git commit` unless the user explicitly tells you to commit in that request. Same for `git push`, `git merge`, and opening PRs. Staging changes or writing code is fine; creating the commit is not. If you think a commit is warranted, stop and ask first. A prior "yes" does not carry over to later changes; ask again each time.
 
 **MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
