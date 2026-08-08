@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code status line (1 line). Reads session JSON on stdin.
-# 🕐 clock · 🤖 model · effort 💭 · 📁 dir @ branch · 🧠 context% n/total · 📊 5h ⏰reset · 📆 7d ⏰reset
+# 🕐 clock · 🤖 model · effort 💭 · 📁 dir @ branch · 🧠 context% n/total · 📊 5h →reset · 📆 7d →reset
 # Muted 256-color palette for dark terminals, no special font. Portable via $HOME.
 
 input="$(cat)"
@@ -116,10 +116,10 @@ rlfmt() { # $1=pct $2=emoji $3=label $4=resets_at(epoch, optional)
   elif [ "$p" -ge 60 ]; then c="$C_YELLOW"
   else c="$C_GREEN"; fi
   local out; out="$(printf '%s %s %s%s%%%s' "$2" "$3" "$c" "$p" "$C_RESET")"
-  # append ⏰countdown when resets_at is a future epoch
+  # append →countdown when resets_at is a future epoch
   if [ -n "$4" ]; then
     local ttr=$(( $4 - $(date +%s) ))
-    [ "$ttr" -gt 0 ] && out="${out} ${C_GRAY}⏰$(rfmt "$ttr")${C_RESET}"
+    [ "$ttr" -gt 0 ] && out="${out} ${C_GRAY}→ $(rfmt "$ttr")${C_RESET}"
   fi
   printf '%s' "$out"
 }
