@@ -1,19 +1,24 @@
 #!/bin/bash
 # Claude Code notification hook. Arg $1 = event: "done" or "input".
-# Reads Stop/Notification JSON payload on stdin (.cwd).
+# Reads Stop/Notification JSON payload on stdin (.cwd, .transcript_path, .message).
 # Banner (no sound):
 #   title    = 🖥️ session - window (tmux), else 🖥️ project
 #   subtitle = 📁 project @ git-branch
-#   body     = ✅ Task complete / 🚨 Needs your input
+#   body     = Claude's actual last message/question (rich), else fallback
+#              ✅ Task complete / 🚨 Needs your input
 # Click-to-focus: with terminal-notifier, clicking activates Ghostty and jumps
 # tmux to the exact pane that fired. Falls back to a plain osascript banner on
 # machines without terminal-notifier. Uses $HOME — portable across synced PCs.
+# Phone push: also POSTs a GENERIC line to ntfy.sh/<topic> (topic in
+# ~/.claude/.ntfy_topic). Phone text stays generic — ntfy.sh is a public relay.
 
 event="${1:-done}"
 
 payload="$(cat)"
 cwd="$(printf '%s' "$payload" | jq -r '.cwd // empty' 2>/dev/null)"
 [ -z "$cwd" ] && cwd="$PWD"
+transcript="$(printf '%s' "$payload" | jq -r '.transcript_path // empty' 2>/dev/null)"
+notif_msg="$(printf '%s' "$payload" | jq -r '.message // empty' 2>/dev/null)"
 
 project="$(basename "$cwd")"
 sess="$(tmux display-message -p '#S' 2>/dev/null)"   # tmux session, empty if none
@@ -21,13 +26,59 @@ win="$(tmux display-message -p '#W' 2>/dev/null)"    # tmux window name
 pane="${TMUX_PANE:-$(tmux display-message -p '#{pane_id}' 2>/dev/null)}"  # stable pane id
 branch="$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null)"
 
-# title / subtitle / body
+# title / subtitle
 if [ -n "$sess" ]; then title="🖥️ $sess - $win"; else title="🖥️ $project"; fi
 subtitle="📁 $project"; [ -n "$branch" ] && subtitle="$subtitle @ $branch"
+
+# generic fallback body per event (used for phone push, and desktop when no rich text)
 case "$event" in
-  input) body="🚨 Needs your input" ;;
-  *)     body="✅ Task complete" ;;
+  input) generic="🚨 Needs your input" ;;
+  *)     generic="✅ Task complete" ;;
 esac
+
+# rich desktop body = Claude's actual words.
+#  - input: Claude Code puts its question in stdin .message → use it.
+#  - done:  reverse-scan the transcript tail for the newest assistant text block.
+# Both trimmed to one line ≤140 chars. Any miss → generic fallback.
+rich=""
+if [ "$event" = "input" ] && [ -n "$notif_msg" ]; then
+  rich="$notif_msg"
+elif [ -n "$transcript" ] && [ -f "$transcript" ]; then
+  # tail 64KB (last assistant msg is near the end), newest-first, skip subagent
+  # (isSidechain) turns and non-text (thinking/tool_use) blocks. First hit wins.
+  # tail -r reverses lines (macOS; no `tac`). tac used when present (Linux).
+  # gsub collapses whitespace INSIDE jq so a multi-line message stays one line —
+  # else jq -r's real newlines would let `head -1` truncate it mid-message.
+  if command -v tac >/dev/null 2>&1; then rev=tac; else rev="tail -r"; fi
+  rich="$(tail -c 65536 "$transcript" 2>/dev/null | $rev 2>/dev/null | jq -rc '
+    select(.type=="assistant" and (.isSidechain|not))
+    | .message.content[]? | select(.type=="text") | .text | gsub("\\s+";" ")' 2>/dev/null \
+    | head -1)"
+fi
+# collapse whitespace/newlines to single spaces, trim, cap length
+if [ -n "$rich" ]; then
+  rich="$(printf '%s' "$rich" | tr '\n\r\t' '   ' | sed -E 's/  +/ /g; s/^ +//; s/ +$//')"
+  [ "${#rich}" -gt 140 ] && rich="${rich:0:139}…"
+fi
+body="${rich:-$generic}"
+
+# --- phone push via ntfy (generic text only; ntfy.sh is a public relay) ---
+# Topic lives in ~/.claude/.ntfy_topic (not in this script). Absent → skip.
+# Detached + disowned so a slow network never blocks the turn.
+topic_file="$HOME/.claude/.ntfy_topic"
+if [ -s "$topic_file" ] && command -v curl >/dev/null 2>&1; then
+  topic="$(head -n1 "$topic_file" | tr -d '[:space:]')"
+  if [ -n "$topic" ]; then
+    case "$event" in
+      input) ntfy_title="🚨 $project · needs input"; prio="urgent"; tags="bell,warning" ;;
+      *)     ntfy_title="✅ $project · done";        prio="default"; tags="white_check_mark" ;;
+    esac
+    curl -fsS --max-time 5 \
+      -H "Title: $ntfy_title" -H "Priority: $prio" -H "Tags: $tags" \
+      -d "$generic" "https://ntfy.sh/$topic" >/dev/null 2>&1 &
+    disown 2>/dev/null
+  fi
+fi
 
 # --- preferred path: terminal-notifier with click-to-focus ---
 if command -v terminal-notifier >/dev/null 2>&1; then

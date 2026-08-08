@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code status line (1 line). Reads session JSON on stdin.
-# 🕐 clock · 🤖 model · effort 💭 · 📁 dir @ branch · 🧠 context% n/total · 📊 5h · 📆 7d
+# 🕐 clock · 🤖 model · effort 💭 · 📁 dir @ branch · 🧠 context% n/total · 📊 5h ⏰reset · 📆 7d ⏰reset
 # Muted 256-color palette for dark terminals, no special font. Portable via $HOME.
 
 input="$(cat)"
@@ -17,6 +17,8 @@ effort="$(printf '%s' "$input" | jq -r '.effort.level // empty')"
 thinking="$(printf '%s' "$input" | jq -r 'if .thinking.enabled == null then "" else .thinking.enabled end')"
 rl5="$(printf '%s' "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')"
 rl7="$(printf '%s' "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')"
+rl5_reset="$(printf '%s' "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')"
+rl7_reset="$(printf '%s' "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')"
 
 # Muted 256-color palette, easy on the eyes in dark terminals (same hues, low saturation)
 C_GREEN=$'\033[38;5;108m'   # soft sage green
@@ -95,16 +97,34 @@ if [ -n "$effort" ]; then
   fi
 fi
 
-# rate limit helper: emoji + label + colored used%
-rlfmt() { # $1=pct $2=emoji $3=label
+# humanize seconds -> compact reset countdown: <1h "12m", <1d "3h12m", else "2d3h"
+rfmt() { # $1=seconds-until-reset
+  local s="$1"
+  [ "$s" -lt 0 ] && s=0
+  local d=$(( s / 86400 )); s=$(( s % 86400 ))
+  local h=$(( s / 3600 ));  s=$(( s % 3600 ))
+  local m=$(( s / 60 ))
+  if   [ "$d" -gt 0 ]; then printf '%dd%dh' "$d" "$h"
+  elif [ "$h" -gt 0 ]; then printf '%dh%dm' "$h" "$m"
+  else printf '%dm' "$m"; fi
+}
+
+# rate limit helper: emoji + label + colored used% + dim reset countdown
+rlfmt() { # $1=pct $2=emoji $3=label $4=resets_at(epoch, optional)
   local p="$(printf '%.0f' "$1")" c
   if   [ "$p" -ge 85 ]; then c="$C_RED"
   elif [ "$p" -ge 60 ]; then c="$C_YELLOW"
   else c="$C_GREEN"; fi
-  printf '%s %s %s%s%%%s' "$2" "$3" "$c" "$p" "$C_RESET"
+  local out; out="$(printf '%s %s %s%s%%%s' "$2" "$3" "$c" "$p" "$C_RESET")"
+  # append ⏰countdown when resets_at is a future epoch
+  if [ -n "$4" ]; then
+    local ttr=$(( $4 - $(date +%s) ))
+    [ "$ttr" -gt 0 ] && out="${out} ${C_GRAY}⏰$(rfmt "$ttr")${C_RESET}"
+  fi
+  printf '%s' "$out"
 }
-rl5_part=""; [ -n "$rl5" ] && rl5_part="$(rlfmt "$rl5" "📊" "5h")"
-rl7_part=""; [ -n "$rl7" ] && rl7_part="$(rlfmt "$rl7" "📆" "7d")"
+rl5_part=""; [ -n "$rl5" ] && rl5_part="$(rlfmt "$rl5" "📊" "5h" "$rl5_reset")"
+rl7_part=""; [ -n "$rl7" ] && rl7_part="$(rlfmt "$rl7" "📆" "7d" "$rl7_reset")"
 
 # wall clock
 clock_part="🕐 ${C_WHITE}$(date +%H:%M)${C_RESET}"
