@@ -1,2 +1,3 @@
 .config/bashrc/secret
 .config/bashrc/local
+.claude/.ntfy_topic

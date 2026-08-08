@@ -1,3 +1,4 @@
 .ssh/config
 .config/bashrc/secret
+.claude/.ntfy_topic
 
