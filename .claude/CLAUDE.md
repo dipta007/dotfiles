@@ -160,7 +160,7 @@ But: complete. The "why" must be there if it's non-obvious. Future-you must be a
 - Don't write multi-paragraph block comments unless the user asks. Two short lines beat one paragraph.
 - Don't pad with "Note:", "Important:", "Please". Just say it.
 - Don't write polished marketing prose. This is a comment, not docs.
-- Don't use em-dashes or polished transitions ("Furthermore", "Additionally", "However") to chain claims. Plain `.` or `;` is enough.
+- Don't use em-dashes to chain claims. Plain `.` or `;` is enough.
 - Don't comment on what you removed. `# removed old X` has no referent, the code is gone. A deletion needs no note left behind.
 - Don't narrate every change with a comment. Comment only where it matters (the non-obvious "why", a cut corner, a gotcha). Most edits need no comment at all.
 
@@ -183,7 +183,9 @@ When in doubt: shorter, plainer, complete. If it loses meaning, add it back. If 
 
 **Before making ANY visualization, think about how the human eye and brain read it.** Design for perception first, decoration last.
 
-- **Invoke the `dataviz` skill first** for any chart, graph, plot, dashboard, figure, or data viz. It encodes these principles. Do this BEFORE writing the first line of chart/UI code or picking colors.
+- **Two stages, two skills:**
+  - **Stage 1 (design, ALWAYS first): `dataviz`.** For any chart, graph, plot, dashboard, figure, or data viz. It sets the chart type, layout, visual hierarchy, and a validated colorblind-safe palette (light + dark). Invoke it BEFORE writing the first line of chart/UI code or picking colors. `dataviz` is built into Claude Code (not a plugin).
+  - **Stage 2 (generate, following Stage 1's design): the generator.** For an ML/research paper figure (matplotlib/seaborn: bars, lines, scatter, heatmap, confusion matrix, training curves) use **`academic-plotting`**. For a quick HTML result explorer (metrics table, run compare, sample grid, error analysis) use the **`visual-explainer:ml-*`** commands. For a method/architecture figure with icons use the **`drawio`** skill. For any other chart, write the code yourself following Stage 1. Never skip Stage 1: design decides how it looks, the generator only makes it.
 - **Ground design in perception research.** Follow the ideas from the core visualization books, which are all about how humans perceive:
   - Colin Ware, *Information Visualization: Perception for Design* (how the eye/brain process visuals).
   - Edward Tufte, *The Visual Display of Quantitative Information* (maximize data-ink, cut chartjunk).
@@ -220,5 +222,6 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 5. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
 6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again. Record it as one greppable line: `[LEARN:<category>] <wrong> → <right>` (example: `[LEARN:git] yadm add stages whole file → stage a surgical blob`).
 7. **Never commit without explicit permission (CRITICAL)**: Do NOT run `git commit` unless the user explicitly tells you to commit in that request. Same for `git push`, `git merge`, and opening PRs. Staging changes or writing code is fine; creating the commit is not. If you think a commit is warranted, stop and ask first. A prior "yes" does not carry over to later changes; ask again each time.
+8. **Token-heavy skills need explicit opt-in (`avoid-ai-writing`)**: Never auto-invoke `avoid-ai-writing` (its SKILL.md loads ~23k tokens per fire). Do not trigger it just because a request loosely matches ("clean this up", "make it read better"); those go to `writing-craft` or a plain edit. Invoke it ONLY when the user explicitly names it. Even then, first confirm: "This loads ~23k tokens. Run it?" and wait for a yes. Same rule for any skill whose on-invoke cost is that large.
 
 **MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
