@@ -91,7 +91,8 @@
     "code-simplifier@claude-plugins-official": true,
     "safety-net@cc-marketplace": true,
     "avoid-ai-writing@conorbronsdon-skills": true,
-    "visual-explainer@visual-explainer-marketplace": true
+    "visual-explainer@visual-explainer-marketplace": true,
+    "drawio@drawio": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -134,6 +135,12 @@
       "source": {
         "source": "github",
         "repo": "dipta007/viz-ml"
+      }
+    },
+    "drawio": {
+      "source": {
+        "source": "github",
+        "repo": "jgraph/drawio-mcp"
       }
     }
   },
