@@ -119,6 +119,12 @@ When your changes create orphans:
 
 The test: Every changed line should trace directly to the user's request.
 
+**Backward compatibility by default.** Any change to existing code MUST keep current callers, signatures, configs, data formats, and behavior working. Add, don't break: new optional args with defaults, new fields that old readers ignore, new code paths behind a flag. Old inputs must still produce old outputs.
+
+- **If backward compatibility is NOT possible** (the change must break an existing caller, signature, format, or behavior): STOP. Do not decide for the user. Ask with the `AskUserQuestion` tool, naming exactly what breaks and who it affects, and offer options (e.g. keep-compat-with-more-code vs clean-break).
+- **If keeping compatibility makes the code too complicated** (lots of shims, dead branches, or confusing indirection just to preserve the old path): STOP. Ask with the `AskUserQuestion` tool. Show the tradeoff: simple-but-breaking vs compatible-but-complex. Let the user choose.
+- Never silently pick "break it" or "add complexity". Both are the user's call. When unsure whether a change is breaking, treat it as breaking and ask.
+
 ## 4. Goal-Driven Execution
 
 **Define success criteria. Loop until verified.**
