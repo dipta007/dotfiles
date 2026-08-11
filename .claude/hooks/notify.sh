@@ -9,8 +9,6 @@
 # Click-to-focus: with terminal-notifier, clicking activates Ghostty and jumps
 # tmux to the exact pane that fired. Falls back to a plain osascript banner on
 # machines without terminal-notifier. Uses $HOME — portable across synced PCs.
-# Phone push: also POSTs a GENERIC line to ntfy.sh/<topic> (topic in
-# ~/.claude/.ntfy_topic). Phone text stays generic — ntfy.sh is a public relay.
 
 event="${1:-done}"
 
@@ -61,24 +59,6 @@ if [ -n "$rich" ]; then
   [ "${#rich}" -gt 140 ] && rich="${rich:0:139}…"
 fi
 body="${rich:-$generic}"
-
-# --- phone push via ntfy (generic text only; ntfy.sh is a public relay) ---
-# Topic lives in ~/.claude/.ntfy_topic (not in this script). Absent → skip.
-# Detached + disowned so a slow network never blocks the turn.
-topic_file="$HOME/.claude/.ntfy_topic"
-if [ -s "$topic_file" ] && command -v curl >/dev/null 2>&1; then
-  topic="$(head -n1 "$topic_file" | tr -d '[:space:]')"
-  if [ -n "$topic" ]; then
-    case "$event" in
-      input) ntfy_title="🚨 $project · needs input"; prio="urgent"; tags="bell,warning" ;;
-      *)     ntfy_title="✅ $project · done";        prio="default"; tags="white_check_mark" ;;
-    esac
-    curl -fsS --max-time 5 \
-      -H "Title: $ntfy_title" -H "Priority: $prio" -H "Tags: $tags" \
-      -d "$generic" "https://ntfy.sh/$topic" >/dev/null 2>&1 &
-    disown 2>/dev/null
-  fi
-fi
 
 # --- preferred path: terminal-notifier with click-to-focus ---
 if command -v terminal-notifier >/dev/null 2>&1; then
