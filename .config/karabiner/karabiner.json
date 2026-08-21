@@ -172,19 +172,20 @@
                                     }
                                 ],
                                 "type": "basic"
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Both Shifts pressed together -> toggle Caps Lock",
+                        "manipulators": [
                             {
                                 "from": {
+                                    "modifiers": { "optional": ["any"] },
                                     "simultaneous": [
                                         { "key_code": "left_shift" },
                                         { "key_code": "right_shift" }
-                                    ],
-                                    "simultaneous_options": {
-                                        "key_down_order": "insensitive",
-                                        "key_up_order": "insensitive"
-                                    }
+                                    ]
                                 },
-                                "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
                                 "to": [{ "key_code": "caps_lock" }],
                                 "type": "basic"
                             }
