@@ -148,12 +148,14 @@ Inside neovim, install formatters:
 
 ### 7. Terminal Tools
 
-| Tool                                        | What it does                   |
-| ------------------------------------------- | ------------------------------ |
-| [bat](https://github.com/sharkdp/bat)       | `cat` with syntax highlighting |
-| [yazi](https://github.com/sxyazi/yazi)      | Terminal file manager          |
-| [jq](https://jqlang.github.io/jq/)          | JSON processor                 |
-| [aichat](https://github.com/sigoden/aichat) | AI chat in terminal            |
+| Tool                                                 | What it does                        |
+| ---------------------------------------------------- | ----------------------------------- |
+| [bat](https://github.com/sharkdp/bat)                | `cat` with syntax highlighting      |
+| [yazi](https://github.com/sxyazi/yazi)               | Terminal file manager               |
+| [jq](https://jqlang.github.io/jq/)                   | JSON processor                      |
+| [aichat](https://github.com/sigoden/aichat)          | AI chat in terminal                 |
+| [opencode](https://github.com/anomalyco/opencode)    | AI coding agent in the terminal     |
+| [paseo](https://www.npmjs.com/package/@getpaseo/cli) | Drive AI coding agents from the CLI |
 
 ```bash
 brew install bat jq aichat
@@ -162,6 +164,10 @@ brew install bat jq aichat
 bat --completion=zsh > ~/.local/share/zsh/completions/_bat
 brew install --cask claude-code    # Claude Code CLI
 brew install codex                 # OpenAI Codex CLI
+brew install anomalyco/tap/opencode # opencode agent (pulls ripgrep)
+
+# Paseo: needs node/npm from mise (section 4). Launches on first install.
+npm install -g @getpaseo/cli && paseo
 
 ```
 
@@ -209,6 +215,7 @@ brew install yazi ffmpeg sevenzip poppler resvg imagemagick
 brew install --cask ghostty         # GPU-accelerated terminal
 brew install --cask claude          # Claude desktop app
 brew install cronboard              # cron scheduler with a terminal UI
+brew install --cask wispr-flow      # voice-to-text dictation, AI auto-editing
 
 # terminal-notifier: powers Claude Code's click-to-focus notifications
 # (~/.claude/hooks/notify.sh). Click a banner -> jumps to the tmux pane that
