@@ -1,32 +1,32 @@
 #!/usr/bin/env node
-// cue: fetch prompts from the read-only API.
+// mantra: fetch prompts from the read-only API.
 //
 // Auth comes from the environment, matching Cloudflare's own header names:
 //   CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET   (an Access service token)
-//   CUE_URL                                        (optional, defaults below)
+//   MANTRA_URL                                        (optional, defaults below)
 //
 // The token is read-only by design, so this tool can only read. A write would
 // be refused with 403 by the Worker, which is the point.
 
-const BASE = (process.env.CUE_URL ?? "https://cue.roydipta.com").replace(/\/$/, "");
+const BASE = (process.env.MANTRA_URL ?? "https://mantra.roydipta.com").replace(/\/$/, "");
 const ID = process.env.CF_ACCESS_CLIENT_ID;
 const SECRET = process.env.CF_ACCESS_CLIENT_SECRET;
 
-const USAGE = `cue: your prompt library, from the terminal
+const USAGE = `mantra: your prompt library, from the terminal
 
-  cue                          list every prompt
-  cue <slug>                   print one prompt
-  cue <slug> -v name=value     fill {{variables}} before printing
-  cue <slug> -c                copy to the clipboard instead of printing
-  cue search <words...>        list prompts matching all the words
-  cue --json <slug>            print the raw record
-  cue url                      print the web address
+  mantra                          list every prompt
+  mantra <slug>                   print one prompt
+  mantra <slug> -v name=value     fill {{variables}} before printing
+  mantra <slug> -c                copy to the clipboard instead of printing
+  mantra search <words...>        list prompts matching all the words
+  mantra --json <slug>            print the raw record
+  mantra url                      print the web address
 
 Auth: set CF_ACCESS_CLIENT_ID and CF_ACCESS_CLIENT_SECRET to an Access
 service token. Read-only: this cannot change anything.`;
 
 function die(message, code = 1) {
-  process.stderr.write(`cue: ${message}\n`);
+  process.stderr.write(`mantra: ${message}\n`);
   process.exit(code);
 }
 
@@ -156,12 +156,12 @@ async function main(argv) {
   const missing = findVariables(text);
   if (missing.length > 0) {
     // stderr, so it never pollutes a pipe into pbcopy or another command
-    process.stderr.write(`cue: still blank: ${missing.map((m) => `{{${m}}}`).join(" ")}\n`);
+    process.stderr.write(`mantra: still blank: ${missing.map((m) => `{{${m}}}`).join(" ")}\n`);
   }
 
   if (copy) {
     await toClipboard(text);
-    process.stderr.write(`cue: copied ${prompt.slug}\n`);
+    process.stderr.write(`mantra: copied ${prompt.slug}\n`);
   } else {
     process.stdout.write(text.endsWith("\n") ? text : text + "\n");
   }
