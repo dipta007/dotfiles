@@ -2,3 +2,4 @@
 .config/bashrc/secret
 .claude/.ntfy_topic
 
+.claude-sync/config.yaml
