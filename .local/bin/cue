@@ -1,0 +1,170 @@
+#!/usr/bin/env node
+// cue: fetch prompts from the read-only API.
+//
+// Auth comes from the environment, matching Cloudflare's own header names:
+//   CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET   (an Access service token)
+//   CUE_URL                                        (optional, defaults below)
+//
+// The token is read-only by design, so this tool can only read. A write would
+// be refused with 403 by the Worker, which is the point.
+
+const BASE = (process.env.CUE_URL ?? "https://cue.roydipta.com").replace(/\/$/, "");
+const ID = process.env.CF_ACCESS_CLIENT_ID;
+const SECRET = process.env.CF_ACCESS_CLIENT_SECRET;
+
+const USAGE = `cue: your prompt library, from the terminal
+
+  cue                          list every prompt
+  cue <slug>                   print one prompt
+  cue <slug> -v name=value     fill {{variables}} before printing
+  cue <slug> -c                copy to the clipboard instead of printing
+  cue search <words...>        list prompts matching all the words
+  cue --json <slug>            print the raw record
+  cue url                      print the web address
+
+Auth: set CF_ACCESS_CLIENT_ID and CF_ACCESS_CLIENT_SECRET to an Access
+service token. Read-only: this cannot change anything.`;
+
+function die(message, code = 1) {
+  process.stderr.write(`cue: ${message}\n`);
+  process.exit(code);
+}
+
+async function get(path) {
+  if (!ID || !SECRET) {
+    die(
+      "missing credentials. Set CF_ACCESS_CLIENT_ID and CF_ACCESS_CLIENT_SECRET\n" +
+        "     (an Access service token from Zero Trust > Access > Service Auth)",
+    );
+  }
+  let response;
+  try {
+    response = await fetch(`${BASE}/api${path}`, {
+      headers: { "CF-Access-Client-Id": ID, "CF-Access-Client-Secret": SECRET },
+    });
+  } catch (error) {
+    die(`cannot reach ${BASE}: ${error.message}`);
+  }
+  // Access bounces unauthenticated traffic to a login page rather than the API,
+  // so an HTML body here means the credentials were not accepted.
+  const type = response.headers.get("content-type") ?? "";
+  if (!type.includes("application/json")) {
+    die(
+      `${BASE} did not return JSON (HTTP ${response.status}).\n` +
+        "     Usually a rejected or expired service token.",
+    );
+  }
+  const body = await response.json();
+  if (!response.ok) die(`${body.error ?? `HTTP ${response.status}`}`);
+  return body;
+}
+
+// Same rule as src/lib/variables.ts. Duplicated deliberately: this file has to
+// stay dependency-free and runnable straight from PATH. Keep the two in step.
+const VARIABLE = /\{\{\s*([A-Za-z0-9_-]+)\s*\}\}/g;
+
+function fill(body, values) {
+  return body.replace(VARIABLE, (whole, name) => {
+    const value = values[name];
+    return value !== undefined && value.trim() !== "" ? value : whole;
+  });
+}
+
+function findVariables(body) {
+  const seen = [];
+  for (const match of body.matchAll(VARIABLE)) {
+    if (!seen.includes(match[1])) seen.push(match[1]);
+  }
+  return seen;
+}
+
+function table(prompts, empty = "no prompts yet") {
+  if (prompts.length === 0) return empty;
+  const width = Math.max(...prompts.map((p) => p.slug.length));
+  return prompts
+    .map((p) => {
+      const pin = p.pinned ? "*" : " ";
+      const used = p.use_count > 0 ? `${p.use_count}x` : "-";
+      const vars = findVariables(p.body).length;
+      const marks = vars > 0 ? `  {{${vars}}}` : "";
+      return `${pin} ${p.slug.padEnd(width)}  ${p.category.padEnd(10)} ${used.padStart(5)}${marks}`;
+    })
+    .join("\n");
+}
+
+async function toClipboard(text) {
+  const { spawn } = await import("node:child_process");
+  const command = process.platform === "darwin" ? "pbcopy" : "xclip";
+  const args = process.platform === "darwin" ? [] : ["-selection", "clipboard"];
+  await new Promise((resolve, reject) => {
+    const child = spawn(command, args, { stdio: ["pipe", "ignore", "ignore"] });
+    child.on("error", reject);
+    child.on("close", (code) => (code === 0 ? resolve() : reject(new Error(`${command} exited ${code}`))));
+    child.stdin.end(text);
+  }).catch((error) => die(`could not copy: ${error.message}`));
+}
+
+async function main(argv) {
+  const args = [...argv];
+  const values = {};
+  let copy = false;
+  let json = false;
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === "-v" || args[i] === "--var") {
+      const pair = args[i + 1] ?? "";
+      const eq = pair.indexOf("=");
+      if (eq < 1) die(`-v needs name=value, got "${pair}"`);
+      values[pair.slice(0, eq)] = pair.slice(eq + 1);
+      args.splice(i, 2);
+      i--;
+    } else if (args[i] === "-c" || args[i] === "--copy") {
+      copy = true;
+      args.splice(i, 1);
+      i--;
+    } else if (args[i] === "--json") {
+      json = true;
+      args.splice(i, 1);
+      i--;
+    }
+  }
+
+  const [command, ...rest] = args;
+
+  if (command === "-h" || command === "--help") return console.log(USAGE);
+  if (command === "url") return console.log(BASE);
+
+  if (command === undefined) {
+    return console.log(table(await get("/prompts")));
+  }
+
+  if (command === "search") {
+    if (rest.length === 0) die("search needs at least one word");
+    const words = rest.map((w) => w.toLowerCase());
+    const all = await get("/prompts");
+    const hits = all.filter((p) => {
+      const hay = [p.title, p.body, p.tags, p.notes, p.category].join("\n").toLowerCase();
+      return words.every((w) => hay.includes(w));
+    });
+    return console.log(table(hits, `nothing matches ${rest.join(" ")}`));
+  }
+
+  const prompt = await get(`/prompts/${encodeURIComponent(command)}`);
+  if (json) return console.log(JSON.stringify(prompt, null, 2));
+
+  const text = fill(prompt.body, values);
+  const missing = findVariables(text);
+  if (missing.length > 0) {
+    // stderr, so it never pollutes a pipe into pbcopy or another command
+    process.stderr.write(`cue: still blank: ${missing.map((m) => `{{${m}}}`).join(" ")}\n`);
+  }
+
+  if (copy) {
+    await toClipboard(text);
+    process.stderr.write(`cue: copied ${prompt.slug}\n`);
+  } else {
+    process.stdout.write(text.endsWith("\n") ? text : text + "\n");
+  }
+}
+
+main(process.argv.slice(2)).catch((error) => die(error.message));
