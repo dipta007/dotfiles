@@ -156,6 +156,8 @@ Inside neovim, install formatters:
 | [aichat](https://github.com/sigoden/aichat)          | AI chat in terminal                 |
 | [opencode](https://github.com/anomalyco/opencode)    | AI coding agent in the terminal     |
 | [paseo](https://www.npmjs.com/package/@getpaseo/cli) | Drive AI coding agents from the CLI |
+| [claude-sync](https://github.com/tawanorg/claude-sync) | Sync Claude Code sessions across machines (encrypted, own bucket) |
+| [claude-swap](https://github.com/realiti4/claude-swap) | Switch Claude accounts before rate limits hit (`cswap`) |
 
 ```bash
 brew install bat jq aichat
@@ -168,6 +170,37 @@ brew install anomalyco/tap/opencode # opencode agent (pulls ripgrep)
 
 # Paseo: needs node/npm from mise (section 4). Launches on first install.
 npm install -g @getpaseo/cli && paseo
+
+# claude-sync: session sync across machines. Standalone binary, NOT the npm
+# package: node comes from mise (section 4), so a global npm install breaks on
+# every node version switch. Asset per platform:
+#   macOS  claude-sync-darwin-arm64  (Intel: -darwin-amd64)
+#   Linux  claude-sync-linux-amd64   (arm64: -linux-arm64)
+cd /tmp && B=claude-sync-darwin-arm64        # <- change per platform
+curl -fsSL -O https://github.com/tawanorg/claude-sync/releases/latest/download/$B
+curl -fsSL -O https://github.com/tawanorg/claude-sync/releases/latest/download/checksums.txt
+grep "$B" checksums.txt && { shasum -a 256 "$B" 2>/dev/null || sha256sum "$B"; }  # hashes must match
+chmod +x "$B" && mv "$B" ~/.local/bin/claude-sync
+
+# FIRST machine: R2 (10GB free, zero egress), sessions scope only so it never
+# fights yadm over settings.json/CLAUDE.md/skills/agents.
+claude-sync init --provider r2 --scope sessions   # prompts for creds + passphrase
+# Exclude anything that must not reach a personal bucket BEFORE the first push:
+#   claude-sync paths exclude '<glob>'    # repeat per pattern
+#   claude-sync paths list                # verify, THEN push
+claude-sync push
+
+# NEW machine: `yadm decrypt` already restored ~/.claude-sync/config.yaml, which
+# carries the R2 creds, scope AND the excludes. Only the age key is missing, on
+# purpose: it is derived from the passphrase, so archiving it buys nothing.
+claude-sync init --passphrase      # SAME passphrase or nothing decrypts
+claude-sync paths list             # confirm scope + excludes came across
+claude-sync pull
+
+# claude-swap: multi-account switcher, command is `cswap`. Needs uv (section 4).
+# Swaps stored credentials (Keychain on macOS), so CLI + VS Code both work.
+uv tool install claude-swap
+# uv tool install 'claude-swap[menubar]'   # + macOS menu bar quota extra
 
 ```
 
