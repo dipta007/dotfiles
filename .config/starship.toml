@@ -23,11 +23,13 @@ diverged = "<>"
 renamed = "r"
 deleted = "x"
 
-# --- KEPT: python, nodejs ---
+# --- KEPT: python ---
 [python]
 symbol = "py "
 
+# --- DISABLED: mise shim too slow, blew starship command_timeout ---
 [nodejs]
+disabled = true
 symbol = "nodejs "
 
 # --- DISABLED: not in use ---
