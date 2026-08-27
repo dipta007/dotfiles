@@ -2,3 +2,4 @@
 .config/bashrc/local
 .claude/.ntfy_topic
 .claude-sync/config.yaml
+.local/share/yadm/repo.git/
