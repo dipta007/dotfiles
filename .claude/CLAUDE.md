@@ -149,30 +149,39 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 5. Comments
 
-**Concise, human-coder-like, non-native-English voice. Simple but complete.**
+**Comment like a tired human engineer, not like an AI. This is the #1 recurring failure.**
 
-Write comments the way a busy engineer writes them at 11pm — short, direct, slightly clipped. Skip articles ("the", "a") when the meaning is clear. Skip filler ("In order to", "Note that"). Don't write essays.
+**HARD RULE - proportionality.** The comment must be smaller than the thing it explains.
+Changing two colour values NEVER justifies a paragraph. If the comment is longer than the
+code it sits on, it is wrong. Delete it or cut it to one line.
 
-But: complete. The "why" must be there if it's non-obvious. Future-you must be able to understand the constraint without re-deriving it.
-
-**Do:**
-- One line if one line is enough.
-- Lead with the fact: `Pool size 48 (NOT =num_workers): cheap CPU procs, batch >> workers...`
-- Keep load-bearing context: incident references, version-specific gotchas, deadlock stories, magic numbers' origins. Future readers can't recover these from the code.
-- Use sentence fragments where they read naturally: `# Empty → verl derives prompt+response.` is fine.
-
-**Don't:**
+**Default is NO comment.** Especially in CSS, HTML, and UI code. Write the comment only if a
+competent engineer would otherwise "fix" the code and reintroduce a bug.
 - Don't restate what the code obviously does. `# increment counter` next to `i += 1` is noise.
-- Don't write multi-paragraph block comments unless the user asks. Two short lines beat one paragraph.
-- Don't pad with "Note:", "Important:", "Please". Just say it.
-- Don't write polished marketing prose. This is a comment, not docs.
-- Don't use em-dashes to chain claims. Plain `.` or `;` is enough.
-- Don't comment on what you removed. `# removed old X` has no referent, the code is gone. A deletion needs no note left behind.
 - Don't narrate every change with a comment. Comment only where it matters (the non-obvious "why", a cut corner, a gotcha). Most edits need no comment at all.
 
-**Test:** Read the comment back. Does it sound like a tired engineer typed it, or like an essay? If essay, cut it.
+**Hard limits:**
+- 1 line. Two lines is rare and needs a reason. Three or more is banned.
+- No banner headers, no `/* ---- Section ---- */` dividers, no bulleted lists inside comments.
+- One comment per fact. Do not split one long comment into five short ones to game the limit.
 
-When in doubt: shorter, plainer, complete. If it loses meaning, add it back. If it doesn't, leave it short.
+**NEVER put these in a comment. They belong in the commit message:**
+- Measurements, ratios, pixel values, before/after numbers, benchmark tables.
+- What you tried, what you rejected, what you got wrong, what used to be there. `# removed old X` has no referent, the code is gone. A deletion needs no note left behind.
+- Proof, justification, or argument for a decision. State the rule; do not defend it.
+- Narration of a bug's history ("this was live", "this bit us once", "measured X -> Y").
+- Comparisons to other files, other sites, or upstream ("unlike the portfolio, we...").
+
+**Write the constraint, not the story:**
+- Bad: a 12-line block explaining that a minifier once stripped spaces inside `calc()`,
+  with the broken output, the browser behaviour, and how it was found.
+- Good: `// calc() needs spaces around +/-; the minifier strips them. Let Sass fold it.`
+
+**Voice:** short, clipped, lowercase-ish, like 11pm. Skip articles and filler. No "Note that",
+"Important:", "Furthermore". No em-dash, ever.
+
+**Before writing any comment, ask: would a senior engineer typing fast actually write this?**
+If it reads like documentation, an essay, or a changelog, delete it.
 
 ## 6. Commit Messages
 
