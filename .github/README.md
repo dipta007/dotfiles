@@ -16,6 +16,13 @@ brew bundle dump --file=~/.config/brew/mac.Brewfile --no-vscode --force
 brew bundle --file=~/.config/brew/mac.Brewfile
 ```
 
+> `dump --force` rewrites the Brewfile from what brew currently owns. Anything
+> installed another way is silently dropped, e.g. `uv` (standalone installer).
+> Check the diff before committing a fresh dump.
+
+> If an app or font is already installed by hand, add `--adopt`
+> (`brew install --cask <name> --adopt`) so brew manages it instead of erroring.
+
 For a fresh device, follow the step-by-step guide below.
 
 ---
@@ -59,6 +66,11 @@ export BW_PASSWORD={BITWARDEN_PASSWORD}
 ```
 
 > Full bootstrap: [private gist](https://gist.github.com/dipta007/a68276b44fd9fa42f8746d6dfb2e8390)
+
+> Secrets live in the yadm archive at `~/.local/share/yadm/archive`, the yadm 3.x
+> default. Needs yadm 3.x, and `XDG_DATA_HOME` unset or set to `~/.local/share`.
+> Do not keep it at `~/.config/yadm/archive` (the yadm 2.x path). Hooks and scripts
+> that run `yadm decrypt` get no shell alias, so they fail with "does not exist".
 
 ### 3. Shell & Prompt
 
@@ -169,7 +181,11 @@ brew install codex                 # OpenAI Codex CLI
 brew install anomalyco/tap/opencode # opencode agent (pulls ripgrep)
 
 # Paseo: needs node/npm from mise (section 4). Launches on first install.
-npm install -g @getpaseo/cli && paseo
+npm install -g @getpaseo/cli
+mise reshim                        # else paseo is not on PATH (node globals are shimmed)
+paseo                              # first launch
+# npm may block esbuild/node-pty postinstall scripts. If paseo misbehaves:
+#   npm install -g --allow-scripts=esbuild,node-pty @getpaseo/cli
 
 # claude-sync: session sync across machines. Standalone binary, NOT the npm
 # package: node comes from mise (section 4), so a global npm install breaks on
@@ -191,11 +207,23 @@ claude-sync init --provider r2 --scope sessions   # prompts for creds + passphra
 claude-sync push
 
 # NEW machine: `yadm decrypt` already restored ~/.claude-sync/config.yaml, which
-# carries the R2 creds, scope AND the excludes. Only the age key is missing, on
-# purpose: it is derived from the passphrase, so archiving it buys nothing.
+# carries the R2 creds, scope AND the excludes. The age key is missing on purpose:
+# it is derived from the passphrase, so archiving it buys nothing.
 claude-sync init --passphrase      # SAME passphrase or nothing decrypts
+
+# init writes the age key but does NOT update encryption_key_path. It still names
+# the home of the machine that made the config, so every command dies with
+# "failed to read age key". Fix it first:
+grep encryption_key_path ~/.claude-sync/config.yaml   # see whose home it names
+sed -i '' "s#/Users/OLD_USER#$HOME#" ~/.claude-sync/config.yaml
+
 claude-sync paths list             # confirm scope + excludes came across
-claude-sync pull
+claude-sync status                 # also shows what a push would upload
+claude-sync pull --dry-run         # pull is interactive; dry-run shows the damage
+claude-sync pull                   # pick "backup existing files" at the prompt
+# Sessions over 100MB upload fine but can NEVER be pulled back: MaxDownloadSize
+# is a hardcoded 100MB on the download path only. Pull reports them failed
+# forever. Keep sessions small. Upstream: tawanorg/claude-sync#87
 
 # claude-swap: multi-account switcher, command is `cswap`. Needs uv (section 4).
 # Swaps stored credentials (Keychain on macOS), so CLI + VS Code both work.
@@ -216,6 +244,7 @@ depend on are NOT installed by TPM — do these manually per machine.
 | python3 | [extrakto](https://github.com/laktak/extrakto) (`prefix + Tab`) | fzf grab of pane text into the command line |
 
 ```bash
+brew install tmux              # no earlier section installs it
 brew install sesh              # needs zoxide + fzf (already installed above)
 brew install tmux-fingers      # or let its prefix+I wizard pick "brew"
 brew install python            # for extrakto (fzf already present)
@@ -254,10 +283,6 @@ brew install --cask wispr-flow      # voice-to-text dictation, AI auto-editing
 # (~/.claude/hooks/notify.sh). Click a banner -> jumps to the tmux pane that
 # fired it. Without it the hook falls back to a plain (non-clickable) banner.
 brew install terminal-notifier
-
-# TomoBar: menu-bar Pomodoro timer (maintained, signed fork of TomatoBar).
-# Third-party tap, not core. Or install "TomoBar" from the Mac App Store.
-brew install --cask ArtemYurov/tomobar/tomobar
 ```
 
 ### 10. GitHub CLI
@@ -274,7 +299,6 @@ brew install gh && gh auth login
 | [borders](https://github.com/FelixKratz/JankyBorders) | Colored window borders        |
 | [Homerow](https://www.homerow.app/)                   | Keyboard-driven UI navigation |
 | [kindavim](https://kindavim.app/)                     | Vim keybindings system-wide   |
-| [pipiri](https://lowtechguys.com/pipiri/)             | PIP view anything on macOS    |
 
 ```bash
 brew install --cask kindavim
@@ -292,13 +316,13 @@ defaults write com.apple.dock expose-group-apps -bool true && killall Dock
 
 Install [Homerow](https://www.homerow.app/) manually and set up a hotkey (cmd + shift + space and cmd + shift + j) to trigger it.
 
-Install [pipiri](https://lowtechguys.com/pipiri/) manually and set up a hotkey (cmd + y) to trigger it.
-
 ### 12. Other macOS Tools
 
 ```bash
 brew install --cask mactex                   # LaTeX distribution
 brew install imagemagick                      # Image manipulation
-brew install luarocks && luarocks install magick  # Lua image library (for neovim)
+brew install luarocks                        # Lua package manager
+# image.nvim is disabled in the nvim config, so the magick rock is not needed.
+# if you re-enable it: luarocks install magick
 brew install mutagen-io/mutagen/mutagen      # File sync for remote dev
 ```

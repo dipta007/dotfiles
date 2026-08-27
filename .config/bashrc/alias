@@ -49,15 +49,12 @@ alias nvim-nuke='rm -rf ~/.local/share/nvim/lazy ~/.local/share/nvim/mason ~/.ca
 alias brewdump='brew bundle dump --file=~/.config/brew/mac.Brewfile --no-vscode --force'
 alias brewinstall='brew bundle --file=~/.config/brew/mac.Brewfile'
 
-# yadm
-alias yadm='yadm --yadm-archive ~/.config/yadm/archive'
-
 # jean-claude profile: work
-alias claude-work='CLAUDE_CONFIG_DIR="/Users/sroy/.claude-work" claude'
+alias claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
 alias cw='claude-work'
 
 # jean-claude profile: home
-alias claude-home='CLAUDE_CONFIG_DIR="/Users/sroy/.claude-home" claude'
+alias claude-home='CLAUDE_CONFIG_DIR="$HOME/.claude-home" claude'
 alias ch='claude-home'
 
 # make a dir and cd into it
