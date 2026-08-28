@@ -271,7 +271,6 @@ These are only needed on a local macOS machine (not remote servers).
 
 ```bash
 # yazi + its optional dependencies
-uv tool install git+https://github.com/androsovm/clorch.git
 brew install yazi ffmpeg sevenzip poppler resvg imagemagick
 
 brew install --cask ghostty         # GPU-accelerated terminal
@@ -301,7 +300,8 @@ brew install gh && gh auth login
 | [kindavim](https://kindavim.app/)                     | Vim keybindings system-wide   |
 
 ```bash
-brew install --cask kindavim
+brew install --cask kindavim      # vim keys system-wide
+brew install --cask homerow       # keyboard-driven UI navigation
 
 brew install --cask nikitabobko/tap/aerospace
 brew tap FelixKratz/formulae
@@ -314,7 +314,7 @@ defaults write com.apple.spaces spans-displays -bool true && killall SystemUISer
 defaults write com.apple.dock expose-group-apps -bool true && killall Dock
 ```
 
-Install [Homerow](https://www.homerow.app/) manually and set up a hotkey (cmd + shift + space and cmd + shift + j) to trigger it.
+After install, set Homerow's hotkeys (cmd + shift + space and cmd + shift + j) in its settings.
 
 ### 12. Other macOS Tools
 
