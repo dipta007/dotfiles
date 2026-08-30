@@ -74,3 +74,6 @@ extract() {
   esac
 }
 
+# roy-agents
+alias agents='mosh --ssh="ssh -p 2222" roy@agents -- tmux new -A -s main'
+alias agents-fwd='ssh -A -p 2222 roy@agents -t "tmux new -A -s main"'

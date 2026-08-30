@@ -69,3 +69,6 @@ keybind = super+shift+k=clear_screen
 # Zoom split, like tmux prefix+z. cmd+z steals undo (still on cmd+shift+t).
 keybind = super+z=toggle_split_zoom
 keybind = super+shift+enter=toggle_split_zoom
+
+# ssh xterm config
+shell-integration-features = sudo,ssh-terminfo,ssh-env
