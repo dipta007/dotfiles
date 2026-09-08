@@ -13,6 +13,8 @@ setopt HIST_IGNORE_ALL_DUPS  # remove older duplicate entries
 setopt HIST_IGNORE_SPACE     # skip commands starting with space
 setopt HIST_REDUCE_BLANKS    # trim extra whitespace
 
+setopt AUTO_CD               # bare dir path (or ..) cds into it
+
 typeset -U path  # auto-deduplicate PATH entries
 path=(
   "$HOME/.local/bin"
