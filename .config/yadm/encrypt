@@ -3,3 +3,4 @@
 .claude/.ntfy_topic
 
 .claude-sync/config.yaml
+.config/opencode/meta-api-key
