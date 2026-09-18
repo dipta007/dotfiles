@@ -93,7 +93,8 @@
     "safety-net@cc-marketplace": true,
     "avoid-ai-writing@conorbronsdon-skills": true,
     "visual-explainer@visual-explainer-marketplace": true,
-    "drawio@drawio": true
+    "drawio@drawio": true,
+    "cloudflare@cloudflare": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -143,8 +144,15 @@
         "source": "github",
         "repo": "jgraph/drawio-mcp"
       }
+    },
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
     }
   },
+  "outputStyle": "Concise",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
   "tui": "fullscreen",
