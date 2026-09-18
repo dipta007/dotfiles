@@ -1,48 +1,48 @@
 #!/usr/bin/env bash
-# Sync Claude skills -> Codex via per-folder symlinks.
-# Source of truth: ~/.claude/skills. Codex reads each skill through a symlink.
-# Add/remove a skill in Claude, run this (or launch codex via the wrapper), done.
-#
-# Safe by design:
-#  - never touches ~/.codex/skills/.system (Codex's own bundled skills)
-#  - only removes symlinks it owns (links pointing back into ~/.claude or ~/.agents)
-#  - resolves nested symlinks (e.g. overleaf -> ~/.agents/skills/overleaf) to real path
+# Real directories and links outside the shared skill roots belong to the user.
 set -euo pipefail
 
 CLAUDE_SKILLS="$HOME/.claude/skills"
+SHARED_SKILLS="$HOME/.agents/skills"
 CODEX_SKILLS="$HOME/.codex/skills"
 
-[ -d "$CLAUDE_SKILLS" ] || { echo "no $CLAUDE_SKILLS"; exit 1; }
+[ -d "$CLAUDE_SKILLS" ] || [ -d "$SHARED_SKILLS" ] || { echo "no shared skills"; exit 1; }
 mkdir -p "$CODEX_SKILLS"
 
 linked=0
-# Link every Claude skill folder into Codex.
-for src in "$CLAUDE_SKILLS"/*; do
-  [ -e "$src" ] || continue          # empty glob guard
+for src in "$CLAUDE_SKILLS"/* "$SHARED_SKILLS"/*; do
+  [ -e "$src" ] || continue
   name=$(basename "$src")
-  case "$name" in .*) continue;; esac # skip dotfiles
-  # resolve real dir (follows symlinks like overleaf -> ~/.agents/skills/overleaf)
+  case "$name" in .*) continue;; esac
+  if [ "$src" = "$SHARED_SKILLS/$name" ] && [ -f "$CLAUDE_SKILLS/$name/SKILL.md" ]; then continue; fi
   real=$(cd "$src" 2>/dev/null && pwd -P) || continue
-  [ -f "$real/SKILL.md" ] || continue # only real skills
+  [ -f "$real/SKILL.md" ] || continue
   dest="$CODEX_SKILLS/$name"
   if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$real" ]; then
-    :                                 # already correct
+    :
   else
-    rm -rf "$dest"
+    if [ -L "$dest" ]; then
+      case "$(readlink "$dest")" in
+        "$HOME/.claude/"*|"$HOME/.agents/"*) rm "$dest";;
+        *) echo "preserving custom skill link: $dest"; continue;;
+      esac
+    elif [ -e "$dest" ]; then
+      echo "preserving custom skill: $dest"
+      continue
+    fi
     ln -s "$real" "$dest"
   fi
   linked=$((linked+1))
 done
 
-# Remove stale links we own: symlinks in Codex pointing into ~/.claude or ~/.agents
-# whose Claude source no longer exists.
 pruned=0
 for dest in "$CODEX_SKILLS"/*; do
   [ -L "$dest" ] || continue
   tgt=$(readlink "$dest")
   case "$tgt" in
     "$HOME/.claude/"*|"$HOME/.agents/"*)
-      if [ ! -e "$dest" ] || [ ! -e "$CLAUDE_SKILLS/$(basename "$dest")" ]; then
+      name=$(basename "$dest")
+      if [ ! -e "$dest" ] || { [ ! -f "$CLAUDE_SKILLS/$name/SKILL.md" ] && [ ! -f "$SHARED_SKILLS/$name/SKILL.md" ]; }; then
         rm -f "$dest"; pruned=$((pruned+1))
       fi;;
   esac

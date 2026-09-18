@@ -71,6 +71,9 @@
     }
   },
   "model": "meta/muse-spark-1.1",
+  "tools": {
+    "builder-mcp_MechanicRunTool": false
+  },
   "mcp": {
     "builder-mcp": {
       "type": "local",
@@ -99,6 +102,21 @@
     "duckduckgo": {
       "type": "local",
       "command": ["npx", "-y", "@oevortex/ddg_search"]
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "docling": {
+      "type": "local",
+      "command": ["docling-mcp-server", "--transport", "stdio", "conversion", "generation"],
+      "environment": {
+        "DOCLING_MCP_CONVERSION_MODE": "local"
+      },
+      "enabled": true,
+      "timeout": 120000
     }
   }
 }
