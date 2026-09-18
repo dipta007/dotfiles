@@ -12,7 +12,6 @@
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
-  "autoCompactWindow": 930000,
   "hooks": {
     "Stop": [
       {
@@ -155,6 +154,7 @@
   "outputStyle": "Concise",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "autoCompactWindow": 930000,
   "tui": "fullscreen",
   "autoDreamEnabled": true,
   "skipWorkflowUsageWarning": true,
