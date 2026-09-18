@@ -17,6 +17,17 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 - If short and complete conflict, keep complete — then simplify the wording, not the content.
 - This rule is NON-NEGOTIABLE and overrides any habit toward long or complex prose.
 
+**Plain language, not compressed language (CRITICAL). Applies to EVERY agent and subagent, on every generation.**
+Short does not mean dense. Cutting words is only correct when the result is EASIER to read, never harder.
+- One idea per sentence. Short sentences. Common words. If a sentence needs two readings, split it.
+- Do not stack many ideas into one line: no long chains of clauses, no piles of nouns ("model output quality regression root cause analysis"), no three qualifiers before one noun. Unpack it into two plain sentences instead.
+- Do not compress by deleting the connecting words (`the`, `that`, `which`, `is`) until the line reads like a telegram or a log message. Write full sentences.
+- Say the thing directly. Prefer verbs over noun forms ("we measured X", not "measurement of X was performed"). Prefer active voice.
+- Explain, do not gesture. A cryptic half-sentence the reader must decode is worse than one more clear sentence.
+- Test before sending: could a non-native English speaker read this ONCE and act on it? If no, rewrite it simpler.
+- This binds every subagent too. When you dispatch an agent, pass this rule along so its output follows it.
+- **For any writing task, use the `writing-craft` skill** (drafting, editing, or improving prose: papers, abstracts, intros, rebuttals, README, docs, blog posts). Invoke it before writing, not after.
+
 **Applies to written docs too, not just chat answers.** Any generated content or tech doc
 (README, design doc, plan, notes, code comments) MUST be:
 - **Simple** enough for a non-native English speaker.
@@ -101,6 +112,8 @@ The ladder shortens the solution, never the reading. A small diff in the wrong p
 
 **When NOT to be lazy (never simplify these away):** input validation at trust boundaries, error handling that prevents data loss, security, accessibility basics, and anything the user explicitly asked for. Simplicity trims speculative code, never these. If the user wants the full version, build it, no re-arguing.
 
+**Complexity is a timing problem, not a correctness problem.** Bloated code usually applies a real pattern correctly. The fault is adding the pattern before the second use case exists, which is why over-engineering survives review. Solve today's problem simply; add the abstraction when the complexity actually arrives.
+
 ## 3. Surgical Changes
 
 **Touch only what you must. Clean up only your own mess.**
@@ -146,6 +159,15 @@ For multi-step tasks, state a brief plan:
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
 **Verify factual claims in a fresh context (anti-hallucination).** Before you assert a fact, citation, or number that the user will rely on (a paper says X, a function has signature Y, an API returns Z, a metric equals N), check it against the source, not your memory. For a batch of claims (a draft, a related-work section, a results table), verify each one in a context that did not write it: a claim is `supported`, `contradicted`, or `unverifiable`. For a citation, check the source actually *says* the attributed thing, not merely that the source exists. If you cannot verify, say `unverifiable`, never upgrade a guess to a fact.
+
+### Anti-patterns for rules 1-4 (concrete self-check)
+
+| Rule | Anti-pattern | Fix |
+|---|---|---|
+| 1. Think Before Coding | Silently assumes the file format, field names, or scope | List assumptions, ask |
+| 2. Simplicity First | Strategy pattern for one discount calculation | One function until the complexity is real |
+| 3. Surgical Changes | Reformats quotes and adds type hints while fixing a bug | Only the lines that fix the reported issue |
+| 4. Goal-Driven | "I'll review and improve the code" | "Test for bug X → make it pass → no regressions" |
 
 ## 5. Comments
 
@@ -238,5 +260,11 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again. Record it as one greppable line: `[LEARN:<category>] <wrong> → <right>` (example: `[LEARN:git] yadm add stages whole file → stage a surgical blob`).
 7. **Never commit without explicit permission (CRITICAL)**: Do NOT run `git commit` unless the user explicitly tells you to commit in that request. Same for `git push`, `git merge`, and opening PRs. Staging changes or writing code is fine; creating the commit is not. If you think a commit is warranted, stop and ask first. A prior "yes" does not carry over to later changes; ask again each time.
 8. **Token-heavy skills need explicit opt-in (`avoid-ai-writing`)**: Never auto-invoke `avoid-ai-writing` (its SKILL.md loads ~23k tokens per fire). Do not trigger it just because a request loosely matches ("clean this up", "make it read better"); those go to `writing-craft` or a plain edit. Invoke it ONLY when the user explicitly names it. Even then, first confirm: "This loads ~23k tokens. Run it?" and wait for a yes. Same rule for any skill whose on-invoke cost is that large.
+9. **Never let the paper's method section go stale (CRITICAL)**: If the repo has a paper method section (e.g. `paper/method.tex`), treat it as part of the method, not as documentation about it. Whenever the method changes, update that file **in the same task**, before reporting the work as done.
+   - **Triggers an update:** a new component, a changed loss or objective, a new or changed hyperparameter or default, a different way of extracting directions or features, a new or changed composition or decision rule, a changed evaluation readout or metric, a new normalization or scaling scheme, a new dataset or model in the instantiation.
+   - **Does not trigger:** refactors, logging, plumbing or dtype fixes, anything leaving the described math and protocol unchanged.
+   - Update the equations and the hyperparameter values, not only the prose. A stale number in the method is worse than no number, because the reader trusts it.
+   - Keep the method-section register: state what the method does and why that construction is right. No results, no comparisons against what was tried and rejected. A fix found while debugging is written as the positive design choice it became.
+   - Recompile after editing and confirm it still builds before saying the task is finished.
 
 **MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
