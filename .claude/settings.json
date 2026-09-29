@@ -89,11 +89,11 @@
     "frontend-design@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "safety-net@cc-marketplace": true,
     "avoid-ai-writing@conorbronsdon-skills": true,
     "visual-explainer@visual-explainer-marketplace": true,
     "drawio@drawio": true,
-    "cloudflare@cloudflare": true
+    "cloudflare@cloudflare": true,
+    "cc-safety-net@cc-marketplace": true
   },
   "extraKnownMarketplaces": {
     "skim": {
@@ -162,7 +162,7 @@
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
-  "inputNeededNotifEnabled": true
+  "voiceEnabled": true
 }
