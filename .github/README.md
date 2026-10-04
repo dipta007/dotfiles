@@ -91,7 +91,9 @@ brew install sheldon starship
 | [uv](https://docs.astral.sh/uv/) | Fast Python package/project manager    |
 
 ```bash
-brew install mise uv
+# mise is slow in brew
+brew uninstall mise && curl https://mise.run | sh
+brew install uv
 
 # Install runtimes declared in ~/.config/mise/config.toml (node/npm) + gen shims.
 # We use shims mode (no per-prompt activate hook), so this step is what creates
@@ -109,15 +111,15 @@ uv tool install ipython
 
 ### 5. Search & Navigation
 
-| Tool                                             | What it does                           |
-| ------------------------------------------------ | -------------------------------------- |
-| [fd](https://github.com/sharkdp/fd)              | Fast `find` alternative                |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative                |
-| [eza](https://github.com/eza-community/eza)      | Modern `ls` with git cols + icons (`ll` alias) |
-| [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything            |
-| [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits   |
+| Tool                                             | What it does                                      |
+| ------------------------------------------------ | ------------------------------------------------- |
+| [fd](https://github.com/sharkdp/fd)              | Fast `find` alternative                           |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast `grep` alternative                           |
+| [eza](https://github.com/eza-community/eza)      | Modern `ls` with git cols + icons (`ll` alias)    |
+| [fzf](https://github.com/junegunn/fzf)           | Fuzzy finder for everything                       |
+| [zoxide](https://github.com/ajeetdsouza/zoxide)  | Smarter `cd` that learns your habits              |
 | [atuin](https://github.com/atuinsh/atuin)        | `Ctrl-R` history in SQLite, syncs across machines |
-| [wt](https://github.com/max-sixty/worktrunk)     | Git worktree manager with fuzzy search |
+| [wt](https://github.com/max-sixty/worktrunk)     | Git worktree manager with fuzzy search            |
 
 ```bash
 brew install fd ripgrep eza fzf zoxide atuin worktrunk
@@ -160,16 +162,16 @@ Inside neovim, install formatters:
 
 ### 7. Terminal Tools
 
-| Tool                                                 | What it does                        |
-| ---------------------------------------------------- | ----------------------------------- |
-| [bat](https://github.com/sharkdp/bat)                | `cat` with syntax highlighting      |
-| [yazi](https://github.com/sxyazi/yazi)               | Terminal file manager               |
-| [jq](https://jqlang.github.io/jq/)                   | JSON processor                      |
-| [aichat](https://github.com/sigoden/aichat)          | AI chat in terminal                 |
-| [opencode](https://github.com/anomalyco/opencode)    | AI coding agent in the terminal     |
-| [paseo](https://www.npmjs.com/package/@getpaseo/cli) | Drive AI coding agents from the CLI |
+| Tool                                                   | What it does                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------------- |
+| [bat](https://github.com/sharkdp/bat)                  | `cat` with syntax highlighting                                    |
+| [yazi](https://github.com/sxyazi/yazi)                 | Terminal file manager                                             |
+| [jq](https://jqlang.github.io/jq/)                     | JSON processor                                                    |
+| [aichat](https://github.com/sigoden/aichat)            | AI chat in terminal                                               |
+| [opencode](https://github.com/anomalyco/opencode)      | AI coding agent in the terminal                                   |
+| [paseo](https://www.npmjs.com/package/@getpaseo/cli)   | Drive AI coding agents from the CLI                               |
 | [claude-sync](https://github.com/tawanorg/claude-sync) | Sync Claude Code sessions across machines (encrypted, own bucket) |
-| [claude-swap](https://github.com/realiti4/claude-swap) | Switch Claude accounts before rate limits hit (`cswap`) |
+| [claude-swap](https://github.com/realiti4/claude-swap) | Switch Claude accounts before rate limits hit (`cswap`)           |
 
 ```bash
 brew install bat jq aichat
@@ -237,11 +239,11 @@ uv tool install claude-swap
 tmux plugins install themselves via TPM (`prefix + I`), but these binaries they
 depend on are NOT installed by TPM — do these manually per machine.
 
-| Tool | Used by | What it does |
-| ---- | ------- | ------------ |
-| [sesh](https://github.com/joshmedeski/sesh)          | `prefix + o` | fuzzy jump to any project/session (uses zoxide) |
-| [tmux-fingers](https://github.com/Morantron/tmux-fingers) | `prefix + f` | hint-label copy of paths/urls/hashes on screen |
-| python3 | [extrakto](https://github.com/laktak/extrakto) (`prefix + Tab`) | fzf grab of pane text into the command line |
+| Tool                                                      | Used by                                                         | What it does                                    |
+| --------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| [sesh](https://github.com/joshmedeski/sesh)               | `prefix + o`                                                    | fuzzy jump to any project/session (uses zoxide) |
+| [tmux-fingers](https://github.com/Morantron/tmux-fingers) | `prefix + f`                                                    | hint-label copy of paths/urls/hashes on screen  |
+| python3                                                   | [extrakto](https://github.com/laktak/extrakto) (`prefix + Tab`) | fzf grab of pane text into the command line     |
 
 ```bash
 brew install tmux              # no earlier section installs it
