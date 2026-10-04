@@ -1,4 +1,4 @@
-# research-deck — ML/AI research presentation skill for Claude Code
+# research-deck: ML/AI research presentation skill for Claude Code
 
 A Claude Code skill that turns a paper / results into a storytelling deck
 (**Problem → Gap → Method → Results → Takeaway**). It's the narrative + structure layer;
@@ -8,13 +8,13 @@ scaffold **Slidev/Marp** for HTML/PDF talks. Adapted from
 
 ## What's in here
 - `SKILL.md`: workflow (defaults to white minimal; asks pptx-vs-HTML each deck)
-- `content_guidelines.md` — argument structure, action titles, ghost-deck test, ML QA checklist
-- `figures.md` — matplotlib `text.usetex`, equation-as-image, real-figure scan (pptx has NO native LaTeX)
-- `slide_patterns.md` — PptxGenJS coordinate patterns per ML slide type
-- `install.sh` — idempotent bootstrap (all 3 layers below)
+- `content_guidelines.md`: argument structure, action titles, ghost-deck test, ML QA checklist
+- `figures.md`: matplotlib `text.usetex`, equation-as-image, real-figure scan (pptx has NO native LaTeX)
+- `slide_patterns.md`: PptxGenJS coordinate patterns per ML slide type
+- `install.sh`: idempotent bootstrap (all 3 layers below)
 
 ## The 3 layers you must reproduce on a new machine
-Committing files alone is NOT enough — only layer A is files.
+Committing files alone is NOT enough; only layer A is files.
 
 | Layer | What | How it's reproduced |
 |---|---|---|
@@ -35,18 +35,18 @@ Works on macOS (Homebrew) and Debian/Ubuntu (apt). Re-running is safe.
 
 Recommended: keep the source-of-truth copy in your dotfiles repo and symlink it in.
 
-**Plain dotfiles / bootstrap script** — add to your bootstrap:
+**Plain dotfiles / bootstrap script.** Add to your bootstrap:
 ```bash
 bash "$DOTFILES/claude/skills/research-deck/install.sh"
 ```
 
-**GNU stow** — put the tree at `stow/claude/.claude/skills/research-deck/`, then `stow claude`,
-then once per machine run `install.sh SKILL_ONLY=1` isn't needed (stow made the symlink) — just run it to do layers B+C.
+**GNU stow**: put the tree at `stow/claude/.claude/skills/research-deck/`, then `stow claude`,
+then once per machine run `install.sh SKILL_ONLY=1` isn't needed (stow made the symlink); just run it to do layers B+C.
 
-**chezmoi** — store files under `dot_claude/skills/research-deck/`, and add `install.sh` as a
+**chezmoi**: store files under `dot_claude/skills/research-deck/`, and add `install.sh` as a
 `run_onchange_` script (chezmoi re-runs it when the file hashes change).
 
-Note: `~/.claude/skills/` also holds other loose skills (`commit`, `explain`, …) — symlink the
+Note: `~/.claude/skills/` also holds other loose skills (`commit`, `explain`, …); symlink the
 `research-deck` *subdir* specifically; don't stow the whole `skills/` dir unless you track all of them.
 
 ## Verify after install

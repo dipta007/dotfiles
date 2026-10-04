@@ -1,7 +1,7 @@
-# Slide Patterns — ML/AI decks (PptxGenJS)
+# Slide Patterns: ML/AI decks (PptxGenJS)
 
-Concrete PptxGenJS patterns per ML slide type. Use with the pptx skill's `pptxgenjs.md` for the full API.
-All coords assume `LAYOUT_16x9` (10" × 5.625"). WHITE MINIMAL is the default — EVERY slide (incl. title
+Concrete PptxGenJS patterns per ML slide type. Use with the pptx skill's "Creating with pptxgenjs" section.
+All coords assume `LAYOUT_16x9` (10" × 5.625"). WHITE MINIMAL is the default: EVERY slide (incl. title
 and conclusions) has a WHITE background; differentiate with accent bars / light-tinted bands, NEVER a dark fill.
 
 ---
@@ -25,9 +25,9 @@ const FONTS = { face: "Arial", title: 26, sectionHeader: 22, body: 20, label: 16
 const MARGIN = 0.5;
 ```
 
-**HARD RULE — body text is 20pt, floor 18pt. NON-NEGOTIABLE.**
+**HARD RULE: body text is 20pt, floor 18pt. NON-NEGOTIABLE.**
 Use `FONTS.body` (20) for ALL body/bullet text; never type a smaller literal to make text fit.
-Interpretation columns, takeaways, table cells — all ≥18pt. If content doesn't fit at 20pt, the fix
+Interpretation columns, takeaways, table cells: all ≥18pt. If content doesn't fit at 20pt, the fix
 is **less text, not smaller font** (cut words, split the slide, move detail to appendix). A slide with
 17pt bullets is a FAILED slide even if it looks full. Only captions/citations (`FONTS.cite` 13) and
 chart-internal labels (`FONTS.label` 16) may go below 18. Titles ≥24. This is the #1 drift to avoid.
@@ -46,7 +46,7 @@ function cite(slide, text) {
 
 ---
 
-## 1. Title slide (WHITE — accent bar, not a dark fill)
+## 1. Title slide (WHITE: accent bar, not a dark fill)
 
 ```javascript
 slide.background = { color: COLORS.bg };
@@ -190,7 +190,7 @@ cite(slide, "Ablations on AppWorld dev; mean of 3 seeds");
 
 ---
 
-## 8. Equation slide (math is a pre-rendered image — pptx has no LaTeX)
+## 8. Equation slide (math is a pre-rendered image; pptx has no LaTeX)
 
 Render the equation to PNG per figures.md §4, then:
 
@@ -227,7 +227,7 @@ slide.addText("you@lab.edu   ·   github.com/you/repo   ·   arxiv.org/abs/XXXX.
 
 ---
 
-## 10. Section divider (decks > 15 slides) — WHITE with tint band
+## 10. Section divider (decks > 15 slides): WHITE with tint band
 
 ```javascript
 slide.background = { color: COLORS.bg };
@@ -265,9 +265,9 @@ actionTitle(slide, "dirty_rows stays 0 across all steps: no hint token ever reac
 
 ---
 
-## 13. Speaker notes (every slide — a spoken script)
+## 13. Speaker notes (every slide: a spoken script)
 
-Attach a full spoken script to each slide (see SKILL Step 4 for the voice — it must sound like a HUMAN
+Attach a full spoken script to each slide (see SKILL Step 4 for the voice; it must sound like a HUMAN
 TALKING, not text read aloud). pptx uses `addNotes`; write it the way you'd actually SAY it.
 
 ```javascript
@@ -306,7 +306,7 @@ rhythm)? Simple words + jargon OK, contractions OK, no em-dashes, no written con
 □ Body 20pt (18pt floor); ≤~40 words/slide; no accent line under any title
 □ Every slide has speaker notes = a spoken script (FAANG/top-lab voice), not slide-text read aloud
 □ Notes in SIMPLE non-native-friendly English (technical jargon OK, no fancy words/idioms)
-□ NO em-dashes in notes — period/comma/connector; "category like example", not "category, example,"
+□ NO em-dashes in notes: period/comma/connector; "category like example", not "category, example,"
 □ Each note sentence joins ≤2 ideas (split 3+ clause chains; ear can't track them)
 □ Ran the pptx skill's visual QA (subagent) + fixed at least one cycle
 ```

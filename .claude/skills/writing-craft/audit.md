@@ -1,4 +1,4 @@
-# Audit — how to review and fix a draft
+# Audit: how to review and fix a draft
 
 The mechanics: how to turn the principles (clarity.md, narrative.md) into a concrete review a researcher can
 act on. Borrows the best of the existing skills (enforcement tags, density scoring, Original/Recommended/Reason
@@ -6,10 +6,10 @@ cards, independent red-team) and adds the checks none of them do (value-to-reade
 
 ## Order of the audit (structure first, always)
 
-1. **Value + story pass** (narrative.md) — ghost-outline test, so-what test, McEnerney value reframe.
+1. **Value + story pass** (narrative.md): ghost-outline test, so-what test, McEnerney value reframe.
    If this fails, STOP and coach the structure. Do not proceed to word edits.
-2. **Claim↔evidence pass** (below) — the highest-value ML check.
-3. **Clarity pass** (clarity.md) — clutter, energy-drains, sentence length, given→new flow.
+2. **Claim↔evidence pass** (below): the highest-value ML check.
+3. **Clarity pass** (clarity.md): clutter, energy-drains, sentence length, given→new flow.
 4. **Score, report, offer to fix.**
 
 ---
@@ -21,19 +21,19 @@ For a paper draft (or intro+results), build a small table before editing prose:
 1. Extract every CLAIM in the abstract + intro (contributions, "we show that…", performance assertions).
 2. For each, find the RESULT (table/figure/section) that backs it.
 3. Flag:
-   - **Unbacked claim** — a claim with no result behind it → CRITICAL (reviewers attack this first).
-   - **Buried result** — a result never promised up front → the abstract/intro is underselling; surface it.
-   - **Number mismatch** — a number in the prose ≠ the number in the table/figure → CRITICAL, and never
+   - **Unbacked claim**: a claim with no result behind it → CRITICAL (reviewers attack this first).
+   - **Buried result**: a result never promised up front → the abstract/intro is underselling; surface it.
+   - **Number mismatch**: a number in the prose ≠ the number in the table/figure → CRITICAL, and never
      "fix" by inventing a number; flag it for the author to reconcile.
 
-This is prose-side only — it finds the mismatch. To VERIFY the numbers/citations against code and DBLP, hand
+This is prose-side only; it finds the mismatch. To VERIFY the numbers/citations against code and DBLP, hand
 off to `phd-skills` (`/xray`, `/factcheck`). Say so in the report.
 
 ---
 
 ## Density score (so one flaw doesn't fail a good draft)
 
-Don't count raw hits — weight by severity and normalize, per slop-cop's method:
+Don't count raw hits; weight by severity and normalize, per slop-cop's method:
 
 ```
 U = words / 500
@@ -46,12 +46,12 @@ Tiers: **0–2 CLEAN · 2–5 LIGHT · 5–10 NEEDS WORK · 10+ REWRITE.**
 Escalate one tier if: any unbacked claim (auto-CRITICAL), the ghost-outline test fails, or a paragraph has 3+
 CRITICAL/MAJOR. Report the number and the tier so "this reads badly" becomes reproducible.
 
-Compression signal: if fixing clutter cuts the passage >50%, that's not wordiness — the framing was wrong; flag
+Compression signal: if fixing clutter cuts the passage >50%, that's not wordiness; the framing was wrong; flag
 for a structural rethink, not just tightening.
 
 ---
 
-## Report format (default output — do NOT mutate the file first)
+## Report format (default output; do NOT mutate the file first)
 
 Write a report, section by section. Each issue is a card:
 
@@ -81,10 +81,10 @@ scratch. Trust "clean" only when the independent reviewer returns zero CRITICAL/
 
 ---
 
-## Calibration — don't over-edit
+## Calibration: don't over-edit
 
 - Flag by whether it hurts the READER, not by rule-matching. A passive in Methods, a long sentence that's
-  genuinely one idea, a technical term the reviewer knows — all fine. Say so instead of flagging.
+  genuinely one idea, a technical term the reviewer knows: all fine. Say so instead of flagging.
 - Respect the reader level chosen in Step 0: jargon undefined for experts is correct; the same word is clutter
   for a cross-field reader.
 - If a passage needs rethinking, say it plainly. Don't polish words in a paragraph that shouldn't exist.

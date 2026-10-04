@@ -2,15 +2,15 @@
 
 Word- and sentence-level craft. Grounded in Zinsser (*On Writing Well*), Lanham (paramedic method),
 Williams (*Style*), Gopen & Swan (given-new). Each rule is tagged:
-- `[MECH]` — a grep/scan can catch a candidate (still needs a human to confirm it's really wrong).
-- `[JUDGE]` — no pattern catches it; must be READ for.
+- `[MECH]`: a grep/scan can catch a candidate (still needs a human to confirm it's really wrong).
+- `[JUDGE]`: no pattern catches it; must be READ for.
 
 The Zinsser core, in one line: **simplicity, clarity, brevity, humanity. Cut every word that does no work.**
 A sentence is clean when nothing can be removed without losing meaning.
 
 ---
 
-## 1. Clutter — cut it `[MECH]` for the lists, `[JUDGE]` for padding
+## 1. Clutter: cut it `[MECH]` for the lists, `[JUDGE]` for padding
 
 **Inflated phrases → short form:**
 - in order to → to · due to the fact that / owing to the fact that → because · in the event that → if
@@ -32,7 +32,7 @@ novel, don't assert it), "significant improvement" (give the number), "detailed 
 
 ---
 
-## 2. The three energy-drains — rewrite actor→action→object
+## 2. The three energy-drains: rewrite actor→action→object
 
 The most common reason ML prose feels flat. Fix template: put the DOER first, a strong VERB next, the target last.
 
@@ -48,13 +48,13 @@ The most common reason ML prose feels flat. Fix template: put the DOER first, a 
 
 ---
 
-## 3. Sentences — one idea, short, direct
+## 3. Sentences: one idea, short, direct
 
 - **One idea per sentence `[JUDGE]`.** Break any sentence that joins 3+ clauses with and/but/which/so/;.
   The reader can hold "A, and B." They lose "A, and B, but C, which D."
 - **Long-sentence flag `[MECH]`:** >30 words = check; >40 words = almost always split.
 - **Simple words over fancy `[JUDGE]`:** demonstrate→show, utilize→use, leverage→use, facilitate→help,
-  methodology→method (usually), elucidate→explain, endeavor→try. (Technical terms stay — GRPO, gradient,
+  methodology→method (usually), elucidate→explain, endeavor→try. (Technical terms stay: GRPO, gradient,
   ablation. This is about the *non*-technical words.)
 - **Positive over negative `[JUDGE]`:** "does not have" → "lacks"; "did not remember" → "forgot".
 - **Concrete over abstract `[JUDGE]`:** name the thing. "performance improvements" → "+4.2 BLEU".
@@ -69,7 +69,7 @@ From Gopen & Swan / Williams. Reader-comprehension, not grammar.
 - **Flow rule:** the new idea at the end of sentence N should become the familiar start of sentence N+1
   ("reach back and grab"). stress→topic linking = a story; topic→topic repetition = a flat list.
 - **Detection heuristic:** read the first noun phrase and last noun phrase of consecutive sentences. If
-  sentence N+1 opens on something never introduced, the chain is broken — that's why the paragraph feels jumpy.
+  sentence N+1 opens on something never introduced, the chain is broken; that's why the paragraph feels jumpy.
 
 ---
 
@@ -77,7 +77,7 @@ From Gopen & Swan / Williams. Reader-comprehension, not grammar.
 
 1. Circle the prepositions (of, in, to, for, with, by…). Each is a place clutter hides.
 2. Circle the "is/are/was/were" forms.
-3. Find the real action — who is kicking whom?
+3. Find the real action: who is kicking whom?
 4. Put the doer at the front, the action in a strong verb.
 5. Cut what's left that does no work. Start fast (no long windup).
 
@@ -86,5 +86,5 @@ From Gopen & Swan / Williams. Reader-comprehension, not grammar.
 ## De-AI note (light)
 Cut the tells that also happen to be clutter: em-dashes (rewrite with a period, comma, colon, or parentheses), "not just X, but Y"
 scaffolding, "it's worth noting", listicle transitions ("Furthermore, Moreover, Additionally"),
-sycophantic openers. These overlap the clutter rules above — no separate pass needed. (For a dedicated
+sycophantic openers. These overlap the clutter rules above; no separate pass needed. (For a dedicated
 mechanical AI-tell linter, `slop-cop` / `avoid-ai-writing` exist; this skill treats it as part of clutter.)

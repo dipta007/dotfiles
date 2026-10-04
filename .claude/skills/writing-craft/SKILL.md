@@ -7,12 +7,12 @@ license: MIT
 # Writing Craft (ML/AI research)
 
 Make research prose clear, well-structured, and valuable to the reader. This skill is about the
-WORDS — not formatting, citations, or slides. It coaches and edits toward four pillars, in priority order:
+WORDS, not formatting, citations, or slides. It coaches and edits toward four pillars, in priority order:
 
-1. **Value to the reader (McEnerney)** — does the text change what the reader thinks, in terms THEY care about?
-2. **Story / structure (Schimel OCAR)** — is it a narrative (problem→gap→approach→result→meaning), not a data dump?
-3. **Clarity & cut clutter (Zinsser + Lanham)** — every word earns its place; simple, direct, warm.
-4. **Reviewer-facing sharpness** — claim-first sentences, the so-what test, claims backed by evidence.
+1. **Value to the reader (McEnerney)**: does the text change what the reader thinks, in terms THEY care about?
+2. **Story / structure (Schimel OCAR)**: is it a narrative (problem→gap→approach→result→meaning), not a data dump?
+3. **Clarity & cut clutter (Zinsser + Lanham)**: every word earns its place; simple, direct, warm.
+4. **Reviewer-facing sharpness**: claim-first sentences, the so-what test, claims backed by evidence.
 
 **Guides:** [narrative.md](narrative.md) (structure + value + sharpness), [clarity.md](clarity.md)
 (word/sentence craft), [audit.md](audit.md) (how to review/report/fix), [draft.md](draft.md) (write a
@@ -20,47 +20,47 @@ grounded first draft from results/code/papers). Read the ones your mode (Step 0)
 
 ---
 
-## Step 0 — Pick the mode (ask if unclear)
+## Step 0: Pick the mode (ask if unclear)
 
-- **Draft from sources** — blank page; user has results / code / related papers and wants a first draft.
+- **Draft from sources**: blank page; user has results / code / related papers and wants a first draft.
   **Read [draft.md](draft.md).** Draft ONLY from grounded inputs; never invent numbers or citations; flag
   every unsupported spot with `[TODO]`. This is the safe way to "write my paper from scratch."
-- **Coach / plan** — user is starting or stuck but not ready to draft. Help find the story and value FIRST (narrative.md), before any prose. Don't polish words that shouldn't exist.
-- **Revise** — user has a draft, wants it better. Run the audit (audit.md), produce an issue report, apply fixes on request.
-- **Quick edit** — user pastes a paragraph, wants it tightened now. Give the improved version + a 1-line why per change. Skip the full report.
+- **Coach / plan**: user is starting or stuck but not ready to draft. Help find the story and value FIRST (narrative.md), before any prose. Don't polish words that shouldn't exist.
+- **Revise**: user has a draft, wants it better. Run the audit (audit.md), produce an issue report, apply fixes on request.
+- **Quick edit**: user pastes a paragraph, wants it tightened now. Give the improved version + a 1-line why per change. Skip the full report.
 
 Also ask (if not obvious): **who is the reader?** (expert reviewer / area chair skimming / cross-field reader). This sets what jargon may go undefined and how much context to give. Everything downstream depends on it.
 
 ---
 
-## Step 1 — Value and story BEFORE words (the part everyone skips)
+## Step 1: Value and story BEFORE words (the part everyone skips)
 
 Most "bad writing" is not word-level. It is that the text explains what the author DID instead of why the
-reader should CARE. Fix this first — polishing a value-less paragraph is wasted work. From narrative.md:
+reader should CARE. Fix this first; polishing a value-less paragraph is wasted work. From narrative.md:
 
-- **The McEnerney test:** the value of the writing is not to record your ideas — it is to CHANGE the reader's.
+- **The McEnerney test:** the value of the writing is not to record your ideas; it is to CHANGE the reader's.
   Ask: what does the reader believe now, what should they believe after, and why do THEY care? If the text
   only says "here is what we did", reframe around the reader's problem.
-- **The so-what test:** for the abstract, intro, and every results paragraph — cover the claim, read it, ask
+- **The so-what test:** for the abstract, intro, and every results paragraph, cover the claim, read it, ask
   "so what?". If there is no answer in the reader's terms, the point is not made yet.
 - **OCAR / story arc:** problem (why this matters) → gap (what's missing/broken) → approach → result → meaning.
   Titles/topic-sentences alone should tell this arc (the ghost-outline test).
 
 ---
 
-## Step 2 — Then the words (clarity.md)
+## Step 2: Then the words (clarity.md)
 
 Apply Zinsser + the paramedic method. The four highest-yield moves for ML prose:
-- **Cut clutter** — inflated phrases ("in order to"→"to"), throat-clearing openers ("It is important to note that"→delete), padding, redundant adjectives.
-- **Kill the three energy-drains** — passive voice, fuzzy verbs (is/makes/performs), nominalizations ("the regulation of"→"regulates"). Rewrite as actor→action→object.
+- **Cut clutter**: inflated phrases ("in order to"→"to"), throat-clearing openers ("It is important to note that"→delete), padding, redundant adjectives.
+- **Kill the three energy-drains**: passive voice, fuzzy verbs (is/makes/performs), nominalizations ("the regulation of"→"regulates"). Rewrite as actor→action→object.
 - **One idea per sentence.** Break any sentence joining 3+ clauses. Simple words over fancy ones.
-- **Given→new flow** — start each sentence with old/familiar info, end on the new idea; the new idea of sentence N becomes the familiar start of N+1. Broken chains are why paragraphs feel choppy.
+- **Given→new flow**: start each sentence with old/familiar info, end on the new idea; the new idea of sentence N becomes the familiar start of N+1. Broken chains are why paragraphs feel choppy.
 
 Full rule lists with `[MECH]` (a grep/scan catches it) vs `[JUDGE]` (must be read for) tags are in clarity.md.
 
 ---
 
-## Step 3 — Sharpness + claim↔evidence (audit.md)
+## Step 3: Sharpness + claim↔evidence (audit.md)
 
 The check no other writing tool does, and the one ML reviewers punish hardest:
 - **Every claim maps to evidence.** Each contribution/claim in the abstract and intro must be backed by a
@@ -70,7 +70,7 @@ The check no other writing tool does, and the one ML reviewers punish hardest:
 
 ---
 
-## Report format (from audit.md — the default output)
+## Report format (from audit.md; the default output)
 
 Do NOT silently rewrite the user's file. Produce an issue report, section by section, each issue as a card:
 
@@ -84,25 +84,25 @@ Why:         <one line + the principle, e.g. "clutter (Zinsser)" / "value (McEne
 - **Severity:** CRITICAL (misleads reader / unbacked claim / buried point) · MAJOR (clutter, weak structure, no so-what) · MINOR (word choice, rhythm).
 - Lead each section with a 1-line summary (counts by severity). Omit sections with no issues.
 - End with the **top 3 fixes** ranked by impact on the reader.
-- Then offer: "want me to apply these?" — only mutate the text after the user says yes.
+- Then offer: "want me to apply these?" Only mutate the text after the user says yes.
 
 ## Honest calibration (avoid over-editing)
 
 - Not every passive is wrong (methods sections use it legitimately); not every long sentence is bad. Flag by
   whether it hurts the READER, not by rule-matching. Say when a "violation" is actually fine.
-- Keep the author's voice. The goal is their idea, clearer — not your style.
+- Keep the author's voice. The goal is their idea, clearer, not your style.
 - Match the reader level chosen in Step 0. Jargon a reviewer knows is fine; the same term is clutter for a cross-field reader.
-- If a whole passage needs rethinking, say so plainly — don't polish sentences in a paragraph that shouldn't exist.
+- If a whole passage needs rethinking, say so plainly; don't polish sentences in a paragraph that shouldn't exist.
 
 ## Related tools (hand off, don't duplicate)
-- **phd-skills** `/factcheck` `/xray` — citations vs DBLP, number/code audits. Writing-craft does PROSE; it flags claim↔evidence but phd-skills verifies the numbers.
-- **research-deck** — for SLIDES, use research-deck, NOT this skill. See the boundary below.
-- **slop-cop** (if installed) — a mechanical CLI prose linter; complementary to this skill's craft coaching.
+- **phd-skills** `/factcheck` `/xray`: citations vs DBLP, number/code audits. Writing-craft does PROSE; it flags claim↔evidence but phd-skills verifies the numbers.
+- **research-deck**: for SLIDES, use research-deck, NOT this skill. See the boundary below.
+- **slop-cop** (if installed): a mechanical CLI prose linter; complementary to this skill's craft coaching.
 
-## Slides are NOT prose — the boundary with research-deck
+## Slides are NOT prose: the boundary with research-deck
 
 If the target is a slide deck, use **research-deck**, not this skill. Slides have no sentences or paragraphs,
-so this skill's word/sentence rules (clarity.md) would make slides worse — walls of text instead of the
+so this skill's word/sentence rules (clarity.md) would make slides worse: walls of text instead of the
 telegraphic fragments good slides use. What DOES carry over is only the structure layer, and research-deck
 already has its own versions:
 - value-to-reader → research-deck's "audience needs the why" + reader-level question
@@ -110,7 +110,7 @@ already has its own versions:
 - so-what test → research-deck's **action titles** (title states the takeaway, not a topic)
 - ghost-outline → research-deck's **ghost-deck test**
 
-The ONLY slide elements that are sentence-like — and where this skill's clarity rules genuinely help — are the
+The ONLY slide elements that are sentence-like (and where this skill's clarity rules genuinely help) are the
 **action titles** and the **speaker-note scripts**. research-deck already governs both. So: don't run this
 skill's paragraph rules (given→new flow, topic sentences, one-idea-per-sentence, full-sentence polish) on slide
 bullets. Improve the deck's PROSE artifacts (a blog version, the paper the talk is based on) with this skill;

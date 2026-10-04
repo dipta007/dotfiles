@@ -200,7 +200,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ## 7. Prose
 
 - Follow the Google Developer Documentation Style Guide, except: never use em dashes.
-- Use ASD-STE100-derived precision rules.
+- Follow ASD-STE100 (Simplified Technical English).
 - Apply Zinsser's four principles: clarity, simplicity, brevity, and humanity.
 
 ## Visualization (any chart, plot, figure, image, UI, or HTML artifact)

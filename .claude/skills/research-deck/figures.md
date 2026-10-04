@@ -1,11 +1,11 @@
-# Figures — getting ML plots and math onto slides
+# Figures: getting ML plots and math onto slides
 
 The `pptx` skill embeds **images** (PNG/JPG via file path/URL/base64) and **native charts**
 (BAR, LINE, PIE, DOUGHNUT, SCATTER, BUBBLE, RADAR). It has **NO native LaTeX / equation rendering.**
 So: native charts for simple bars/lines built from numbers; **pre-rendered PNGs** for anything with
 math, or when the real experimental figure already exists.
 
-**Core principle — RECREATE FOR THE STORY.** Whatever the user gives (a finished figure, a CSV, a table,
+**Core principle: RECREATE FOR THE STORY.** Whatever the user gives (a finished figure, a CSV, a table,
 numbers in the prompt, a wandb run) is a **DATA SOURCE**, not a final asset. The slide's action title
 decides the exhibit; you plot it from the numbers, white/minimal, focal point annotated. Re-plot even a
 polished figure unless it's already white, already the right exhibit for THIS point, and readable.
@@ -21,14 +21,14 @@ Decision rule:
 
 ## 0. Get the numbers first (data-source ladder)
 
-Ask where the results are (SKILL Step 0c), then get the numbers — never invent them:
+Ask where the results are (SKILL Step 0c), then get the numbers (never invent them):
 
 1. **Numbers in the prompt / a table** → use directly.
 2. **CSV / json / parquet** in the repo → read it (`pandas`).
 3. **Existing figure (PNG/SVG/PDF)** → if it has a data source (HTML with inline data, a plotting
-   script, a CSV), use that. A bare PNG is pixels — recover the numbers from its source, or from wandb.
+   script, a CSV), use that. A bare PNG is pixels; recover the numbers from its source, or from wandb.
 4. **wandb** → use the **`wandb-primary` skill** to pull run history. Ask the user (or read a local
-   wandb config) for the **entity, project, run names, and metric keys** — don't hardcode them.
+   wandb config) for the **entity, project, run names, and metric keys**; don't hardcode them.
    Match runs by name; confirm the exact metric key against the user's numbers before plotting a whole deck.
    **If it needs an API key and none is set, ASK the user for it.** (Pattern: a small pull script that
    caches `run.history(keys=[...])` to JSON, then §2 plots it white.)
@@ -47,7 +47,7 @@ slide.addImage({ path: "figs_light/main_result.png", x: 0.5, y: 1.15, w: 5.4, h:
 ```
 
 Vector `.pdf` source → rasterize at presentation DPI: `pdftoppm -png -r 200 curve.pdf curve`.
-**Never screenshot a paper figure** — print-size fonts vanish on a projector; rebuild from the numbers.
+**Never screenshot a paper figure**: print-size fonts vanish on a projector; rebuild from the numbers.
 
 ---
 
@@ -111,7 +111,7 @@ ax.set_title(r"Reward vs.\ $\beta$ (Dr.\ GRPO, $\gamma{=}1$)")
 ```
 
 If `text.usetex=True` errors (no LaTeX installed), fall back to mathtext: set it back to `False` and
-keep the `$...$` — simple equations still render. Only real LaTeX needs the TeX install.
+keep the `$...$`; simple equations still render. Only real LaTeX needs the TeX install.
 
 ---
 
@@ -135,7 +135,7 @@ centered, with the intuition as a one-line caption below. Keep one equation per 
 
 ## 5. Tables (ablation grids / leaderboards)
 
-Small numeric tables are fine as native pptx tables — bold the winning row/number, right-align numbers:
+Small numeric tables are fine as native pptx tables: bold the winning row/number, right-align numbers:
 
 ```javascript
 slide.addTable(rows, { x: 0.5, y: 1.2, w: 9, fontSize: 18, border: { pt: 0.5, color: "CCCCCC" },
@@ -143,7 +143,7 @@ slide.addTable(rows, { x: 0.5, y: 1.2, w: 9, fontSize: 18, border: { pt: 0.5, co
 // build `rows` with per-cell { text, options:{ bold, color, fill } }; bold the SOTA row.
 ```
 
-Big tables belong in the appendix — on the main slide show only the rows that make the point.
+Big tables belong in the appendix; on the main slide show only the rows that make the point.
 
 ---
 
