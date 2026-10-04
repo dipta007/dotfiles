@@ -83,10 +83,7 @@ extract() {
   esac
 }
 
-# roy-agents
-alias agents='mosh --ssh="ssh -p 2222" roy@agents -- tmux new -A -s main'
-alias agents-fwd='ssh -A -p 2222 roy@agents -t "tmux new -A -s main"'
-
-# tailscale macs
+# tailscale devices
 alias studio='mosh dipta007@mac-studio'
 alias air='mosh dipta007@shubhashiss-macbook-air'
+alias hermes='mosh roy@hermes -- tmux new -A -s main'
