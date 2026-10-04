@@ -216,6 +216,12 @@ If it reads like documentation, an essay, or a changelog, delete it.
 - Always give a body for: breaking changes, security fixes, data migrations, reverts. Future debuggers need the context.
 - A local/project CLAUDE.md commit rule overrides this.
 
+## 7. Prose
+
+- Follow the Google Developer Documentation Style Guide.
+- Use ASD-STE100-derived precision rules.
+- Apply Zinsser's four principles: clarity, simplicity, brevity, and humanity.
+
 ## Visualization (CRITICAL — any chart, plot, figure, image, UI, HTML artifact)
 
 **Before making ANY visualization, think about how the human eye and brain read it.** Design for perception first, decoration last.
