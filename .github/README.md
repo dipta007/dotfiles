@@ -92,7 +92,7 @@ brew install sheldon starship
 
 ```bash
 # mise is slow in brew
-brew uninstall mise && curl https://mise.run | sh
+brew uninstall mise 2>/dev/null; curl https://mise.run | sh
 brew install uv
 
 # Install runtimes declared in ~/.config/mise/config.toml (node/npm) + gen shims.
