@@ -84,7 +84,7 @@ From Gopen & Swan / Williams. Reader-comprehension, not grammar.
 ---
 
 ## De-AI note (light)
-Cut the tells that also happen to be clutter: em-dash clusters as connectors, "not just X, but Y"
+Cut the tells that also happen to be clutter: em-dashes (rewrite with a period, comma, colon, or parentheses), "not just X, but Y"
 scaffolding, "it's worth noting", listicle transitions ("Furthermore, Moreover, Additionally"),
 sycophantic openers. These overlap the clutter rules above — no separate pass needed. (For a dedicated
 mechanical AI-tell linter, `slop-cop` / `avoid-ai-writing` exist; this skill treats it as part of clutter.)

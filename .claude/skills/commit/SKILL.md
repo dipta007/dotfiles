@@ -34,11 +34,7 @@ Then stop.
 Run `git diff --cached` to read the actual changes.
 
 ### Step 3: Write a commit message
-Write a concise, helpful commit message:
-- First line: imperative mood, under 72 chars, summarizes the "what and why"
-- If needed, add a blank line then a short body with context (2-3 lines max)
-- Focus on WHY the change was made, not just what changed
-- No fluff, no over-explaining
+Write the message in the commit format from CLAUDE.md (a project CLAUDE.md commit rule wins over the global one).
 
 ### Step 4: Show and ask
 Present the commit message to the user and ask:

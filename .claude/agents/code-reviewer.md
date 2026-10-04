@@ -34,7 +34,7 @@ You are a senior code reviewer. You can ONLY read code — never edit, write, or
 
 Keep it concise. For each finding:
 ```
-[CRITICAL/WARNING/SUGGESTION] file:line — one-line description
+[CRITICAL/WARNING/SUGGESTION] file:line: one-line description
   → what's wrong and how to fix it
 ```
 

@@ -11,7 +11,7 @@ argument-hint: <arxiv-id-or-url>
 Dumping a summary at a reader is the weakest way to teach a paper, and bolting XP/points on
 top can make it worse. This skill is built on verified motivation and learning science, not on
 game-feel intuition. The design rules below are load-bearing. Do not "improve" the game by
-adding points, levels, or streaks. That was tried and rejected for cause.
+adding points, levels, or streaks.
 
 **The four findings this game runs on:**
 
@@ -52,7 +52,8 @@ Download and read the paper (curl the PDF to /tmp, Read it; or use the arxiv MCP
 `download_paper` + `read_paper`). Build a private plan you keep to yourself:
 - The 3-5 facts/claims to quiz, ordered easy to hard.
 - For standard/deep: silently find the paper's 1-2 real weak spots and check ONE headline
-  number, to ground the hardest beats. Do this quietly. Do not narrate your prep.
+  number, to ground the hardest beats. Do not reveal any fact, number, or weak spot from
+  this prep. A one-line status such as "Reading the paper now" is fine.
 - Curiosity needs a footing: note the one line of context each question needs so the gap
   actually bites (a reader feels no gap about something they know nothing about).
 
@@ -67,7 +68,7 @@ Each beat:
 3. **Wait for their answer.** Do not answer your own question.
 4. **Reveal = reward:** confirm or correct with INFORMATIONAL feedback. Name what they got
    right, the ONE key piece they missed, and why it matters. The reveal must answer the exact
-   thing you asked them to predict. Cap at ~3 lines. Never a score, never "correct/level up".
+   thing you asked them to predict. Never a score, never "correct/level up".
 5. If they are close, give ONE hint and let them retry before revealing (keeps flow).
 
 **Rising difficulty** (curiosity framing, not a locked gate):

@@ -40,6 +40,8 @@ U = words / 500
 density = ( CRITICAL×3  +  MAJOR×1  +  MINOR×0.25 ) / U
 ```
 
+Count the words and do this arithmetic in code (`wc -w` plus a one-line `uv run python -c`), not by estimate. Your part is the severity calls.
+
 Tiers: **0–2 CLEAN · 2–5 LIGHT · 5–10 NEEDS WORK · 10+ REWRITE.**
 Escalate one tier if: any unbacked claim (auto-CRITICAL), the ghost-outline test fails, or a paragraph has 3+
 CRITICAL/MAJOR. Report the number and the tier so "this reads badly" becomes reproducible.
@@ -56,8 +58,8 @@ Write a report, section by section. Each issue is a card:
 ```
 ### [CRITICAL · value] intro never says why the reader should care
 Original:    In this paper, we present a method for online hint generation in GRPO.
-Recommended: GRPO can't learn from tasks where every rollout fails — the exact hard tasks we care about. We fix that with online teacher hints.
-Why:         value/story — leads with what we did, not the reader's problem (McEnerney; Swales Move 2 gap missing)
+Recommended: GRPO can't learn from tasks where every rollout fails, and these are the hard tasks we care about most. We fix that with online teacher hints.
+Why:         value/story: leads with what we did, not the reader's problem (McEnerney; Swales Move 2 gap missing)
 ```
 
 - **Severity:** CRITICAL (misleads reader / unbacked claim / no contribution / buried point) · MAJOR (clutter,

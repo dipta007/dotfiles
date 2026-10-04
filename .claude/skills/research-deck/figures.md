@@ -11,6 +11,7 @@ decides the exhibit; you plot it from the numbers, white/minimal, focal point an
 polished figure unless it's already white, already the right exhibit for THIS point, and readable.
 
 Decision rule:
+- Design the chart with the `dataviz` skill first (chart type, palette, labels); the slide rules below then apply on top.
 - Pick the exhibit from the point: gap → dumbbell; convergence/trend → line; single comparison → annotated bar; ablation grid → table; math → pre-rendered image.
 - Build it from the numbers with matplotlib (see §2), white bg, ≥16pt labels.
 - Only embed a user-supplied figure UNCHANGED if it's already white + already the right exhibit + readable.
@@ -137,7 +138,7 @@ centered, with the intuition as a one-line caption below. Keep one equation per 
 Small numeric tables are fine as native pptx tables — bold the winning row/number, right-align numbers:
 
 ```javascript
-slide.addTable(rows, { x: 0.5, y: 1.2, w: 9, fontSize: 16, border: { pt: 0.5, color: "CCCCCC" },
+slide.addTable(rows, { x: 0.5, y: 1.2, w: 9, fontSize: 18, border: { pt: 0.5, color: "CCCCCC" },
                        align: "center", valign: "middle" });
 // build `rows` with per-cell { text, options:{ bold, color, fill } }; bold the SOTA row.
 ```

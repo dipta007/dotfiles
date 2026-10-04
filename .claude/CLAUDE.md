@@ -4,20 +4,19 @@ Behavioral guidelines to reduce common LLM coding mistakes.
 
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use your judgment. For anything non-trivial, follow these rules to avoid costly mistakes and rework.
 
-## 0. Output Style (CRITICAL — applies to EVERY final answer)
+## 0. Output Style (applies to every final answer)
 
 **Final output MUST be: (1) concise but complete, (2) simple enough for a non-native English speaker.**
 
-- Think as long as you want (reasoning tokens are free). This rule governs ONLY the final answer, not your thinking.
+- This rule governs only the final answer, not your thinking.
 - **Concise but complete:** say everything that matters, nothing that does not. Cut filler, repetition, hedging. Do not drop needed steps, caveats, or context to be short.
 - **Keep exact tokens exact:** being concise never means altering code, error strings, IDs, file paths, commands, numbers, or units. Quote those byte-for-byte. And never drop a negation (`not`/`no`/`never`/`only`/`except`) to save words; dropping it flips the meaning, far worse than the length saved.
 - **No invented abbreviations:** write the full word (`config` not `cfg`, `implementation` not `impl`, `request`/`response` not `req`/`res`, `function` not `fn`). Short forms save ~zero tokens (the tokenizer splits them the same) and cost the reader clarity. Standard, well-known acronyms (DB, API, HTTP) are fine.
 - **Simple language:** short sentences (one idea each). Common words over fancy ones. Explain a needed technical term in a few plain words. No idioms, no rare vocabulary, no long clause-chains.
 - Prefer lists, short tables, and short paragraphs over walls of text.
-- If short and complete conflict, keep complete — then simplify the wording, not the content.
-- This rule is NON-NEGOTIABLE and overrides any habit toward long or complex prose.
+- If short and complete conflict, keep complete. Then simplify the wording, not the content.
 
-**Plain language, not compressed language (CRITICAL). Applies to EVERY agent and subagent, on every generation.**
+**Plain language, not compressed language. Applies to every agent and subagent, on every generation.**
 Short does not mean dense. Cutting words is only correct when the result is EASIER to read, never harder.
 - One idea per sentence. Short sentences. Common words. If a sentence needs two readings, split it.
 - Do not stack many ideas into one line: no long chains of clauses, no piles of nouns ("model output quality regression root cause analysis"), no three qualifiers before one noun. Unpack it into two plain sentences instead.
@@ -28,13 +27,11 @@ Short does not mean dense. Cutting words is only correct when the result is EASI
 - This binds every subagent too. When you dispatch an agent, pass this rule along so its output follows it.
 - **For any writing task, use the `writing-craft` skill** (drafting, editing, or improving prose: papers, abstracts, intros, rebuttals, README, docs, blog posts). Invoke it before writing, not after.
 
-**Applies to written docs too, not just chat answers.** Any generated content or tech doc
-(README, design doc, plan, notes, code comments) MUST be:
+**Applies to written docs too, not just chat answers.** Any generated content or tech doc (README, design doc, plan, notes, code comments) MUST be:
 - **Simple** enough for a non-native English speaker.
 - **Concise** enough that a busy researcher WANTS to read it.
 - **Complete** enough that they miss nothing they need.
-- EXCEPTION: research papers. For papers use the `writing-craft` skill or a paper-writing skill,
-  NOT this rule.
+- EXCEPTION: research papers. For papers use the `writing-craft` skill or a paper-writing skill, NOT this rule.
 
 **No hard-wrapping prose. Let lines wrap naturally.** In markdown and any prose output (chat, docs, README, notes, plans, commit bodies), do NOT insert manual line breaks to hit a fixed column width (like 80 chars). Write each paragraph as ONE line and let the editor or viewer soft-wrap it by width.
 - Break the line ONLY when the meaning needs it: a new paragraph, a new list item, a heading, or a code block. Width is the renderer's job, not yours.
@@ -42,19 +39,12 @@ Short does not mean dense. Cutting words is only correct when the result is EASI
 - HTML / artifacts: the browser wraps prose by width on its own. Do NOT fake width-wrapping with `<br>` tags or `white-space: pre` / `pre-wrap` on prose. Let normal flow wrap it. (Real code blocks and `<pre>` for code are fine.)
 - EXCEPTION: code and code-block contents keep their own line-length rules. This is about prose, not code.
 
-**NO em-dash, ever (applies to ALL output).** Never use the em-dash character in any
-generation: chat replies, papers, docs, README, slides, comments, commit messages, code,
-anything. This has no exception.
-- Do not just swap the em-dash for an en-dash or a spaced hyphen as a workaround. Rewrite the
-  sentence so no dash is needed.
-- Use a period, comma, colon, parentheses, or two short sentences instead. Pick the one that
-  fits the meaning.
+**NO em-dash, ever (applies to ALL output).** Never use the em-dash character in any generation: chat replies, papers, docs, README, slides, comments, commit messages, code, anything. This has no exception.
+- Do not just swap the em-dash for an en-dash or a spaced hyphen as a workaround. Rewrite the sentence so no dash is needed.
+- Use a period, comma, colon, parentheses, or two short sentences instead. Pick the one that fits the meaning.
 - Applies to visible text AND thinking output.
-- The character to never emit is U+2014 (the long dash). Also avoid using U+2013 or a
-  spaced hyphen as a stand-in for it.
-- NOTE: the "Bad" lines below intentionally contain a real em-dash so the example is clear.
-  This block is the ONLY place an em-dash is allowed. Do not copy the pattern; do not strip
-  the em-dash from these examples either.
+- The character to never emit is U+2014 (the long dash). Also avoid using U+2013 or a spaced hyphen as a stand-in for it.
+- NOTE: the "Bad" lines below intentionally contain a real em-dash so the example is clear. This block is the ONLY place an em-dash is allowed. Do not copy the pattern; do not strip the em-dash from these examples either.
 - Aside or interruption:
   - Bad: "The fix works — but only on macOS."
   - Good: "The fix works, but only on macOS." Or: "The fix works. It is macOS only."
@@ -65,10 +55,7 @@ anything. This has no exception.
   - Bad: "One rule matters most — verify."
   - Good: "One rule matters most: verify."
 
-**Flag must-read info with a pinned block.** Long answers make users skim and miss
-crucial things (a risk, a blocker, a needed action, a data-loss warning). When your output
-has something the user MUST NOT miss, put it in its own block: start the line with
-`📌📌📌📌` and end it with `📌📌📌📌`.
+**Flag must-read info with a pinned block.** Long answers make users skim and miss crucial things (a risk, a blocker, a needed action, a data-loss warning). When your output has something the user MUST NOT miss, put it in its own block: start the line with `📌📌📌📌` and end it with `📌📌📌📌`.
 - Use it only for truly critical points, not for every reply. Overuse kills the signal.
 
 ## 1. Think Before Coding
@@ -173,12 +160,9 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 **Comment like a tired human engineer, not like an AI. This is the #1 recurring failure.**
 
-**HARD RULE - proportionality.** The comment must be smaller than the thing it explains.
-Changing two colour values NEVER justifies a paragraph. If the comment is longer than the
-code it sits on, it is wrong. Delete it or cut it to one line.
+**HARD RULE - proportionality.** The comment must be smaller than the thing it explains. Changing two colour values NEVER justifies a paragraph. If the comment is longer than the code it sits on, it is wrong. Delete it or cut it to one line.
 
-**Default is NO comment.** Especially in CSS, HTML, and UI code. Write the comment only if a
-competent engineer would otherwise "fix" the code and reintroduce a bug.
+**Default is NO comment.** Especially in CSS, HTML, and UI code. Write the comment only if a competent engineer would otherwise "fix" the code and reintroduce a bug.
 - Don't restate what the code obviously does. `# increment counter` next to `i += 1` is noise.
 - Don't narrate every change with a comment. Comment only where it matters (the non-obvious "why", a cut corner, a gotcha). Most edits need no comment at all.
 
@@ -195,15 +179,12 @@ competent engineer would otherwise "fix" the code and reintroduce a bug.
 - Comparisons to other files, other sites, or upstream ("unlike the portfolio, we...").
 
 **Write the constraint, not the story:**
-- Bad: a 12-line block explaining that a minifier once stripped spaces inside `calc()`,
-  with the broken output, the browser behaviour, and how it was found.
+- Bad: a 12-line block explaining that a minifier once stripped spaces inside `calc()`, with the broken output, the browser behaviour, and how it was found.
 - Good: `// calc() needs spaces around +/-; the minifier strips them. Let Sass fold it.`
 
-**Voice:** short, clipped, lowercase-ish, like 11pm. Skip articles and filler. No "Note that",
-"Important:", "Furthermore". No em-dash, ever.
+**Voice:** short and plain, like a tired engineer at 11pm. No "Note that", "Important:", "Furthermore". No em-dash, ever.
 
-**Before writing any comment, ask: would a senior engineer typing fast actually write this?**
-If it reads like documentation, an essay, or a changelog, delete it.
+**Before writing any comment, ask: would a senior engineer typing fast actually write this?** If it reads like documentation, an essay, or a changelog, delete it.
 
 ## 6. Commit Messages
 
@@ -211,23 +192,23 @@ If it reads like documentation, an essay, or a changelog, delete it.
 
 - Subject: `type(scope): imperative summary`. Scope optional. Types: `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style`, `revert`.
 - Imperative mood ("add", "fix", "remove"), not "added"/"adds". No trailing period. Aim ≤50 chars, hard cap 72.
-- Body only when the subject is not self-explanatory. Add it for a non-obvious *why*, a breaking change, a migration, or linked issues. Wrap at 72. Reference issues at the end (`Closes #42`).
+- Body only when the subject is not self-explanatory. Add it for a non-obvious *why*, a breaking change, a migration, or linked issues. Reference issues at the end (`Closes #42`).
 - Never write "this commit does X", "I", "we", "now" (the diff already says what). No AI attribution ("Generated with Claude Code") unless a project rule requires an attribution trailer.
 - Always give a body for: breaking changes, security fixes, data migrations, reverts. Future debuggers need the context.
 - A local/project CLAUDE.md commit rule overrides this.
 
 ## 7. Prose
 
-- Follow the Google Developer Documentation Style Guide.
+- Follow the Google Developer Documentation Style Guide, except: never use em dashes.
 - Use ASD-STE100-derived precision rules.
 - Apply Zinsser's four principles: clarity, simplicity, brevity, and humanity.
 
-## Visualization (CRITICAL — any chart, plot, figure, image, UI, HTML artifact)
+## Visualization (any chart, plot, figure, image, UI, or HTML artifact)
 
-**Before making ANY visualization, think about how the human eye and brain read it.** Design for perception first, decoration last.
+**Before making any visualization, think about how the human eye and brain read it.** Design for perception first, decoration last.
 
 - **Two stages, two skills:**
-  - **Stage 1 (design, ALWAYS first): `dataviz`.** For any chart, graph, plot, dashboard, figure, or data viz. It sets the chart type, layout, visual hierarchy, and a validated colorblind-safe palette (light + dark). Invoke it BEFORE writing the first line of chart/UI code or picking colors. `dataviz` is built into Claude Code (not a plugin).
+  - **Stage 1 (design, first): `dataviz`.** For any chart, graph, plot, dashboard, figure, or data viz. It sets the chart type, layout, visual hierarchy, and a validated colorblind-safe palette (light + dark). Invoke it before writing the first line of chart/UI code or picking colors. `dataviz` is built into Claude Code (not a plugin).
   - **Stage 2 (generate, following Stage 1's design): the generator.** For an ML/research paper figure (matplotlib/seaborn: bars, lines, scatter, heatmap, confusion matrix, training curves) use **`academic-plotting`**. For a quick HTML result explorer (metrics table, run compare, sample grid, error analysis) use the **`visual-explainer:ml-*`** commands. For a method/architecture figure with icons use the **`drawio`** skill. For any other chart, write the code yourself following Stage 1. Never skip Stage 1: design decides how it looks, the generator only makes it.
 - **Ground design in perception research.** Follow the ideas from the core visualization books, which are all about how humans perceive:
   - Colin Ware, *Information Visualization: Perception for Design* (how the eye/brain process visuals).

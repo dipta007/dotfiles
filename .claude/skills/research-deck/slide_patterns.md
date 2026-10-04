@@ -10,16 +10,16 @@ and conclusions) has a WHITE background; differentiate with accent bars / light-
 
 ```javascript
 const COLORS = {
-  bg:        "FFFFFF",   // white — EVERY slide, no exceptions (incl. title/conclusions)
-  primary:   "1F4E79",   // dark navy — title/header TEXT color (never a background fill)
-  accent:    "2E75B6",   // mid-blue — accent bars, focal series
-  body:      "2D2D2D",   // near-black — body text
-  muted:     "777777",   // gray — citations, captions
-  rule:      "CCCCCC",   // light gray — dividers
-  band:      "EEF3F9",   // very light blue — tint band for title/conclusion/divider (replaces dark fills)
-  highlight: "FFF2CC",   // pale yellow — callouts (sparingly)
-  good:      "2E7D32",   // green — wins / our method
-  bad:       "C62828",   // red — failures / alerts
+  bg:        "FFFFFF",   // white: EVERY slide, no exceptions (incl. title/conclusions)
+  primary:   "1F4E79",   // dark navy: title/header TEXT color (never a background fill)
+  accent:    "2E75B6",   // mid-blue: accent bars, focal series
+  body:      "2D2D2D",   // near-black: body text
+  muted:     "777777",   // gray: citations, captions
+  rule:      "CCCCCC",   // light gray: dividers
+  band:      "EEF3F9",   // very light blue: tint band for title/conclusion/divider
+  highlight: "FFF2CC",   // pale yellow: callouts (sparingly)
+  good:      "2E7D32",   // green: wins / our method
+  bad:       "C62828",   // red: failures / alerts
 };
 const FONTS = { face: "Arial", title: 26, sectionHeader: 22, body: 20, label: 16, cite: 13 };
 const MARGIN = 0.5;
@@ -51,7 +51,7 @@ function cite(slide, text) {
 
 ```javascript
 slide.background = { color: COLORS.bg };
-// left accent bar for visual interest (replaces the old dark background)
+// left accent bar for visual interest
 slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.18, h: 5.625, fill: { color: COLORS.accent } });
 slide.addText("Insight-Guided RL: teacher hints rescue the hard groups\nGRPO can't learn from", {
   x: 0.7, y: 1.4, w: 8.6, h: 1.8, fontSize: 32, fontFace: FONTS.face, color: COLORS.primary, bold: true, align: "left", valign: "top" });
@@ -70,7 +70,7 @@ slide.addText("arxiv.org/abs/XXXX.XXXXX   ·   github.com/you/repo", {
 ## 2. Motivation / problem
 
 ```javascript
-actionTitle(slide, "LLM agents fail on hard tasks where every GRPO rollout gets 0 reward — no gradient, no learning");
+actionTitle(slide, "LLM agents fail on hard tasks where every GRPO rollout gets 0 reward: no gradient, no learning");
 slide.addText([
   { text: "GRPO learns from within-group reward variance. ", options: { bold: true, breakLine: false } },
   { text: "When all K rollouts in a group fail, advantage = 0 → that task teaches nothing.", options: { breakLine: true } },
@@ -87,13 +87,13 @@ cite(slide, "Shao et al. (2024), DeepSeekMath (GRPO); Guo et al. (2025)");
 ## 3. Gap / related work
 
 ```javascript
-actionTitle(slide, "Existing fixes give partial signal — none inject knowledge into an all-fail group online");
+actionTitle(slide, "Existing fixes give partial signal, but none inject knowledge into an all-fail group online");
 // Two-column: what they do (left) / what's missing (right)
 slide.addText("Prior approaches", { x: MARGIN, y: 1.25, w: 4.3, h: 0.35, fontSize: FONTS.sectionHeader, fontFace: FONTS.face, color: COLORS.accent, bold: true });
 slide.addText([
-  { text: "Reward shaping — dense proxy reward", options: { breakLine: true } },
-  { text: "Curriculum — reorder by difficulty", options: { breakLine: true } },
-  { text: "SFT warmstart — imitate before RL", options: { breakLine: true } },
+  { text: "Reward shaping: dense proxy reward", options: { breakLine: true } },
+  { text: "Curriculum: reorder by difficulty", options: { breakLine: true } },
+  { text: "SFT warmstart: imitate before RL", options: { breakLine: true } },
 ], { x: MARGIN, y: 1.65, w: 4.3, h: 2.6, fontSize: FONTS.body, fontFace: FONTS.face, color: COLORS.body, bullet: true, paraSpaceAfter: 10 });
 slide.addText("What's still missing", { x: 5.3, y: 1.25, w: 4.2, h: 0.35, fontSize: FONTS.sectionHeader, fontFace: FONTS.face, color: COLORS.accent, bold: true });
 slide.addText([
@@ -113,7 +113,7 @@ Build the method as a schematic (boxes + arrows). One picture, no detail.
 actionTitle(slide, "On an all-fail group, a teacher LLM writes a hint; we append it, regenerate, and train the prefix");
 const box = (x, y, w, label, fill) => {
   slide.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h: 0.9, fill: { color: fill }, line: { color: COLORS.accent, pt: 1 }, rectRadius: 0.06 });
-  slide.addText(label, { x, y, w, h: 0.9, fontSize: 14, fontFace: FONTS.face, color: COLORS.body, align: "center", valign: "middle" });
+  slide.addText(label, { x, y, w, h: 0.9, fontSize: FONTS.label, fontFace: FONTS.face, color: COLORS.body, align: "center", valign: "middle" });
 };
 box(0.5, 2.2, 2.0, "GRPO group\nall K fail", "F2F2F2");
 box(2.9, 2.2, 2.0, "Teacher LLM\ngenerates hint", COLORS.highlight);
@@ -128,7 +128,7 @@ cite(slide, "See method slide for the strip step (hint never enters the trained 
 ## 5. Method detail (1–2 slides, only what's needed)
 
 ```javascript
-actionTitle(slide, "The hint conditions generation but is stripped before the loss — so we train p(solution | task), not p(·| task+hint)");
+actionTitle(slide, "The hint conditions generation but is stripped before the loss, so we train p(solution | task), not p(·| task+hint)");
 slide.addText([
   { text: "Trigger: ", options: { bold: true, breakLine: false } },
   { text: "group where max reward = 0 (all rollouts fail).", options: { breakLine: true } },
@@ -168,7 +168,7 @@ cite(slide, "AppWorld test-normal + test-challenge; Qwen3-4B-Instruct");
 If the focal number isn't already marked inside the PNG, overlay a callout:
 ```javascript
 slide.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 3.4, y: 1.35, w: 1.7, h: 0.5, fill: { color: COLORS.highlight }, line: { color: "E6C800", pt: 1 }, rectRadius: 0.06 });
-slide.addText("+27 pts", { x: 3.4, y: 1.35, w: 1.7, h: 0.5, fontSize: 14, fontFace: FONTS.face, color: "7A5200", bold: true, align: "center", valign: "middle" });
+slide.addText("+27 pts", { x: 3.4, y: 1.35, w: 1.7, h: 0.5, fontSize: FONTS.label, fontFace: FONTS.face, color: "7A5200", bold: true, align: "center", valign: "middle" });
 ```
 
 ---
@@ -186,7 +186,7 @@ const rows = [
   [cell("− teacher (random hint)", { align: "left" }), cell("0.39"), cell("0.63")],
   [cell("GRPO baseline", { align: "left" }), cell("0.31"), cell("0.67")],
 ];
-slide.addTable(rows, { x: 0.8, y: 1.25, w: 8.4, fontSize: 16, fontFace: FONTS.face, border: { pt: 0.5, color: COLORS.rule }, valign: "middle", rowH: 0.55 });
+slide.addTable(rows, { x: 0.8, y: 1.25, w: 8.4, fontSize: 18, fontFace: FONTS.face, border: { pt: 0.5, color: COLORS.rule }, valign: "middle", rowH: 0.55 });
 cite(slide, "Ablations on AppWorld dev; mean of 3 seeds");
 ```
 
@@ -211,9 +211,9 @@ slide.addText([
 
 ```javascript
 slide.background = { color: COLORS.bg };
-// light tint band across the top (replaces the old dark fill) — differentiates without going dark
+// light tint band across the top: differentiates without going dark
 slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 1.0, fill: { color: COLORS.band } });
-slide.addText("Conclusions", { x: MARGIN, y: 0.28, w: 9.0, h: 0.5, fontSize: 22, fontFace: FONTS.face, color: COLORS.primary, bold: true });
+slide.addText("Conclusions", { x: MARGIN, y: 0.28, w: 9.0, h: 0.5, fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true });
 slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 0.98, w: 9.0, h: 0.04, fill: { color: COLORS.accent } });
 slide.addText([
   { text: "1. All-fail groups are the bottleneck: ", options: { bold: true, color: COLORS.primary, breakLine: false } },
@@ -262,8 +262,8 @@ slide.addText(refs.flatMap((r, i) => [{ text: r, options: { breakLine: true } },
 ## 12. Appendix (labeled; pre-built Q&A)
 
 ```javascript
-slide.addText("Appendix B — Strip correctness", { x: MARGIN, y: 0.15, w: 9.0, h: 0.4, fontSize: 14, fontFace: FONTS.face, color: COLORS.muted, italic: true });
-actionTitle(slide, "dirty_rows stays 0 across all steps — no hint token ever reaches the trained gradient", 0.6, 0.75);
+slide.addText("Appendix B: Strip correctness", { x: MARGIN, y: 0.15, w: 9.0, h: 0.4, fontSize: 14, fontFace: FONTS.face, color: COLORS.muted, italic: true });
+actionTitle(slide, "dirty_rows stays 0 across all steps: no hint token ever reaches the trained gradient", 0.6, 0.75);
 // normal content patterns below
 ```
 
@@ -278,7 +278,7 @@ TALKING, not text read aloud). pptx uses `addNotes`; write it the way you'd actu
 // after building slide `s`:
 s.addNotes(
 "Okay, results. Look at where the lines cross 0.6. Nudge gets there around step 160, the baseline " +
-"needs like 225. So early on we're almost twice as fast. Now, I don't want to oversell it, because by " +
+"needs like 225. So early on we're almost twice as fast. Now, I don't want to over-claim, because by " +
 "the end they all kind of meet up, around 0.84 to 0.89. So the honest story here is speed, not a higher " +
 "final score. I'll come back to that, it's one of my open questions.");
 ```

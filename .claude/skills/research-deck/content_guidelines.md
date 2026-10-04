@@ -40,7 +40,7 @@ Every content-slide title is a complete sentence stating the takeaway — the "s
 | Results | Our method beats the strongest baseline by 4.2 BLEU with no extra data |
 | Related Work | Prior RL-from-feedback methods need a reward model we can't train here |
 | Method | A single value head lets us drop the critic and halve training cost |
-| Ablations | Removing the auxiliary loss drops accuracy 6 pts — it's load-bearing |
+| Ablations | Removing the auxiliary loss drops accuracy 6 pts: it's load-bearing |
 | Dataset | We evaluate on 3 benchmarks spanning 12 languages and 40k examples |
 | Motivation | LLM agents fail on long-horizon tasks because credit assignment is sparse |
 

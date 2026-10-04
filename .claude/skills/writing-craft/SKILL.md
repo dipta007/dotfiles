@@ -1,6 +1,6 @@
 ---
 name: writing-craft
-description: "Use this skill whenever the user wants to improve the WRITING itself — prose quality, clarity, storytelling, cutting clutter, making dense technical text readable — for ML/AI research writing: paper drafts, abstracts, intros, related work, rebuttals, blog posts, README, grant text, or any passage they want to read better. Triggers: 'make this clearer', 'tighten this', 'edit my writing', 'is this well written', 'help me write the intro/abstract', 'cut the clutter', 'this reads badly', 'improve the prose', 'rewrite this paragraph', 'review my writing', 'draft my paper', 'write the paper/section from my results/code', 'write from scratch', 'draft the related work from these papers', 'turn my notes into a draft'. This governs the CRAFT of the words (clarity, story, value-to-reader, sharpness) — NOT file formatting (docx/latex), citations (phd-skills), or slides (research-deck). Grounded in Zinsser (On Writing Well), Schimel (Writing Science / OCAR), McEnerney (communicating value), Lanham (paramedic method), Williams, Gopen & Swan (given-new flow)."
+description: "Use this skill whenever the user wants to improve the WRITING itself (prose quality, clarity, storytelling, cutting clutter, making dense technical text readable) for ML/AI research writing: paper drafts, abstracts, intros, related work, rebuttals, blog posts, README, grant text, or any passage they want to read better. Covers editing or reviewing existing prose, coaching the story before drafting, and writing a grounded first draft from results, code, notes, or related papers. This governs the CRAFT of the words (clarity, story, value-to-reader, sharpness), NOT file formatting (docx/latex), citations (phd-skills), or slides (research-deck)."
 license: MIT
 ---
 
@@ -77,8 +77,8 @@ Do NOT silently rewrite the user's file. Produce an issue report, section by sec
 ```
 ### [SEVERITY · Pillar] short title
 Original:    <the exact sentence/passage>
-Recommended: <the concrete rewrite — a full sentence, not a fragment>
-Why:         <one line + the principle, e.g. "clutter — Zinsser" / "value — McEnerney" / "unbacked claim">
+Recommended: <the concrete rewrite: a full sentence, not a fragment>
+Why:         <one line + the principle, e.g. "clutter (Zinsser)" / "value (McEnerney)" / "unbacked claim">
 ```
 
 - **Severity:** CRITICAL (misleads reader / unbacked claim / buried point) · MAJOR (clutter, weak structure, no so-what) · MINOR (word choice, rhythm).

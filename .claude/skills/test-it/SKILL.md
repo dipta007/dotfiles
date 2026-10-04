@@ -26,7 +26,7 @@ Clearly state:
 - If failed: what went wrong, with the full error
 
 ### Step 4: Fix if broken
-If the test fails, debug and fix the issue. Re-run until it passes.
+If the test fails, find the root cause, describe the fix, and wait for the user's approval before changing code. After the fix, re-run until it passes.
 
 ### Step 5: Ask about pytest
 After the feature works, ask the user:

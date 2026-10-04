@@ -23,14 +23,14 @@ If it's a file or function, read it thoroughly. If it's a concept, gather contex
 If the target file imports or depends on other files that are essential to understanding it, briefly explain those too. But ONLY if without them the target makes no sense. Do not explain every import — just the critical ones.
 
 ### Step 3: Explain it clearly
-Follow the structure below.
+Use the parts below that help with this target and skip the rest. A short function rarely needs all six; the length rule under Writing style wins.
 
 ## Explanation structure
 
 ### Start with an analogy
 Compare the code/concept to something from everyday life. This anchors understanding before diving into details.
 
-> "Think of this like a restaurant kitchen — orders come in (requests), the chef (controller) delegates to stations (services), and plates go out (responses)."
+> "Think of this like a restaurant kitchen. Orders come in (requests), the chef (controller) delegates to stations (services), and plates go out (responses)."
 
 ### Show the big picture
 Draw an ASCII diagram showing how this piece fits into the system. Show data flow, relationships, or architecture.

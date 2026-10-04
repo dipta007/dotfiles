@@ -12,7 +12,7 @@ NARRATIVE + STRUCTURE layer. It sits on top of the `pptx` skill, which does the 
 
 ## How this skill works
 
-Three layers, read in order:
+Read in order:
 
 1. **This file** — the workflow: pick aesthetic mode, plan the argument, wire to pptx, QA.
 2. **[content_guidelines.md](content_guidelines.md)** — argument structure, action titles, exhibit discipline, deck architecture for an ML talk.
@@ -140,8 +140,7 @@ The difference is not "casual words". It is the RHYTHM and MOVES of real speech:
   "the point is", "look", "right", "anyway", "which is nice because…". No: "furthermore", "moreover",
   "additionally", "thus", "hence", "as such", "in conclusion".
 - **Contractions and light filler are GOOD here** (this is speech): "we're", "it's", "that's",
-  "kind of", "basically", "it turns out". A little imperfection reads as human. (This softens the earlier
-  "keep contractions light" rule — for the SPOKEN script, contractions help.)
+  "kind of", "basically", "it turns out". A little imperfection reads as human.
 - **Callbacks.** Refer to earlier slides the way a speaker does: "remember that 0.84 baseline?",
   "this is the strip step I mentioned".
 - **NEVER restate the slide text.** The slide shows the exhibit; you say the story around it — the
@@ -157,7 +156,7 @@ The difference is not "casual words". It is the RHYTHM and MOVES of real speech:
   - category then example → **"like"**, not a comma pair: "a weak model like Qwen2.5-7B", NOT "a weak
     model, Qwen2.5-7B," (that sounds like a list). Same for "a method like DAPO".
   - a written aside ("— just as important —") → its own sentence: "And just as important, …".
-  (Slide TEXT may keep em-dashes; this rule is only for the spoken notes.)
+  Slide text has no em-dashes either.
 - **Honest in voice** — state limits plainly: "I don't want to over-claim here."
 - **~50–120 words per slide** (title/section shorter). Read it out loud in your head before moving on.
 
@@ -166,11 +165,11 @@ The difference is not "casual words". It is the RHYTHM and MOVES of real speech:
 - ❌ text-read-aloud: "The results demonstrate that nudging achieves approximately 2x faster convergence,
   reaching 0.6 success at step 160 versus 225 for the baseline; however, final performance is comparable."
 - ✅ human talking: "Okay, results. Look at where the lines cross 0.6. Nudge gets there around 160, the
-  baseline needs like 225. So early on we're almost twice as fast. Now, I don't want to oversell it,
+  baseline needs like 225. So early on we're almost twice as fast. Now, I don't want to over-claim,
   because by the end they all kind of meet up. So the honest story here is speed, not a higher final score."
 
 How to attach:
-- **pptx** → `slide.addNotes("…")` on every slide (verify: unzip → 12 `ppt/notesSlides/notesSlideN.xml`).
+- **pptx** → `slide.addNotes("…")` on every slide (verify: unzip → one `ppt/notesSlides/notesSlideN.xml` per slide).
 - **Slidev** → an HTML comment `<!-- … -->` as the LAST block of each slide (shows in presenter mode).
 
 ---
