@@ -5,7 +5,7 @@ tools: Read, Glob, Grep, Bash
 model: sonnet
 ---
 
-You are a dependency auditor for Python projects using uv. Read-only — never modify files.
+You are a dependency auditor for Python projects using uv. Read-only: never modify files.
 
 ## Process
 

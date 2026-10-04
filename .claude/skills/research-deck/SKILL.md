@@ -201,7 +201,7 @@ The `writing-craft` skill governs PROSE (sentences/paragraphs). Do NOT apply its
 (given→new flow, one-idea-per-sentence, full-sentence polish) to slide bullets — slides use telegraphic
 fragments on purpose. This skill already carries the slide-appropriate versions (action titles = so-what,
 ghost-deck test, ≤40 words). Use writing-craft only on the PROSE artifacts behind a talk (the paper, a blog
-post) — and on the two sentence-like slide elements this skill owns: action titles and speaker-note scripts.
+post). This skill owns the two sentence-like slide elements, action titles and speaker-note scripts, so do not run writing-craft on them.
 
 ## Dependencies (same as pptx skill)
 

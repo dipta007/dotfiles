@@ -20,7 +20,7 @@ Then stop. Do not proceed without arguments.
 If it's a file or function, read it thoroughly. If it's a concept, gather context from the codebase.
 
 ### Step 2: Check dependencies (only if needed)
-If the target file imports or depends on other files that are essential to understanding it, briefly explain those too. But ONLY if without them the target makes no sense. Do not explain every import — just the critical ones.
+If the target file imports or depends on other files that are essential to understanding it, briefly explain those too. But ONLY if without them the target makes no sense. Do not explain every import, just the critical ones.
 
 ### Step 3: Explain it clearly
 Use the parts below that help with this target and skip the rest. A short function rarely needs all six; the length rule under Writing style wins.
@@ -56,8 +56,8 @@ How does this relate to broader programming concepts or patterns? What can be le
 ## Writing style
 
 - Conversational, like explaining to a smart friend over coffee
-- Use analogies freely — they make things stick
-- Don't skip the "why" — understanding intent matters more than syntax
-- If something is genuinely complex, say so — then break it down layer by layer
+- Use analogies freely; they make things stick
+- Don't skip the "why": understanding intent matters more than syntax
+- If something is genuinely complex, say so, then break it down layer by layer
 - Use code snippets to illustrate, but don't just dump code without explanation
 - **Keep it concise**: The explanation should be SHORTER and FASTER to read than the code itself. If reading the code would be quicker, the explanation is too long. Cut ruthlessly. Focus on insight, not narration.

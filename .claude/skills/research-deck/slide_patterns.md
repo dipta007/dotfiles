@@ -38,7 +38,6 @@ Two reusable helpers (define once, call per slide):
 function actionTitle(slide, text, y = 0.2, h = 0.85) {
   slide.addText(text, { x: MARGIN, y, w: 9.0, h, fontSize: FONTS.title, fontFace: FONTS.face,
                         color: COLORS.primary, bold: true, valign: "top" });
-  slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: y + h + 0.05, w: 9.0, h: 0.025, fill: { color: COLORS.rule } });
 }
 function cite(slide, text) {
   slide.addText(text, { x: MARGIN, y: 5.12, w: 9.0, h: 0.3, fontSize: FONTS.cite, fontFace: FONTS.face, color: COLORS.muted });
@@ -55,7 +54,6 @@ slide.background = { color: COLORS.bg };
 slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.18, h: 5.625, fill: { color: COLORS.accent } });
 slide.addText("Insight-Guided RL: teacher hints rescue the hard groups\nGRPO can't learn from", {
   x: 0.7, y: 1.4, w: 8.6, h: 1.8, fontSize: 32, fontFace: FONTS.face, color: COLORS.primary, bold: true, align: "left", valign: "top" });
-slide.addShape(pres.shapes.RECTANGLE, { x: 0.72, y: 3.15, w: 2.4, h: 0.04, fill: { color: COLORS.accent } });
 slide.addText("NeurIPS 2026  ·  Efficient RL for LLM Agents workshop", {
   x: 0.7, y: 3.3, w: 8.6, h: 0.4, fontSize: 16, fontFace: FONTS.face, color: COLORS.accent });
 slide.addText("Your Name¹  ·  Coauthor²\n¹ Your Lab   ² Affiliation", {
@@ -214,7 +212,6 @@ slide.background = { color: COLORS.bg };
 // light tint band across the top: differentiates without going dark
 slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 1.0, fill: { color: COLORS.band } });
 slide.addText("Conclusions", { x: MARGIN, y: 0.28, w: 9.0, h: 0.5, fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true });
-slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 0.98, w: 9.0, h: 0.04, fill: { color: COLORS.accent } });
 slide.addText([
   { text: "1. All-fail groups are the bottleneck: ", options: { bold: true, color: COLORS.primary, breakLine: false } },
   { text: "GRPO gets no gradient exactly where we need it most.", options: { color: COLORS.body, breakLine: true } },
@@ -247,7 +244,6 @@ slide.addText("Results", { x: MARGIN, y: 2.65, w: 9.0, h: 0.9, fontSize: 36, fon
 ```javascript
 slide.background = { color: COLORS.bg };
 slide.addText("References", { x: MARGIN, y: 0.2, w: 9.0, h: 0.5, fontSize: 24, fontFace: FONTS.face, color: COLORS.primary, bold: true });
-slide.addShape(pres.shapes.RECTANGLE, { x: MARGIN, y: 0.72, w: 9.0, h: 0.025, fill: { color: COLORS.rule } });
 const refs = [
   "Shao, Z. et al. (2024). DeepSeekMath: Pushing the Limits of Mathematical Reasoning. arXiv:2402.03300.",
   "Guo, D. et al. (2025). DeepSeek-R1. arXiv:2501.12948.",
@@ -307,7 +303,7 @@ rhythm)? Simple words + jargon OK, contractions OK, no em-dashes, no written con
 □ Ablation tables: winning row bold; big tables in appendix
 □ Every borrowed figure/dataset cited on-slide; References slide present
 □ Conclusions last main slide; contact/code/arXiv; stays up during Q&A
-□ Body ≥20pt; ≤~40 words/slide; no accent line under any title
+□ Body 20pt (18pt floor); ≤~40 words/slide; no accent line under any title
 □ Every slide has speaker notes = a spoken script (FAANG/top-lab voice), not slide-text read aloud
 □ Notes in SIMPLE non-native-friendly English (technical jargon OK, no fancy words/idioms)
 □ NO em-dashes in notes — period/comma/connector; "category like example", not "category, example,"

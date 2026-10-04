@@ -7,7 +7,7 @@ scaffold **Slidev/Marp** for HTML/PDF talks. Adapted from
 [Gabberflast/academic-pptx-skill](https://github.com/Gabberflast/academic-pptx-skill) (MIT), ML-tuned.
 
 ## What's in here
-- `SKILL.md` — workflow (asks minimal-vs-visual + pptx-vs-HTML each deck)
+- `SKILL.md`: workflow (defaults to white minimal; asks pptx-vs-HTML each deck)
 - `content_guidelines.md` — argument structure, action titles, ghost-deck test, ML QA checklist
 - `figures.md` — matplotlib `text.usetex`, equation-as-image, real-figure scan (pptx has NO native LaTeX)
 - `slide_patterns.md` — PptxGenJS coordinate patterns per ML slide type

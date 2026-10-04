@@ -216,7 +216,7 @@ Generic (upstream): `generate-web-diagram, generate-visual-plan, generate-slides
 **Group inventory**
 - `avoid-ai-writing` (plugin, `conorbronsdon/avoid-ai-writing`, MIT): audits/rewrites text to strip AI-writing tells (em-dash, "delve", "It's not X it's Y", sycophancy, filler). Has a deterministic detector + 61 pattern categories, detect/rewrite/edit modes, voice profiles.
 
-🔴 **Token cost + opt-in rule:** firing it loads a ~23k-token SKILL.md. Global CLAUDE.md rule #8: **never auto-invoke; only when I name it explicitly; confirm "~23k tokens, run it?" first.** For loose "clean this up" → use `writing-craft` or a plain edit instead.
+🔴 **Token cost + opt-in rule:** firing it loads a ~10k-token SKILL.md (`claude plugin details` estimate). Global CLAUDE.md rule #8: **never auto-invoke; only when I name it explicitly; confirm "~10k tokens, run it?" first.** For loose "clean this up" → use `writing-craft` or a plain edit instead.
 
 | When | Use |
 |---|---|

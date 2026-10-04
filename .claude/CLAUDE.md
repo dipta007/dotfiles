@@ -235,7 +235,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## Memory
 
-After any substantial change (new feature, bug fix, architectural decision, new dependency, config change, or lesson learned), update the project-level memory files. Keep MEMORY.md concise and link to topic-specific files for details.
+Save non-obvious lessons and decisions to memory: things a future session cannot learn from the code or git history. Keep MEMORY.md concise and link to topic-specific files for details.
 
 ## Workflow Rules
 
@@ -246,7 +246,7 @@ After any substantial change (new feature, bug fix, architectural decision, new 
 5. **Risk awareness**: After writing code, list what could break and suggest tests to cover those risks.
 6. **Learn from corrections**: When the user corrects a mistake, add a rule to your memory so the same mistake never happens again. Record it as one greppable line: `[LEARN:<category>] <wrong> → <right>` (example: `[LEARN:git] yadm add stages whole file → stage a surgical blob`).
 7. **Never commit without explicit permission (CRITICAL)**: Do NOT run `git commit` unless the user explicitly tells you to commit in that request. Same for `git push`, `git merge`, and opening PRs. Staging changes or writing code is fine; creating the commit is not. If you think a commit is warranted, stop and ask first. A prior "yes" does not carry over to later changes; ask again each time.
-8. **Token-heavy skills need explicit opt-in (`avoid-ai-writing`)**: Never auto-invoke `avoid-ai-writing` (its SKILL.md loads ~23k tokens per fire). Do not trigger it just because a request loosely matches ("clean this up", "make it read better"); those go to `writing-craft` or a plain edit. Invoke it ONLY when the user explicitly names it. Even then, first confirm: "This loads ~23k tokens. Run it?" and wait for a yes. Same rule for any skill whose on-invoke cost is that large.
+8. **Token-heavy skills need explicit opt-in (`avoid-ai-writing`)**: Never auto-invoke `avoid-ai-writing` (its SKILL.md loads ~10k tokens per fire). Do not trigger it just because a request loosely matches ("clean this up", "make it read better"); those go to `writing-craft` or a plain edit. Invoke it ONLY when the user explicitly names it. Even then, first confirm: "This loads ~10k tokens. Run it?" and wait for a yes. Same rule for any skill whose on-invoke cost is that large.
 9. **Never let the paper's method section go stale (CRITICAL)**: If the repo has a paper method section (e.g. `paper/method.tex`), treat it as part of the method, not as documentation about it. Whenever the method changes, update that file **in the same task**, before reporting the work as done.
    - **Triggers an update:** a new component, a changed loss or objective, a new or changed hyperparameter or default, a different way of extracting directions or features, a new or changed composition or decision rule, a changed evaluation readout or metric, a new normalization or scaling scheme, a new dataset or model in the instantiation.
    - **Does not trigger:** refactors, logging, plumbing or dtype fixes, anything leaving the described math and protocol unchanged.

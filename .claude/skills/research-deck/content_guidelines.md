@@ -86,7 +86,7 @@ If it's on a slide, discuss it. If you won't have time, move it to the appendix.
 - **≤ ~40 words body text per slide.** More → split the slide or move to appendix.
 - **Bullets are orientation cues, one idea each.** 3–5 per slide; >5 is a warning sign.
 - **Telegraphic language is fine.** "Method reduces val loss 12%, no extra labels (Table 2)" beats a full sentence.
-- **Body font ≥ 20pt.** A floor, not a target. If it must be smaller to fit, cut content.
+- **Body font 20pt, floor 18pt.** If it must go below 18pt to fit, cut content.
 - **Bold/italics sparingly:** bold for a key term on first use, inline labels ("Note:", "Limitation:"),
   and the focal number. Italics for math notation and dataset/model names. Not decoration.
 
@@ -139,7 +139,7 @@ problem, main result, conclusions. Pre-build appendix slides for the 3–5 likel
 
 ## 8. Accessibility / international audiences
 
-- ≥20pt body, ≥24pt titles; high contrast; never rely on color alone (add labels/patterns/markers —
+- 20pt body (18pt floor), ≥24pt titles; high contrast; never rely on color alone (add labels/patterns/markers —
   matters for colorblind viewers reading a scatter or multi-line curve).
 - Define every acronym on first use, even "obvious" ones (SFT, RM, GRPO, RLHF, KV-cache…).
 - Avoid idioms; plain direct sentences; alt text on figures if the deck circulates as PDF.
