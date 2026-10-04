@@ -93,7 +93,8 @@
     "visual-explainer@visual-explainer-marketplace": true,
     "drawio@drawio": true,
     "cloudflare@cloudflare": true,
-    "cc-safety-net@cc-marketplace": true
+    "cc-safety-net@cc-marketplace": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "extraKnownMarketplaces": {
     "skim": {
