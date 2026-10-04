@@ -14,7 +14,7 @@ A detailed, engaging document that explains the entire project in plain language
 ## Process
 
 1. **Check if FORDIPTA.md exists**: If it does, read it first. This is your starting point.
-2. **Read the entire codebase**: Explore the full project structure, all key files, configs, and recent git history. The code is the source of truth: always prioritize what's actually in the code over what's in the existing FORDIPTA.md.
+2. **Read the codebase**: Explore the project structure, the key files, configs, and recent git history. The code is the source of truth: always prioritize what's actually in the code over what's in the existing FORDIPTA.md.
 3. **Compare and update**: If FORDIPTA.md already exists, diff your understanding of the code against the existing doc. Update anything that's outdated, add anything that's missing, remove anything that no longer reflects the code. If no FORDIPTA.md exists, create it from scratch.
 4. **Add FORDIPTA.md to .gitignore**: Check if `FORDIPTA.md` is in the project's `.gitignore`. If not, add it. This is a personal learning doc, not for the repo.
 

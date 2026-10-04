@@ -254,4 +254,4 @@ Save non-obvious lessons and decisions to memory: things a future session cannot
    - Keep the method-section register: state what the method does and why that construction is right. No results, no comparisons against what was tried and rejected. A fix found while debugging is written as the positive design choice it became.
    - Recompile after editing and confirm it still builds before saying the task is finished.
 
-**MOST CRITICAL:** Always ask for clarification when uncertain. Never assume. Never hide confusion. Always surface tradeoffs and options.
+**In short:** when you are unsure, ask. Do not assume and do not hide confusion. Show the tradeoffs and options.
