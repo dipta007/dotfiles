@@ -1,0 +1,46 @@
+{
+  "title": "Sticky modifiers (built-in keyboard only)",
+  "rules": [
+    {
+      "description": "Sticky Shift / Command / Option on built-in keyboard",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "left_shift", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "left_shift" }],
+          "to_if_alone": [{ "sticky_modifier": { "left_shift": "toggle" } }],
+          "conditions": [
+            { "type": "device_if", "identifiers": [{ "is_built_in_keyboard": true }] }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "right_shift", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "right_shift" }],
+          "to_if_alone": [{ "sticky_modifier": { "right_shift": "toggle" } }],
+          "conditions": [
+            { "type": "device_if", "identifiers": [{ "is_built_in_keyboard": true }] }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "left_command", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "left_command" }],
+          "to_if_alone": [{ "sticky_modifier": { "left_command": "toggle" } }],
+          "conditions": [
+            { "type": "device_if", "identifiers": [{ "is_built_in_keyboard": true }] }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "left_option", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "left_option" }],
+          "to_if_alone": [{ "sticky_modifier": { "left_option": "toggle" } }],
+          "conditions": [
+            { "type": "device_if", "identifiers": [{ "is_built_in_keyboard": true }] }
+          ]
+        }
+      ]
+    }
+  ]
+}
