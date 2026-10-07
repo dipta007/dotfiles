@@ -231,6 +231,7 @@
                     },
                     {
                         "description": "Map ,. to enter (built-in keyboard only)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -273,6 +274,7 @@
                     },
                     {
                         "description": "Sticky Shift / Command / Option on built-in keyboard",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
