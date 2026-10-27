@@ -71,17 +71,10 @@
     }
   },
   "model": "meta/muse-spark-1.1",
-  "tools": {
-    "builder-mcp_MechanicRunTool": false
-  },
   "mcp": {
-    "builder-mcp": {
-      "type": "local",
-      "command": ["builder-mcp"]
-    },
     "semantic-scholar": {
       "type": "local",
-      "command": ["uvx", "--with", "mcp<2", "semantic-scholar-mcp"]
+      "command": ["uvx", "--with", "mcp<2", "--with", "pymupdf", "semantic-scholar-mcp"]
     },
     "arxiv": {
       "type": "local",
@@ -97,7 +90,17 @@
     },
     "playwright": {
       "type": "local",
-      "command": ["/Users/roydipta/.local/bin/playwright-mcp"]
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--user-data-dir",
+        "/Users/dipta007/.cache/opencode-playwright-profile",
+        "--caps",
+        "vision"
+      ],
+      "enabled": true,
+      "timeout": 60000
     },
     "duckduckgo": {
       "type": "local",
