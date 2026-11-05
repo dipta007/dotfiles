@@ -233,6 +233,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 4. After implementing a feature, run it to verify it works before reporting completion.
 5. After verifying a feature works, ask the user: "Should I add this as a pytest test so you can run it later?"
 
+## Cloudflare
+
+When interacting with Cloudflare, use the cf CLI unless the project has a Wrangler configuration file.
+
 ## Memory
 
 Save non-obvious lessons and decisions to memory: things a future session cannot learn from the code or git history. Keep MEMORY.md concise and link to topic-specific files for details.
