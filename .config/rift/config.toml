@@ -1,0 +1,191 @@
+# setup on a new mac:
+#   brew install acsandmann/tap/rift
+#   defaults write com.apple.spaces spans-displays -bool false   # separate Spaces ON, then log out
+#   rift service install && rift service start   # allow Accessibility, then: rift service restart
+#   rift-cli query workspaces && rift-cli query displays   # fix display names in workspace_rules
+# rift config, ported from ~/.config/aerospace/aerospace.toml
+# not ported (no rift equivalent): flatten-workspace-tree, close-all-windows-but-current, focus wrap-around
+
+[settings]
+animate = false
+default_disable = false
+focus_follows_mouse = false
+# stands in for on-focused-monitor-changed = move-mouse; fires on every focus change
+mouse_follows_focus = true
+mouse_hides_on_focus = false
+auto_focus_blacklist = []
+run_on_start = []
+hot_reload = true
+
+[settings.layout]
+mode = "traditional"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.traditional]
+equalize_nodes = true
+
+# tab bar shows the stack, so no offset needed
+[settings.layout.stack]
+stack_offset = 0.0
+default_orientation = "perpendicular"
+
+[settings.layout.scrolling.gestures]
+enabled = true
+fingers = 3
+invert_horizontal = true
+
+[settings.layout.gaps.outer]
+top = 2
+left = 2
+bottom = 2
+right = 2
+
+[settings.layout.gaps.inner]
+horizontal = 4
+vertical = 4
+
+[settings.ui.menu_bar]
+enabled = true
+show_empty = false
+show_binding_mode = true
+mode = "all"
+display_style = "label"
+active_label = "name"
+
+[virtual_workspaces]
+mode = "global"
+enabled = true
+default_workspace_count = 21
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = false
+default_workspace = 14
+workspace_names = ["A", "B", "C", "D", "E", "G", "I", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+# unlisted workspaces live on the BenQ
+workspace_rules = [
+  { workspace = "A", display = "BenQ RD320U" },
+  { workspace = "B", display = "LG Ultra HD" },
+  { workspace = "C", display = "PHL 276E9Q" },
+  { workspace = "D", display = "BenQ RD320U" },
+  { workspace = "E", display = "BenQ RD320U" },
+  { workspace = "G", display = "BenQ RD320U" },
+  { workspace = "I", display = "BenQ RD320U" },
+  { workspace = "M", display = "BenQ RD320U" },
+  { workspace = "N", display = "BenQ RD320U" },
+  { workspace = "O", display = "LG Ultra HD" },
+  { workspace = "P", display = "BenQ RD320U" },
+  { workspace = "Q", display = "BenQ RD320U" },
+  { workspace = "R", display = "BenQ RD320U" },
+  { workspace = "S", display = "BenQ RD320U" },
+  { workspace = "T", display = "BenQ RD320U" },
+  { workspace = "U", display = "BenQ RD320U" },
+  { workspace = "V", display = "BenQ RD320U" },
+  { workspace = "W", display = "BenQ RD320U" },
+  { workspace = "X", display = "BenQ RD320U" },
+  { workspace = "Y", display = "LG Ultra HD" },
+  { workspace = "Z", display = "LG Ultra HD" },
+]
+app_rules = [
+  { app_id = "com.apple.finder", floating = true },
+  { app_id = "com.apple.systempreferences", floating = true },
+  { app_id = "com.google.Chrome", workspace = "M" },
+  { app_id = "com.TickTick.task.mac", workspace = "X" },
+  { app_id = "com.mitchellh.ghostty", workspace = "T" },
+  { app_id = "com.hnc.Discord", workspace = "C" },
+  { app_name = "Zotero", workspace = "Z" },
+  { app_name = "Slack", workspace = "C" },
+  { app_name = "Cursor", workspace = "W" },
+  { app_name = "Claude", workspace = "Y" },
+  { app_name = "Notes", workspace = "Y" },
+  { app_name = "Obsidian", workspace = "O" },
+]
+
+[modifier_combinations]
+ms = "Alt + Shift"
+
+[keys]
+"Alt + Slash" = "toggle_orientation"
+"Alt + Comma" = "toggle_stack"
+
+"Alt + H" = { move_focus = "left" }
+"Alt + J" = { move_focus = "down" }
+"Alt + K" = { move_focus = "up" }
+"Alt + L" = { move_focus = "right" }
+
+"ms + H" = { move_node = "left" }
+"ms + J" = { move_node = "down" }
+"ms + K" = { move_node = "up" }
+"ms + L" = { move_node = "right" }
+
+"Alt + Minus" = { resize_window_shrink = "smart" }
+"Alt + Equal" = { resize_window_grow = "smart" }
+
+"Alt + F" = "toggle_fullscreen"
+"Alt + Tab" = "switch_to_last_workspace"
+"ms + Tab" = { move_workspace_to_display = { selector = "right", wrap_around = true } }
+"ms + Semicolon" = { binding_mode = "service" }
+
+# layout of the current workspace
+"Alt + 1" = { set_workspace_layout = { mode = "traditional" } }
+"Alt + 2" = { set_workspace_layout = { mode = "bsp" } }
+"Alt + 3" = { set_workspace_layout = { mode = "master_stack" } }
+"Alt + 4" = { set_workspace_layout = { mode = "scrolling" } }
+"Alt + 5" = { set_workspace_layout = { mode = "stack" } }
+"Alt + 6" = { set_workspace_layout = { mode = "floating" } }
+
+# workspace index = position in workspace_names (0-based)
+"Alt + A" = { switch_to_workspace = 0 }
+"Alt + B" = { switch_to_workspace = 1 }
+"Alt + C" = { switch_to_workspace = 2 }
+"Alt + D" = { switch_to_workspace = 3 }
+"Alt + E" = { switch_to_workspace = 4 }
+"Alt + G" = { switch_to_workspace = 5 }
+"Alt + I" = { switch_to_workspace = 6 }
+"Alt + M" = { switch_to_workspace = 7 }
+"Alt + N" = { switch_to_workspace = 8 }
+"Alt + O" = { switch_to_workspace = 9 }
+"Alt + P" = { switch_to_workspace = 10 }
+"Alt + Q" = { switch_to_workspace = 11 }
+"Alt + R" = { switch_to_workspace = 12 }
+"Alt + S" = { switch_to_workspace = 13 }
+"Alt + T" = { switch_to_workspace = 14 }
+"Alt + U" = { switch_to_workspace = 15 }
+"Alt + V" = { switch_to_workspace = 16 }
+"Alt + W" = { switch_to_workspace = 17 }
+"Alt + X" = { switch_to_workspace = 18 }
+"Alt + Y" = { switch_to_workspace = 19 }
+"Alt + Z" = { switch_to_workspace = 20 }
+
+"ms + A" = { move_window_to_workspace = 0 }
+"ms + B" = { move_window_to_workspace = 1 }
+"ms + C" = { move_window_to_workspace = 2 }
+"ms + D" = { move_window_to_workspace = 3 }
+"ms + E" = { move_window_to_workspace = 4 }
+"ms + G" = { move_window_to_workspace = 5 }
+"ms + I" = { move_window_to_workspace = 6 }
+"ms + M" = { move_window_to_workspace = 7 }
+"ms + N" = { move_window_to_workspace = 8 }
+"ms + O" = { move_window_to_workspace = 9 }
+"ms + P" = { move_window_to_workspace = 10 }
+"ms + Q" = { move_window_to_workspace = 11 }
+"ms + R" = { move_window_to_workspace = 12 }
+"ms + S" = { move_window_to_workspace = 13 }
+"ms + T" = { move_window_to_workspace = 14 }
+"ms + U" = { move_window_to_workspace = 15 }
+"ms + V" = { move_window_to_workspace = 16 }
+"ms + W" = { move_window_to_workspace = 17 }
+"ms + X" = { move_window_to_workspace = 18 }
+"ms + Y" = { move_window_to_workspace = 19 }
+"ms + Z" = { move_window_to_workspace = 20 }
+
+[binding_modes.service]
+"Escape" = ["reload_config", { binding_mode = "default" }]
+"F" = ["toggle_window_floating", { binding_mode = "default" }]
+"Alt + Shift + H" = [{ join_window = "left" }, { binding_mode = "default" }]
+"Alt + Shift + J" = [{ join_window = "down" }, { binding_mode = "default" }]
+"Alt + Shift + K" = [{ join_window = "up" }, { binding_mode = "default" }]
+"Alt + Shift + L" = [{ join_window = "right" }, { binding_mode = "default" }]
+"Down" = { exec = ["osascript", "-e", "set volume output volume ((output volume of (get volume settings)) - 6)"] }
+"Up" = { exec = ["osascript", "-e", "set volume output volume ((output volume of (get volume settings)) + 6)"] }
+"Shift + Down" = [{ exec = ["osascript", "-e", "set volume output volume 0"] }, { binding_mode = "default" }]
