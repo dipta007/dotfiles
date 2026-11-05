@@ -158,6 +158,12 @@
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
     }
   },
   "autoCompactWindow": 930000,
@@ -167,7 +173,7 @@
   "theme": "custom:tokyonight-night",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "remoteControlAtStartup": true,
+  "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "voiceEnabled": true
