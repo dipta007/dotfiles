@@ -1,8 +1,8 @@
+tap "acsandmann/tap"
 tap "anomalyco/tap"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "mongodb/brew", trusted: true
 tap "mutagen-io/mutagen", trusted: true
-tap "nikitabobko/tap"
 brew "aichat"
 brew "atuin"
 brew "bat"
@@ -44,11 +44,11 @@ brew "worktrunk"
 brew "yarn"
 brew "yazi"
 brew "zoxide"
+brew "acsandmann/tap/rift", trusted: true
 brew "anomalyco/tap/opencode", trusted: true
 brew "felixkratz/formulae/borders"
 brew "mongodb/brew/mongodb-community"
 brew "mutagen-io/mutagen/mutagen"
-cask "nikitabobko/tap/aerospace", trusted: true
 cask "chromium"
 cask "claude"
 cask "claude-code"

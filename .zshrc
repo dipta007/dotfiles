@@ -116,7 +116,7 @@ function zvm_after_init() {
     bindkey -M viins '?' self-insert
     bindkey -M main  '?' self-insert
   fi
-  # fzf cd-widget on Ctrl-F ('Find dir'). Alt-C is taken by aerospace (system-level).
+  # fzf cd-widget on Ctrl-F ('Find dir'). Alt-C is taken by rift (system-level).
   if (( $+widgets[fzf-cd-widget] )); then
     bindkey -M viins '^f' fzf-cd-widget
     bindkey -M vicmd '^f' fzf-cd-widget

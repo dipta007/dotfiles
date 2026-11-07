@@ -171,7 +171,6 @@ Inside neovim, install formatters:
 | [opencode](https://github.com/anomalyco/opencode)      | AI coding agent in the terminal                                   |
 | [paseo](https://www.npmjs.com/package/@getpaseo/cli)   | Drive AI coding agents from the CLI                               |
 | [claude-sync](https://github.com/tawanorg/claude-sync) | Sync Claude Code sessions across machines (encrypted, own bucket) |
-| [claude-swap](https://github.com/realiti4/claude-swap) | Switch Claude accounts before rate limits hit (`cswap`)           |
 
 ```bash
 brew install bat jq aichat
@@ -226,11 +225,6 @@ claude-sync pull                   # pick "backup existing files" at the prompt
 # Sessions over 100MB upload fine but can NEVER be pulled back: MaxDownloadSize
 # is a hardcoded 100MB on the download path only. Pull reports them failed
 # forever. Keep sessions small. Upstream: tawanorg/claude-sync#87
-
-# claude-swap: multi-account switcher, command is `cswap`. Needs uv (section 4).
-# Swaps stored credentials (Keychain on macOS), so CLI + VS Code both work.
-uv tool install claude-swap
-# uv tool install 'claude-swap[menubar]'   # + macOS menu bar quota extra
 
 ```
 
@@ -296,7 +290,7 @@ brew install gh && gh auth login
 
 | Tool                                                  | What it does                  |
 | ----------------------------------------------------- | ----------------------------- |
-| [aerospace](https://github.com/nikitabobko/AeroSpace) | Tiling window manager         |
+| [rift](https://github.com/acsandmann/rift)            | Tiling window manager         |
 | [borders](https://github.com/FelixKratz/JankyBorders) | Colored window borders        |
 | [Homerow](https://www.homerow.app/)                   | Keyboard-driven UI navigation |
 | [kindavim](https://kindavim.app/)                     | Vim keybindings system-wide   |
@@ -305,18 +299,24 @@ brew install gh && gh auth login
 brew install --cask kindavim      # vim keys system-wide
 brew install --cask homerow       # keyboard-driven UI navigation
 
-brew install --cask nikitabobko/tap/aerospace
+brew install acsandmann/tap/rift  # config: ~/.config/rift/config.toml
 brew tap FelixKratz/formulae
 brew install borders
 
-# Let spaces span across displays
-defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+# rift needs separate Spaces per display. Log out and back in after this.
+defaults write com.apple.spaces spans-displays -bool false
 
 # Group windows by app in Mission Control
 defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+
+rift service install && rift service start
 ```
 
-After install, set Homerow's hotkeys (cmd + shift + space and cmd + shift + j) in its settings.
+After install:
+
+1. Turn on `rift` in System Settings > Privacy & Security > Accessibility, then run `rift service restart`.
+2. Connect all monitors and run `rift-cli query displays`. If a display name is different, fix it in `workspace_rules` in the rift config.
+3. Set Homerow's hotkeys (cmd + shift + space and cmd + shift + j) in its settings.
 
 ### 12. Other macOS Tools
 
