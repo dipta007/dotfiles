@@ -89,7 +89,12 @@ workspace_rules = [
 app_rules = [
   { app_id = "com.apple.finder", floating = true },
   { app_id = "com.apple.systempreferences", floating = true },
-  { app_id = "com.google.Chrome", workspace = "M" },
+  # chrome popups make macos report every chrome window as AXDialog, so rift would drop them
+  { app_id = "com.google.Chrome", manage = true },
+  # but not its own popups (address bar dropdown, dialogs, tooltips): untitled AXDialog / AXHelpTag
+  { app_id = "com.google.Chrome", ax_subrole = "AXDialog", title_regex = "^$", manage = false },
+  { app_id = "com.google.Chrome", ax_role = "AXHelpTag", manage = false },
+  { app_id = "com.google.Chrome", title_regex = "^Find in page", manage = false },
   { app_id = "com.TickTick.task.mac", workspace = "X" },
   { app_id = "com.mitchellh.ghostty", workspace = "T" },
   { app_id = "com.hnc.Discord", workspace = "C" },
