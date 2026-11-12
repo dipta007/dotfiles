@@ -1,6 +1,12 @@
 #!/bin/bash
 yadm decrypt
 
+# yadm exports GIT_DIR/GIT_WORK_TREE to hooks, so a bare `git` targets THIS yadm repo.
+# The installers below run `claude plugin install` / `git clone`; without this unset they
+# inherit GIT_DIR and `claude`'s internal `git sparse-checkout` rewrites the yadm repo,
+# wiping every dotfile except the plugin path. Clear the git env before calling them.
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR GIT_PREFIX
+
 # research-deck skill: install pptx plugin + system deps after a pull.
 # Check-first & idempotent (~2s no-op when already set up). Never fails the pull.
 RD="$HOME/.claude/skills/research-deck/install.sh"
